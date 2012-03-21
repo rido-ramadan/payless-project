@@ -215,6 +215,9 @@ a.loginbutton {
     width: 100px;
     height: 25px;
     margin: 10px 10px 0px 20px;
+    /*
+    font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
+    font-size: 13px; */
 }
 
 a.closelogin {
@@ -698,7 +701,7 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
 
 .userdata {
     width: 400px;
-    height: 200px;
+    height: auto;
     border-left: solid;
     border-left-style: outset;
     display: inline-block;
@@ -710,4 +713,32 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     border-left: solid;
     border-left-style: outset;
     display: inline-block;
+}
+
+.lhs {
+    /*float: left;*/
+    width: 100px;
+    text-align: left;
+    padding-left: 10px;
+    color: #333333;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 26px;
+}
+
+.rhs {
+    width: 275px;
+    text-align: left;
+    color: #333333;
+    font-size: 11px;
+    line-height: 26px;
+    word-wrap: break-word;
+}
+
+.clearfix:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }
