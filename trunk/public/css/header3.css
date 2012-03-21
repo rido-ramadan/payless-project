@@ -1,0 +1,510 @@
+/* BG: cfcfcf dcdcdc ,, */
+
+body {
+	margin:0 auto;
+	background: #bababa  url(../images/bg-sepia.png) repeat-y;
+	background-position: center center;
+	font-family: myriad, Sans-Serif, Verdana, Tahoma, Arial;
+	height: 100%;
+}
+
+.push {
+   height: 35px;
+}
+
+.left {		float: left;}
+.right {	float: right;}
+.clear {	clear:both;}
+.hidden {	display:none;}
+
+a {		text-decoration: none;}
+a:visited {	text-decoration: none;}
+a:hover {	text-decoration: none;}
+a:active{	}
+
+a img {
+	border: 0;
+}
+
+a.topbutton {
+	display: inline-block;
+	width: 100px;
+	height: 25px;
+	margin: 18px 10px 0 0;
+}
+
+a.signup {	background: url(../images/signup-sepia.png);}
+a.topbutton:hover {	background-position: 0 -25px;}
+a.topbutton:active {	background-position: 0 25px;}
+
+.headertext {
+	font-size: 22px;
+	line-height: 22px;
+	padding-bottom: 15px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.giantbox {
+	padding: 0;
+	margin: 0 auto;
+	width: 1048px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -35px;
+}
+
+/* -------------------- */
+/*	THE HEADER	*/
+/* -------------------- */
+
+.topbox {
+	width: 1016px;
+	height: auto;
+	margin: 0 auto;
+	background: url(../images/navbg-sepia.png) no-repeat top center;
+	color: #000000;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 40px;
+}
+
+.nav1 {
+	width: 1000px;
+	height: 60px;
+	margin: 0 auto;
+}
+
+/* LOGO: 172322 */
+
+.logo {
+	font-size: 36px;
+	line-height: 60px;
+	/* color: #272727; */
+	padding-left: 10px;
+}
+
+.nav2 {
+	width: 970px;
+	height: 40px;
+	margin: 0 auto;
+	padding: 0 15px 0 15px;
+}
+
+.nav2act {
+	background: url(../img/header/select2.png) no-repeat bottom center;
+}
+
+.nav3 {
+	width: 970px;
+	height: 40px;
+	margin: 0 auto;
+	padding: 0 15px 16px 15px;
+}
+
+.nav3act {
+	background: url(../img/header/select3.png) no-repeat bottom center;
+}
+
+.nav2 a {
+	text-decoration: none;
+	color: #000;
+}
+
+.nav3 a {
+	text-decoration: none;
+	color: #000;
+}
+
+div.themes {margin-top: 0px;}
+
+/* ----------------------- */
+/*	APP IN DETAIL	   */
+/* ----------------------- */
+
+.detbox {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.dettop {
+	height: 12px;
+	background: url(../images/apptop-sepia.png) no-repeat bottom center;
+	margin-top: -2px;
+}
+
+.detmain {
+	background: url(../images/appmain-sepia.png) repeat-y;
+	padding: 10px 51px 7px 51px;
+}
+
+.detbot {
+	background: url(../images/appbot-sepia.png) no-repeat;
+	height: 20px;
+}
+
+.termsagreements {
+    font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ----------------------------- */
+/*	LOGIN/SIGNUP/SUBMIT      */
+/* ----------------------------- */
+
+.txtfield {
+	border: 1px solid #cdcdcd;
+	padding: 5px;
+}
+
+.sidesbox {
+	width: 48%;
+}
+
+.txtboxlabel {
+	width: auto;
+	text-align: left;
+	color: #333333;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 26px;
+}
+
+.txtfieldbox {
+	width: 100%;
+	margin: 0 auto;
+	border-top: 1px solid #cdcdcd;
+	padding: 8px 0 8px 0;
+}
+
+.chkbox {
+	padding: 8px 0 8px 0;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.reasonlist {
+	margin: 0px;
+	padding: 0;
+	padding-left: 40px;
+	padding-bottom: 5px;
+	line-height: 24px;
+	text-align:left;
+}
+
+.joinbutton {
+	background: #0040db;
+	border: 1px solid #00007d;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.signinbutton {
+	background: #73ac59;
+	border: 1px solid #236013;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 5px;
+}
+
+#content {
+	clear: both;
+}
+
+/* Upload Post */
+.row {
+    width: 820px;
+    padding: 5px;
+    margin: 0px auto;
+    font-size:11px;
+    font-weight:bold;
+    line-height:26px;
+    border-bottom:1px solid #cdcdcd;
+}
+
+.key {
+    display:inline-block;
+    width:200px;
+    vertical-align:middle;
+    color:#333333;
+}
+
+.input {
+    display: inline;
+    width: 600px;
+    border:1px solid #cdcdcd;
+    padding:5px;
+}
+
+.space {
+    height:25px;
+}
+
+.separator {
+    height: 2px;
+    width: 100%;
+    margin: 0px auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #cfcfcf;
+}
+
+.postbutton {
+	background: #0040db;
+	border: 1px solid #00007d;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 5px;
+    margin-left: 703px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.error {
+    display:none;
+    color:Red;
+    text-align:right;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+label.left {
+    text-align: left;
+}
+
+
+/* -------------------- */
+/*	CONTENT LIST		*/
+/* -------------------- */
+
+.iconcontent {
+	padding: 5px;
+	width: 60px;
+	height: 60px;
+	margin: 0px;
+	/*background: blue;*/
+}
+
+.content {
+	width: 500px;
+	margin: 0px 30px 30px 60px;
+	padding-left: 20px;
+	text-align: justify;
+	font-size: 12pt;
+	/*word-wrap: break-word;*/
+	/*background: yellow;*/
+}
+
+div.content a:link, div.content a:visited {
+	font-size: 22pt;
+	text-decoration: underline;
+	color: black;
+}
+
+div.content a:hover {
+	font-size: 23pt;
+	text-decoration: underline;
+	color: red;
+}
+
+.judul {
+	margin: 20px 30px 20px 60px;
+	padding-left: 20px;
+    padding-top: 20px;
+	width: 600px;
+	color: #000000;
+	font-size: 32pt;
+	/*background: aqua;*/
+}
+
+div.judul a:hover, div.judul a:link, div.judul a:visited {
+	color: #000;
+}
+
+.paketkonten {
+	margin: 50px;
+	width: 800px;
+	border-bottom: solid;
+}
+
+div.likebutton {
+	margin: 2px;
+	width: 64px;
+	height: 64px;
+	background: url('../images/icon-like.png');
+	display: block;
+	text-align: center;
+}
+
+
+div.dislikebutton {
+	background: url('../images/icon-dislike.png');
+	margin: 2px 2px 2px 68px;
+	width: 64px;
+	height: 64px;
+	display: block;
+}
+
+div.paketjempol {
+	width: 150px;
+	display: block;
+	font-size: 12px;
+}
+
+.buttonnext {
+	width: 250px;
+	height: 40px;
+	background: url('../images/next-sepia.png');
+	margin-left: 80px;
+
+}
+.buttonnext:hover {
+	background: url('../images/next-click-sepia.png');
+	margin-left: 80px;
+
+}
+
+
+.buttonprevious {
+	width: 250px;
+	height: 40px;
+	background: url('../images/prev-sepia.png');
+}
+
+
+.buttonprevious:hover{
+	background: url('../images/prev-click-sepia.png');
+
+}
+
+.paketgantihalaman {
+	width: 600px;
+	height: 40px;
+	display: block;
+	margin: 0px 0px 50px 170px;
+}
+
+.paketkontenmasuk {
+	margin: 50px;
+	width: 800px;
+}
+
+.contentmasuk {
+	width: 700px;
+	margin: 0px 30px 30px 60px;
+	padding-left: 20px;
+	text-align: justify;
+	font-size: 12pt;
+	/*word-wrap: break-word;*/
+	/*background: yellow;*/
+}
+
+.commenttop {
+	height: 36px;
+	width: 550px;
+	margin: 20px auto 0px;
+	background: url('../images/commtop-sepia.png');
+}
+
+.commentcontainer {
+	width: 550px;
+	margin: 0px auto;
+	background: url('../images/commmain-sepia.png') repeat-y;
+	padding: 10px 0px;
+}
+
+.commentbottom {
+	width: 550px;
+	height: 12px;
+	margin: 0px auto;
+	background: url('../images/commbot-sepia.png') no-repeat;
+}
+
+.comment {
+	width: 500px;
+	margin: 10px 25px;
+	border-bottom: 1px solid;
+}
+
+.avatar {
+	margin: 5px;
+	width: 64px;
+	height: 75px;
+}
+
+.isikomen {
+	margin: 10px;
+	width:465px;
+	height: 75px;
+}
+div.contentmasuk a:link, div.contentmasuk a:visited {
+	font-size: 22pt;
+	text-decoration: underline;
+	color: black;
+}
+
+div.contentmasuk a:hover {
+	font-size: 23pt;
+	text-decoration: underline;
+	color: red;
+}
+
+div.tulisan {
+	line-height: 64px;
+	vertical-align: top;
+	font-style: italic;
+	text-align: right;
+}
+
+/* -------------------- */
+/*	INDEX CONTENTS		*/
+/* -------------------- */
+div.toppost {
+    float: left;
+    width: 316px;
+    height: 416px;
+    text-align: center;
+    background: url('../images/appboxbg-sepia.png') no-repeat;
+}
+
+div.contenttitle {
+    width: 255px;
+    line-height: 20px;
+    display: block;
+    vertical-align: bottom;
+    margin-top: 25px;
+    margin-left: 30px;
+    border-bottom-style: groove;
+}
+
+div.view {
+    margin-top: 15px;
+}
+
+div.likes {
+    line-height: 35px;
+    height: 35px;
+    width: 200px;
+    margin: 10px auto;
+}
+
+div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
+	color: #000;
+}
+
+.namecomment {
+	font-weight: bold;
+	display: inline;
+}
+
+.timecomment {
+	font-size: 10px;
+	font-style: italic;
+}
