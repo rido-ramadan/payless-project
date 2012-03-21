@@ -84,7 +84,7 @@
                 </div>
                 <div class="userdata">
                     <div class="subtitle left ">USER INFORMATION</div>
-                    <div class="edituser left clearfix">EDIT</div>
+                    <div class="edituser left clearfix" onclick="editProfile()">EDIT</div>
                     <div class="lhs left">E-MAIL</div>
                     <div class="rhs left clearfix">edgar.drake@gmail.com</div>
                     <div class="lhs left">GENDER</div>
