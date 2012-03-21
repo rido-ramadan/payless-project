@@ -11,3 +11,12 @@ function closePopUp() {
     overlay.style.display = 'none';
     popup.style.display = 'none';
 }
+
+function editProfile() {
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+}
+
+function cancelEditting() {
+
+}
