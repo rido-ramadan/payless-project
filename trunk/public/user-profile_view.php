@@ -78,36 +78,105 @@
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
-                <div class="userheader">Edgar Drake's Profile</div>
+                <div class="userheader">EdgarDrake's Profile</div>
                 <div class="useravatar">
-                    
+                    <img src="img/avatar.jpg" alt="EdgarDrake">
                 </div>
                 <div class="userdata">
+                    <div class="subtitle left ">USER INFORMATION</div>
+                    <div class="edituser left clearfix">EDIT</div>
                     <div class="lhs left">E-MAIL</div>
                     <div class="rhs left clearfix">edgar.drake@gmail.com</div>
                     <div class="lhs left">GENDER</div>
                     <div class="rhs left clearfix">Gentleman</div>
                     <div class="lhs left">STATUS</div>
-                    <div class="rhs left clearfix">Forever Alone</div>
-                    <div class="lhs left">HOBBY</div>
-                    <div class="rhs left clearfix">Browsing</div>
+                    <div class="rhs left clearfix">In A Relationship</div>
+                    <div class="lhs left">BIRTHDATE</div>
+                    <div class="rhs left clearfix">20-03-1991</div>
                     <div class="lhs left">ABOUT ME</div>
                     <div class="rhs left clearfix">
                         I am just me, it's nothing unusual for a programmer like me to have some account on a payless project like this. Afterall, it is I who the one who made this. OK, that's it.
                     </div>
                     <div class="lhs left"># COMMENTS</div>
-                    <div class="rhs left clearfix">24</div>
+                    <div class="rhs left clearfix">50</div>
                     <div class="lhs left"># UPLOADS</div>
-                    <div class="rhs left clearfix">1</div>
+                    <div class="rhs left clearfix">10</div>
                     <div class="lhs left">POST LIST</div>
                     <div class="rhs left clearfix">
                         <ul>
-                            <li><a href="edgardrake/p1.php">post 1</a></li>
+                            <li><a href="edgardrake/p1.php">Imagine this..</a></li>
+                            <li><a href="edgardrake/p2.php">Unbeliavable Food</a></li>
+                            <li><a href="edgardrake/p3.php">Outside!</a></li>
+                            <li><a href="edgardrake/p4.php">This is Sucks</a></li>
+                            <li><a href="edgardrake/p5.php">Featurephone vs Smartphone</a></li>
+                            <li><a href="edgardrake/p6.php">Intangible Media</a></li>
+                            <li><a href="edgardrake/p7.php">Angry Birds....?</a></li>
+                            <li><a href="edgardrake/p8.php">Attack of (Apache) TomCat</a></li>
+                            <li><a href="edgardrake/p9.php">Jedi</a></li>
+                            <li><a href="edgardrake/p10.php">Macrohard Dominance</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="userachievement">
-
+                    <div class="subtitle left ">ACHIEVEMENTS</div>
+                    <div class="clearfix"></div>
+                    <!-- ACHIEVEMENT LIST -->
+                    <ul>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">I've Moved On</div>
+                                    <div class="ach_how">You're not alone anymore</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">Hello, World</div>
+                                    <div class="ach_how">Upload a post once</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">Quality or Quantity</div>
+                                    <div class="ach_how">Upload a post ten times</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">Spik!</div>
+                                    <div class="ach_how">Comment on a post once</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">Il Commentatore</div>
+                                    <div class="ach_how">Comment on posts 20 times</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="achievement">
+                                <div class="ach_logo"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">Achievements Hunters</div>
+                                    <div class="ach_how">Not enough with 3 achievements? We reward one more</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="detbot"></div>
