@@ -10,7 +10,7 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
-                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="images/logo.png" alt="logo" /></a></div>
+                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
                     <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
                     <a class="topbutton signup" href="register_view.php" id="myacctButton" title="Sign Up"></a>
@@ -29,9 +29,9 @@
             </div>
             <div class="nav3">
                 <div id="sort5" class="left"><a href="index.php">Home</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <div class="right">
                     <div id="applesearch">
@@ -79,13 +79,13 @@
         <div class="giantbox">
             <div class="toppost" style="margin-left: 50px;">
                 <div class="headertext contenttitle"><a href="image_view.php">Versi Image</a></div>
-                <div class="view"><img src="images/pemandangan.jpg" width="225" alt="Image View"></div>
+                <div class="view"><img src="img/pemandangan.jpg" width="225" alt="Image View"></div>
                 <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 70px; margin-left: 86px; float:left;"></div>
                 <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 70px; margin-left: 163px; position: absolute;"></div>
                 <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="images/like-mini.png" alt="like"/>
+                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
                     <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="images/comment-mini.png" alt="comment"/>
+                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
                     <div class="jumlahkomen" style="display: inline"></div>
                 </div>
             </div>
@@ -96,22 +96,22 @@
                 <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 59px; margin-left: 86px; float:left;"></div>
                 <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 59px; margin-left: 163px; position: absolute;"></div>
                 <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="images/like-mini.png" alt="like"/>
+                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
                     <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="images/comment-mini.png" alt="comment"/>
+                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
                     <div class="jumlahkomen" style="display: inline"></div>
                 </div>
             </div>
 
             <div class="left toppost">
                 <div class="headertext contenttitle"><a href="link_view.php">Versi Link</a></div>
-                <div class="view"><img src="images/9gag.png" width="225" alt="9Gag"></div>
+                <div class="view"><img src="img/9gag.png" width="225" alt="9Gag"></div>
                 <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 72px; margin-left: 86px; float:left;"></div>
                 <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 72px; margin-left: 163px; position: absolute;"></div>
                 <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="images/like-mini.png" alt="like"/>
+                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
                     <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="images/comment-mini.png" alt="comment"/>
+                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
                     <div class="jumlahkomen" style="display: inline"></div>
                 </div>
             </div>

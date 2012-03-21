@@ -1,11 +1,12 @@
-<!DOCTYPE html >
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Payless Project &raquo; Versi Video</title>
+		<meta charset="utf-8" />
+        <title>Payless Project &raquo; My Profile</title>
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
-    <body onload="randomlike(); inisialisasi()">
+    <body>
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
@@ -73,77 +74,25 @@
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
-
+        <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
         <div class="detbox">
             <div class="dettop"></div>
-            <div class="detmain">
-                <div class="paketkontenmasuk">
-                    <div class="left iconcontent">
-                        <img src="img/icon-link.png" alt="icon"/>
-                    </div>
-                    <div class="headertext judul">
-                        <a href="">Versi Video</a>
-                    </div>
-                    <div class="contentmasuk">
-                        <iframe width="640" height="480" src="http://www.youtube.com/embed/MGtLGuSaVOI"></iframe>
-                    </div>
-                    <div class="right paketjempol">
-						<div class="left likebutton" onclick="voteplus(this.num)"></div>
-						<div class="dislikebutton" onclick="votemin(this.num)"></div>
-					</div>
-					<div class="tulisan"> <div class="jumlahlike" style="display:inline-block"></div> likes </div>
-
-                    <div class="commenttop"></div>
-                    <div class="commentcontainer">
-
-                        <div id="superbaru">
-
-						</div>
-
-                        <div class="comment">
-                            <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
-                            </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
-								comment nomor satu tentu saja ini
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
-                            </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 16:06:56 GMT</div>
-								comment nomor dua tentu saja ini
-                            </div>
-                        </div>
-                        <div class="comment">	<div class="left avatar">
-                                <img style="margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
-                            </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 10:00:12 GMT</div>
-								<div>comment nomor tiga tentu saja ini</div>
-                            </div>
-                        </div>
-                        <div class="comment" style="border-bottom:0px">
-                            <div class="isikomen">
-                                <div><textarea rows="3" cols="59" id="ucomment"></textarea></div>
-                                <input style="margin-left:425px" type="submit" value="Comment" onclick="comment()"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentbottom"></div>
+            <div class="detmain" style="text-align: center">
+                <div class="headertext" style="text-align: center;">Error 404 - Payment not Found!</div>
+                <div class="error404">
+                    Please don't try to mess with us. We won't even take any other payless project except for this one.
                 </div>
             </div>
             <div class="detbot"></div>
         </div>
+        <div style="height: 10px;"></div>
+        <!-- ::::::::::::::::::::: END OF BODY PART ::::::::::::::::::::: -->
         <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
         <div class="footer">
             &copy; Payless Project 2012. Created by: <a href="http://masphei.ungu.com">Masphei</a>, <a href="http://personanonymous.wordpress.com">Edgar Drake</a>, <a href="http://marchygabe.tumblr.com">Marchy Gabe</a>
         </div>
         <!-- ::::::::::::::::::::: END OF FOOTER PART ::::::::::::::::::::: -->
-        <script type="text/javascript" src="js/navigasi.js"></script>
+        <script type="text/javascript" src="js/register.js"></script>
         <script type="text/javascript" src="js/styleBox.js"></script>
     </body>
 </html>

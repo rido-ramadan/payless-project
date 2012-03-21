@@ -10,7 +10,7 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
-                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="images/logo.png" alt="logo" /></a></div>
+                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
                     <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
                     <a class="topbutton signup" href="register_view.php" id="myacctButton" title="Sign Up"></a>
@@ -29,9 +29,9 @@
             </div>
             <div class="nav3">
                 <div id="sort5" class="left"><a href="index.php">Home</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <div class="right">
                     <div id="applesearch">
