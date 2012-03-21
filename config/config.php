@@ -9,4 +9,4 @@ define('DB_USER', 'progin');
 define('DB_PASSWORD', 'progin');
 define('DB_HOST', 'localhost');
 define('BASE_URL', 'http://localhost/progin/');
-define('DEFAULT_CON', 'Home_con/');
+
