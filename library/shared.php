@@ -80,7 +80,7 @@ function callHook() {
 //            if(file_exists(BASE_URL.$controllerName))
 //                echo "File ada";
 //            else
-                echo "class not exist";
+            header( 'Location: '.BASE_URL.'404-not-found.php' ) ;            
         }
 
 	if ((int)method_exists($controller, $action)) {

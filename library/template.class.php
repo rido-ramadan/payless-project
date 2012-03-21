@@ -21,7 +21,6 @@ class Template {
         //echo "load=".$fileName."<br>";
         $this->_action[count($this->_action)] = $fileName;
     }
-
     function setAction($name) {
         echo "ngisi=" . $name . "<br>";
         echo "length=" . count($this->_action) . "<br>";
