@@ -75,8 +75,13 @@ function callHook() {
 	//$model = "sa";
 	//$dispatch = new $controller($model,$controllerName,$action);
 	if(class_exists($controllerName))
-	$dispatch = new $controller($model,$controllerName);
-	else echo "class not exist";
+            $dispatch = new $controller($model,$controllerName);
+	else {
+//            if(file_exists(BASE_URL.$controllerName))
+//                echo "File ada";
+//            else
+                echo "class not exist";
+        }
 
 	if ((int)method_exists($controller, $action)) {
 		call_user_func_array(array($dispatch,$action),$queryString);

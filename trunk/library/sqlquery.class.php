@@ -41,9 +41,9 @@ class SQLQuery {
     	return $this->query($query, 1);    
     }
 
-	function test($request){
-    	return $this->query($request);
-	}
+    function test($request){
+    return $this->query($request);
+    }
     /** Custom SQL Query **/
 
 	function query($query, $singleResult = 0) {
