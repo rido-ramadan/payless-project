@@ -9,7 +9,7 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
-                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="images/logo.png" alt="logo" /></a></div>
+                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
                     <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
                     <a class="topbutton signup" href="register_view.php" id="myacctButton" title="Sign Up"></a>
@@ -28,9 +28,9 @@
             </div>
             <div class="nav3">
                 <div id="sort5" class="left"><a href="index.php">Home</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <div class="right">
                     <div id="applesearch">
@@ -79,7 +79,7 @@
 			<div class="detmain">
 				<div class="paketkontenmasuk">
 					<div class="left iconcontent">
-						<img src="images/icon-link.png" alt="icon"/>
+						<img src="img/icon-link.png" alt="icon"/>
 					</div>
 					<div class="headertext judul">
 						<a href="">Versi Link</a>
@@ -102,7 +102,7 @@
 
                         <div class="comment">
                             <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="images/avatar.png" alt="avatar" width="64" />
+                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
                             </div>
                             <div class="isikomen">
                                 <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="comment">
                             <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="images/avatar.png" alt="avatar" width="64" />
+                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
                             </div>
                             <div class="isikomen">
                                 <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 16:06:56 GMT</div>
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="comment">	<div class="left avatar">
-                                <img style="margin: 2px;" src="images/avatar.png" alt="avatar" width="64" />
+                                <img style="margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
                             </div>
                             <div class="isikomen">
                                 <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 10:00:12 GMT</div>
@@ -138,6 +138,11 @@
 			</div>
 			<div class="detbot"></div>
 		</div>
+        <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
+        <div class="footer">
+            &copy; Payless Project 2012. Created by: <a href="http://masphei.ungu.com">Masphei</a>, <a href="http://personanonymous.wordpress.com">Edgar Drake</a>, <a href="http://marchygabe.tumblr.com">Marchy Gabe</a>
+        </div>
+        <!-- ::::::::::::::::::::: END OF FOOTER PART ::::::::::::::::::::: -->
 		<script type="text/javascript" src="js/navigasi.js"></script>
         <script type="text/javascript" src="js/styleBox.js"></script>
 	</body>

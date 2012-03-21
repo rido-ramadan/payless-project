@@ -10,7 +10,7 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
-                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="images/logo.png" alt="logo" /></a></div>
+                <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
                     <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
                     <a class="topbutton signup" href="register_view.php" id="myacctButton" title="Sign Up"></a>
@@ -29,9 +29,9 @@
             </div>
             <div class="nav3">
                 <div id="sort5" class="left"><a href="index.php">Home</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
-                <div class="left"><img src="images/divide.png" alt="" /></div>
+                <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <div class="right">
                     <div id="applesearch">
@@ -81,15 +81,15 @@
 
 				<div class="paketkonten">
 					<div class="left iconcontent">
-						<img src="images/icon-link.png">
+						<img src="img/icon-link.png">
 					</div>
 					<div class="headertext judul">
 						<a href="link.html">Versi Link</a>
 					</div>
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/>
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
@@ -105,16 +105,16 @@
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-photo.png">
+						<img src="img/icon-photo.png">
 					</div>
 					<div class="headertext judul">
 						<a href="image.html">Versi Image</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/>
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
@@ -122,23 +122,23 @@
 					</div>
 
 					<div class="content">
-						<img src="images/pemandangan.jpg" width="480">
+						<img src="img/pemandangan.jpg" width="480">
 					</div>
 
 				</div>
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-video.png">
+						<img src="img/icon-video.png">
 					</div>
 					<div class="headertext judul">
 						<a href="video.html">Versi Video</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/>
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
@@ -153,15 +153,15 @@
 
 				<div class="paketkonten">
 					<div class="left iconcontent">
-						<img src="images/icon-link.png">
+						<img src="img/icon-link.png">
 					</div>
 					<div class="headertext judul">
 						<a href="link.html">Versi Link</a>
 					</div>
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/>
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
@@ -177,16 +177,16 @@
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-photo.png">
+						<img src="img/icon-photo.png">
 					</div>
 					<div class="headertext judul">
 						<a href="image.html">Versi Image</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/>
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
@@ -194,23 +194,23 @@
 					</div>
 
 					<div class="content">
-						<img src="images/pemandangan.jpg" width="480">
+						<img src="img/pemandangan.jpg" width="480">
 					</div>
 
 				</div>
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-video.png">
+						<img src="img/icon-video.png">
 					</div>
 					<div class="headertext judul">
 						<a href="video.html">Versi Video</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/><div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
@@ -224,15 +224,15 @@
 
 				<div class="paketkonten">
 					<div class="left iconcontent">
-						<img src="images/icon-link.png">
+						<img src="img/icon-link.png">
 					</div>
 					<div class="headertext judul">
 						<a href="link.html">Versi Link</a>
 					</div>
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/><div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
@@ -247,39 +247,39 @@
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-photo.png">
+						<img src="img/icon-photo.png">
 					</div>
 					<div class="headertext judul">
 						<a href="image.html">Versi Image</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/><div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
 					</div>
 
 					<div class="content">
-						<img src="images/pemandangan.jpg" width="480">
+						<img src="img/pemandangan.jpg" width="480">
 					</div>
 
 				</div>
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-video.png">
+						<img src="img/icon-video.png">
 					</div>
 					<div class="headertext judul">
 						<a href="video.html">Versi Video</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/><div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
@@ -293,16 +293,16 @@
 
 				<div class="paketkonten">
 					<div class=" left iconcontent">
-						<img src="images/icon-video.png">
+						<img src="img/icon-video.png">
 					</div>
 					<div class="headertext judul">
 						<a href="video.html">Versi Video</a>
 					</div>
 
 					<div class="right paketjempol">
-						<img style="float:left; margin: 0px 5px" src="images/like-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
 						<div class="left jumlahlike"></div>
-						<img style="float:left; margin: 0px 5px" src="images/comment-mini.png">
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
 						<div class="jumlahkomen"></div>
 						<br/><div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
