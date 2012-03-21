@@ -20,18 +20,37 @@ class User_con extends Controller {
 		$this->set('display','Berhasil pindah');
 		$this->loadView("login_view.php");		
 	}
+        function register(){
+            $this->loadView("header_view.php");
+            $this->loadView("register_view.php");		
+            $this->loadView("footer_view.php");            
+        }
+        function validate_register(){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $confirm = $_POST['confirm'];
+            $email = $_POST['email'];
+            $birthdate = $_POST['birthdate'];
+            //$avatar = $_POST['avatar'];
+            $gender = $_POST['gender'];
+            $about = $_POST['about'];
+            $this->redirect(BASE_URL.'home_con');
+            
+        }
+        function profile($id){
+            if(empty($id) || empty($_SESSION['login'])){
+                $this->redirect(BASE_URL.'user_con/error_display/0');
+            }
+            $this->loadView("header_view.php");
+            $this->loadView("profile_view.php");		
+            $this->loadView("footer_view.php");
+            
+        }
         function logout(){
             $this->destroy();
             $this->redirect(BASE_URL."home_con/");
         }
-	function destroy(){
-            session_start();
-            session_destroy();
-	}
-        function redirect($url){
-                header( 'Location: '.$url ) ;            
-        }
-	function validate(){
+	function validate_login(){
             $username= $_POST['username'];
             $password= $_POST['password'];
             if(strlen($username)>45 || strlen($password)>45){
@@ -42,8 +61,14 @@ class User_con extends Controller {
             //echo $username."<br>";
             //echo $password."<br>";
             if(count($account)==1){
-                
-                $this->set('user',$account[0]);
+                $data = Array (
+                    'login' => true,
+                    'nama' => $account[0]['NAMA'],
+                    'id' =>$account[0]['ID_USER']
+                        );
+                $_SESSION = $data;
+                //echo $_SESSION['nama'];
+                //$this->set('user',$account[0]);
                 $this->loadView("header_view.php");
                 $this->loadView("home_view.php");		
                 $this->loadView("footer_view.php");
