@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<div id="overlay"></div>
+<div id="overlay" onclick="closeAll()"></div>
 <div id="popup" class="popup">
     <div class="loginpopout">
         <div class="topbutton">
@@ -60,7 +60,8 @@
             <span class="lbox_r" id="srch_clear"></span>
         </div>
         <span><a class="closelogin" onclick="closePopUp()"></a></span>
-        <span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span>
+        <span><input type="submit" class="loginbutton login" id="loginButton" alt="Log In" value="Log In"></span>
+        <!--span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span-->
     </div>
 </div>
 <script type="text/javascript" src="js/divPop.js"></script>
