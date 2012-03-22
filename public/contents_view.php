@@ -79,7 +79,7 @@
 			<div class="dettop"></div>
 			<div class="detmain">
 
-				<div class="paketkonten">
+				<div class="paketkonten linkpost">
 					<div class="left iconcontent">
 						<img src="img/icon-link.png">
 					</div>
@@ -99,11 +99,9 @@
 						<a href="http://www.9gag.com"> www.9gag.com </a>
 						<p> deskripsinya link ini </p>
 					</div>
-
-
 				</div>
 
-				<div class="paketkonten">
+				<div class="paketkonten imagepost">
 					<div class=" left iconcontent">
 						<img src="img/icon-photo.png">
 					</div>
@@ -127,7 +125,7 @@
 
 				</div>
 
-				<div class="paketkonten">
+				<div class="paketkonten videopost">
 					<div class=" left iconcontent">
 						<img src="img/icon-video.png">
 					</div>

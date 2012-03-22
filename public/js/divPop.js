@@ -15,6 +15,12 @@ function getHeight(){
     }
 }
 
+function doPopUp() {
+    var overlay = document.getElementById('overlay');
+    overlay.style.height = getHeight() + 'px';
+    overlay.style.display = 'block';
+}
+
 function showPopup() {
     var overlay = document.getElementById('overlay');
     var popup = document.getElementById('popup');
@@ -42,7 +48,9 @@ function closeAll() {
     var overlay = document.getElementById('overlay');
     var edit = document.getElementById('edituserdata');
     var popup = document.getElementById('popup');
+    var preview = document.getElementById('preview');
     overlay.style.display = 'none';
-    edit.style.display = 'none';
     popup.style.display = 'none';
+    if (edit !== null) edit.style.display = 'none';
+    if (preview !== null) preview.style.display = 'none';
 }
