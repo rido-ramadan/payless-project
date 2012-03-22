@@ -32,9 +32,9 @@ class Template {
     function renderView() {
         //echo count($this->_action);
         extract($this->variables);
-        for ($i = 0; $i < count($this->_action); $i++) {
-            if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_action[$i])) {
-                include (ROOT . DS . 'application' . DS . 'views' . DS . $this->_action[$i]);
+        for ($_renderan = 0; $_renderan < count($this->_action); $_renderan++) {
+            if (file_exists(ROOT . DS . 'application' . DS . 'views' . DS . $this->_action[$_renderan])) {
+                include (ROOT . DS . 'application' . DS . 'views' . DS . $this->_action[$_renderan]);
             }
         }
     }

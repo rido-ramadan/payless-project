@@ -10,14 +10,14 @@
                         <a href=""><?php if(!empty($content)) echo $content['JUDUL']?></a>
                     </div>
                     <div class="contentmasuk">
-                        <?php if(!empty($content)) echo $content['ISI']?>
+                        <?php if(!empty($content)) echo $content['LINK']?>
                     </div>
                 </div>
                 <div class="right paketjempol">
 						<div class="left likebutton" onclick="voteplus(this.num)"></div>
 						<div class="dislikebutton" onclick="votemin(this.num)"></div>
 					</div>
-				<div class="tulisan"> <div class="jumlahlike" style="display:inline-block"> </div> likes </div>
+				<div class="tulisan"> <div class="jumlahlike" style="display:inline-block"> <?php if(!empty($content)) echo $content['LIKE']?></div> likes </div>
 
                 <div class="commenttop"></div>
                 <div class="commentcontainer">

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
         <title>Payless Project &raquo; Homepage</title>
         <script type="text/javascript" src="<?php echo BASE_URL?>js/style.js"></script>
-        <script type="text/javascript" src="<?php echo BASE_URL?>js/navigasi.js"></script>
+        <!--<script type="text/javascript" src="<?php echo BASE_URL?>js/navigasi.js"></script>-->
         <link type="text/css" rel="stylesheet" href="<?php echo BASE_URL?>css/header1.css" />
     </head>
     <body onload="randomlike(); randomkomen(); inisialisasi()">
@@ -33,12 +34,30 @@
     <div class="nav2">
         It's a Project without a Payment!
         <div class="right themes"><?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
-            <select name="Tags" onchange="ChangeStyle(this.value)">
+			<?php 
+			
+			if(!empty($list_tag)) {
+				echo '
+				<select name="Tags" onchange="ChangeStyle(this.value)">
+				<option value="-">Select Tags</option>
+				';
+				for($i=0;$i<count($list_tag);$i++){
+					echo '
+						<option value="'.($list_tag[$i]['ID_TAG']).'">'.$list_tag[$i]['NAMA_TAG'].'</option>
+					';
+				}
+				echo '
+				</select>
+				
+			';
+			}
+			?>
+            <!--<select name="Tags" onchange="ChangeStyle(this.value)">
                 <option value="1">Select Tags</option>
                 <option value="2">Funny</option>
                 <option value="3">Cool</option>
                 <option value="4">Disgusting</option>
-            </select>
+            </select>-->
         </div>
     </div>
     <div class="nav3">
@@ -65,7 +84,7 @@
         </div>
     </div>
 </div>
-<div id="overlay"></div>
+<div id="overlay" onclick="closeAll()"></div>
 <div id="popup" class="popup">
     <div class="loginpopout">
         <form action="<?php echo BASE_URL ?>user_con/validate_login" method="post">

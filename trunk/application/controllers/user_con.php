@@ -41,6 +41,28 @@ class User_con extends Controller {
             if(empty($id) || empty($_SESSION['login'])){
                 $this->redirect(BASE_URL.'user_con/error_display/0');
             }
+            $user = $this->_model->query('select * from user where ID_USER='.$id.'');
+            if(count($user)>0){
+                if($user[0]['GENDER']=="LAKI")
+                    $user[0]['GENDER'] = "Male";
+                else
+                    $user[0]['GENDER'] = "Female";
+                $query_komentar = $this->_model->query('select * from komentar where ID_USER='.$id.'');
+                $komentar = count($query_komentar);
+                $query_post = $this->_model->query('select * from konten where ID_USER='.$id.'');
+                $post = count($query_post);
+                $user[0]['KOMENTAR'] = $komentar;
+                $user[0]['POST'] = $post;
+                if($post>0){
+                    $user[0]['KONTEN']= $query_post;
+                }
+                $query_achv = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$id.'');
+                if(count($query_achv)>0){
+                    $user[0]['ACHIEVEMENT'] = $query_achv;
+                }
+
+                $this->set('user', $user[0]);
+            }
             $this->loadView("header_view.php");
             $this->loadView("profile_view.php");		
             $this->loadView("footer_view.php");
