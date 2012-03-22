@@ -32,3 +32,48 @@ function GoToPage() {
     else if(image.checked) window.location = 'image.html';
     else if (video.checked) window.location = 'video.html';
 }
+
+function previewPost() {
+    doPopUp();
+    var title = document.forms["newpostform"]["title"].value;
+    var links = document.forms["newpostform"]["hyperlink"].value;
+    var desc = document.forms["newpostform"]["description"].value;
+    var href = links;
+    var http = /^http:\/\/+[A-Za-z0-9_.-]/;
+    
+    if (!http.test(links)) {
+        href = "http://" + links;
+    }
+
+    var preview = document.getElementById('preview');
+    preview.style.display = 'block';
+
+    if(link.checked) {
+        preview.innerHTML =
+            '<div class="dettop"></div>' +
+            '<div class="detmain">' +
+                '<div class="left iconcontent"><img src="img/icon-link.png"></div>' +
+                '<div class="headertext judul" id="linktitle">' +
+                    '<a href="' + title + '.php' + '">' + title + '</a>' +
+                '</div>' +
+                '<div class="content" id="linkcontent">' +
+                    '<a href="' + href + '">' + links + '</a>' +
+                    '<p>' + desc + '</p>' +
+                '</div>' +
+            '</div>' +
+            '<div class="detbot"></div>';
+    } else if (video.checked) {
+        preview.innerHTML =
+            '<div class="dettop"></div>' +
+            '<div class="detmain">' +
+                '<div class="left iconcontent"><img src="img/icon-video.png"></div>' +
+                '<div class="headertext judul">' +
+                    '<a href="' + title + '.php' + '">' + title + '</a>' +
+                '</div>' +
+                '<div class="content">' +
+                    '<iframe width="480" height="360" src="' + href + ' frameborder="0" allowfullscreen></iframe>' +
+                '</div>' +
+            '</div>' +
+            '<div class="detbot"></div>';
+    }
+}

@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div id="overlay"></div>
+        <div id="overlay" onclick="closeAll()"></div>
         <div id="popup" class="popup">
             <div class="loginpopout">
                 <div class="topbutton">
@@ -69,7 +69,8 @@
                     <span class="lbox_r" id="srch_clear"></span>
                 </div>
                 <span><a class="closelogin" onclick="closePopUp()"></a></span>
-                <span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span>
+                <span><input type="submit" class="loginbutton login" id="loginButton" alt="Log In" value="Log In"></span>
+                <!--span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span-->
             </div>
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
@@ -101,7 +102,7 @@
 
                     <div class="row" id="textlink">
                         <label class="key">LINK</label>
-                        <input class="input" name="link" type="text"/>
+                        <input class="input" name="hyperlink" type="text"/>
                     </div>
 
                     <div class="row" id="linkdesc" style="border-bottom: 0; padding-bottom: 0">
@@ -110,13 +111,16 @@
                     </div>
 
                     <div class="space"></div>
-                    <span><button class="postbutton" style ="margin-left: 539px;" onclick="GoToPage()" value="Preview">Preview</button></span>
+                    <span><a class="previewbutton" onclick="previewPost()">Preview</a></span>
                     <span><input class="postbutton" type="submit" name="post" value="Post"></span>
                 </form>
                 <div class="space"></div>
             </div>
             <div class="detbot"></div>
         </div>
+
+        <div class="preview" id="preview"></div>
+        
         <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
         <div class="footer">
             &copy; Payless Project 2012. Created by: <a href="http://masphei.ungu.com">Masphei</a>, <a href="http://personanonymous.wordpress.com">Edgar Drake</a>, <a href="http://marchygabe.tumblr.com">Marchy Gabe</a>

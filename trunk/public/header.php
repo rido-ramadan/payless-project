@@ -1,3 +1,9 @@
+<head>
+    <meta charset="utf-8" />
+    <title>Payless Project &raquo; My Profile</title>
+    <script type="text/javascript" src="js/style.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
+</head>
 <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
 <div class="topbox">
     <div class="nav1">
