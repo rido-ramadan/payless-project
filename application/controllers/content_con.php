@@ -18,30 +18,65 @@ class Content_con extends Controller {
         }
         function content($id){
             if(!empty($id)){
-                switch ($id){
-                    case 1:// link
-                        $this->set('content',Array('JUDUL'=>'LINK', 'ISI'=>'sesuatu'));
-                        $this->loadView("header_view.php");
-                        $this->loadView("content_view.php");		
-                        $this->loadView("footer_view.php");                            
-                        break;
-                    case 2: // image
-                        $this->set('content',Array('JUDUL'=>'IMAGE', 'ISI'=>'sesuatu'));
-                        $this->loadView("header_view.php");
-                        $this->loadView("content_view.php");		
-                        $this->loadView("footer_view.php");                            
-                        break;
-                    case 3: // video
-                        $this->set('content',Array('JUDUL'=>'VIDEO', 'ISI'=>'sesuatu'));
-                        $this->loadView("header_view.php");
-                        $this->loadView("content_view.php");		
-                        $this->loadView("footer_view.php");                            
-                        break;
-                }
+				$konten = $this->getContentFromId($this->getContent(),$id);
+				if(!empty($konten)){
+					$this->set('content',$konten);
+					$this->loadView("header_view.php");
+					$this->loadView("content_view.php");		
+					$this->loadView("footer_view.php");            					
+				}
             }else{
                 
             }
         }
+		function getContentFromId($konten, $id){
+			$result = null;
+			$counter=0;
+			while($counter<count($konten) && $result==null){
+				if($konten[$counter]['ID_KONTEN']==$id) $result = $konten[$counter];
+				$counter+=1;
+			}
+			return $result;
+		}
+		function getContent(){
+			$result = Array();
+			$konten = $this->_model->query('select * from konten');
+			if(count($konten)>0){
+				for($i=0;$i<count($konten);$i++){
+					$sum_like = 0;
+					$sum_dislike = 0;
+					//like/dislike
+					$konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+					for($j=0;$j<count($konten_like);$j++){
+						if($konten_like[$i]['STATUS']=="LIKE") $sum_like+=1;
+						if($konten_like[$i]['STATUS']=="DISLIKE") $sum_dislike+=1;
+					}
+					//echo "like=".$sum_like."<br>";
+					//echo "dislike=".$sum_dislike."<br>";
+
+					//komentar
+					$komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+					$konten[$i]['KOMENTAR'] = $komen;
+					
+					$konten[$i]['LIKE'] = $sum_like-$sum_dislike;
+					//$konten[$i]['DISLIKE'] = $sum_dislike;
+					switch($konten[$i]['ID_TYPE']){
+						case 1:
+							$konten[$i]['JUDUL'] = 'VERSI LINK';
+							break;
+						case 2:
+							$konten[$i]['JUDUL'] = 'VERSI IMAGE';
+							break;
+						case 3:
+							$konten[$i]['JUDUL'] = 'VERSI VIDEO';
+							break;
+					}
+				}
+				
+				$result = $konten;
+			}
+			return $result;
+		}
         function error_display($no=0){
             $error_message="";
             switch($no){
