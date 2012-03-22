@@ -110,11 +110,10 @@
                     </div>
 
                     <div class="space"></div>
-                    <!--
-                    <input class="postbutton" type="submit" name="post" value="Post"/>-->
+                    <span><button class="postbutton" style ="margin-left: 539px;" onclick="GoToPage()" value="Preview">Preview</button></span>
+                    <span><input class="postbutton" type="submit" name="post" value="Post"></span>
                 </form>
-                    <button class="postbutton" onclick="GoToPage()" value="Post">Post</button>
-                    <div class="space"></div>
+                <div class="space"></div>
             </div>
             <div class="detbot"></div>
         </div>
