@@ -63,6 +63,9 @@ function previewPost() {
             '</div>' +
             '<div class="detbot"></div>';
     } else if (video.checked) {
+        var param = href.split("watch?v=");
+        param[0] = param[0] + "embed/";
+        var ID = param[1].split("&");
         preview.innerHTML =
             '<div class="dettop"></div>' +
             '<div class="detmain">' +
@@ -71,7 +74,7 @@ function previewPost() {
                     '<a href="' + title + '.php' + '">' + title + '</a>' +
                 '</div>' +
                 '<div class="content">' +
-                    '<iframe width="480" height="360" src="' + href + ' frameborder="0" allowfullscreen></iframe>' +
+                    '<iframe width="480" height="360" src="' + param[0] + ID[0] + '" frameborder="0" allowfullscreen></iframe>' +
                 '</div>' +
             '</div>' +
             '<div class="detbot"></div>';
