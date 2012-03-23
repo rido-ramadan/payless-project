@@ -74,6 +74,11 @@
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
+        <div class="pagebar">
+            <div class="notification">
+                Show contents by filter: <b id="filtermethod">NO FILTER</b>, sorted by: <b id="sortingmethod">NEWEST</b>
+            </div>
+        </div>
 
         <div class="detbox">
             <div class="dettop"></div>
@@ -86,7 +91,9 @@
                                     <div class="iconlink"></div>
                                 </div>
                                 <div class="headertext judul">
-                                    <a href="link.html">Versi Link</a>
+                                    <div class="title"><a href="link.html">9GAG - Just For Fun</a></div>
+                                    <div class="uploader"><a href="user-profile_view.php">EdgarDrake</a></div>
+                                    <div class="uploaded">2 days ago</div>
                                 </div>
                                 <div class="content">
                                     <a href="http://www.9gag.com"> www.9gag.com </a>
@@ -117,10 +124,12 @@
                                     <div class="iconphoto"></div>
                                 </div>
                                 <div class="headertext judul">
-                                    <a href="image.html">Versi Image</a>
+                                    <div class="title"><a href="link.html">Sunny Beach</a></div>
+                                    <div class="uploader"><a href="user-profile_view.php">EdgarDrake</a></div>
+                                    <div class="uploaded">3 days ago</div>
                                 </div>
                                 <div class="content">
-                                    <img src="img/pemandangan.jpg" width="320">
+                                    <img src="img/pemandangan.jpg" width="320" alt="beach">
                                 </div>
                                 <div class="paketjempol">
                                     <div class="likemini"></div>
@@ -147,7 +156,9 @@
                                     <div class="iconvideo"></div>
                                 </div>
                                 <div class="headertext judul">
-                                    <a href="video.html">Versi Video</a>
+                                    <div class="title"><a href="link.html">Video Clip</a></div>
+                                    <div class="uploader"><a href="user-profile_view.php">EdgarDrake</a></div>
+                                    <div class="uploaded">3 days ago</div>
                                 </div>
                                 <div class="content">
                                     <iframe width="320" height="240" src="http://www.youtube.com/embed/MGtLGuSaVOI" frameborder="0" allowfullscreen></iframe>
@@ -209,8 +220,8 @@
                 </div>
 
                 <div class="paketgantihalaman">
-                    <div class="left buttonprevious" onclick="window.location.href='contents.html'"></div>
-                    <div class="left buttonnext" onclick="window.location.href='contents.html'"></div>
+                    <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
+                    <div class="buttonnext" onclick="window.location.href='contents.html'">NEXT</div>
                 </div>
             </div>
             <div class="detbot"></div>
