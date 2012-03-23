@@ -17,8 +17,8 @@ class Home_con extends Controller {
 				//like/dislike
 				$konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
 				for($j=0;$j<count($konten_like);$j++){
-					if($konten_like[$i]['STATUS']=="LIKE") $sum_like+=1;
-					if($konten_like[$i]['STATUS']=="DISLIKE") $sum_dislike+=1;
+					if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
+					if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
 				}
 				//echo "like=".$sum_like."<br>";
 				//echo "dislike=".$sum_dislike."<br>";
@@ -31,24 +31,51 @@ class Home_con extends Controller {
 				}else $konten[$i]['KOMENTAR'] = 0;
 				$konten[$i]['LIKE'] = $sum_like;
 				$konten[$i]['DISLIKE'] = $sum_dislike;
-				switch($konten[$i]['ID_TYPE']){
-					case 1:
-						$konten[$i]['JUDUL'] = 'VERSI LINK';
-						break;
-					case 2:
-						$konten[$i]['JUDUL'] = 'VERSI IMAGE';
-						break;
-					case 3:
-						$konten[$i]['JUDUL'] = 'VERSI VIDEO';
-						break;
-				}
+//				switch($konten[$i]['ID_TYPE']){
+//					case 1:
+//						$konten[$i]['JUDUL'] = 'VERSI LINK';
+//						break;
+//					case 2:
+//						$konten[$i]['JUDUL'] = 'VERSI IMAGE';
+//						break;
+//					case 3:
+//						$konten[$i]['JUDUL'] = 'VERSI VIDEO';
+//						break;
+//				}
 			}
 			
-			$this->set('content_most_like',$konten);
+			$this->set('content_most_like',$this->orderKontenByLike($konten));
+			$this->set('content_most_comment',$this->orderKontenByKomentar($konten));
 		}
         $this->set('display','Success - My Todo List App');
         $this->loadView("header_view.php");
         $this->loadView("home_view.php");
         $this->loadView("footer_view.php");
+    }
+    function orderKontenByLike($konten){
+        $result = $konten;
+        for($x = 0; $x < count($result); $x++) {
+          for($y = 0; $y < count($result); $y++) {
+            if($result[$x]['LIKE'] > $result[$y]['LIKE']) {
+              $hold = $result[$x];
+              $result[$x] = $result[$y];
+              $result[$y] = $hold;
+            }
+          }
+        }        
+        return $result;
+    }
+    function orderKontenByKomentar($konten){
+        $result = $konten;
+        for($x = 0; $x < count($result); $x++) {
+          for($y = 0; $y < count($result); $y++) {
+            if($result[$x]['KOMENTAR'] > $result[$y]['KOMENTAR']) {
+              $hold = $result[$x];
+              $result[$x] = $result[$y];
+              $result[$y] = $hold;
+            }
+          }
+        }        
+        return $result;
     }
 }

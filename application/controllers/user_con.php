@@ -91,11 +91,9 @@ class User_con extends Controller {
                 $_SESSION = $data;
                 //echo $_SESSION['nama'];
                 //$this->set('user',$account[0]);
-                $this->loadView("header_view.php");
-                $this->loadView("home_view.php");		
-                $this->loadView("footer_view.php");
+                $this->redirect(BASE_URL.'home_con/');
             }else{
-                $this->error_display(1);
+                $this->redirect(BASE_URL.'login_con/error_display/1');
             }
             
 //            $result = $this->_model->test("select * from user");

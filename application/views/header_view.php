@@ -18,8 +18,8 @@
             <?php 
                 if(isset($_SESSION['login'])){
                     echo '
+                    <a class="topbutton myaccount" href="'.BASE_URL.'user_con/profile/'.($_SESSION['id']).'" id="myacctButton" title="Sign Up"></a>
                     <a class="topbutton signout" id="loginButton" alt="Log In" href="'.BASE_URL.'user_con/logout"></a>
-                    <a class="topbutton signup" href="register_view.php" id="myacctButton" title="Sign Up"></a>
                         ';
                 }
                 else{
@@ -31,19 +31,39 @@
             ?>
         </div>
     </div>
+    <script type="text/javascript">
+    function call(url){
+        var tag=document.getElementById("Tags");
+        var sort=document.getElementById("Sorting");
+        //document.location.href=url+'/'+term.value;
+        document.location.href=url+tag.value+"/"+sort;
+    }
+    </script>
+
     <div class="nav2">
         It's a Project without a Payment!
         <div class="right themes"><?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
+                <form action="<?php echo BASE_URL?>content_con/submit_tag" method="post">
+                    <select id="Sorting" name="Sorting">
+                        <option value="-1">Newest</option>
+                        <option <?php if(!empty($current_sort) && $current_sort==1) echo 'selected="selected"'?> value="1">Most Popular</option>
+                        <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
+                    </select>
+                    <input type="text" name="input_tag" />
+                    <input type="submit" value="submit"/>
+                </form>
 			<?php 
 			
 			if(!empty($list_tag)) {
 				echo '
-				<select name="Tags" onchange="ChangeStyle(this.value)">
-				<option value="-">Select Tags</option>
+				<select id="Tags" name="Tags" onChange="call(\''.BASE_URL.'content_con/list_content/\')">
+				<option value="-1">Select Tags</option>
 				';
 				for($i=0;$i<count($list_tag);$i++){
 					echo '
-						<option value="'.($list_tag[$i]['ID_TAG']).'">'.$list_tag[$i]['NAMA_TAG'].'</option>
+						<option ';
+                                        if(!empty($current_tag) && $list_tag[$i]['ID_TAG']==$current_tag) echo 'selected="selected" ';
+                                        echo 'value="'.($list_tag[$i]['ID_TAG']).'">'.$list_tag[$i]['NAMA_TAG'].'</option>
 					';
 				}
 				echo '
@@ -62,9 +82,9 @@
     </div>
     <div class="nav3">
         <div id="sort5" class="left"><a href="<?php echo BASE_URL?>">Home</a></div>
-        <div class="left"><img src="images/divide.png" alt="" /></div>
+        <div class="left"><img src="<?php echo BASE_URL?>img/divide.png" alt="" /></div>
         <div id="sort2" class="left nav3act"><a href="<?php echo BASE_URL?>content_con/list_content">Contents</a></div>
-        <div class="left"><img src="images/divide.png" alt="" /></div>
+        <div class="left"><img src="<?php echo BASE_URL?>img//divide.png" alt="" /></div>
         <div id="sort1" class="left"><a href="<?php echo BASE_URL?>content_con/post">Upload Post</a></div>
         <div class="right">
             <div id="applesearch">

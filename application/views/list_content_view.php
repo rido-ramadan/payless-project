@@ -2,7 +2,38 @@
 			<div class="dettop"></div>
 			<div class="detmain">
 
+                            <?php
+                                if(!empty($konten)){
+                                    for($i=0;$i<count($konten);$i++){
+                                        echo '
 				<div class="paketkonten">
+					<div class="left iconcontent">
+						<img src="img/icon-link.png">
+					</div>
+					<div class="headertext judul">
+						<a href="link.html">'.$konten[$i]['JUDUL'].'</a>
+					</div>
+					<div class="right paketjempol">
+						<img style="float:left; margin: 0px 5px" src="img/like-mini.png">
+						<div class="left jumlahlike"></div>
+						<img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
+						<div class="jumlahkomen"></div>
+						<br/>
+						<div class="left likebutton" onclick="voteplus(this.num)"></div>
+						<div class="dislikebutton" onclick="votemin(this.num)"></div>
+					</div>
+					<div class="content">
+						<a href="http://www.9gag.com"> www.9gag.com </a>
+						<p> deskripsinya link ini </p>
+					</div>
+
+
+				</div>
+                                            ';
+                                    }
+                                }
+                            ?>
+				<!--<div class="paketkonten">
 					<div class="left iconcontent">
 						<img src="img/icon-link.png">
 					</div>
@@ -235,7 +266,7 @@
 						<iframe width="480" height="360" src="http://www.youtube.com/embed/MGtLGuSaVOI" frameborder="0" allowfullscreen></iframe>
 					</div>
 
-				</div>
+				</div>-->
 
 				<div class="paketgantihalaman">
 					<div class="left buttonprevious" onclick="window.location.href='contents.html'"></div>
