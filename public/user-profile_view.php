@@ -127,7 +127,7 @@
                     <ul>
                         <li>
                             <div class="achievement">
-                                <div class="ach_logo"></div>
+                                <div class="ach_logo"><img src="img/i've moved on.png" alt=""></div>
                                 <div class="ach_detail">
                                     <div class="ach_name">I've Moved On</div>
                                     <div class="ach_how">You're not alone anymore</div>

@@ -534,27 +534,84 @@ div.judul a:hover, div.judul a:link, div.judul a:visited {
 }
 
 div.likebutton {
-    margin: 2px;
-    width: 64px;
-    height: 64px;
-    background: url('../img/icon-like.png');
+    margin: -8px 2px 2px 2px;
+    width: 72px;
+    height: 48px;
     display: block;
+    border-radius: 10px;
     text-align: center;
+
+    /*background-color: #cccccc;*/
+    background: -o-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -moz-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+.likebutton a {
+    background: url('../img/button-like.png') center no-repeat;
+    width: 72px;
+    height: 48px;
+    display: block;
+}
 
 div.dislikebutton {
     background: url('../img/icon-dislike.png');
-    margin: 2px 2px 2px 68px;
-    width: 64px;
-    height: 64px;
+    margin: -8px 2px 2px 80px;
+    width: 72px;
+    height: 48px;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+
+    /*background-color: #cccccc;*/
+    background: -o-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -moz-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.dislikebutton a {
+    background: url('../img/button-dislike.png') center no-repeat;
+    width: 72px;
+    height: 48px;
     display: block;
 }
 
 div.paketjempol {
-    width: 150px;
+    width: 200px;
     display: block;
     font-size: 12px;
+}
+
+.jumlahlike {
+    width: 52px;
+    height: 15px;
+}
+
+.jumlahkomen {
+    height: 15px;
+}
+
+.listcontents {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.tags {
+    width: inherit;
+    min-height: 20px;
+    font: 11px/13px;
+}
+
+.tags ul {
+    list-style: square;
+    margin: 0;
+    padding-left: 0;
 }
 
 .buttonnext {

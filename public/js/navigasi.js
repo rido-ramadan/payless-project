@@ -71,11 +71,15 @@ function changeLikeImage(i){
         
     if(like[i].clicked==0)
     {
-        like[i].style.backgroundImage = "url(images/icon-like-click.png)";
+        like[i].style.backgroundImage = "-o-linear-gradient(center top , #888888, #444444)";
+        like[i].style.backgroundImage = "-webkit-linear-gradient(center top , #888888, #444444)";
+        like[i].style.backgroundImage = "-moz-linear-gradient(center top , #888888, #444444)";
     }
     else
     {
-        like[i].style.backgroundImage = "url(images/icon-like.png)";
+        like[i].style.backgroundImage = "-o-linear-gradient(center top , #dddddd, #aaaaaa)";
+        like[i].style.backgroundImage = "-webkit-linear-gradient(center top , #dddddd, #aaaaaa)";
+        like[i].style.backgroundImage = "-moz-linear-gradient(center top , #dddddd, #aaaaaa)";
     }
 }
 
@@ -84,11 +88,15 @@ function changeDislikeImage(i){
     imgPath = dislike[i].style.backgroundImage;
 	if(dislike[i].clicked==0)
     {
-        dislike[i].style.backgroundImage = "url(images/icon-dislike-click.png)";
+        dislike[i].style.backgroundImage = "-o-linear-gradient(center top , #888888, #444444)";
+        dislike[i].style.backgroundImage = "-webkit-linear-gradient(center top , #888888, #444444)";
+        dislike[i].style.backgroundImage = "-moz-linear-gradient(center top , #888888, #444444)";
     }
     else
     {
-		dislike[i].style.backgroundImage = "url(images/icon-dislike.png)";
+        dislike[i].style.backgroundImage = "-o-linear-gradient(center top , #dddddd, #aaaaaa)";
+        dislike[i].style.backgroundImage = "-webkit-linear-gradient(center top , #dddddd, #aaaaaa)";
+        dislike[i].style.backgroundImage = "-moz-linear-gradient(center top , #dddddd, #aaaaaa)";
     }
 }
 

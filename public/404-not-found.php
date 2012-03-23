@@ -3,6 +3,7 @@
     <head>
 		<meta charset="utf-8" />
         <title>Payless Project &raquo; My Profile</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
