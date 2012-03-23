@@ -4,13 +4,28 @@
             <div class="detmain">
                 <div class="paketkontenmasuk">
                     <div class="left iconcontent">
-                        <img src="img/icon-link.png" alt="icon"/>
+                        <?php
+                            if(!empty($content)){
+                                if($content['ID_TYPE']==1)
+                                    echo '
+                                    <img src="'.BASE_URL.'img/icon-link.png" alt="icon"/>
+                                        ';
+                                else if($content['ID_TYPE']==2)
+                                    echo '
+                                    <img src="'.BASE_URL.'img/icon-photo.png" alt="icon"/>
+                                        ';
+                                else
+                                    echo '
+                                    <img src="'.BASE_URL.'img/icon-video.png" alt="icon"/>
+                                        ';
+                            }
+                        ?>
                     </div>
                     <div class="headertext judul">
                         <a href=""><?php if(!empty($content)) echo $content['JUDUL']?></a>
                     </div>
                     <div class="contentmasuk">
-                        <?php if(!empty($content)) echo $content['LINK']?>
+                        <?php if(!empty($content)) echo $content['LINK'].'<br>'.$content['DESKRIPSI']?>
                     </div>
                 </div>
                 <div class="right paketjempol">
@@ -22,10 +37,26 @@
                 <div class="commenttop"></div>
                 <div class="commentcontainer">
 
-                    <div id="superbaru">
+                    <div id="superbaru"></div>
 
-						</div>
-
+                    <?php
+                        if(!empty($content['KOMENTAR'])){
+                            for($i=0;$i<count($content['KOMENTAR']);$i++){
+                                echo '
+                                <div class="comment">
+                                    <div class="left avatar">
+                                        <img style="/*float:left;*/ margin: 2px;" src="'.BASE_URL.'img/avatar.png" alt="avatar" width="64" />
+                                    </div>
+                                    <div class="isikomen">
+                                        <br/><div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div><div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
+                                        '.$content['KOMENTAR'][$i]['ISI'].'
+                                    </div>
+                                </div>
+                                    ';
+                            }
+                        }
+                    ?>
+                    <!--
                         <div class="comment">
                             <div class="left avatar">
                                 <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
@@ -58,7 +89,8 @@
                             <input style="margin-left:425px" type="submit" value="Comment" onclick="comment()"/>
 						</div>
 					</div>
-                </div>
+                   --></div>
+                 
                 <div class="commentbottom"></div>
             </div>
             <div class="detbot"></div>

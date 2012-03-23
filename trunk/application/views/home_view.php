@@ -10,14 +10,52 @@
 							else echo 'toppost" style="margin-left: 50px;">';
 							echo '
 								<div class="headertext contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content_most_like[$i]['ID_KONTEN'].'">'.$content_most_like[$i]['JUDUL'].'</a></div>
-								<div class="view"><img src="images/pemandangan.jpg" width="225" alt="Image View"></div>
+								<div class="view"><img src="images/pemandangan.jpg" width="225" alt="Image View"></div>';
+                                                                
+                                                        if((!empty($_SESSION['login']))){
+                                                            echo '
 								<div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 70px; margin-left: 86px; float:left;"></div>
 								<div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 70px; margin-left: 163px; position: absolute;"></div>
+                                                                ';
+                                                        }
+                                                        
+                                                        echo '
 								<div class="likes">
 									<img class="left" style="margin: 10px 5px 0 -80px;" src="images/like-mini.png" alt="like"/>
 									<div class="left jumlahlike" style="display: inline; margin-left: -55px;">'.($content_most_like[$i]['LIKE']-$content_most_like[$i]['DISLIKE']).'</div>
 									<img class="left" style="margin: 0px 5px; margin-top: 10px;" src="images/comment-mini.png" alt="comment"/>
 									<div class="jumlahkomen" style="display: inline">'.$content_most_like[$i]['KOMENTAR'].'</div>
+								</div>
+							</div>
+							
+						';
+						}
+					}
+				}
+                                if(!empty($content_most_comment)){
+					for($i=0;$i<3;$i++){
+						if(!empty($content_most_comment[$i])){
+						echo '
+							<div class="';
+							if($i>0) echo 'left toppost">';
+							else echo 'toppost" style="margin-left: 50px;">';
+							echo '
+								<div class="headertext contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content_most_comment[$i]['ID_KONTEN'].'">'.$content_most_comment[$i]['JUDUL'].'</a></div>
+								<div class="view"><img src="images/pemandangan.jpg" width="225" alt="Image View"></div>';
+                                                                
+                                                        if((!empty($_SESSION['login']))){
+                                                            echo '
+								<div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 70px; margin-left: 86px; float:left;"></div>
+								<div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 70px; margin-left: 163px; position: absolute;"></div>
+                                                                ';
+                                                        }
+                                                        
+                                                        echo '
+								<div class="likes">
+									<img class="left" style="margin: 10px 5px 0 -80px;" src="images/like-mini.png" alt="like"/>
+									<div class="left jumlahlike" style="display: inline; margin-left: -55px;">'.($content_most_comment[$i]['LIKE']-$content_most_comment[$i]['DISLIKE']).'</div>
+									<img class="left" style="margin: 0px 5px; margin-top: 10px;" src="images/comment-mini.png" alt="comment"/>
+									<div class="jumlahkomen" style="display: inline">'.$content_most_comment[$i]['KOMENTAR'].'</div>
 								</div>
 							</div>
 							
