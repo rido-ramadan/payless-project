@@ -821,9 +821,14 @@ div.paketjempol {
 .sortingmethod select {font: 11px/13px arial;}
 .sortingmethod select option {font: 11px/13px arial;}
 
+.ads {
+    margin: 40px 0 20px 0;
+}
+
 .buttonnext {
     width: 150px;
-    height: 20px;
+    height: 30px;
+    line-height: 30px;
     color: black;
     font-weight: bold;
     border-radius: 8px;
@@ -834,7 +839,7 @@ div.paketjempol {
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
     margin-left: 245px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     text-align: center;
     cursor: pointer;
 }
@@ -846,7 +851,8 @@ div.paketjempol {
 
 .buttonprevious {
     width: 150px;
-    height: 20px;
+    height: 30px;
+    line-height: 30px;
     color: black;
     font-weight: bold;
     border-radius: 8px;
@@ -856,7 +862,7 @@ div.paketjempol {
     background: -moz-linear-gradient(center top , #dddddd, #999999);
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     text-align: center;
     cursor: pointer;
 }
