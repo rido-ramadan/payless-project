@@ -74,94 +74,147 @@
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
-        
+
         <div class="detbox">
-			<div class="dettop"></div>
-			<div class="detmain">
-                <ul class="listcontents">
-                    <li>
-                        <div class="paketkonten linkpost">
-                            <div class="left iconcontent">
-                                <img src="img/icon-link.png">
-                            </div>
-                            <div class="headertext judul">
-                                <a href="link.html">Versi Link</a>
-                            </div>
-                            <div class="right paketjempol">
-                                <img style="float:left; margin: 0px 5px" src="img/like-mini.png">
-                                <div class="left jumlahlike"></div>
-                                <img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
-                                <div class="jumlahkomen"></div>
-                                <br/>
-                                <div class="left likebutton" onclick="voteplus(this.num)"><a></a></div>
-                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
-                                <div class="tags">
-                                    Tags : <br/>
-                                    <ul>
-                                        <li>9gag</li>
-                                        <li>funny</li>
-                                        <li>rage comics</li>
-                                    </ul>
+            <div class="dettop"></div>
+            <div class="detmain">
+                <div class="contentlist">
+                    <ul class="listcontents">
+                        <li>
+                            <div class="paketkonten linkpost">
+                                <div class="left iconcontent">
+                                    <div class="iconlink"></div>
+                                </div>
+                                <div class="headertext judul">
+                                    <a href="link.html">Versi Link</a>
+                                </div>
+                                <div class="content">
+                                    <a href="http://www.9gag.com"> www.9gag.com </a>
+                                    <p> deskripsinya link ini </p>
+                                </div>
+                                <div class="paketjempol">
+                                    <div class="likemini"></div>
+                                    <div class="jumlahlike"></div>
+                                    <div class="commentmini"></div>
+                                    <div class="jumlahkomen"></div>
+                                    <br/>
+                                    <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                    <div class="tags">
+                                        Tags : <br/>
+                                        <ul class="tag">
+                                            <li>9gag</li>
+                                            <li>funny</li>
+                                            <li>rage comics</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="content">
-                                <a href="http://www.9gag.com"> www.9gag.com </a>
-                                <p> deskripsinya link ini </p>
+                        </li>
+                        <li>
+                            <div class="paketkonten imagepost">
+                                <div class=" left iconcontent">
+                                    <div class="iconphoto"></div>
+                                </div>
+                                <div class="headertext judul">
+                                    <a href="image.html">Versi Image</a>
+                                </div>
+                                <div class="content">
+                                    <img src="img/pemandangan.jpg" width="320">
+                                </div>
+                                <div class="paketjempol">
+                                    <div class="likemini"></div>
+                                    <div class="jumlahlike"></div>
+                                    <div class="commentmini"></div>
+                                    <div class="jumlahkomen"></div>
+                                    <br/>
+                                    <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                    <div class="tags">
+                                        Tags : <br/>
+                                        <ul class="tag">
+                                            <li>9gag</li>
+                                            <li>funny</li>
+                                            <li>rage comics</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
+                        </li>
+                        <li>
+                            <div class="paketkonten videopost">
+                                <div class=" left iconcontent">
+                                    <div class="iconvideo"></div>
+                                </div>
+                                <div class="headertext judul">
+                                    <a href="video.html">Versi Video</a>
+                                </div>
+                                <div class="content">
+                                    <iframe width="320" height="240" src="http://www.youtube.com/embed/MGtLGuSaVOI" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="paketjempol">
+                                    <div class="likemini"></div>
+                                    <div class="jumlahlike"></div>
+                                    <div class="commentmini"></div>
+                                    <div class="jumlahkomen"></div>
+                                    <br/>
+                                    <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                    <div class="tags">
+                                        Tags : <br/>
+                                        <ul class="tag">
+                                            <li>9gag</li>
+                                            <li>funny</li>
+                                            <li>rage comics</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="filtermethod">
+                    <div class="inputtag">
+                        <div class="headertext" style="margin: 10px 0 0 15px;">Filter by Tags</div>
+                        <form name="filtertag" action="" method="post">
+                            <div class="tagbar">
+                                <span class="sbox_l"></span>
+                                <span class="sbox">
+                                    <input style="outline-width:0px;" type="text" name="inputtag" placeholder="input tags" >
+                                </span>
+                                <span class="sbox_r" id="srch_clear"></span>
+                            </div>
+                            <div class="tagsubmit">
+                                <input type="submit" name="submittag" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tagclouds">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Choose a Tag</div>
+                        <div class="tagcloudscontent">
+                            9gag Funny Star Wars Pokemon Tugas Besar Artificial Intelligence Angry Birds
                         </div>
-                    </li>
-                    <li>
-                        <div class="paketkonten imagepost">
-                            <div class=" left iconcontent">
-                                <img src="img/icon-photo.png">
-                            </div>
-                            <div class="headertext judul">
-                                <a href="image.html">Versi Image</a>
-                            </div>
-                            <div class="right paketjempol">
-                                <img style="float:left; margin: 0px 5px" src="img/like-mini.png">
-                                <div class="left jumlahlike"></div>
-                                <img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
-                                <div class="jumlahkomen"></div>
-                                <br/>
-                                <div class="left likebutton" onclick="voteplus(this.num)"><a></a></div>
-                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
-                            </div>
-                            <div class="content">
-                                <img src="img/pemandangan.jpg" width="480">
-                            </div>
+                    </div>
+                    <div class="sorting">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Sort</div>
+                        Sort by:
+                        <div class="sortingmethod">
+                            <select name="sortmethod" onchange="">
+                                <option value="newest">Newest First</option>
+                                <option value="popularity">Most Popular First</option>
+                                <option value="mostcommented">Most Commented First</option>
+                            </select>
                         </div>
-                    </li>
-                    <li>
-                        <div class="paketkonten videopost">
-                            <div class=" left iconcontent">
-                                <img src="img/icon-video.png">
-                            </div>
-                            <div class="headertext judul">
-                                <a href="video.html">Versi Video</a>
-                            </div>
-                            <div class="right paketjempol">
-                                <img style="float:left; margin: 0px 5px" src="img/like-mini.png">
-                                <div class="left jumlahlike"></div>
-                                <img style="float:left; margin: 0px 5px" src="img/comment-mini.png">
-                                <div class="jumlahkomen"></div>
-                                <br/>
-                                <div class="left likebutton" onclick="voteplus(this.num)"><a></a></div>
-                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
-                            </div>
-                            <div class="content">
-                                <iframe width="480" height="360" src="http://www.youtube.com/embed/MGtLGuSaVOI" frameborder="0" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-				<div class="paketgantihalaman">
-					<div class="left buttonprevious" onclick="window.location.href='contents.html'"></div>
-					<div class="left buttonnext" onclick="window.location.href='contents.html'"></div>
-				</div>
-			</div>
-			<div class="detbot"></div>
-		</div>
+                    </div>
+                </div>
+
+                <div class="paketgantihalaman">
+                    <div class="left buttonprevious" onclick="window.location.href='contents.html'"></div>
+                    <div class="left buttonnext" onclick="window.location.href='contents.html'"></div>
+                </div>
+            </div>
+            <div class="detbot"></div>
+        </div>
 
         <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
         <div class="footer">
