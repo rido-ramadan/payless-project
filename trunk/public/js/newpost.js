@@ -74,7 +74,7 @@ function previewPost() {
                     '<a href="' + title + '.php' + '">' + title + '</a>' +
                 '</div>' +
                 '<div class="content">' +
-                    '<iframe width="480" height="360" src="' + param[0] + ID[0] + '" frameborder="0" allowfullscreen></iframe>' +
+                    '<iframe width="320" height="240" src="' + param[0] + ID[0] + '" frameborder="0" allowfullscreen></iframe>' +
                 '</div>' +
             '</div>' +
             '<div class="detbot"></div>';

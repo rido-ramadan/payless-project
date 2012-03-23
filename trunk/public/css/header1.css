@@ -487,13 +487,50 @@ label.left {
     /*background: blue;*/
 }
 
+.iconlink {
+    background: url('../img/icon-link.png') no-repeat;
+    width: 48px;
+    height: 48px;
+    display: block;
+}
+
+.iconphoto {
+    background: url('../img/icon-photo.png') no-repeat;
+    width: 48px;
+    height: 37px;
+    display: block;
+}
+
+.iconvideo {
+    background: url('../img/icon-video.png') no-repeat;
+    width: 48px;
+    height: 40px;
+    display: block;
+}
+
+.contentlist {
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.listcontents {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
 .content {
-    width: 500px;
-    margin: 0px 30px 30px 60px;
-    padding-left: 20px;
+    width: 400px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     text-align: justify;
     font-size: 12pt;
     word-wrap: break-word;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .content p {
@@ -528,22 +565,23 @@ div.judul a:hover, div.judul a:link, div.judul a:visited {
 }
 
 .paketkonten {
-    margin: 50px;
-    width: 800px;
-    border-bottom: solid;
+    margin: 20px;
+    width: 600px;
+    border-bottom: solid #aaaaaa;
 }
 
 div.likebutton {
     margin: -8px 2px 2px 2px;
     width: 72px;
     height: 48px;
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     border-radius: 10px;
     text-align: center;
 
     /*background-color: #cccccc;*/
-    background: -o-linear-gradient(center top , #dddddd, #aaaaaa);
-    background: -moz-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -o-linear-gradient(center top , #dddddd, #999999);
+    background: -moz-linear-gradient(center top , #dddddd, #999999);
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
@@ -558,16 +596,17 @@ div.likebutton {
 
 div.dislikebutton {
     background: url('../img/icon-dislike.png');
-    margin: -8px 2px 2px 80px;
+    margin: -8px 2px 2px 0;
     width: 72px;
     height: 48px;
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     border-radius: 10px;
     text-align: center;
 
     /*background-color: #cccccc;*/
-    background: -o-linear-gradient(center top , #dddddd, #aaaaaa);
-    background: -moz-linear-gradient(center top , #dddddd, #aaaaaa);
+    background: -o-linear-gradient(center top , #dddddd, #999999);
+    background: -moz-linear-gradient(center top , #dddddd, #999999);
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
@@ -581,31 +620,53 @@ div.dislikebutton {
 }
 
 div.paketjempol {
-    width: 200px;
-    display: block;
+    width: 160px;
+    display: inline-block;
+    vertical-align: top;
     font-size: 12px;
+}
+
+.likemini {
+    background: url('../img/like-mini.png') no-repeat;
+    width: 16px;
+    height: 16px;
+    margin: 10px 5px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .jumlahlike {
     width: 52px;
-    height: 15px;
+    height: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.commentmini {
+    background: url('../img/comment-mini.png') no-repeat;
+    width: 16px;
+    height: 16px;
+    margin: 10px 5px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .jumlahkomen {
-    height: 15px;
-}
-
-.listcontents {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    list-style: none;
+    height: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .tags {
     width: inherit;
-    min-height: 20px;
-    font: 11px/13px;
+    margin: 10px 0;
+    min-height: 20px;    
+    padding-left: 20px;
+    font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .tags ul {
@@ -613,6 +674,102 @@ div.paketjempol {
     margin: 0;
     padding-left: 0;
 }
+
+.filtermethod {
+    width: 230px;
+    height: auto;
+    min-height: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inputtag {
+    margin: 40px 0 20px 0;
+    border-radius: 8px;
+    background: -o-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.tagbar {
+    margin: 0 0 10px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tagbar .sbox_l  {
+    background: white url('../img/srch_l.gif') no-repeat top left;
+    float: left;
+    width: 19px; height: 19px;
+    margin-top: 2px;
+}
+
+.tagbar .sbox_r  {
+    background: white url('../img/srch_r.gif') no-repeat top left;
+    float: left;
+    width: 19px; height: 19px;
+    margin-top: 2px;
+}
+
+.tagbar .sbox input {
+    background: white url('../img/srch_bg.gif') repeat-x top left;
+    float: left;
+    border: 0;
+    height: 13px; width: 100px;
+    padding: 3px;
+    margin-top: 2px;
+    font: 11px/13px arial;
+    color: #000;
+}
+
+.tagsubmit {
+    margin: 0 0 10px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tagsubmit input {
+    font: 11px/13px arial;
+    border-radius: 10px;
+}
+
+.tagclouds {
+    margin: 0 0 20px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: -o-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.tagcloudscontent {
+    word-wrap: break-word;
+    font: 11px/13px arial;
+}
+
+.sorting {
+    margin: 0 0 20px 0;
+    padding: 10px;
+    font: 11px/13px arial;
+    border-radius: 8px;
+    background: -o-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.sortingmethod {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sortingmethod select {font: 11px/13px arial;}
+.sortingmethod select option {font: 11px/13px arial;}
 
 .buttonnext {
     width: 250px;
@@ -626,7 +783,6 @@ div.paketjempol {
     margin-left: 80px;
 
 }
-
 
 .buttonprevious {
     width: 250px;
