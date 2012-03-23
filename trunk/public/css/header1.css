@@ -479,6 +479,29 @@ label.left {
 /*	CONTENT LIST		*/
 /* -------------------- */
 
+.pagebar {
+	width: 942px;
+	height: 30px;
+	margin: 0 auto;
+	padding: 0 29px 16px 29px;
+	background: url(../img/navmenu.png) no-repeat;
+    display: block;
+	text-align: left;
+}
+
+#filtermethod, #sortingmethod {
+    font-weight: bolder;
+}
+
+.notification {
+    margin: 0 0 0 20px;
+    padding-top: 7px;
+    text-align: left;
+    color: white;
+    font: 13px arial;
+    font-weight: bold;
+}
+
 .iconcontent {
     padding: 5px;
     width: 60px;
@@ -557,10 +580,37 @@ div.content a:hover {
     width: 600px;
     color: #000000;
     font-size: 32pt;
-    /*background: aqua;*/
+}
+
+.title {
+    width: 600px;
+    color: #000000;
+    font-size: 32pt;
+}
+
+.uploader {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 5px 0 0;
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.uploaded {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 5px 0 0;
+    color: gray;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 div.judul a:hover, div.judul a:link, div.judul a:visited {
+    color: #000;
+}
+
+div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     color: #000;
 }
 
@@ -772,35 +822,56 @@ div.paketjempol {
 .sortingmethod select option {font: 11px/13px arial;}
 
 .buttonnext {
-    width: 250px;
-    height: 40px;
-    background: url('../img/next.png');
-    margin-left: 80px;
-
+    width: 150px;
+    height: 20px;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+    background: -o-linear-gradient(center top , #dddddd, #999999);
+    background: -moz-linear-gradient(center top , #dddddd, #999999);
+    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    margin-left: 245px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
 }
 .buttonnext:hover {
-    background: url('../img/next-click.png');
-    margin-left: 80px;
-
+    background: -o-linear-gradient(center top , #888888, #444444);
+    background: -moz-linear-gradient(center top , #888888, #444444);
+    background: -webkit-linear-gradient(center top , #888888, #444444);
 }
 
 .buttonprevious {
-    width: 250px;
-    height: 40px;
-    background: url('../img/prev.png');
+    width: 150px;
+    height: 20px;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+    background: -o-linear-gradient(center top , #dddddd, #999999);
+    background: -moz-linear-gradient(center top , #dddddd, #999999);
+    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
 }
 
-
 .buttonprevious:hover{
-    background: url('../img/prev-click.png');
-
+    background: -o-linear-gradient(center top , #888888, #444444);
+    background: -moz-linear-gradient(center top , #888888, #444444);
+    background: -webkit-linear-gradient(center top , #888888, #444444);
 }
 
 .paketgantihalaman {
     width: 600px;
     height: 40px;
     display: block;
-    margin: 0px 0px 50px 170px;
+    margin: 0px 0px 50px 45px;
 }
 
 .paketkontenmasuk {
