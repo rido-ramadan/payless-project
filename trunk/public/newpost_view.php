@@ -105,9 +105,14 @@
                         <input class="input" name="hyperlink" type="text"/>
                     </div>
 
-                    <div class="row" id="linkdesc" style="border-bottom: 0; padding-bottom: 0">
+                    <div class="row" id="linkdesc" style="padding-bottom: 0">
                         <label class="key" style="vertical-align:top">DESCRIPTION</label>
                         <textarea class="input" name="description" cols="40" rows="5"></textarea>
+                    </div>
+
+                    <div class="row" id="tagspost" style="border-bottom: 0; padding-bottom: 0">
+                        <label class="key" style="vertical-align:top">TAGS</label>
+                        <input class="input" name="tags" type="text" >
                     </div>
 
                     <div class="space"></div>
