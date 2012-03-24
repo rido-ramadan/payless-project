@@ -54,3 +54,15 @@ function closeAll() {
     if (edit !== null) edit.style.display = 'none';
     if (preview !== null) preview.style.display = 'none';
 }
+
+function showAchievement() {
+    var popup = document.getElementById('ach_popup');
+    doPopUp();
+    popup.style.display = 'block';
+}
+
+function closeAchievement() {
+    var popup = document.getElementById('ach_popup');
+    closeAll();
+    popup.style.display = 'none';
+}
