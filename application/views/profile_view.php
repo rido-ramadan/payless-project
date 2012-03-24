@@ -79,13 +79,13 @@
                         }
                     ?>
                 </div>
-            <?php }?>
             </div>
             <div class="detbot"></div>
         </div>
         <div style="height: 10px;"></div>
 
         <!-- EDIT DIV POP OUT -->
+        <form method="post" action="<?php echo BASE_URL?>user_con/edit_user" enctype="multipart/form-data">
         <div class="edituserdata" id="edituserdata">
             <div class="edittop"></div>
             <div class="editmain">
@@ -115,9 +115,17 @@
                     <div class="error" id="cpasswordError">The password is not match.</div>
                 </div>
                 <div class="txtfieldbox width90">
+                    <div class="left txtboxlabel">EMAIL</div>
+                    <div class="right">
+                        <input class="txtfield" type="text" value="<?php echo $user['EMAIL']?>" size="30" name="email" onkeydown="ProcessCPassword(this)" onkeyup="ProcessCPassword(this)" />
+                    </div>
+                    <div class="clear"></div>
+                    <div class="error" id="cpasswordError">The password is not match.</div>
+                </div>
+                <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male">Male</option><option value="female">Female</option></select>
+                        <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male" <?php if($user['GENDER']="LAKI") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']="PEREMPUAN") echo 'selected="selected"'?>value="female">Female</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="genderError">You must select a gender.</div>
@@ -141,7 +149,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">ABOUT ME</div>
                     <div class="right">
-                        <textarea rows="5" cols="24" name="about"></textarea>
+                        <textarea rows="5" cols="24"  name="about"><?php echo $user['ABOUT_ME']?></textarea>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="avatarError">Please upload jpeg image.</div>
@@ -155,6 +163,9 @@
             </div>
             <div class="editbot"></div>
         </div>
+        </form>
+                    <?php }?>
+
         <!---------------------->
 
         <!-- ::::::::::::::::::::: END OF BODY PART ::::::::::::::::::::: -->
