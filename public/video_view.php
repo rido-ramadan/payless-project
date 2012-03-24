@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Payless Project &raquo; Versi Video</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>

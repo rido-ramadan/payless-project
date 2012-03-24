@@ -3,6 +3,7 @@
     <head>
 		<meta charset="utf-8" />
         <title>Payless Project &raquo; Register</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
@@ -144,10 +145,18 @@
                         <div class="txtfieldbox">
                             <div class="left txtboxlabel">GENDER</div>
                             <div class="right">
-                                <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">- -Select- -</option><option value="male">Male</option><option value="female">Female</option></select>
+                                <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male">Male</option><option value="female">Female</option></select>
                             </div>
                             <div class="clear"></div>
                             <div class="error" id="genderError">You must select a gender.</div>
+                        </div>
+                        <div class="txtfieldbox">
+                            <div class="left txtboxlabel">STATUS</div>
+                            <div class="right">
+                                <select class="txtfield" name="status" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="single">Forever Alone</option><option value="relation">In a Relationship</option></select>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="error" id="genderError">Please choose your status</div>
                         </div>
                         <div class="txtfieldbox">
                             <div class="left txtboxlabel">AVATAR UPLOAD</div>

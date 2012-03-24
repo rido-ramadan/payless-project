@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Payless Project &raquo; Contents</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <script type="text/javascript" src="js/navigasi.js"></script>
         <link type="text/css" rel="stylesheet" href="css/header1.css" />
@@ -130,7 +131,7 @@
             </div>
             <div class="top-post" id="commented-3">
                 <div class="top-video">
-                    <div class="contenttitle"><a href="link_view.php">Skyrim Glitch</a></div>
+                    <div class="contenttitle"><a href="link_view.php">Skyrim Easter Eggs</a></div>
                     <div class="view">
                         <div class="view-video">
                             <div class="view"><iframe width="240" height="180" src="http://www.youtube.com/embed/I28EkJ32nwQ" ></iframe></div>
@@ -201,7 +202,7 @@
             </div>
             <div class="top-post" id="popular-3">
                 <div class="top-video">
-                    <div class="contenttitle"><a href="link_view.php">Skyrim Glitch</a></div>
+                    <div class="contenttitle"><a href="link_view.php">Skyrim Easter Eggs</a></div>
                     <div class="view">
                         <div class="view-video">
                             <div class="view"><iframe width="240" height="180" src="http://www.youtube.com/embed/I28EkJ32nwQ" ></iframe></div>
