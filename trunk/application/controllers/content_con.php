@@ -17,7 +17,7 @@ class Content_con extends Controller {
             }
             
             if($sort==-1){ // sort waktu
-                $konten=  $this->orderKontenByLike($konten);
+                $konten=  $this->orderKontenByTime($konten);
             }else if($sort==1){ // sort like
                 $konten=  $this->orderKontenByLike($konten);
             }else if($sort==2){ // sort komentar
@@ -120,7 +120,7 @@ class Content_con extends Controller {
                     $sort = $_POST['Sorting'];
                 }
                 if($sort==-1){ // sort waktu
-                    $konten=  $this->orderKontenByLike($konten);
+                    $konten=  $this->orderKontenByTime($konten);
                 }else if($sort==1){ // sort like
                     $konten=  $this->orderKontenByLike($konten);
                 }else if($sort==2){ // sort komentar
@@ -156,13 +156,27 @@ class Content_con extends Controller {
             if(empty($_POST['title'])){
                 $this->set('empty','title');                
             }else{
+                $post_type = $_POST['type'];
                 $this->set('post_title',$_POST['title']);                                
-                if($_POST['type']=="Link"){
+                if($post_type=="Link"){
                     if(!empty($_POST['link'])){
                         $this->set('post_link',$_POST['link']);                                
                         if(!empty($_POST['description'])){
                             // sukses
                             $valid = true;
+                            $id_user = $_SESSION['id'];
+                            $id_type = 1;
+                            $waktu = date("Y-m-d H:i:s");
+                            $judul = $_POST['title'];
+                            $link = $_POST['link'];
+                            $desc = $_POST['description'];
+                            $insert = 'insert into konten (ID_USER, ID_TYPE, WAKTU, JUDUL, LINK, DESKRIPSI) 
+                                values ("'.$id_user.'", "'.$id_type.'",
+                                    "'.$waktu.'", "'.$judul.'",
+                                        "'.$link.'", "'.$desc.'"
+                                    )';
+                            $this->_model->query($insert);
+                            $this->redirect(BASE_URL.'content_con');
                         }
                         else{
                             if(empty($_POST['description']))
@@ -182,19 +196,21 @@ class Content_con extends Controller {
                         $fileSize = $_FILES['picture']['size']; //get the size
                         $fileError = $_FILES['picture']['error']; //get the error when upload
                         if($fileSize > 0 || $fileError == 0){ //check if the file is corrupt or error
-                        echo $fileName;
-                        echo $fileSize;
-                        echo $fileError;
-                        $move = move_uploaded_file($_FILES['picture']['tmp_name'], 'upload/'.$fileName); //save image to the folder
+                        $move = move_uploaded_file($_FILES['picture']['tmp_name'], 'image/'.$fileName); //save image to the folder
                         if($move){
-                        //echo "<h3>Success! </h3>";
-                        //$q = "INSERT into tb_image VALUES('','$fileName','image/$fileName')"; //insert image property to database
-                        //$result = mysql_query($q);
-
-                        //$q1 = "SELECT location from tb_image where filename = '$fileName' limit 1 "; //get the image that have been uploaded
-                        //$result = mysql_query($q1);
-                        //while ($data = mysql_fetch_array($result)) {
-                        //$loc = $data['location']; 
+                            $id_user = $_SESSION['id'];
+                            $id_type = 2;
+                            $waktu = date("Y-m-d H:i:s");
+                            $judul = $_POST['title'];
+                            $link = BASE_URL.'image/'.$fileName;
+                            $desc = "";
+                            $insert = 'insert into konten (ID_USER, ID_TYPE, WAKTU, JUDUL, LINK, DESKRIPSI) 
+                                values ("'.$id_user.'", "'.$id_type.'",
+                                    "'.$waktu.'", "'.$judul.'",
+                                        "'.$link.'", "'.$desc.'"
+                                    )';
+                            $this->_model->query($insert);
+                            $this->redirect(BASE_URL.'content_con');
 
                         } else{
                             //echo "<h3>Failed! </h3>";
@@ -211,6 +227,19 @@ class Content_con extends Controller {
                 else if($_POST['type']=="Video"){
                     if(!empty($_POST['link'])){
                         $valid = true;
+                        $id_user = $_SESSION['id'];
+                        $id_type = 3;
+                        $waktu = date("Y-m-d H:i:s");
+                        $judul = $_POST['title'];
+                        $link = $_POST['link'];
+                        $desc = "";
+                        $insert = 'insert into konten (ID_USER, ID_TYPE, WAKTU, JUDUL, LINK, DESKRIPSI) 
+                            values ("'.$id_user.'", "'.$id_type.'",
+                                "'.$waktu.'", "'.$judul.'",
+                                    "'.$link.'", "'.$desc.'"
+                                )';
+                        $this->_model->query($insert);
+                        $this->redirect(BASE_URL.'content_con');
                     }
                     else{
                         if(empty($_POST['link']))
@@ -226,6 +255,22 @@ class Content_con extends Controller {
                 
             }
             
+        }
+        function dateInputFormatSQL($tanggal){
+            $cd = strtotime($tanggal);
+              $newdate = date('Y-m-d H:m:s', mktime(date('h',$cd),
+                date('i',$cd), date('s',$cd), date('m',$cd),
+                date('d',$cd), date('Y',$cd)));
+                return $newdate;
+        }
+        function dateOutputFormatSQLDate($tanggal){
+                $cd = strtotime($tanggal);
+              $newdate = date('d/m/Y', mktime(date('h',$cd),
+                date('i',$cd), date('s',$cd), date('m',$cd),
+                date('d',$cd), date('Y',$cd)));
+                return $newdate;
+                
+
         }
         function content($id){
             if(!empty($id)){
@@ -290,6 +335,24 @@ class Content_con extends Controller {
                 }
                 $result = $konten;
             }
+            return $result;
+        }
+        function orderKontenByTime($konten){
+            $result = $konten;
+//            for($p=0;$p<count($konten);$p++){
+//                echo $konten[$p]['JUDUL'].':'.strtotime($konten[$p]['WAKTU']).'<br>';
+//            }
+            for($x = 0; $x < count($result); $x++) {
+              for($y = 0; $y < count($result); $y++) {
+                $time1=strtotime($result[$x]['WAKTU']);
+                $time2=strtotime($result[$y]['WAKTU']);
+                if($time1 > $time2) {
+                  $hold = $result[$x];
+                  $result[$x] = $result[$y];
+                  $result[$y] = $hold;
+                }
+              }
+            }        
             return $result;
         }
         function orderKontenByLike($konten){

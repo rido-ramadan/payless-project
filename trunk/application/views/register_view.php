@@ -6,7 +6,7 @@
                 <span style="color: red; font-size: 1em;">
 
                 </span>
-                <form id="registerForm" method="POST" action="<?php echo BASE_URL?>user_con/validate_register">
+                <form id="registerForm" method="POST" enctype="multipart/form-data" action="<?php echo BASE_URL?>user_con/validate_register">
                     <div class="left sidesbox">
                         <div class="txtfieldbox" style="border-top: 0; padding-top: 0">
                             <div class="left txtboxlabel">USERNAME</div>
