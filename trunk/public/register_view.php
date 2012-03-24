@@ -35,7 +35,7 @@
                 <div class="left"><div class="divide"></div></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <form action="" method="post" name="srch">
-                    <div class="right">
+                    <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search" value="Search"/>
                     </div>
                     <div class="right">
@@ -171,11 +171,8 @@
                     <div class="clear" style="overflow: auto; padding-top: 15px; text-align: center">
                         <div class="txtboxlabel" style="text-align: center;">ABOUT ME</div>
                         <div><textarea rows="5" cols="106" name="about"></textarea></div>
-                        <div class="termsagreements">We Get Rid of the Terms and Agreements in GetRid!</div>
+                        <div class="termsagreements">Why would you agree to the terms and agreements while we got no payment?</div>
                         <input class="joinbutton" type="submit" name="signup" value="Create my Account!" />
-                        <!--<ul class="reasonlist">
-                            <li>As a registered user, you can upload your own posts!</li>
-                        </ul>-->
                     </div>
                 </form>
             </div>

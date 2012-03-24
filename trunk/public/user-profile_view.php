@@ -35,7 +35,7 @@
                 <div class="left"><div class="divide"></div></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <form action="" method="post" name="srch">
-                    <div class="right">
+                    <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search" value="Search"/>
                     </div>
                     <div class="right">
@@ -256,6 +256,14 @@
             <div class="editmain">
                 <div class="subtitle" style="margin: 0 20px;">EDIT PROFILE DATA</div>
                 <div class="txtfieldbox width90" style="border-top: 0; padding-top: 10px;">
+                    <div class="left txtboxlabel">EMAIL</div>
+                    <div class="right">
+                        <input class="txtfield" type="text" size="30" name="email" onkeydown="ProcessEmail(this)" onkeyup="ProcessEmail(this)" />
+                    </div>
+                    <div class="clear"></div>
+                    <div class="error" id="emailError">Wrong email format.</div>
+                </div>
+                <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">OLD PASSWORD</div>
                     <div class="right">
                         <input class="txtfield" type="password" size="30" name="password" onkeydown="ProcessPassword(this)" onkeyup="ProcessPassword(this)" />
