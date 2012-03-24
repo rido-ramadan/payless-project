@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<meta charset="utf-8" />
+        <meta charset="utf-8" />
         <title>Payless Project &raquo; My Profile</title>
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
@@ -110,18 +110,76 @@
                     <div class="lhs left"># UPLOADS</div>
                     <div class="rhs left clearfix">10</div>
                     <div class="lhs left">POST LIST</div>
-                    <div class="rhs left clearfix">
+                    <div class="clear">
                         <ul>
-                            <li><a href="edgardrake/p1.php">Imagine this..</a></li>
-                            <li><a href="edgardrake/p2.php">Unbeliavable Food</a></li>
-                            <li><a href="edgardrake/p3.php">Outside!</a></li>
-                            <li><a href="edgardrake/p4.php">This is Sucks</a></li>
-                            <li><a href="edgardrake/p5.php">Featurephone vs Smartphone</a></li>
-                            <li><a href="edgardrake/p6.php">Intangible Media</a></li>
-                            <li><a href="edgardrake/p7.php">Angry Birds....?</a></li>
-                            <li><a href="edgardrake/p8.php">Attack of (Apache) TomCat</a></li>
-                            <li><a href="edgardrake/p9.php">Jedi</a></li>
-                            <li><a href="edgardrake/p10.php">Macrohard Dominance</a></li>
+                            <li>
+                                <div class="top-post"">
+                                     <div class="top-image">
+                                        <div class="contenttitle"><a href="image_view.php">Sunny Beach</a></div>
+                                        <div class="view">
+                                            <div class="view-image">
+                                                <img src="img/pemandangan.jpg" width="260" alt="Suuny Beach">
+                                            </div>
+                                        </div>
+                                        <div class="basic-features">
+                                            <div class="paketjempol">
+                                                <div class="likemini"></div>
+                                                <div class="jumlahlike"></div>
+                                                <div class="commentmini"></div>
+                                                <div class="jumlahkomen"></div>
+                                                <br/>
+                                                <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="top-post">
+                                    <div class="top-link">
+                                        <div class="contenttitle"><a href="link_view.php">Encrypted Google</a></div>
+                                        <div class="view">
+                                            <div class="view-link-url"><a href="https://encrypted.google.com">https://encrypted.google.com</a></div>
+                                            <div class="view-link-desc">Google SSL Searchm with encrypted data search. Remember though the data you're searching for is encrypted, ISP still can trace what URL you're browsing in.</div>
+                                        </div>
+                                        <div class="basic-features">
+                                            <div class="paketjempol">
+                                                <div class="likemini"></div>
+                                                <div class="jumlahlike"></div>
+                                                <div class="commentmini"></div>
+                                                <div class="jumlahkomen"></div>
+                                                <br/>
+                                                <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="top-post">
+                                    <div class="top-video">
+                                        <div class="contenttitle"><a href="link_view.php">Skyrim Glitch</a></div>
+                                        <div class="view">
+                                            <div class="view-video">
+                                                <div class="view"><iframe width="240" height="180" src="http://www.youtube.com/embed/I28EkJ32nwQ" ></iframe></div>
+                                            </div>
+                                        </div>
+                                        <div class="basic-features">
+                                            <div class="paketjempol">
+                                                <div class="likemini"></div>
+                                                <div class="jumlahlike"></div>
+                                                <div class="commentmini"></div>
+                                                <div class="jumlahkomen"></div>
+                                                <br/>
+                                                <div class="likebutton" onclick="voteplus(this.num)"><a></a></div>
+                                                <div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

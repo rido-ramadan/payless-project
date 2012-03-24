@@ -836,6 +836,7 @@ div.paketjempol {
 .tagsubmit input {
     font: 11px/13px arial;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .tagclouds {
@@ -1015,26 +1016,72 @@ div.tulisan {
 /* -------------------- */
 /*	INDEX CONTENTS		*/
 /* -------------------- */
+.top-post {
+    width: 312px;
+    height: auto;
+    min-height: 200px;
+    background: white;
+    display: inline-block;
+    vertical-align: top;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(128, 128, 128, 0.6);
+}
+
+.contenttitle {
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: bold;
+    text-align: left;
+
+    width: 255px;
+    line-height: 20px;
+    display: block;
+    vertical-align: bottom;
+    margin: 15px 0 0 25px;
+    padding-bottom: 10px;
+    border-bottom-style: groove;
+}
+
+.view {
+    margin: 10px auto;
+    width: 280px;
+    height: auto;
+    min-height: 200px;
+    text-align: center;
+}
+
+.view-image {
+
+}
+
+.view-link-url {
+    font: 13px arial;
+    font-weight: bold;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.view-link-desc {
+    font: 11px arial;
+    text-align: justify;
+    font-weight: bold;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.basic-features {
+    width: 160px;
+    height: auto;
+    margin: 0 auto 20px;
+}
+
 div.toppost {
     float: left;
     width: 316px;
     height: 416px;
     text-align: center;
     background: url('../img/appboxbg.png') no-repeat;
-}
-
-div.contenttitle {
-    width: 255px;
-    line-height: 20px;
-    display: block;
-    vertical-align: bottom;
-    margin-top: 25px;
-    margin-left: 30px;
-    border-bottom-style: groove;
-}
-
-div.view {
-    margin-top: 15px;
 }
 
 div.likes {
@@ -1044,7 +1091,7 @@ div.likes {
     margin: 10px auto;
 }
 
-div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
+.contenttitle a:hover, .contenttitle a:link, .contenttitle a:visited {
     color: #000;
 }
 
@@ -1094,6 +1141,8 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     height: auto;
     border-left: solid;
     border-left-style: outset;
+    border-right: solid;
+    border-right-style: inset;
     display: inline-block;
     vertical-align: top;
 }
@@ -1101,8 +1150,8 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
 .userachievement {
     width: 325px;
     height: auto;
-    border-left: solid;
-    border-left-style: outset;
+/*    border-left: solid;
+    border-left-style: outset; */
     display: inline-block;
     vertical-align: top;
 }
@@ -1179,6 +1228,34 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     margin-bottom: 0;
     padding-left: 0;
     list-style: none;
+}
+
+.clear ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 80px;
+    list-style: none;
+}
+
+.clear ul li .top-post {
+    width: 312px;
+    height: auto;
+    min-height: 50px;
+    background: #eeeeee;
+    margin-bottom: 5px;
+    display: inline-block;
+    vertical-align: top;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.clear ul li .top-post .view {
+    margin: 10px auto;
+    width: 280px;
+    height: auto;
+    min-height: 50px;
+    text-align: center;
 }
 
 .achievement {
