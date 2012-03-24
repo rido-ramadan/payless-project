@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Payless Project &raquo; Homepage</title>
+		<meta charset="utf-8" />
+        <title>Payless Project &raquo; Ups.. You're not Logged In</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
-        <script type="text/javascript" src="js/navigasi.js"></script>
-        <link type="text/css" rel="stylesheet" href="css/header1.css" />
+        <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
-    <body onload="randomlike(); randomkomen(); inisialisasi()">
+    <body>
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
@@ -80,56 +81,26 @@
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
-
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
-        <div class="giantbox">
-            <div class="toppost" style="margin-left: 50px;">
-                <div class="headertext contenttitle"><a href="image_view.php">Versi Image</a></div>
-                <div class="view"><img src="img/pemandangan.jpg" width="225" alt="Image View"></div>
-                <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 70px; margin-left: 86px; float:left;"></div>
-                <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 70px; margin-left: 163px; position: absolute;"></div>
-                <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
-                    <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
-                    <div class="jumlahkomen" style="display: inline"></div>
+        <div class="detbox">
+            <div class="dettop"></div>
+            <div class="detmain" style="text-align: center">
+                <div class="headertext" style="text-align: center;">Ups... You're not Logged In</div>
+                <div class="error404">
+                    Sorry, but you cannot upload a new post while you are not logged in. <br/>
+                    Please click the log in button above to sign in or click the sign up button to register new account
                 </div>
             </div>
-
-            <div class="left toppost">
-                <div class="headertext contenttitle"><a href="video_view.php">Versi Video</a></div>
-                <div class="view"><iframe width="240" height="180" src="http://www.youtube.com/embed/MGtLGuSaVOI" ></iframe></div>
-                <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 59px; margin-left: 86px; float:left;"></div>
-                <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 59px; margin-left: 163px; position: absolute;"></div>
-                <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
-                    <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
-                    <div class="jumlahkomen" style="display: inline"></div>
-                </div>
-            </div>
-
-            <div class="left toppost">
-                <div class="headertext contenttitle"><a href="link_view.php">Versi Link</a></div>
-                <div class="view"><img src="img/9gag.png" width="225" alt="9Gag"></div>
-                <div class="likebutton" onclick="voteplus(this.num)" style="margin-top: 72px; margin-left: 86px; float:left;"></div>
-                <div class="dislikebutton" onclick="votemin(this.num)" style="margin-top: 72px; margin-left: 163px; position: absolute;"></div>
-                <div class="likes">
-                    <img class="left" style="margin: 10px 5px 0 -80px;" src="img/like-mini.png" alt="like"/>
-                    <div class="left jumlahlike" style="display: inline; margin-left: -55px;"></div>
-                    <img class="left" style="margin: 0px 5px; margin-top: 10px;" src="img/comment-mini.png" alt="comment"/>
-                    <div class="jumlahkomen" style="display: inline"></div>
-                </div>
-            </div>
+            <div class="detbot"></div>
         </div>
+        <div style="height: 10px;"></div>
         <!-- ::::::::::::::::::::: END OF BODY PART ::::::::::::::::::::: -->
-
         <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
         <div class="footer">
             &copy; Payless Project 2012. Created by: <a href="http://masphei.ungu.com">Masphei</a>, <a href="http://personanonymous.wordpress.com">Edgar Drake</a>, <a href="http://marchygabe.tumblr.com">Marchy Gabe</a>
         </div>
         <!-- ::::::::::::::::::::: END OF FOOTER PART ::::::::::::::::::::: -->
-        
+        <script type="text/javascript" src="js/register.js"></script>
         <script type="text/javascript" src="js/styleBox.js"></script>
     </body>
 </html>

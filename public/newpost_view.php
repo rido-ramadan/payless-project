@@ -29,26 +29,31 @@
             </div>
             <div class="nav3">
                 <div id="sort5" class="left"><a href="index.php">Home</a></div>
-                <div class="left"><img src="img/divide.png" alt="" /></div>
+                <div class="left"><div class="divide"></div></div>
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
-                <div class="left"><img src="img/divide.png" alt="" /></div>
+                <div class="left"><div class="divide"></div></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
-                <div class="right">
-                    <div id="applesearch">
-                        <span class="sbox_l"></span>
-                        <span class="sbox">
-                            <input style="outline-width:0px;" type="text" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
-                        </span>
-                        <span class="sbox_r" id="srch_clear"></span>
+                <form action="" method="post" name="srch">
+                    <div class="right">
+                        <input id="filtersearch" type="submit" name="search" value="Search"/>
                     </div>
-                </div>
-                <div class="right filter">
-                    <select name="srch_op" onchange="ChangeStyle(this.value)">
-                        <option value="filter-none">No Filter</option>
-                        <option value="filter-user">Username</option>
-                        <option value="filter-cont">Content</option>
-                    </select>
-                </div>
+                    <div class="right">
+                        <div id="applesearch">
+                            <span class="sbox_l"></span>
+                            <span class="sbox">
+                                <input style="outline-width:0px;" type="text" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+                            </span>
+                            <span class="sbox_r" id="srch_clear"></span>
+                        </div>
+                    </div>
+                    <div class="right filter">
+                        <select name="srch_op" onchange="ChangeStyle(this.value)">
+                            <option value="filter-none">No Filter</option>
+                            <option value="filter-user">Username</option>
+                            <option value="filter-cont">Content</option>
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
         <div id="overlay" onclick="closeAll()"></div>
@@ -68,8 +73,8 @@
                     </span>
                     <span class="lbox_r" id="srch_clear"></span>
                 </div>
-                <span><a class="closelogin" onclick="closePopUp()"></a></span>
-                <span><input type="submit" class="loginbutton login" id="loginButton" alt="Log In" value="Log In"></span>
+                <div class="close"><a class="closelogin" onclick="closePopUp()"></a></div>
+                <div class="do-login"><input type="submit" class="loginbutton login" id="loginButton" alt="Log In" value="Log In"></div>
                 <!--span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span-->
             </div>
         </div>
