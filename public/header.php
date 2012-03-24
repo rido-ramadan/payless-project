@@ -47,6 +47,7 @@
                 </form>
             </div>
         </div>
+        <!-- :::::::::::::::::::::: POP-UP AREA :::::::::::::::::::::: -->
         <div id="overlay" onclick="closeAll()"></div>
         <div id="popup" class="popup">
             <div class="loginpopout">
