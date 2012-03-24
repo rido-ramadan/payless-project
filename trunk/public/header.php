@@ -69,5 +69,19 @@
                 <!--span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span-->
             </div>
         </div>
+        <div class="ach_popup" id="ach_popup">
+            <div class="ach_congrats">Congratulations!</div>
+            <div class="ach_text">You have been awarded this achievement</div>
+            <div class="achievement">
+                <div class="ach_logo"></div>
+                <div class="ach_detail">
+                    <div class="ach_name">Hello, World</div>
+                    <div class="ach_how">Upload a post once</div>
+                </div>
+            </div>
+            <div class="ach_close">
+                <button value="CLOSE" onclick="closeAchievement()">CLOSE</button>
+            </div>
+        </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
