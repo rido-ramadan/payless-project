@@ -661,7 +661,7 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     border-bottom: solid #aaaaaa;
 }
 
-div.likebutton {
+.likebutton {
     margin: -8px 2px 2px 2px;
     width: 72px;
     height: 48px;
@@ -669,8 +669,7 @@ div.likebutton {
     vertical-align: top;
     border-radius: 10px;
     text-align: center;
-
-    /*background-color: #cccccc;*/
+    cursor: pointer;
     background: -o-linear-gradient(center top , #dddddd, #999999);
     background: -moz-linear-gradient(center top , #dddddd, #999999);
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
@@ -691,7 +690,7 @@ div.likebutton {
     display: block;
 }
 
-div.dislikebutton {
+.dislikebutton {
     background: url('../img/icon-dislike.png');
     margin: -8px 2px 2px 0;
     width: 72px;
@@ -700,8 +699,7 @@ div.dislikebutton {
     vertical-align: top;
     border-radius: 10px;
     text-align: center;
-
-    /*background-color: #cccccc;*/
+    cursor: pointer;
     background: -o-linear-gradient(center top , #dddddd, #999999);
     background: -moz-linear-gradient(center top , #dddddd, #999999);
     background: -webkit-linear-gradient(center top , #dddddd, #999999);

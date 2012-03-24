@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Payless Project &raquo; My Profile</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
@@ -160,7 +161,7 @@
                             <li>
                                 <div class="top-post">
                                     <div class="top-video">
-                                        <div class="contenttitle"><a href="link_view.php">Skyrim Glitch</a></div>
+                                        <div class="contenttitle"><a href="link_view.php">Skyrim Easter Eggs</a></div>
                                         <div class="view">
                                             <div class="view-video">
                                                 <div class="view"><iframe width="240" height="180" src="http://www.youtube.com/embed/I28EkJ32nwQ" ></iframe></div>

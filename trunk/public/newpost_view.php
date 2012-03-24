@@ -3,6 +3,7 @@
     <head>
 		<meta charset="utf-8" />
         <title>Payless Project &raquo; Upload Post</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
         <script type="text/javascript" src="js/style.js"></script>
         <link type="text/css" rel="stylesheet" href="css/header1.css" />
     </head>
