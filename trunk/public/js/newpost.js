@@ -40,6 +40,8 @@ function previewPost() {
     var desc = document.forms["newpostform"]["description"].value;
     var href = links;
     var http = /^http:\/\/+[A-Za-z0-9_.-]/;
+    var tags = document.forms["newpostform"]["tags"].value.split(",");
+    var tag = "";
     
     if (!http.test(links)) {
         href = "http://" + links;
@@ -48,27 +50,39 @@ function previewPost() {
     var preview = document.getElementById('preview');
     preview.style.display = 'block';
 
+    for (i = 0; i < tags.length; i++) {
+        tag += "<li>" + tags[i] + "</li>";
+    }
+
     if(link.checked) {
         preview.innerHTML =
-            '<div class="dettop"></div>' +
-            '<div class="detmain">' +
-                '<div class="left iconcontent"><img src="img/icon-link.png"></div>' +
+            '<div class="previewtop"></div>' +
+            '<div class="previewmain">' +
+                '<div class="left iconcontent"><div class="iconlink"></div></div>' +
                 '<div class="headertext judul" id="linktitle">' +
-                    '<a href="' + title + '.php' + '">' + title + '</a>' +
+                    '<div class="title"><a href="' + title +'.php">' + title + '</a></div>' +
                 '</div>' +
                 '<div class="content" id="linkcontent">' +
                     '<a href="' + href + '">' + links + '</a>' +
                     '<p>' + desc + '</p>' +
                 '</div>' +
+                '<div class="paketjempol">' +
+                    '<div class="likemini"></div><div class="jumlahlike"></div><div class="commentmini"></div><div class="jumlahkomen"></div><br/>' +
+                    '<div class="likebutton" onclick="voteplus(this.num)"><a></a></div><div class="dislikebutton" onclick="votemin(this.num)"><a></a></div>' +
+                    '<div class="tags">' +
+                        'Tags : <br/>' +
+                        '<ul class="tag">' + tag + '</ul>' +
+                    '</div>' +
+                '</div>' +
             '</div>' +
-            '<div class="detbot"></div>';
+            '<div class="previewbot"></div>';
     } else if (video.checked) {
         var param = href.split("watch?v=");
         param[0] = param[0] + "embed/";
         var ID = param[1].split("&");
         preview.innerHTML =
-            '<div class="dettop"></div>' +
-            '<div class="detmain">' +
+            '<div class="previewtop"></div>' +
+            '<div class="previewmain">' +
                 '<div class="left iconcontent"><img src="img/icon-video.png"></div>' +
                 '<div class="headertext judul">' +
                     '<a href="' + title + '.php' + '">' + title + '</a>' +
@@ -77,6 +91,6 @@ function previewPost() {
                     '<iframe width="320" height="240" src="' + param[0] + ID[0] + '" frameborder="0" allowfullscreen></iframe>' +
                 '</div>' +
             '</div>' +
-            '<div class="detbot"></div>';
+            '<div class="previewbot"></div>';
     }
 }

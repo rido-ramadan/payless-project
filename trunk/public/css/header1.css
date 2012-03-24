@@ -124,6 +124,13 @@ a.login:active {	background-position: 0 25px;}
     color: #000;
 }
 
+.divide {
+    background: url('../img/divide.png') no-repeat;
+    width: 31px;
+    height: 40px;
+    display: block;
+}
+
 div.themes {margin-top: 0px;}
 
 .themes select {font: 11px/13px arial;}
@@ -154,6 +161,27 @@ div.themes {margin-top: 0px;}
     padding: 3px;
     font: 11px/13px arial;
     color: #000;
+}
+
+#filtersearch {
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+    background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    border: 1px solid rgb(42, 115, 166) !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+#filtersearch:hover, #filtersearch:active{
+    background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
 }
 
 .filter {
@@ -219,18 +247,29 @@ div.themes {margin-top: 0px;}
     display: inline-block;
     width: 100px;
     height: 18px;
-    margin: 10px 10px 0px 20px;
+    margin: 12px 10px 0px 25px;
     cursor: pointer;
     font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
     font-size: 11px;
     font-weight: bold;
     color: white;
     border-radius: 20px;
-    border: none;
-    box-shadow: inset 0 1px 3px #fff, inset 0 -18px #cbe6f2, 0 0 3px #8ec1da;
-    -o-box-shadow: inset 0 1px 3px #fff, inset 0 -18px #cbe6f2, 0 0 3px #8ec1da;
-    -webkit-box-shadow: inset 0 1px 3px #fff, inset 0 -18px #cbe6f2, 0 0 3px #8ec1da;
-    -moz-box-shadow: inset 0 1px 3px #fff, inset 0 -18px rgb(9,13,69), 0 0 3px #8ec1da;
+    background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    border: 1px solid rgb(42, 115, 166) !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.close {
+    width: 16px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.do-login {
+    display: inline-block;
+    vertical-align: top;
 }
 
 a.closelogin {
@@ -503,7 +542,7 @@ label.left {
 }
 
 .iconcontent {
-    padding: 5px;
+    padding: 20px 5px 5px 5px;
     width: 60px;
     height: 60px;
     margin: 0px;
@@ -577,15 +616,17 @@ div.content a:hover {
     margin: 20px 30px 20px 60px;
     padding-left: 20px;
     padding-top: 20px;
-    width: 600px;
+    width: 500px;
     color: #000000;
     font-size: 32pt;
 }
 
 .title {
-    width: 600px;
+    width: 500px;
     color: #000000;
     font-size: 32pt;
+    word-wrap: break-word;
+    line-height: 32px;
 }
 
 .uploader {
@@ -637,6 +678,12 @@ div.likebutton {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+.likebutton:hover {
+    background: -o-linear-gradient(center top , #aaaaaa, #777777);
+    background: -moz-linear-gradient(center top , #aaaaaa, #777777);
+    background: -webkit-linear-gradient(center top , #aaaaaa, #777777);
+}
+
 .likebutton a {
     background: url('../img/button-like.png') center no-repeat;
     width: 72px;
@@ -660,6 +707,12 @@ div.dislikebutton {
     background: -webkit-linear-gradient(center top , #dddddd, #999999);
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.dislikebutton:hover {
+    background: -o-linear-gradient(center top , #aaaaaa, #777777);
+    background: -moz-linear-gradient(center top , #aaaaaa, #777777);
+    background: -webkit-linear-gradient(center top , #aaaaaa, #777777);
 }
 
 .dislikebutton a {
@@ -822,7 +875,15 @@ div.paketjempol {
 .sortingmethod select option {font: 11px/13px arial;}
 
 .ads {
-    margin: 40px 0 20px 0;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    min-height: 50px;
+    border-radius: 8px;
+    background: -o-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
 .buttonnext {
@@ -1094,7 +1155,7 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     color: #333333;
     cursor: pointer;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 11px;
     background: #dddddd;
     border: 1px solid #8ec1da;
     background-color: #ddeef6;
@@ -1103,6 +1164,14 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     -o-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
     -webkit-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
     -moz-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #cbe6f2, 0 0 3px #8ec1da;
+}
+
+.edituser:hover {
+    background-color: #ccdde6;
+    box-shadow: inset 0 1px 3px #fff, inset 0 -15px #bad5e1, 0 0 3px #7eb1ca;
+    -o-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #bad5e1, 0 0 3px #7eb1ca;
+    -webkit-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #bad5e1, 0 0 3px #7eb1ca;
+    -moz-box-shadow: inset 0 1px 3px #fff, inset 0 -15px #bad5e1, 0 0 3px #7eb1ca;
 }
 
 .rhs ul {
@@ -1195,6 +1264,26 @@ div.headertext a:hover, div.headertext a:link, div.headertext a:visited {
     height: auto;
     top: 0%;
     left: 50%;
-    margin: 100px 0 0 -500px; /* [-(height/2)px 0 0 -(width/2)px] */
+    margin: 100px 0 0 -350px; /* [-(height/2)px 0 0 -(width/2)px] */
     display: none;
+}
+
+.previewtop {
+    width: 700px;
+    height: 12px;
+    background: url(../img/previewtop.png) no-repeat bottom center;
+    margin-top: -2px;
+}
+
+.previewmain {
+    width: 700px;
+    height: auto;
+    background: url(../img/previewmain.png) repeat-y;
+    padding: 10px 30px 7px 30px;
+}
+
+.previewbot {
+    width: 700px;
+    background: url(../img/previewbot.png) no-repeat;
+    height: 20px;
 }
