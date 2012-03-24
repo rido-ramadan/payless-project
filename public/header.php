@@ -25,7 +25,7 @@
                 <div class="left"><div class="divide"></div></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
                 <form action="" method="post" name="srch">
-                    <div class="right">
+                    <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search" value="Search"/>
                     </div>
                     <div class="right">

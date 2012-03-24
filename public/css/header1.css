@@ -163,6 +163,8 @@ div.themes {margin-top: 0px;}
     color: #000;
 }
 
+.searchbutton { margin-top: -2px; }
+
 #filtersearch {
     margin-left: 10px;
     cursor: pointer;
@@ -259,6 +261,12 @@ div.themes {margin-top: 0px;}
     background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
     border: 1px solid rgb(42, 115, 166) !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.loginbutton:hover, .loginbutton:active{
+    background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
 }
 
 .close {
@@ -420,6 +428,10 @@ a.closelogin:active {
     font-weight: bold;
     padding: 5px;
     cursor: pointer;
+}
+
+.joinbutton:hover {
+    background: #0030bb;
 }
 
 .signinbutton {
@@ -964,9 +976,16 @@ div.paketjempol {
 
 .commentcontainer {
     width: 550px;
-    margin: 0px auto;
+    margin: -10px auto 15px;
     background: url('../img/commmain.png') repeat-y;
-    padding: 10px 0px;
+    padding: 0px 0px;
+
+    border-radius: 8px;
+    background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -webkit-linear-gradient(center top , #eeeeee, #bbbbbb);
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
 .commentbottom {
@@ -986,12 +1005,54 @@ div.paketjempol {
     margin: 5px;
     width: 64px;
     height: 75px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .isikomen {
-    width:465px;
+    width: 410px;
     height: 75px;
+    margin-left: 10px;
+    padding-top: 5px;
+    display: inline-block;
+    vertical-align: top;
+    font: 11px/13px arial;
 }
+
+.your-comment {
+    display: block;
+}
+
+.your-comment textarea {
+    font: inherit;
+}
+
+.submit-your-comment {
+    display: block;
+    margin: 10px 0 0 328px;
+}
+
+.submit-your-comment input {
+    width: 80px;
+    cursor: pointer;
+    font-family: myriad,Sans-Serif,Verdana,Tahoma,Arial;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+    background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    border: 1px solid rgb(42, 115, 166) !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.submit-your-comment input:hover, .submit-your-comment input:active{
+    background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+}
+
 div.contentmasuk a:link, div.contentmasuk a:visited {
     font-size: 22pt;
     text-decoration: underline;
@@ -1094,6 +1155,7 @@ div.likes {
 }
 
 .namecomment {
+    font: 13px arial;
     font-weight: bold;
     display: inline;
 }
