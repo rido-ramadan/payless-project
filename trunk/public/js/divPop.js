@@ -55,10 +55,17 @@ function closeAll() {
     if (preview !== null) preview.style.display = 'none';
 }
 
-function showAchievement() {
+function showAchievement(ach_name, ach_desc, ach_logo) {
     var popup = document.getElementById('ach_popup');
+    var ach = document.getElementsByClassName('achievement');
     doPopUp();
     popup.style.display = 'block';
+    ach[0].innerHTML =
+        '<div class="ach_logo"><img src="' + ach_logo +'" alt="" width="50">' + '</div>' +
+        '<div class="ach_detail">' +
+            '<div class="ach_name">' + ach_name + '</div>' +
+            '<div class="ach_how">' + ach_desc + '</div>' +
+        '</div>';
 }
 
 function closeAchievement() {

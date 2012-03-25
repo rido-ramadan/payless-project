@@ -175,7 +175,7 @@ div.themes {margin-top: 0px;}
     border-radius: 20px;
     background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
     background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
-    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 165, 230)), to(rgb(48, 120, 208)));
     border: 1px solid rgb(42, 115, 166) !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -183,7 +183,7 @@ div.themes {margin-top: 0px;}
 #filtersearch:hover, #filtersearch:active{
     background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
     background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
-    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
 .filter {
@@ -258,7 +258,7 @@ div.themes {margin-top: 0px;}
     border-radius: 20px;
     background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
     background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
-    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 165, 230)), to(rgb(48, 120, 208)));
     border: 1px solid rgb(42, 115, 166) !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -266,7 +266,7 @@ div.themes {margin-top: 0px;}
 .loginbutton:hover, .loginbutton:active{
     background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
     background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
-    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
 .close {
@@ -682,9 +682,9 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-    background: -o-linear-gradient(center top , #dddddd, #999999);
-    background: -moz-linear-gradient(center top , #dddddd, #999999);
-    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    background-image: -o-linear-gradient(center top , #dddddd, #999999);
+    background-image: -moz-linear-gradient(center top , #dddddd, #999999);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -692,7 +692,7 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
 .likebutton:hover {
     background: -o-linear-gradient(center top , #aaaaaa, #777777);
     background: -moz-linear-gradient(center top , #aaaaaa, #777777);
-    background: -webkit-linear-gradient(center top , #aaaaaa, #777777);
+    background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#777777));
 }
 
 .likebutton a {
@@ -714,7 +714,7 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     cursor: pointer;
     background: -o-linear-gradient(center top , #dddddd, #999999);
     background: -moz-linear-gradient(center top , #dddddd, #999999);
-    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -722,7 +722,7 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
 .dislikebutton:hover {
     background: -o-linear-gradient(center top , #aaaaaa, #777777);
     background: -moz-linear-gradient(center top , #aaaaaa, #777777);
-    background: -webkit-linear-gradient(center top , #aaaaaa, #777777);
+    background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#777777));
 }
 
 .dislikebutton a {
@@ -801,7 +801,7 @@ div.paketjempol {
     border-radius: 8px;
     background: -o-linear-gradient(center top , #dddddd, #eeeeee);
     background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
-    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#eeeeee));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -855,7 +855,7 @@ div.paketjempol {
     border-radius: 8px;
     background: -o-linear-gradient(center top , #dddddd, #eeeeee);
     background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
-    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#eeeeee));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -872,7 +872,7 @@ div.paketjempol {
     border-radius: 8px;
     background: -o-linear-gradient(center top , #dddddd, #eeeeee);
     background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
-    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#eeeeee));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -892,7 +892,7 @@ div.paketjempol {
     border-radius: 8px;
     background: -o-linear-gradient(center top , #dddddd, #eeeeee);
     background: -moz-linear-gradient(center top , #dddddd, #eeeeee);
-    background: -webkit-linear-gradient(center top , #dddddd, #eeeeee);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#eeeeee));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -908,7 +908,7 @@ div.paketjempol {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
     background: -o-linear-gradient(center top , #dddddd, #999999);
     background: -moz-linear-gradient(center top , #dddddd, #999999);
-    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));
     margin-left: 245px;
     display: inline-block;
     vertical-align: middle;
@@ -918,7 +918,7 @@ div.paketjempol {
 .buttonnext:hover {
     background: -o-linear-gradient(center top , #888888, #444444);
     background: -moz-linear-gradient(center top , #888888, #444444);
-    background: -webkit-linear-gradient(center top , #888888, #444444);
+    background: -webkit-gradient(linear, left top, left bottom, from(#888888), to(#444444));
 }
 
 .buttonprevious {
@@ -932,7 +932,7 @@ div.paketjempol {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
     background: -o-linear-gradient(center top , #dddddd, #999999);
     background: -moz-linear-gradient(center top , #dddddd, #999999);
-    background: -webkit-linear-gradient(center top , #dddddd, #999999);
+    background: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));
     display: inline-block;
     vertical-align: middle;
     text-align: center;
@@ -942,7 +942,7 @@ div.paketjempol {
 .buttonprevious:hover{
     background: -o-linear-gradient(center top , #888888, #444444);
     background: -moz-linear-gradient(center top , #888888, #444444);
-    background: -webkit-linear-gradient(center top , #888888, #444444);
+    background: -webkit-gradient(linear, left top, left bottom, from(#888888), to(#444444));
 }
 
 .paketgantihalaman {
@@ -983,7 +983,7 @@ div.paketjempol {
     border-radius: 8px;
     background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
     background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
-    background: -webkit-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#bbbbbb));
     border: 1px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -1042,7 +1042,7 @@ div.paketjempol {
     border-radius: 20px;
     background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
     background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
-    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 165, 230)), to(rgb(48, 120, 208)));
     border: 1px solid rgb(42, 115, 166) !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -1050,7 +1050,7 @@ div.paketjempol {
 .submit-your-comment input:hover, .submit-your-comment input:active{
     background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
     background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
-    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
 div.contentmasuk a:link, div.contentmasuk a:visited {
@@ -1366,7 +1366,7 @@ div.likes {
     border-radius: 10px;
     background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
     background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
-    background: -webkit-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#bbbbbb));
     border: 5px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -1407,7 +1407,7 @@ div.likes {
     border-radius: 20px;
     background: -o-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
     background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
-    background: -webkit-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 165, 230)), to(rgb(48, 120, 208)));
     border: 1px solid rgb(42, 115, 166) !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
@@ -1415,7 +1415,7 @@ div.likes {
 .ach_close button:hover, .ach_close button:active{
     background: -o-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
     background: -moz-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
-    background: -webkit-linear-gradient(center top , rgb(48, 126, 200), rgb(25, 94, 188));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
 .userachievement ul {
