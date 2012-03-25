@@ -84,11 +84,11 @@
             <div class="ach_congrats">Congratulations!</div>
             <div class="ach_text">You have been awarded this achievement</div>
             <div class="achievement">
-                <div class="ach_logo"></div>
+                <!--div class="ach_logo"></div>
                 <div class="ach_detail">
                     <div class="ach_name">Hello, World</div>
                     <div class="ach_how">Upload a post once</div>
-                </div>
+                </div-->
             </div>
             <div class="ach_close">
                 <button value="CLOSE" onclick="closeAchievement()">CLOSE</button>
@@ -100,7 +100,7 @@
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain" style="text-align: center">
-                <div class="headertext" onclick="showAchievement()" style="text-align: center;">Ups... You're not Logged In</div>
+                <div class="headertext" onclick="showAchievement('Hello World', 'Your first post', 'img/achievements/hello_world.png')" style="text-align: center; cursor: pointer;">Ups... You're not Logged In</div>
                 <div class="error404">
                     Sorry, but you cannot upload a new post while you are not logged in. <br/>
                     Please click the log in button above to sign in or click the sign up button to register new account
