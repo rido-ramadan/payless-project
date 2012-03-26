@@ -297,6 +297,45 @@ a.closelogin:active {
     background-position: 0 0;
 }
 
+.search-pop-up {
+    width: 192px;
+    height: auto;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin: 130px 0 0 214px; /* [-(height/2)px 0 0 -(width/2)px] */
+    display: block;
+    background: white;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.search-pop-up ul {
+    padding-left: 0px;
+    margin: 0;
+    list-style: none;
+    font: 11px/13px arial;
+}
+
+.search-pop-up ul li a {
+    width: 180px;
+}
+
+.search-pop-up ul li a:hover, .search-pop-up ul li a:visited {
+    color: black;
+}
+
+.search-pop-up ul li {
+    cursor: pointer;
+    padding-left: 2px;
+    line-height: 16px;
+    vertical-align: middle;
+}
+
+.search-pop-up ul li:hover {
+    background: -moz-linear-gradient(center top , rgb(79, 165, 230), rgb(48, 120, 208));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(79, 165, 230)), to(rgb(48, 120, 208)));
+}
+
 /*-------------*/
 /* POP OUT DIV */
 /*-------------*/
@@ -1053,6 +1092,18 @@ div.paketjempol {
     background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
+.del-comment {
+    background: url('../img/close_button.png') no-repeat;
+    width: 16px;
+    height: 16px;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.del-comment:hover {
+    background-position: -16px 0;
+}
+
 div.contentmasuk a:link, div.contentmasuk a:visited {
     font-size: 22pt;
     text-decoration: underline;
@@ -1426,12 +1477,12 @@ div.likes {
 }
 
 .edituserdata {
-    position: absolute;
+    position: fixed;
     width: 500px;
     height: auto;
     top: 0%;
     left: 50%;
-    margin: 100px 0 0 -250px; /* [-(height/2)px 0 0 -(width/2)px] */
+    margin: 80px 0 0 -250px; /* [-(height/2)px 0 0 -(width/2)px] */
     display: none;
 }
 

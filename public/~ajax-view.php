@@ -1,4 +1,15 @@
-<!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8" />
+        <title>Payless Project &raquo; Ups.. You're not Logged In</title>
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
+        <link sizes="16x16" type="image/png" href="img/favicon.png" rel="icon">
+        <script type="text/javascript" src="js/style.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
+    </head>
+    <body>
+        <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
                 <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="img/logo.png" alt="logo" /></a></div>
@@ -92,3 +103,27 @@
         </div>
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
+        <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
+        <div class="detbox">
+            <div class="dettop"></div>
+            <div class="detmain" style="text-align: center">
+                <div class="headertext" onclick="loadData()" style="text-align: center; cursor: pointer;">Ups... You're not Logged In</div>
+                <div class="error404" id="message">
+                    Sorry, but you cannot upload a new post while you are not logged in. <br/>
+                    Please click the log in button above to sign in or click the sign up button to register new account
+                </div>
+            </div>
+            <div class="detbot"></div>
+        </div>
+        <div style="height: 10px;"></div>
+        <!-- ::::::::::::::::::::: END OF BODY PART ::::::::::::::::::::: -->
+        <!-- ::::::::::::::::::::: START OF FOOTER PART ::::::::::::::::::::: -->
+        <div class="footer">
+            &copy; Payless Project 2012. Created by: <a href="http://masphei.ungu.com">Masphei</a>, <a href="http://personanonymous.wordpress.com">Edgar Drake</a>, <a href="http://marchygabe.tumblr.com">Marchy Gabe</a>
+        </div>
+        <!-- ::::::::::::::::::::: END OF FOOTER PART ::::::::::::::::::::: -->
+        <script type="text/javascript" src="js/ajax.js"></script>
+        <script type="text/javascript" src="js/register.js"></script>
+        <script type="text/javascript" src="js/styleBox.js"></script>
+    </body>
+</html>
