@@ -127,9 +127,10 @@
                                     <img src="img/avatar.png" alt="avatar" width="64" />
                                 </div>
                                 <div class="isikomen">
+                                    <div class="del-comment right"><a></a></div>
                                     <div class="namecomment">username</div>
                                     <div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
-								comment nomor satu tentu saja ini
+                                    comment nomor satu tentu saja ini
                                 </div>
                             </div>
                             <div class="comment">
@@ -147,6 +148,7 @@
                                     <img src="img/avatar.png" alt="avatar" width="64" />
                                 </div>
                                 <div class="isikomen">
+                                    <div class="del-comment right"><a></a></div>
                                     <div class="namecomment">username</div>
                                     <div class="timecomment">Mon, 07 Mar 2012 10:00:12 GMT</div>
                                     <div>comment nomor tiga tentu saja ini</div>
@@ -157,8 +159,10 @@
                                     <img src="img/avatar.png" alt="avatar" width="64" />
                                 </div>
                                 <div class="isikomen">
-                                    <div class="your-comment"><textarea rows="2" cols="72" id="ucomment"></textarea></div>
-                                    <div class="submit-your-comment"><input type="submit" value="Comment" onclick="comment()"/></div>
+                                    <form action="" method="post">
+                                        <div class="your-comment"><textarea rows="2" cols="72" id="ucomment"></textarea></div>
+                                        <div class="submit-your-comment"><input type="submit" value="Comment" onclick="comment()"/></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
