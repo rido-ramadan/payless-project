@@ -70,6 +70,7 @@
                                     <img src="'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
                                 </div>
                                 <div class="isikomen">
+                                    <div class="del-comment right"><a></a></div>
                                     <div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
                                     <div class="timecomment">'.$content['KOMENTAR'][$i]['WAKTU'].'</div>
 								'.$content['KOMENTAR'][$i]['ISI'].'
@@ -82,13 +83,13 @@
                             <div class="comment" style="border-bottom:0px">
                                 <div class="avatar">
                                     <img src="<?php echo $_SESSION['avatar']?>" alt="avatar" width="64" />
-                                </div>
-                                <form method="post" action="<?php echo BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN']?>">
+                                </div>                                
                                 <div class="isikomen">
-                                    <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
-                                    <div class="submit-your-comment"><input type="submit" value="Comment" /></div>
+                                    <form method="post" action="<?php echo BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN']?>">
+                                        <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
+                                        <div class="submit-your-comment"><input type="submit" value="Comment" /></div>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
 
                    </div>
