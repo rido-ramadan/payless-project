@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="right filter">
-                        <select name="srch_op" onchange="ChangeStyle(this.value)">
+                        <select name="srch_op" id="filter-method" onchange="ChangeStyle(this.value)">
                             <option value="filter-none">No Filter</option>
                             <option value="filter-user">Username</option>
                             <option value="filter-cont">Content</option>

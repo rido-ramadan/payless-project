@@ -1,27 +1,28 @@
+//var page = 0;
 
-
-function loadData () {
+function loadContent (page) {
     var xmlHTTP = new XMLHttpRequest();
 
-    // if something happens, do this
     xmlHTTP.onreadystatechange=function() {
         if (xmlHTTP.readyState==4 && xmlHTTP.status==200) {
-            document.getElementById("message").innerHTML = xmlHTTP.responseText;
+            document.getElementById("content-page").innerHTML = xmlHTTP.responseText;
+//            page = document.getElementById("pagenum").innerHTML;
+//            page = parseInt(page, 10);
         }
     }
 
-    // define this variables should do what?
-    xmlHTTP.open("GET", "~ajax-controller.php?", true);
+    xmlHTTP.open("GET", "~ajax-content-controller.php?page=" + page, true);
     xmlHTTP.send();
 }
 
 function showHint(str) {
+    var method = document.getElementById('filter-method').value;
     var xmlhttp;
     if (str.length==0) {
-        document.getElementById("txtHint").innerHTML="";
+        document.getElementById("suggestion").innerHTML="";
         return;
     }
-    xmlhttp=new XMLHttpRequest();
+    xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -29,7 +30,7 @@ function showHint(str) {
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET","~ajax-controller.php?q="+str,true);
+    xmlhttp.open("GET","~ajax-search-controller.php?q=" + str + "&f=" + method,true);
     xmlhttp.send();
 }
 
