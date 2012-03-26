@@ -8,7 +8,7 @@
         <script type="text/javascript" src="js/style.js"></script>
         <link rel="stylesheet" type="text/css" href="css/header1.css" id="header">
     </head>
-    <body>
+    <body onload="loadContent('init')">
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="right filter">
-                        <select name="srch_op" onchange="ChangeStyle(this.value)">
+                        <select name="srch_op" id="filter-method" onchange="ChangeStyle(this.value)">
                             <option value="filter-none">No Filter</option>
                             <option value="filter-user">Username</option>
                             <option value="filter-cont">Content</option>
@@ -106,11 +106,53 @@
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
         <div class="detbox">
             <div class="dettop"></div>
-            <div class="detmain" style="text-align: center">
-                <div class="headertext" onclick="loadData()" style="text-align: center; cursor: pointer;">Ups... You're not Logged In</div>
-                <div class="error404" id="message">
-                    Sorry, but you cannot upload a new post while you are not logged in. <br/>
-                    Please click the log in button above to sign in or click the sign up button to register new account
+            <div class="detmain">
+                <div class="contentlist">
+                    <ul class="listcontents" id="content-page">
+                        
+                    </ul>
+                </div>
+                <div class="filtermethod">
+                    <div class="inputtag">
+                        <div class="headertext" style="margin: 10px 0 0 15px;">Filter by Tags</div>
+                        <form name="filtertag" action="" method="post">
+                            <div class="tagbar">
+                                <span class="sbox_l"></span>
+                                <span class="sbox">
+                                    <input style="outline-width:0px;" type="text" name="inputtag" placeholder="input tags" >
+                                </span>
+                                <span class="sbox_r" id="srch_clear"></span>
+                            </div>
+                            <div class="tagsubmit">
+                                <input type="submit" name="submittag" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tagclouds">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Choose a Tag</div>
+                        <div class="tagcloudscontent">
+                            9gag Funny Star Wars Pokemon Tugas Besar Artificial Intelligence Angry Birds
+                        </div>
+                    </div>
+                    <div class="sorting">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Sort</div>
+                        Sort by:
+                        <div class="sortingmethod">
+                            <select name="sortmethod" onchange="">
+                                <option value="newest">Newest First</option>
+                                <option value="popularity">Most Popular First</option>
+                                <option value="mostcommented">Most Commented First</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ads">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Advertisements</div>
+                    </div>
+                </div>
+
+                <div class="paketgantihalaman">
+                    <div class="buttonprevious" onclick="loadContent(0)">PREVIOUS</div>
+                    <div class="buttonnext" onclick="loadContent(1)">NEXT</div>
                 </div>
             </div>
             <div class="detbot"></div>
