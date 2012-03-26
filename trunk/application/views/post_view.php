@@ -33,6 +33,10 @@
                 <label class="key" style="vertical-align:top">DESCRIPTION</label>
                 <textarea class="input" name="description"  <?php if(!empty($empty) && $empty=="description") echo 'style="background: orangered"' ?> cols="40" rows="5"></textarea>
             </div>
+            <div class="row" id="tagspost" style="border-bottom: 0; padding-bottom: 0">
+                <label class="key" style="vertical-align:top">TAGS</label>
+                <input class="input" name="tags" type="text" >
+            </div>
 
             <div class="space"></div>
             <!--
