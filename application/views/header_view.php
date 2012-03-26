@@ -80,7 +80,7 @@
         <div id="sort2" class="left nav3act"><a href="<?php echo BASE_URL?>content_con/list_content">Contents</a></div>
         <div class="left"><img src="<?php echo BASE_URL?>img//divide.png" alt="" /></div>
         <div id="sort1" class="left"><a href="<?php echo BASE_URL?>content_con/post">Upload Post</a></div>
-        <form action="" method="post" name="srch">
+        <form action="<?php echo BASE_URL.'home_con/'?>" method="post" name="srch">
             <div class="right searchbutton">
                 <input id="filtersearch" type="submit" name="search" value="Search"/>
             </div>
@@ -88,7 +88,7 @@
                 <div id="applesearch">
                     <span class="sbox_l"></span>
                     <span class="sbox">
-                        <input style="outline-width:0px;" type="text" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+                        <input name="search" style="outline-width:0px;" type="text" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
                     </span>
                     <span class="sbox_r" id="srch_clear"></span>
                 </div>
