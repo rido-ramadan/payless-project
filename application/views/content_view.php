@@ -1,97 +1,105 @@
 
+        
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
-                <div class="paketkontenmasuk">
-                    <div class="left iconcontent">
+                <?php 
+                            if(!empty($content)){?>
+                <div class="contentlist">
+                    <div class="paketkonten linkpost">
+                        <div class="left iconcontent">
                         <?php
-                            if(!empty($content)){
                                 if($content['ID_TYPE']==1)
                                     echo '
-                                    <img src="'.BASE_URL.'img/icon-link.png" alt="icon"/>
+                                    <div class="iconlink"></div>
                                         ';
                                 else if($content['ID_TYPE']==2)
                                     echo '
-                                    <img src="'.BASE_URL.'img/icon-photo.png" alt="icon"/>
+                                    <div class="iconphoto"></div>
                                         ';
                                 else
                                     echo '
-                                    <img src="'.BASE_URL.'img/icon-video.png" alt="icon"/>
+                                    <div class="iconvideo"></div>
                                         ';
-                            }
                         ?>
                     </div>
                     <div class="headertext judul">
-                        <a href=""><?php if(!empty($content)) echo $content['JUDUL']?></a>
+                        <div class="title"><a href="#"><?php echo $content['JUDUL']?></a></div>
+                        <div class="uploader"><a href="<?php echo BASE_URL.'user_con/profile/'.$content['ID_USER']?>"><?php echo $content['NAMA']?></a></div>
+                        <div class="uploaded"><?php echo $content['WAKTU']?></div>
                     </div>
-                    <div class="contentmasuk">
-                        <?php if(!empty($content)) echo $content['LINK'].'<br>'.$content['DESKRIPSI']?>
+                    <div class="content">
+                        <a href="<?php echo $content['LINK']?>"> <?php echo $content['LINK']?> </a>
+                        <p> <?php echo $content['DESKRIPSI']?> </p>
                     </div>
-                </div>
-                <div class="right paketjempol">
-						<div class="left likebutton" onclick="voteplus(this.num)"></div>
-						<div class="dislikebutton" onclick="votemin(this.num)"></div>
-					</div>
-				<div class="tulisan"> <div class="jumlahlike" style="display:inline-block"> <?php if(!empty($content)) echo $content['LIKE']?></div> likes </div>
+                <div class="paketjempol">
+                            <div class="likemini"></div>
+                            <div class="jumlahlike"><?php echo $content['LIKE']?></div>
+                            <div class="commentmini"></div>
+                            <div class="jumlahkomen"><?php echo count($content['KOMENTAR'])?></div>
+                            <br/>
+                            <div class="likebutton" onclick="voteplus(this.num)"><a href="<?php echo BASE_URL.'content_con/like/'.$content['ID_KONTEN'];?>"></a></div>
+                            <div class="dislikebutton" onclick="votemin(this.num)"><a href="<?php echo BASE_URL.'content_con/dislike/'.$content['ID_KONTEN'];?>"></a></div>
+                            <div class="tags">
+                                Tags : <br/>
+                                <ul class="tag">
+                                    <?php
+                                        for($j=0;$j<count($content['TAG']);$j++){
+                                            echo '
+                                                <li>'.$content['TAG'][$j]['NAMA_TAG'].'</li>
+                                                ';
+                                        }
+                                    
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentlist">
+                        <div class="commenttop"></div>
+                        <div class="commentcontainer">
+                            <div id="superbaru">
 
-                <div class="commenttop"></div>
-                <div class="commentcontainer">
-
-                    <div id="superbaru"></div>
-
+                            </div>
                     <?php
                         if(!empty($content['KOMENTAR'])){
                             for($i=0;$i<count($content['KOMENTAR']);$i++){
                                 echo '
-                                <div class="comment">
-                                    <div class="left avatar">
-                                        <img style="/*float:left;*/ margin: 2px;" src="'.BASE_URL.'img/avatar.png" alt="avatar" width="64" />
-                                    </div>
-                                    <div class="isikomen">
-                                        <br/><div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div><div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
-                                        '.$content['KOMENTAR'][$i]['ISI'].'
-                                    </div>
+                            <div class="comment">
+                                <div class="avatar">
+                                    <img src="'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
                                 </div>
+                                <div class="isikomen">
+                                    <div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
+                                    <div class="timecomment">'.$content['KOMENTAR'][$i]['WAKTU'].'</div>
+								'.$content['KOMENTAR'][$i]['ISI'].'
+                                </div>
+                            </div>
                                     ';
                             }
                         }
                     ?>
-                    <!--
-                        <div class="comment">
-                            <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
+                            <div class="comment" style="border-bottom:0px">
+                                <div class="avatar">
+                                    <img src="<?php echo $_SESSION['avatar']?>" alt="avatar" width="64" />
+                                </div>
+                                <form method="post" action="<?php echo BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN']?>">
+                                <div class="isikomen">
+                                    <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
+                                    <div class="submit-your-comment"><input type="submit" value="Comment" /></div>
+                                </div>
+                                </form>
                             </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 18:06:56 GMT</div>
-								comment nomor satu tentu saja ini
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <div class="left avatar">
-                                <img style="/*float:left;*/ margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
-                            </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 16:06:56 GMT</div>
-								comment nomor dua tentu saja ini
-                            </div>
-                        </div>
-                        <div class="comment">	<div class="left avatar">
-                                <img style="margin: 2px;" src="img/avatar.png" alt="avatar" width="64" />
-                            </div>
-                            <div class="isikomen">
-                                <br/><div class="namecomment">username</div><div class="timecomment">Mon, 07 Mar 2012 10:00:12 GMT</div>
-								<div>comment nomor tiga tentu saja ini</div>
-                            </div>
-                        </div>
-                    <div class="comment" style="border-bottom:0px">
-						<div class="isikomen">
-							<div><textarea rows="3" cols="59" id="ucomment"></textarea></div>
-                            <input style="margin-left:425px" type="submit" value="Comment" onclick="comment()"/>
-						</div>
-					</div>
-                   --></div>
-                 
-                <div class="commentbottom"></div>
+
+                   </div>
+                    </div>
+                </div>
+                <div class="filtermethod">
+                    <div class="ads" style="margin-top: 40px">
+                        <div class="headertext" style="margin: 0 0 0 10px;">Advertisements</div>
+                    </div>
+                </div>
+                <?php }?>
             </div>
             <div class="detbot"></div>
         </div>

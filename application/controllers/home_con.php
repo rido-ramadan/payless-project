@@ -27,10 +27,22 @@ class Home_con extends Controller {
 				$komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
 				
 				if(count($komen)>0){
-					$konten[$i]['KOMENTAR'] = count($komen);
+                                    $konten[$i]['KOMENTAR'] = count($komen);
 				}else $konten[$i]['KOMENTAR'] = 0;
+                                
 				$konten[$i]['LIKE'] = $sum_like;
 				$konten[$i]['DISLIKE'] = $sum_dislike;
+                                switch($konten[$i]['ID_TYPE']){
+                                    case 1:
+                                        $konten[$i]['TYPE']='link';
+                                        break;
+                                    case 2:
+                                        $konten[$i]['TYPE']='image';
+                                        break;
+                                    case 3:
+                                        $konten[$i]['TYPE']='video';
+                                        break;
+                                }
 //				switch($konten[$i]['ID_TYPE']){
 //					case 1:
 //						$konten[$i]['JUDUL'] = 'VERSI LINK';
@@ -51,6 +63,9 @@ class Home_con extends Controller {
         $this->loadView("header_view.php");
         $this->loadView("home_view.php");
         $this->loadView("footer_view.php");
+    }
+    function submit_search(){
+        
     }
     function orderKontenByLike($konten){
         $result = $konten;

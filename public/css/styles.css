@@ -2,7 +2,7 @@
 
 body {
 	margin:0 auto;
-	background: #bababa  url(../images/bg.png) repeat-y;
+	background: #bababa  url(../img/bg.png) repeat-y;
 	background-position: center center;
 	font-family: myriad, Sans-Serif, Verdana, Tahoma, Arial;
 	height: 100%;
@@ -33,8 +33,8 @@ a.topbutton {
 	margin: 18px 10px 0 0;
 }
 
-a.signup {	background: url(../images/signup.png);}
-a.login {	background: url(../images/login.png);}
+a.signup {	background: url(../img/signup.png);}
+a.login {	background: url(../img/login.png);}
 a.submit {	background: url(../img/header/buttons/submit.png);}
 a.myaccount {	background: url(../img/header/buttons/myaccount.png);}
 a.signout {	background: url(../img/header/buttons/signout.png);}
@@ -67,7 +67,7 @@ a.topbutton:active {	background-position: 0 25px;}
 	width: 1016px;
 	height: auto;
 	margin: 0 auto;
-	background: url(../images/navbg.png) no-repeat top center;
+	background: url(../img/navbg.png) no-repeat top center;
 	color: #000000;
 	font-size: 13px;
 	font-weight: bold;
@@ -372,17 +372,17 @@ ul.applist {
 
 .dettop {
 	height: 12px;
-	background: url(../images/apptop.png) no-repeat bottom center;
+	background: url(../img/apptop.png) no-repeat bottom center;
 	margin-top: -2px;
 }
 
 .detmain {
-	background: url(../images/appmain.png) repeat-y;
+	background: url(../img/appmain.png) repeat-y;
 	padding: 10px 51px 7px 51px;
 }
 
 .detbot {
-	background: url(../images/appbot.png) no-repeat;
+	background: url(../img/appbot.png) no-repeat;
 	height: 20px;
 }
 
