@@ -1,5 +1,3 @@
-
-        
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">

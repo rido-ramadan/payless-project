@@ -1,6 +1,19 @@
 <div class="pagebar">
     <div class="notification">
-        Show contents by filter: <b id="filtermethod">NO FILTER</b>, sorted by: <b id="sortingmethod">NEWEST</b>
+        Show contents by filter: <b id="filtermethod">
+        <?php 
+            if(empty($current_list_tag)) echo 'NO FILTER';
+            else{
+                for($j=0;$j<count($current_list_tag);$j++){
+                    echo $current_list_tag[$j];
+                    if(($j+1)!=count($current_list_tag)){
+                        echo ',';
+                    }
+                }
+            }
+        ?>
+        
+        </b>| sorted by: <b id="sortingmethod">NEWEST</b>
     </div>
 </div>
 
@@ -77,29 +90,68 @@
                                         
                                     }
                                     echo '</ul>';
-                                }
+                                }else{ // tidak ada konten
+                                    echo '<ul class="listcontents">
+                                        <li>
+                                    <div class="paketkonten linkpost">
+                                        <div class="left iconcontent">
+                                            <div class="iconlink"></div>
+                                        </div>
+                                        <div class="headertext judul">
+                                        </div>
+                                        <div class="content">Pencarian tags "';
+                                        if(empty($current_list_tag)) echo 'NO FILTER';
+                                        else{
+                                            for($j=0;$j<count($current_list_tag);$j++){
+                                                echo $current_list_tag[$j];
+                                                if(($j+1)!=count($current_list_tag)){
+                                                    echo ',';
+                                                }
+                                            }
+                                        }
+                                    
+                                    echo '" tidak ditemukan</div>
+
+                                    </div>
+                                </li>
+                                ';
+                                        
+                                        
+                                        
+                                    }
+                                    echo '</ul>';                                
+                                    
                             ?>
                 </div>
                 <div class="filtermethod">
                     <div class="inputtag">
                         <div class="headertext" style="margin: 10px 0 0 15px;">Filter by Tags</div>
-                        <form name="filtertag" action="" method="post">
+                        <form name="filtertag" action="<?php echo BASE_URL?>content_con/submit_tag" method="post">
                             <div class="tagbar">
                                 <span class="sbox_l"></span>
                                 <span class="sbox">
-                                    <input style="outline-width:0px;" type="text" name="inputtag" placeholder="input tags" >
+                                    <input style="outline-width:0px;" type="text" name="input_tag" placeholder="input tags" >
                                 </span>
                                 <span class="sbox_r" id="srch_clear"></span>
                             </div>
                             <div class="tagsubmit">
-                                <input type="submit" name="submittag" value="Submit">
+                                <input type="submit"  value="Submit">
                             </div>
                         </form>
                     </div>
                     <div class="tagclouds">
                         <div class="headertext" style="margin: 0 0 0 10px;">Choose a Tag</div>
                         <div class="tagcloudscontent">
-                            9gag Funny Star Wars Pokemon Tugas Besar Artificial Intelligence Angry Birds
+                            <?php 
+                                if(!empty($list_tag)){
+                                    for($i=0;$i<count($list_tag);$i++){
+                                            echo '<a href='.BASE_URL.'content_con/list_content/'.$list_tag[$i]['ID_TAG'].'>'.$list_tag[$i]['NAMA_TAG'].'</a>';
+                                            if(($i+1)!=count($list_tag)){
+                                                echo ' ';
+                                            }
+                                    }                                    
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="sorting">
