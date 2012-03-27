@@ -65,7 +65,125 @@ class Home_con extends Controller {
         $this->loadView("footer_view.php");
     }
     function submit_search(){
-        
+        $search = $_POST['search'];
+        $filter = $_POST['srch_op'];
+        echo substr_count("asdasdasdkjhasd asd asd ssa", 'as'); 
+        if(!empty($search) && !empty($filter) && strlen($search)<45){
+            if($filter=='filter-none'){
+                $user = $this->_model->query('select * from user');
+                $result_user =$this->filterUser($user, $search);
+                $this->set('search_result', $result_user);
+
+                $konten = $this->getContent();
+                $result_konten =$this->filterKonten($konten, $search);
+                $this->set('search_result', $result_user);
+                
+            }else if($filter=='filter-user'){
+                $user = $this->_model->query('select * from user');
+                $result =$this->filterUser($user, $search);
+                $this->set('search_result', $result);
+
+            }else if($filter=='filter-cont'){
+                $konten = $this->getContent();
+                $result =$this->filterKonten($konten, $search);
+                $this->set('search_result', $result);
+                
+            }
+            $this->loadView("header_view.php");
+            $this->loadView("search_view.php");
+            $this->loadView("footer_view.php");
+        }else{
+            $this->redirect(BASE_URL.'home_con/');
+        }
+    }
+    function filterUser($user, $filter){
+        $result = Array();
+        $counter=0;
+        $filter = strtolower($filter);
+        for($i=0;$i<count($user);$i++){
+            //echo $user[$i]['NAMA'].' :<br>';
+            //echo strpos($user[$i]['NAMA'], $filter).'<br>';
+            $user[$i]['JENIS'] = 'user';
+            if(strpos(strtolower($user[$i]['NAMA']), $filter)!==false){
+                //echo $user[$i]['NAMA'].' ada<br>';
+                
+                if(!$this->existUser($result, $user[$i]['ID_USER'])){
+                    $result[$counter] = $user[$i];
+                    $result[$counter]['JENIS'] = 'user';
+//                    echo $user[$i]['NAMA'].'<br>';
+                    $counter+=1;
+                }
+            }else if(strpos(strtolower($user[$i]['EMAIL']), $filter)!==false){
+                if(!$this->existUser($result, $user[$i]['ID_USER'])){
+                    $result[$counter] = $user[$i];
+                    $result[$counter]['JENIS'] = 'user';
+//                    echo $user[$i]['EMAIL'].'<br>';
+                    $counter+=1;
+                }
+            }else if(strpos(strtolower ($user[$i]['ABOUT_ME']), $filter)!==false){
+                if(!$this->existUser($result, $user[$i]['ID_USER'])){
+                    $result[$counter] = $user[$i];
+                    $result[$counter]['JENIS'] = 'user';
+//                    echo $user[$i]['ABOUT_ME'].'<br>';
+                    $counter+=1;
+                }
+            }
+        }
+        return $result;
+    }
+    function existUser($user, $id){
+        $found = false;
+        $counter=0;
+        while((!$found)&&($counter<count($user))){
+            if($user[$counter]['ID_USER']==$id){
+                $found = true;
+            }
+            $counter+=1;
+        }
+        return $found;
+    }
+    function filterKonten($konten, $filter){
+        $result = Array();
+        $counter=0;
+        $filter = strtolower($filter);
+        for($i=0;$i<count($konten);$i++){
+            //echo $user[$i]['NAMA'].' :<br>';
+            //echo strpos($user[$i]['NAMA'], $filter).'<br>';
+            if(strpos(strtolower($konten[$i]['JUDUL']), $filter)!==false){
+                //echo $user[$i]['NAMA'].' ada<br>';
+                
+                if(!$this->existUser($result, $konten[$i]['ID_KONTEN'])){
+                    $result[$counter] = $konten[$i];
+                    $result[$counter]['JENIS'] = 'konten';
+//                    echo $konten[$i]['JUDUL'].'<br>';
+                    $counter+=1;
+                }
+            }else{ // tag
+                for($j=0;$j<count($konten[$i]['TAG']);$j++){
+                    if(strpos(strtolower($konten[$i]['TAG'][$j]['NAMA_TAG']), $filter)!==false){
+                        if(!$this->existKonten($result, $konten[$i]['ID_KONTEN'])){
+                            $result[$counter] = $konten[$i];
+                            $result[$counter]['JENIS'] = 'konten';
+//                            echo $konten[$i]['JUDUL'].'<br>';
+//                            echo $konten[$i]['TAG'][$j]['NAMA_TAG'].'<br>';
+                            $counter+=1;
+                        }                        
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+    function existKonten($konten, $id){
+        $found = false;
+        $counter=0;
+        while((!$found)&&($counter<count($konten))){
+            if($konten[$counter]['ID_USER']==$id){
+                $found = true;
+            }
+            $counter+=1;
+        }
+        return $found;
     }
     function orderKontenByLike($konten){
         $result = $konten;
@@ -91,6 +209,36 @@ class Home_con extends Controller {
             }
           }
         }        
+        return $result;
+    }
+    function getContent(){
+        $result = Array();
+        $konten = $this->_model->query('select * from konten natural join user');
+        if(count($konten)>0){
+            for($i=0;$i<count($konten);$i++){
+                $sum_like = 0;
+                $sum_dislike = 0;
+                //like/dislike
+                $konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                for($j=0;$j<count($konten_like);$j++){
+                        if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
+                        if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
+                }
+                //echo "like=".$sum_like."<br>";
+                //echo "dislike=".$sum_dislike."<br>";
+
+                //komentar
+                $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                $konten[$i]['KOMENTAR'] = $komen;
+
+                $konten[$i]['LIKE'] = $sum_like-$sum_dislike;
+                // tag
+                $tag = $this->_model->query('select * from konten_tag natural join tag where konten_tag.ID_KONTEN="'.$konten[$i]['ID_KONTEN'].'"');
+                $konten[$i]['TAG'] = $tag;
+
+            }
+            $result = $konten;
+        }
         return $result;
     }
 }

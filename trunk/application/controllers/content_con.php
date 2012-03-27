@@ -23,7 +23,6 @@ class Content_con extends Controller {
             }else if($sort==2){ // sort komentar
                 $konten=  $this->orderKontenByKomentar($konten);                    
             }
-            
             $this->set('current_sort', $sort);
             $this->set('current_tag', $id_tag);
             $this->set('konten', $konten);
@@ -106,6 +105,7 @@ class Content_con extends Controller {
                         $query.=' OR NAMA_TAG=';
                     }
                 }
+                $this->set('current_list_tag', $tag);
                 //echo $query.'<br>';
                 $tag_konten = $this->_model->query($query);            
                 //echo count($tag_konten);
@@ -178,7 +178,6 @@ class Content_con extends Controller {
                                         )';
                                 $this->_model->query($insert);
                                 $this->input_tags_in_last_konten($_POST['tags']);
-                                $this->redirect(BASE_URL.'content_con');
                             }
                             else{
                                 if(empty($_POST['description']))
@@ -203,6 +202,7 @@ class Content_con extends Controller {
                         if($fileSize > 0 || $fileError == 0){ //check if the file is corrupt or error
                         $move = move_uploaded_file($_FILES['picture']['tmp_name'], 'image/'.$fileName); //save image to the folder
                         if($move){
+                            $valid = true;
                             $id_user = $_SESSION['id'];
                             $id_type = 2;
                             $waktu = date("Y-m-d H:i:s");
@@ -216,7 +216,6 @@ class Content_con extends Controller {
                                     )';
                             $this->_model->query($insert);
                             $this->input_tags_in_last_konten($_POST['tags']);
-                            $this->redirect(BASE_URL.'content_con');
 
                         } else{
                             //echo "<h3>Failed! </h3>";
@@ -259,7 +258,6 @@ class Content_con extends Controller {
                                     )';
                             $this->_model->query($insert);
                             $this->input_tags_in_last_konten($_POST['tags']);
-                            $this->redirect(BASE_URL.'content_con');
                                  
                         } else {
                              echo "The string '$findme' was not found in the string '$mystring'";
@@ -271,11 +269,13 @@ class Content_con extends Controller {
                     }
                 }
             }
-            if(!$valid){
+            if(!$valid){ // gagal
                 $this->loadView("header_view.php");
                 $this->loadView("post_view.php");		
                 $this->loadView("footer_view.php");            					
-            }else{
+            }else{ // berhasil
+                $this->checkFirstPost();
+                $this->redirect(BASE_URL.'content_con');
                 
             }
             
@@ -539,4 +539,218 @@ class Content_con extends Controller {
             $this->loadView("error_view.php");		
             $this->loadView("footer_view.php");
         }
+        function checkPostAchievement(){
+            
+        }
+        function checkFirstPost(){
+            $achieve = false;
+            if(!empty($_SESSION['id'])){
+                $post = $this->_model->query('select * from konten where ID_USER="'.$_SESSION['id'].'"');
+                if(count($post)>0){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=1');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "1"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;
+        }
+        function checkMorePost(){
+            $achieve=false;
+            if(!empty($_SESSION['id'])){
+                $post = $this->_model->query('select * from konten where ID_USER="'.$_SESSION['id'].'"');
+                if(count($post)>=10){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=2');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "2"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;
+        }
+        function checkFirstComment(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $post = $this->_model->query('select * from komentar where ID_USER="'.$_SESSION['id'].'"');
+                if(count($post)>0){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=3');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "3"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;
+        }
+        function checkMoreComment(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $post = $this->_model->query('select * from komentar where ID_USER="'.$_SESSION['id'].'"');
+                if(count($post)>=20){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=4');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "4"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+        }
+        function checkMoreLike(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $like = $this->_model->query('SELECT count(konten.ID_KONTEN) as "like" FROM `konten` inner join like_dislike on konten.ID_KONTEN=like_dislike.ID_KONTEN WHERE konten.ID_USER='.$_SESSION['id'].' AND like_dislike.STATUS="LIKE"');
+                if($like[0]['like']>=3){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=5');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "5"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+        }
+        function checkMoreDislike(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $like = $this->_model->query('SELECT count(konten.ID_KONTEN) as like FROM `konten` inner join like_dislike on konten.ID_KONTEN=like_dislike.ID_KONTEN WHERE konten.ID_USER='.$_SESSION['id'].' AND like_dislike.STATUS="DISLIKE"');
+                if($like[0]['like']>=100){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=6');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "6"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                        
+        }
+        function checkPeopleComment(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $like = $this->_model->query('SELECT count(konten.ID_KONTEN) as "like" FROM `konten` inner join komentar on konten.ID_KONTEN=komentar.ID_KONTEN WHERE konten.ID_USER='.$_SESSION['id'].'');
+                if($like[0]['like']>=50){ // berhak mendapat first achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=7');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "7"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                                    
+        }
+        function checkThreeAchievement(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>=3){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=8');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "8"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                                                
+        }
+        function checkUltimate(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>=11){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=9');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "9"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                                                            
+        }
+        function checkAlay(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user where ID_USER='.$_SESSION['id'].'');                
+                if(count($ach)>0){ // berhak mendapat achievement
+                    $subject = $ach[0]['USERNAME'];
+                    if(preg_match('/[A-Za-z]/', $subject) && preg_match('/[0-9]/', $subject)) {
+                        $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=10');
+                        if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                            $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                                values ('.$_SESSION['id'].', "10"
+                                    )';
+                            $this->_model->query($insert);
+                            $achieve = true;
+                        }
+                    }
+                }
+            }            
+            return $achieve;                                                            
+        }
+        function checkNarcism(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from narcism where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>0 && $ach[0]['CHANGE_PICTURE']>=3){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=12');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "12"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+            
+        }
+        function checkStatus(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>0 && $ach[0]['STATUS']=="IN RELATIONSHIP"){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=11');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "11"
+                                )';
+                        $this->_model->query($insert);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+        }
+        
+        
+        
 }

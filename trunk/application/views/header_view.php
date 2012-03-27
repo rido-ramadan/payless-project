@@ -80,7 +80,7 @@
         <div id="sort2" class="left nav3act"><a href="<?php echo BASE_URL?>content_con/list_content">Contents</a></div>
         <div class="left"><img src="<?php echo BASE_URL?>img//divide.png" alt="" /></div>
         <div id="sort1" class="left"><a href="<?php echo BASE_URL?>content_con/post">Upload Post</a></div>
-        <form action="<?php echo BASE_URL.'home_con/'?>" method="post" name="srch">
+        <form action="<?php echo BASE_URL.'home_con/submit_search'?>" method="post" name="srch">
             <div class="right searchbutton">
                 <input id="filtersearch" type="submit" name="search" value="Search"/>
             </div>
