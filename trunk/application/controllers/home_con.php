@@ -241,4 +241,69 @@ class Home_con extends Controller {
         }
         return $result;
     }
+    function ajax_search($str, $method){
+        $query = $this->_model->query('select * from user');
+        for($i=0;$i<count($query);$i++){
+            $username[$i]=$query[$i]['NAMA'];
+            $link_user[$i]=BASE_URL.'user_con/profile/'.$query[$i]['ID_USER'];
+        }
+
+        $query2 = $this->_model->query('select * from konten');
+        for($i=0;$i<count($query2);$i++){
+            $content[$i]=$query2[$i]['JUDUL'];
+            $link_content[$i]=BASE_URL.'content_con/content/'.$query2[$i]['ID_KONTEN'];
+        }
+
+        $nofilter = $username;
+        $nofilter_link = $link_user;
+        foreach ($content as $value) {
+            $nofilter[] = $value;
+        }
+        foreach ($link_content as $value) {
+            $nofilter_link[] = $value;
+        }
+
+        //get the q parameter from URL
+        $q = $str;
+        $f = $method;
+
+        if ($f == "filter-none") {
+            $a = $nofilter;
+            $b = $nofilter_link;
+        } else if ($f == "filter-user") {
+            $a = $username;
+            $b = $link_user;
+        } else if ($f == "filter-cont") {
+            $a = $content;
+            $b = $link_content;
+        }
+
+        //lookup all hints from array if length of q>0
+        if (strlen($q) > 0) {
+            $hint = "";
+            for ($i = 0; $i < count($a); $i++) {
+                if (strtolower($q) == strtolower(substr($a[$i], 0, strlen($q)))) {
+                    if ($hint == "") {
+                        //echo "hint kosong=".$hint;
+                        $hint = "<li>" . "<a href='".$b[$i]."'>" . $a[$i] . '</a>' . "</li>";
+                    } 
+                    else {
+                        //echo "hint isi=".$hint;
+                        $hint = $hint . "<li>" . "<a href='".$b[$i]."'>" . $a[$i] . '</a>' . "</li>";
+                    }
+                }
+            }
+        }
+
+        // Set output to "no suggestion" if no hint were found
+        // or to the correct values
+        if ($hint == "") {
+            $response = "No Suggestion";
+        } else {
+            $response = $hint;
+        }
+
+        //output the response
+        echo $response;        
+    }
 }

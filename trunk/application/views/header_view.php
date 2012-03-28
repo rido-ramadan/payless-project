@@ -8,7 +8,7 @@
         <!--<script type="text/javascript" src="<?php echo BASE_URL?>js/navigasi.js"></script>-->
         <link type="text/css" rel="stylesheet" href="<?php echo BASE_URL?>css/header1.css" />
     </head>
-    <body onload="randomlike(); randomkomen(); inisialisasi()">
+    <body onload="randomlike(); randomkomen(); inisialisasi();loadContent('init')">
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
@@ -48,7 +48,8 @@
 
     <div class="nav2">
         It's a Project without a Payment!
-        <div class="right themes"><?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
+        <div class="right themes"><?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a><img src="'.$_SESSION['avatar'].'" width="60">';?>
+            
 
             <!--<form action="<?php echo BASE_URL?>content_con/submit_tag" method="post">
                     <select  name="Sorting">
@@ -95,13 +96,13 @@
                 <div id="applesearch">
                     <span class="sbox_l"></span>
                     <span class="sbox">
-                        <input name="search" style="outline-width:0px;" type="text" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+                        <input style="outline-width:0px;" type="text" name="search" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="showHint('<?php echo BASE_URL?>', this.value)"/>
                     </span>
                     <span class="sbox_r" id="srch_clear"></span>
                 </div>
             </div>
             <div class="right filter">
-                <select name="srch_op" onchange="ChangeStyle(this.value)">
+                <select name="srch_op" id="filter-method" onchange="ChangeStyle(this.value)">
                     <option value="filter-none">No Filter</option>
                     <option value="filter-user">Username</option>
                     <option value="filter-cont">Content</option>
@@ -133,6 +134,13 @@
         </form>
     </div>
 </div>
+<!-- :::::::: POP-UP SEARCH BAR ::::::: -->
+<div class="search-pop-up">
+    <ul id="suggestion">
+        <li></li>
+    </ul>
+</div>
+<!-- :::::::::::::::::::::::::::::::::: -->
 <div class="ach_popup" id="ach_popup">
     <div class="ach_congrats">Congratulations!</div>
     <div class="ach_text">You have been awarded this achievement</div>
@@ -148,6 +156,7 @@
     </div>
 </div>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/divPop.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL?>js/ajax.js"></script>
 <?php 
     if(!empty($achievement)) echo '
         <script type="text/javascript">showAchievement("'.$achievement['NAME'].'", "'.$achievement['DESCRIPTION'].'", "'.$achievement['IMAGE'].'")</script>';

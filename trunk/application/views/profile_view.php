@@ -8,11 +8,11 @@
                     <?php 
                         if(!empty($user['AVATAR'])) 
                             echo '
-                                <img src="'.$user['AVATAR'].'" alt="EdgarDrake">
+                                <img src="'.$user['AVATAR'].'" width="150" alt="EdgarDrake">
                                 ';
                         else
                             echo '
-                                <img src="'.BASE_URL.'img/avatar.jpg" alt="EdgarDrake">
+                                <img src="'.BASE_URL.'img/avatar.jpg" width="150" alt="EdgarDrake">
                                 ';
                     ?>
                 </div>
@@ -70,7 +70,7 @@
                                     echo '
                                     <li>
                                         <div class="achievement">
-                                            <div class="ach_logo"></div>
+                                            <div class="ach_logo"><img src="'.BASE_URL.'img/achievements/'.$user['ACHIEVEMENT'][$i]['GAMBAR'].'" alt=""></div>
                                             <div class="ach_detail">
                                                 <div class="ach_name">'.$user['ACHIEVEMENT'][$i]['NAMA'].'</div>
                                                 <div class="ach_how">'.$user['ACHIEVEMENT'][$i]['DESKRIPSI'].'</div>
