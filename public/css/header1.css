@@ -12,11 +12,11 @@ body {
     height: 35px;
 }
 
-.left {		float: left;}
-.right {	float: right;}
-.clear {	clear:both;}
-.hidden {	display:none;}
-
+.left   { float: left; }
+.right  { float: right;}
+.clear  { clear: both; }
+.hidden { display: none;}
+.inline { display: inline-block}
 .center { text-align: center; }
 
 a {		text-decoration: none;}
@@ -1272,6 +1272,16 @@ div.likes {
     border-left-style: outset; */
     display: inline-block;
     vertical-align: top;
+}
+
+.userdata-header {
+    width: 385px;
+    height: auto;
+    min-height: 26px;
+}
+
+.user-attribute {
+    margin-top: 20px;
 }
 
 .subtitle {

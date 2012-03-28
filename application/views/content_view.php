@@ -103,7 +103,11 @@
                     }
                         ?>
 
-                   </div>
+                        </div>
+                        <div class="paketgantihalaman">
+                            <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
+                            <div class="buttonnext" onclick="window.location.href='contents.html'">NEXT</div>
+                        </div>
                     </div>
                 </div>
                 <div class="filtermethod">

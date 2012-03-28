@@ -17,33 +17,35 @@
                     ?>
                 </div>
                 <div class="userdata">
-                    <div class="subtitle left ">USER INFORMATION</div>
-                    <?php 
-                        if(!empty($_SESSION['login']) && $_SESSION['id']==$user['ID_USER'])
-                            echo '<div class="edituser left clearfix" onclick="editProfile()">EDIT</div>';
-                        else{
-                            echo '<div class="edituser left clearfix" ></div>';                            
-                        }
-                    ?>
-                    <div class="lhs left">FULL NAME</div>
-                    <div class="rhs left clearfix"><?php echo $user['NAMA']?></div>
-                    <div class="lhs left">E-MAIL</div>
-                    <div class="rhs left clearfix"><?php echo $user['EMAIL']?></div>
-                    <div class="lhs left">GENDER</div>
-                    <div class="rhs left clearfix"><?php echo $user['GENDER']?></div>
-                    <div class="lhs left">STATUS</div>
-                    <div class="rhs left clearfix"><?php echo $user['STATUS']?></div>
-                    <div class="lhs left">BIRTHDATE</div>
-                    <div class="rhs left clearfix"><?php echo $user['TGL_LAHIR']?></div>
-                    <div class="lhs left">ABOUT ME</div>
-                    <div class="rhs left clearfix">
-                        <?php echo $user['ABOUT_ME']?>
+                    <div class="userdata-header">
+                        <div class="subtitle left ">USER INFORMATION</div>
+                        <?php
+                            if(!empty($_SESSION['login']) && $_SESSION['id']==$user['ID_USER'])
+                                echo '<div class="edituser left clearfix" onclick="editProfile()">EDIT</div>';
+                            else{
+                                echo '<div class="edituser left clearfix" ></div>';
+                            }
+                        ?>
                     </div>
-                    <div class="lhs left"># COMMENTS</div>
-                    <div class="rhs left clearfix"><?php echo $user['KOMENTAR']?></div>
-                    <div class="lhs left"># UPLOADS</div>
-                    <div class="rhs left clearfix"><?php echo $user['POST']?></div>
-                    <div class="lhs left">POST LIST</div>
+                    <div class="user-attribute">
+                        <div class="lhs left">FULL NAME</div>
+                        <div class="rhs left clearfix"><?php echo $user['NAMA']?></div>
+                        <div class="lhs left">E-MAIL</div>
+                        <div class="rhs left clearfix"><?php echo $user['EMAIL']?></div>
+                        <div class="lhs left">GENDER</div>
+                        <div class="rhs left clearfix"><?php echo $user['GENDER']?></div>
+                        <div class="lhs left">STATUS</div>
+                        <div class="rhs left clearfix"><?php echo $user['STATUS']?></div>
+                        <div class="lhs left">BIRTHDATE</div>
+                        <div class="rhs left clearfix"><?php echo $user['TGL_LAHIR']?></div>
+                        <div class="lhs left">ABOUT ME</div>
+                        <div class="rhs left clearfix"><?php echo $user['ABOUT_ME']?></div>
+                        <div class="lhs left"># COMMENTS</div>
+                        <div class="rhs left clearfix"><?php echo $user['KOMENTAR']?></div>
+                        <div class="lhs left"># UPLOADS</div>
+                        <div class="rhs left clearfix"><?php echo $user['POST']?></div>
+                        <div class="lhs left">POST LIST</div>
+                    </div>
                     <div class="rhs left clearfix">
                         <?php if(!empty($user['KONTEN'])){
                                 echo '<ul>';
@@ -53,9 +55,7 @@
                                         ';
                                 }
                                 echo '</ul>';
-                                
                             }
-                            
                         ?>
                     </div>
                 </div>
@@ -80,8 +80,6 @@
                                         ';
                                 }
                                 echo '</ul>';
-                                
-                            
                         }
                     ?>
                 </div>
