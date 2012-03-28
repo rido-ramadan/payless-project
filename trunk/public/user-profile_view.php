@@ -90,27 +90,31 @@
                     <img src="img/avatar.jpg" alt="EdgarDrake">
                 </div>
                 <div class="userdata">
-                    <div class="subtitle left ">USER INFORMATION</div>
-                    <div class="edituser left clearfix" onclick="editProfile()">EDIT</div>
-                    <div class="lhs left">FULL NAME</div>
-                    <div class="rhs left clearfix">Edgar Drake</div>
-                    <div class="lhs left">E-MAIL</div>
-                    <div class="rhs left clearfix">edgar.drake@gmail.com</div>
-                    <div class="lhs left">GENDER</div>
-                    <div class="rhs left clearfix">Male</div>
-                    <div class="lhs left">STATUS</div>
-                    <div class="rhs left clearfix">In a Relationship</div>
-                    <div class="lhs left">BIRTHDATE</div>
-                    <div class="rhs left clearfix">20-03-1991</div>
-                    <div class="lhs left">ABOUT ME</div>
-                    <div class="rhs left clearfix">
-                        I am just me, it's nothing unusual for a programmer like me to have some account on a payless project like this. Afterall, it is I who the one who made this. OK, that's it.
+                    <div class="userdata-header">
+                        <div class="subtitle left ">USER INFORMATION</div>
+                        <div class="edituser left clearfix" onclick="editProfile()">EDIT</div>
                     </div>
-                    <div class="lhs left"># COMMENTS</div>
-                    <div class="rhs left clearfix">50</div>
-                    <div class="lhs left"># UPLOADS</div>
-                    <div class="rhs left clearfix">10</div>
-                    <div class="lhs left">POST LIST</div>
+                    <div class="user-attribute">
+                        <div class="lhs left">FULL NAME</div>
+                        <div class="rhs left clearfix">Edgar Drake</div>
+                        <div class="lhs left">E-MAIL</div>
+                        <div class="rhs left clearfix">edgar.drake@gmail.com</div>
+                        <div class="lhs left">GENDER</div>
+                        <div class="rhs left clearfix">Male</div>
+                        <div class="lhs left">STATUS</div>
+                        <div class="rhs left clearfix">In a Relationship</div>
+                        <div class="lhs left">BIRTHDATE</div>
+                        <div class="rhs left clearfix">20-03-1991</div>
+                        <div class="lhs left">ABOUT ME</div>
+                        <div class="rhs left clearfix">
+                            I am just me, it's nothing unusual for a programmer like me to have some account on a payless project like this. Afterall, it is I who the one who made this. OK, that's it.
+                        </div>
+                        <div class="lhs left"># COMMENTS</div>
+                        <div class="rhs left clearfix">50</div>
+                        <div class="lhs left"># UPLOADS</div>
+                        <div class="rhs left clearfix">10</div>
+                        <div class="lhs left">POST LIST</div>
+                    </div>
                     <div class="clear">
                         <ul>
                             <li>

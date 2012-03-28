@@ -1,1 +1,0 @@
-Trying AJAX for the first time. It's okay if I failed first.
