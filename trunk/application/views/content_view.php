@@ -36,8 +36,14 @@
                             <div class="commentmini"></div>
                             <div class="jumlahkomen"><?php echo count($content['KOMENTAR'])?></div>
                             <br/>
-                            <div class="likebutton" onclick="voteplus(this.num)"><a href="<?php echo BASE_URL.'content_con/like/'.$content['ID_KONTEN'];?>"></a></div>
-                            <div class="dislikebutton" onclick="votemin(this.num)"><a href="<?php echo BASE_URL.'content_con/dislike/'.$content['ID_KONTEN'];?>"></a></div>
+                            <?php 
+                                if(!empty($_SESSION['login'])){
+                                    echo '
+                                <div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$content['ID_KONTEN'].'"></a></div>
+                                <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$content['ID_KONTEN'].'"></a></div>
+                                        ';
+                                }
+                            ?>
                             <div class="tags">
                                 Tags : <br/>
                                 <ul class="tag">
@@ -67,9 +73,13 @@
                                 <div class="avatar">
                                     <img src="'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
                                 </div>
-                                <div class="isikomen">
-                                    <div class="del-comment right"><a></a></div>
-                                    <div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
+                                <div class="isikomen">';
+                                if(!empty($_SESSION['login']) && $content['KOMENTAR'][$i]['ID_USER']==$_SESSION['id']){
+                                    echo 
+                                    '<a href="'.BASE_URL.'content_con/delete_comment/'.$content['ID_KONTEN'].'/'.$content['KOMENTAR'][$i]['ID_KOMENTAR'].'"><div class="del-comment right"></div></a>';
+                                }
+                                echo
+                                    '<div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
                                     <div class="timecomment">'.$content['KOMENTAR'][$i]['WAKTU'].'</div>
 								'.$content['KOMENTAR'][$i]['ISI'].'
                                 </div>
@@ -77,18 +87,21 @@
                                     ';
                             }
                         }
-                    ?>
+                    if(!empty($_SESSION['login'])){
+                        echo '
                             <div class="comment" style="border-bottom:0px">
                                 <div class="avatar">
-                                    <img src="<?php echo $_SESSION['avatar']?>" alt="avatar" width="64" />
+                                    <img src="'.$_SESSION['avatar'].'" alt="avatar" width="64" />
                                 </div>                                
                                 <div class="isikomen">
-                                    <form method="post" action="<?php echo BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN']?>">
+                                    <form method="post" action="'.BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN'].'">
                                         <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
                                         <div class="submit-your-comment"><input type="submit" value="Comment" /></div>
                                     </form>
                                 </div>
-                            </div>
+                            </div>';
+                    }
+                        ?>
 
                    </div>
                     </div>

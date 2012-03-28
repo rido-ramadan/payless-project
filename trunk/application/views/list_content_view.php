@@ -13,7 +13,14 @@
             }
         ?>
         
-        </b>| sorted by: <b id="sortingmethod">NEWEST</b>
+        </b>| sorted by: <b id="sortingmethod">
+        <?php 
+            if(!empty($current_sort)){
+                if($current_sort==-1) echo "Newest";
+                else if($current_sort==1) echo 'Most Popular';
+                else echo 'Most Commented';
+            }
+        ?></b>
     </div>
 </div>
 
@@ -68,15 +75,18 @@
                                             <div class="jumlahlike">'.$konten[$i]['LIKE'].'</div>
                                             <div class="commentmini"></div>
                                             <div class="jumlahkomen">'.count($konten[$i]['KOMENTAR']).'</div>
-                                            <br/>
-                                            <div class="likebutton" ><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
-                                            <div class="dislikebutton" "><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>
-                                            <div class="tags">
+                                            <br/>';
+                                            if(!empty($_SESSION['login'])){
+                                                echo '
+                                                    <div class="likebutton"><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                                    <div class="dislikebutton" "><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>';
+                                                }
+                                            echo '<div class="tags">
                                                 Tags : <br/>
                                                 <ul class="tag">';
                                                     for($j=0;$j<count($konten[$i]['TAG']);$j++){
                                                         echo '
-                                                            <li>'.$konten[$i]['TAG'][$j]['NAMA_TAG'].'</li>
+                                                            <li><a href="'.BASE_URL.'content_con/list_content/'.$konten[$i]['TAG'][$j]['ID_TAG'].'">'.$konten[$i]['TAG'][$j]['NAMA_TAG'].'</a></li>
                                                             ';
                                                     }
                                                 echo '</ul>
@@ -144,6 +154,7 @@
                         <div class="tagcloudscontent">
                             <?php 
                                 if(!empty($list_tag)){
+                                    echo '<a href="'.BASE_URL.'content_con/list_content/-1">NO_FILTER</a> ';
                                     for($i=0;$i<count($list_tag);$i++){
                                             echo '<a href='.BASE_URL.'content_con/list_content/'.$list_tag[$i]['ID_TAG'].'>'.$list_tag[$i]['NAMA_TAG'].'</a>';
                                             if(($i+1)!=count($list_tag)){
@@ -158,10 +169,10 @@
                         <div class="headertext" style="margin: 0 0 0 10px;">Sort</div>
                         Sort by:
                         <div class="sortingmethod">
-                            <select name="sortmethod" onchange="">
-                                <option value="newest">Newest First</option>
-                                <option value="popularity">Most Popular First</option>
-                                <option value="mostcommented">Most Commented First</option>
+                            <select name="sortmethod" id="Sorting" onchange="sort_content('<?php echo BASE_URL.'content_con/'?>')">
+                                <option value="-1">Newest</option>
+                                <option <?php if(!empty($current_sort) && $current_sort==1) echo 'selected="selected"'?> value="1">Most Popular</option>
+                                <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
                             </select>
                         </div>
                     </div>

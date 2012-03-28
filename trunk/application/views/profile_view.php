@@ -18,7 +18,13 @@
                 </div>
                 <div class="userdata">
                     <div class="subtitle left ">USER INFORMATION</div>
-                    <div class="edituser left clearfix" onclick="editProfile()">EDIT</div>
+                    <?php 
+                        if(!empty($_SESSION['login']) && $_SESSION['id']==$user['ID_USER'])
+                            echo '<div class="edituser left clearfix" onclick="editProfile()">EDIT</div>';
+                        else{
+                            echo '<div class="edituser left clearfix" ></div>';                            
+                        }
+                    ?>
                     <div class="lhs left">FULL NAME</div>
                     <div class="rhs left clearfix"><?php echo $user['NAMA']?></div>
                     <div class="lhs left">E-MAIL</div>

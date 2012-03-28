@@ -5,12 +5,25 @@ class Content_con extends Controller {
 	function index(){
             $this->redirect(BASE_URL.'content_con/list_content');
 	}
-        function list_content($id_tag=-1, $sort=-1){
+        function list_content($id_tag=-1, $sort=-1, $achieve = -1){
+            if($achieve!=-1){
+                $this->checkFirstPost();
+                $this->checkMorePost();
+                $this->checkThreeAchievement();
+                $this->checkUltimate();
+            }
+            
             $list_tag = $this->_model->query('select * from tag');
                 if(count($list_tag)>0){
                         $this->set('list_tag',$list_tag);
                 }
-           if($id_tag==-1){ // no tags
+            $current_list_tag = $this->_model->query('select * from tag where ID_TAG='.$id_tag.'');
+            if(count($current_list_tag)>0){
+                $current_list_tag[0] = $current_list_tag[0]['NAMA_TAG'];
+                $this->set('current_list_tag',$current_list_tag);
+            }
+            
+            if($id_tag==-1){ // no tags
                 $konten= $this->getContent();
             }else{
                 $konten = $this->getContentFromTag($id_tag);                
@@ -26,6 +39,8 @@ class Content_con extends Controller {
             $this->set('current_sort', $sort);
             $this->set('current_tag', $id_tag);
             $this->set('konten', $konten);
+            $this->set('gate', 1);
+            $this->set('title_page', 'Contents');
             $this->loadView("header_view.php");
             $this->loadView("list_content_view.php");		
             $this->loadView("footer_view.php");            
@@ -69,12 +84,14 @@ class Content_con extends Controller {
             }
             return $result;
         }
-        function submit_tag(){
+        function submit_tag($input_tag=-1){
             if(empty($_POST['input_tag'])){
                 $this->redirect(BASE_URL.'content_con');
             }
-            
-            $input = $_POST['input_tag'];
+            if($input_tag!=-1){
+                $input = $input_tag;
+            }else
+                $input = $_POST['input_tag'];
             $input = explode(',', $input);
             $tag = Array();
             foreach ($input as $value) {
@@ -142,6 +159,7 @@ class Content_con extends Controller {
                 $this->redirect(BASE_URL.'user_con/error_display/0');                
             }
             
+            $this->set('title_page', 'Upload Post');
             $this->loadView("header_view.php");
             $this->loadView("post_view.php");		
             $this->loadView("footer_view.php");            
@@ -274,8 +292,7 @@ class Content_con extends Controller {
                 $this->loadView("post_view.php");		
                 $this->loadView("footer_view.php");            					
             }else{ // berhasil
-                $this->checkFirstPost();
-                $this->redirect(BASE_URL.'content_con');
+                $this->redirect(BASE_URL.'content_con/list_content/-1/-1/1');
                 
             }
             
@@ -371,8 +388,12 @@ class Content_con extends Controller {
                 
 
         }
-        function content($id){
+        function content($id, $achieve=-1){
             if(!empty($id)){
+                if($achieve!=-1){
+                    $this->checkFirstComment();
+                    $this->checkMoreComment();
+                }
                 $konten = $this->getContentFromId($this->getContent(),$id);
                 if(!empty($konten)){
                     if($konten!=null){
@@ -466,7 +487,7 @@ class Content_con extends Controller {
         }
         // KOMENTAR
         function submit_comment($id_konten){
-            if($_SESSION['login']!=true){
+            if(empty($_SESSION['login'])){
                 $this->redirect(BASE_URL.'user_con/error_display/0');
             }
             $komentar = $_POST['komentar'];
@@ -476,8 +497,26 @@ class Content_con extends Controller {
                     "'.$waktu.'", "'.$_SESSION['id'].'"
                     )';
             $this->_model->query($insert);
-            $this->redirect(BASE_URL.'content_con/content/'.$id_konten);
+            $this->redirect(BASE_URL.'content_con/content/'.$id_konten.'/1');
             
+        }
+        function delete_comment($id_content, $id_comment){
+            if(empty($_SESSION['login']) || empty($id_comment) || empty($id_content)){
+                $this->redirect(BASE_URL.'user_con/error_display/0');
+            }
+            $delete = 'delete from komentar where ID_KOMENTAR='.$id_comment.'';
+            $this->_model->query($delete);
+            $this->redirect(BASE_URL.'content_con/content/'.$id_content);
+        }
+        function sort_content($gate, $tag, $sort){
+            if(empty($gate) || empty($sort)){
+                $this->redirect(BASE_URL.'content_con/');
+            }
+            if($gate==1){ // list content
+                $this->redirect(BASE_URL.'content_con/list_content/'.$tag.'/'.$sort);
+            }else{ // submit tag
+                $this->redirect(BASE_URL.'content_con/submit_tag/'.$tag);                
+            }
         }
         function orderKontenByTime($konten){
             $result = $konten;
@@ -539,9 +578,6 @@ class Content_con extends Controller {
             $this->loadView("error_view.php");		
             $this->loadView("footer_view.php");
         }
-        function checkPostAchievement(){
-            
-        }
         function checkFirstPost(){
             $achieve = false;
             if(!empty($_SESSION['id'])){
@@ -553,6 +589,11 @@ class Content_con extends Controller {
                             values ('.$_SESSION['id'].', "1"
                                 )';
                         $this->_model->query($insert);
+                        $achievement=Array();
+                        $achievement['NAME'] = "Hello World";
+                        $achievement['DESCRIPTION'] = "You Just Post your First Post";
+                        $achievement['IMAGE'] = "http://localhost/progin/img/achievements/hello_world.png";
+                        $this->set('achievement', $achievement);
                         $achieve = true;
                     }
                 }
@@ -614,7 +655,7 @@ class Content_con extends Controller {
             $achieve= false;
             if(!empty($_SESSION['id'])){
                 $like = $this->_model->query('SELECT count(konten.ID_KONTEN) as "like" FROM `konten` inner join like_dislike on konten.ID_KONTEN=like_dislike.ID_KONTEN WHERE konten.ID_USER='.$_SESSION['id'].' AND like_dislike.STATUS="LIKE"');
-                if($like[0]['like']>=3){ // berhak mendapat first achievement
+                if($like[0]['like']>=100){ // berhak mendapat first achievement
                     $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=5');
                     if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
                         $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
