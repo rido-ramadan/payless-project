@@ -219,7 +219,7 @@ class User_con extends Controller {
                 return 0;
         }
         function profile($id){
-            if(empty($id) || empty($_SESSION['login'])){
+            if(empty($id)){
                 $this->redirect(BASE_URL.'user_con/error_display/0');
             }
             $user = $this->_model->query('select * from user where ID_USER='.$id.'');

@@ -59,7 +59,7 @@ class Home_con extends Controller {
 			$this->set('content_most_like',$this->orderKontenByLike($konten));
 			$this->set('content_most_comment',$this->orderKontenByKomentar($konten));
 		}
-        $this->set('display','Success - My Todo List App');
+        $this->set('title_page', 'Homepage');
         $this->loadView("header_view.php");
         $this->loadView("home_view.php");
         $this->loadView("footer_view.php");
