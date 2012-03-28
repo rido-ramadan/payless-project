@@ -136,6 +136,13 @@ div.themes {margin-top: 0px;}
 .themes select {font: 11px/13px arial;}
 .themes select option {font: 11px/13px arial;}
 
+.mini-avatar {
+    width: 36px;
+    height: 40px;
+    margin: 2px;
+    display: inline-block;
+}
+
 /** SEARCH **/
 #applesearch {
     padding-top: 11px;
@@ -1537,4 +1544,84 @@ div.likes {
     width: 700px;
     background: url(../img/previewbot.png) no-repeat;
     height: 20px;
+}
+
+/* ------------- */
+/* SEARCH RESULT */
+/* ------------- */
+
+ul.search-user-list {
+    padding-left: 0px;
+    margin: 0;
+    list-style: none;
+    font: 11px/13px arial;
+}
+
+.search-user-box {
+    width: 600px;
+    height: auto;
+    min-height: 50px;
+    border-radius: 8px;
+    border: 2px solid #d0d0d0 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.search-user-avatar {
+    width: 150px;
+    height: auto;
+    min-height: 200px;
+    display: inline-block;
+    vertical-align: top;
+    border-right: 2px solid #d0d0d0 !important;
+    text-align: center;
+}
+
+.search-user-detail {
+    width: 420px;
+    height: auto;
+    min-height: 200px;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.search-user-username {
+    font-size: 35px;
+    line-height: 35px;
+    padding: 15px 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.search-user-fullname {
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0;
+    font-weight: bold;
+    text-align: left;
+    color: #777777;
+}
+
+.search-user-email {
+    font-size: 20px;
+    line-height: 20px;
+    padding: 10px 0;
+    font-weight: bold;
+    text-align: left;
+    color: #444444;
+}
+
+.search-user-about {
+    font-size: 15px;
+    line-height: 17px;
+    font-style: italic;
+    padding: 10px 0;
+    font-weight: normal;
+    text-align: left;
+    color: black;
+}
+
+.search-user-box * a, .search-user-box * a:hover,
+.search-user-box * a:visited, .search-user-box * a:active {
+    color: black;
 }

@@ -48,9 +48,12 @@
 
     <div class="nav2">
         It's a Project without a Payment!
-        <div class="right themes"><?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a><img src="'.$_SESSION['avatar'].'" width="60">';?>
+        <?php
+        echo '<div class="right mini-avatar"><img src="'.$_SESSION['avatar'].'" width="36" height="36" alt="'.$_SESSION['avatar'].'"></div>';
+        ?>
+        <div class="right themes">
+        <?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
             
-
             <!--<form action="<?php echo BASE_URL?>content_con/submit_tag" method="post">
                     <select  name="Sorting">
                         <option value="-1">Newest</option>

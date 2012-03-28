@@ -19,7 +19,11 @@
             </div>
             <div class="nav2">
                 It's a Project without a Payment!
+                <div class="right mini-avatar">
+                    <img src="img/avatar.jpg" width="36" height="36" alt="avatar">
+                </div>
                 <div class="right themes">
+                    Hello Edgar Drake
                     <select name="Tags" onchange="ChangeStyle(this.value)">
                         <option value="1">Select Tags</option>
                         <option value="2">Funny</option>
@@ -101,6 +105,21 @@
             <div class="detmain" id="result-some">
                 <div class="contentlist">
                     <ul class="listcontents">
+                        <li>
+                            <div class="search-user-box">
+                                <div class="search-user-avatar">
+                                    <a href=""><img src="img/avatar.jpg" alt="EdgarDrake"></a>
+                                </div>
+                                <div class="search-user-detail">
+                                    <div class="search-user-username"><a href="">EdgarDrake</a></div>
+                                    <div class="search-user-fullname">Rido Ramadan</div>
+                                    <div class="search-user-email">edgar@drake.com</div>
+                                    <div class="search-user-about">
+                                        <blockquote>"I'm just a normal game developer ever"</blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                         <li>
                             <div class="paketkonten linkpost">
                                 <div class="left iconcontent">
