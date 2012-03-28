@@ -15,7 +15,7 @@ function loadContent (page) {
     xmlHTTP.send();
 }
 
-function showHint(str) {
+function showHint(base_url, str) {
     var method = document.getElementById('filter-method').value;
     var xmlhttp;
     if (str.length==0) {
@@ -30,7 +30,7 @@ function showHint(str) {
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET","~ajax-search-controller.php?q=" + str + "&f=" + method,true);
+    xmlhttp.open("GET",base_url+"home_con/ajax_search/" + str + "/" + method,true);
     xmlhttp.send();
 }
 
