@@ -65,20 +65,21 @@ class Home_con extends Controller {
         $this->loadView("footer_view.php");
     }
     function submit_search(){
-        $search = $_POST['search_i'];
+        $search = $_POST['search_input'];
         $filter = $_POST['srch_op'];
-        echo $search;
-        echo $filter;
         //echo substr_count("asdasdasdkjhasd asd asd ssa", 'as'); 
         if(!empty($search) && !empty($filter) && strlen($search)<45){
             if($filter=='filter-none'){
                 $user = $this->_model->query('select * from user');
                 $result_user =$this->filterUser($user, $search);
                 $this->set('search_result', $result_user);
-
+                $result = $result_user;
                 $konten = $this->getContent();
                 $result_konten =$this->filterKonten($konten, $search);
-                $this->set('search_result', $result_user);
+                foreach ($result_konten as $value) {
+                    $result[] = $value;
+                }
+                $this->set('search_result', $result);
                 
             }else if($filter=='filter-user'){
                 $user = $this->_model->query('select * from user');

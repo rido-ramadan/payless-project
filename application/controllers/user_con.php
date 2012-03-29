@@ -72,7 +72,7 @@ class User_con extends Controller {
                                                                         echo 'format gambar salah';
                                                                 else {
                                                                     if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
-                                                                        $move = move_uploaded_file($avatar['tmp_name'], 'upload/'.$avatar['name']); //save image to the folder
+                                                                        $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
                                                                         if($move){
     //                                                                        $data = Array(
     //                                                                            'USERNAME'=>$username,

@@ -8,11 +8,11 @@
                     <?php 
                         if(!empty($user['AVATAR'])) 
                             echo '
-                                <img src="'.$user['AVATAR'].'" width="150" alt="EdgarDrake">
+                                <img src="'.BASE_URL.'avatar/'.$user['AVATAR'].'" width="150" alt="'.$user['USERNAME'].'">
                                 ';
                         else
                             echo '
-                                <img src="'.BASE_URL.'img/avatar.jpg" width="150" alt="EdgarDrake">
+                                <img src="'.BASE_URL.'img/avatar.jpg" width="150" alt="'.$user['USERNAME'].'">
                                 ';
                     ?>
                 </div>
