@@ -33,6 +33,7 @@ class User_con extends Controller {
             $birthdate = $_POST['birthdate'];
             $avatar = $_FILES['avatar'];
             $gender = $_POST['gender'];
+            $status = $_POST['status'];
             $about = $_POST['about'];
             if(strlen($username)>45 || strlen($password)>45 || strlen($confirm)>45 
                     || strlen($email)>45 || strlen($birthdate)>45 || 
@@ -40,83 +41,103 @@ class User_con extends Controller {
                     $this->redirect(BASE_URL.'user_con/register');
                     }
             else{
-                if(strlen($username)<5) echo 'username kurang dari 5';
+                $this->set('username', $username);
+                $this->set('nama', $name);
+                $this->set('password', $password);
+                $this->set('confirm', $confirm);
+                $this->set('email', $email);
+                $this->set('birthdate', $birthdate);
+                $this->set('avatar', $avatar);
+                if($gender=="male") $this->set('male','');
+                else if($gender=="female") $this->set('female','');
+                if($status=="single") $this->set('single','');
+                else if($status=="relation") $this->set('relation','');
+                else if($status=="married") $this->set('married','');
+                $this->set('about', $about);
+                if(strlen($username)<5) $this->set('error_username','Username must be at least 5 character.');
                 else{
-                    if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) echo 'username format salah';
+                    if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) $this->set('error_username','Username must be alphanumeric.');
                     else{
-                        if($this->checkUsername($username)==1) echo 'username sudah ada';
+                        if($this->checkUsername($username)==1) $this->set('error_username','Username has been taken');
                         else{
                             //if(!preg_match('/^([0-9]{4})+\-([0-9]{2})+\-([0-9]{2})$/', $name)) echo 'nama salah';
-                            if(!preg_match('/^([A-Za-z0-9])+([ ])+([A-Za-z0-9])/', $name)) echo 'nama salah';
+                            if(!preg_match('/^([A-Za-z0-9])+([ ])+([A-Za-z0-9])/', $name)) $this->set('error_nama','Please include your last name.');
                             else{
-                                if(strlen($password)<8) echo 'password kurang dari 8';
+                                if(strlen($password)<8) $this->set('error_password','Password must be at least 8 character.');
                                 else {
-                                    if($password==$username) echo 'password tidak boleh sama dengan username';
+                                    if($password==$username) $this->set('error_password','Password cannot be same with Username');
                                     else {
-                                        if($password=="" || $password!=$confirm) echo 'password harus sama dengan confirm password';
+                                        if(!preg_match('/^[a-zA-Z0-9]+$/',$password)) $this->set('error_password','The password is must be alphanumeric.');
                                         else{
-                                            //if(!preg_match('/^([A-Za-z0-9])+([A-Za-z0-9])$/',$password)) echo 'password salah';
-                                            if(!preg_match('/^[a-zA-Z0-9]+$/',$password)) echo 'password salah';
+                                            if($password=="" || $password!=$confirm) $this->set('error_confirm','The password is not match.');
                                             else{
-                                                if(!preg_match('/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/', $email)) echo 'email salah';
+                                            //if(!preg_match('/^([A-Za-z0-9])+([A-Za-z0-9])$/',$password)) echo 'password salah';
+                                                if(!preg_match('/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/', $email)) $this->set('error_email','Wrong email format.');
                                                 else {
-                                                    if($this->checkEmail($email)) echo 'email sudah ada';
+                                                    if($this->checkEmail($email)) $this->set('error_email','Email has been taken.');
                                                     else{
-                                                        if(!preg_match('/^([0-9]{4})+\-([0-9]{2})+\-([0-9]{2})$/', $birthdate)) echo 'tanggal salah';
+                                                        if(!preg_match('/^([0-9]{4})+\-([0-9]{2})+\-([0-9]{2})$/', $birthdate)) $this->set('error_tanggal', 'Birth date must be written in YYYY-MM-DD.');
                                                         else{
-                                                            if(empty($gender) || $gender=="none") echo 'gender kosong';
+                                                            list( $y, $m, $d ) = preg_split( '/[-\.\/ ]/', $birthdate );
+                                                            if(!checkdate( $m, $d, $y )) $this->set('error_tanggal', 'The date is invalid');
                                                             else{
-                                                                if($avatar['type']!='image/jpg' && 
-                                                                        $avatar['type']!='image/jpeg' && 
-                                                                        $avatar['type']!='image/pjpeg') 
-                                                                        echo 'format gambar salah';
-                                                                else {
-                                                                    if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
-                                                                        $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
-                                                                        if($move){
-    //                                                                        $data = Array(
-    //                                                                            'USERNAME'=>$username,
-    //                                                                            'PASSWORD'=> md5($password),
-    //                                                                            'NANA'=> $name,
-    //                                                                            'TGL_LAHIR'=> $birthdate,
-    //                                                                            'EMAIL'=> $email,
-    //                                                                            'AVATAR'=>$avatar[BASE_URL.'upload/'.$avatar['name']],
-    //                                                                            'GENDER'=>$gender,
-    //                                                                            'ABOUT_ME'=>$about,
-    //                                                                            'STATUS'=>'SINGLE'
-    //                                                                        );
-                                                                            $image = $avatar['name'];
-                                                                            $gender = ($gender=="male")? "LAKI" : "PEREMPUAN";
-                                                                            $insert = 'insert into user (USERNAME, PASSWORD, NAMA, TGL_LAHIR, EMAIL, AVATAR, GENDER, ABOUT_ME, STATUS) 
-                                                                                values ("'.$username.'", "'.md5($password).'",
-                                                                                    "'.$name.'", "'.$birthdate.'",
-                                                                                        "'.$email.'", "'.$image.'",
-                                                                                            "'.$gender.'", "'.$about.'",
-                                                                                                "SINGLE"
-                                                                                    )';
-                                                                            $this->_model->query($insert);
-                                                                            $id = $this->_model->query('select * from user where USERNAME="'.$username.'"');
-                                                                            if(count($id)>0){ // ada
-                                                                                $data = Array (
-                                                                                    'login' => true,
-                                                                                    'nama' => $name,
-                                                                                    'id' =>$id[0]['ID_USER'],
-                                                                                    'avatar' =>$image
-                                                                                        );
-                                                                                $_SESSION = $data;
-                                                                                $this->redirect(BASE_URL.'user_con/profile/'.$id[0]['ID_USER']);
-                                                                            }else{
+                                                                if(empty($gender) || $gender=="none") $this->set('error_gender', 'You must select a gender.');
+                                                                else{
+                                                                    if(empty($status) || $status=="none") $this->set('error_status', 'Actually you have a status.');
+                                                                    else{
+                                                                        if($avatar['type']!='image/jpg' && 
+                                                                                $avatar['type']!='image/jpeg' && 
+                                                                                $avatar['type']!='image/pjpeg') 
+                                                                                $this->set('error_avatar', 'Please upload jpeg image.');
+                                                                        else {
+                                                                            if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
+                                                                                $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
+                                                                                if($move){
+            //                                                                        $data = Array(
+            //                                                                            'USERNAME'=>$username,
+            //                                                                            'PASSWORD'=> md5($password),
+            //                                                                            'NANA'=> $name,
+            //                                                                            'TGL_LAHIR'=> $birthdate,
+            //                                                                            'EMAIL'=> $email,
+            //                                                                            'AVATAR'=>$avatar[BASE_URL.'upload/'.$avatar['name']],
+            //                                                                            'GENDER'=>$gender,
+            //                                                                            'ABOUT_ME'=>$about,
+            //                                                                            'STATUS'=>'SINGLE'
+            //                                                                        );
+                                                                                    $image = $avatar['name'];
+                                                                                    $gender = ($gender=="male")? "LAKI" : "PEREMPUAN";
+                                                                                    $insert = 'insert into user (USERNAME, PASSWORD, NAMA, TGL_LAHIR, EMAIL, AVATAR, GENDER, ABOUT_ME, STATUS) 
+                                                                                        values ("'.$username.'", "'.md5($password).'",
+                                                                                            "'.$name.'", "'.$birthdate.'",
+                                                                                                "'.$email.'", "'.$image.'",
+                                                                                                    "'.$gender.'", "'.$about.'",
+                                                                                                        "SINGLE"
+                                                                                            )';
+                                                                                    $this->_model->query($insert);
+                                                                                    $id = $this->_model->query('select * from user where USERNAME="'.$username.'"');
+                                                                                    if(count($id)>0){ // ada
+                                                                                        $data = Array (
+                                                                                            'login' => true,
+                                                                                            'nama' => $name,
+                                                                                            'id' =>$id[0]['ID_USER'],
+                                                                                            'avatar' =>$image
+                                                                                                );
+                                                                                        $_SESSION = $data;
+                                                                                        $this->redirect(BASE_URL.'user_con/profile/'.$id[0]['ID_USER']);
+                                                                                    }else{
 
+                                                                                    }
+
+                                                                                }else{
+                                                                                    echo 'file error';
+                                                                                }
                                                                             }
-
-                                                                        }else{
-                                                                            echo 'file error';
                                                                         }
+                                                                        //if($_FILES['avatar']['extension'])
+                                                                        //if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG") {
+                                                                        // $valid = true;
                                                                     }
                                                                 }
-                                                                //if($_FILES['avatar']['extension'])
-                                                                //if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG") {
-                                                                // $valid = true;
                                                             }
                                                         }
                                                     }
@@ -157,9 +178,12 @@ class User_con extends Controller {
                 $this->redirect(BASE_URL.'user_con/error_display/0');
             }
             $id = $_SESSION['id'];
-            $pass = $_POST['password'];
-            $newpass = $_POST['newpass'];
-            $confirm = $_POST['confirm'];
+//            $pass = $_POST['password'];
+//            $newpass = $_POST['newpass'];
+//            $confirm = $_POST['confirm'];
+            $pass="";
+            $newpass="";
+            $confirm="";
             $email = $_POST['email'];
             $gender = $_POST['gender'];
             $status = $_POST['status'];
@@ -212,7 +236,7 @@ class User_con extends Controller {
                 return 0;
         }
         function checkEmail($email){
-            $query = $this->_model->query('select * from user where USERNAME="'.$email.'"');
+            $query = $this->_model->query('select * from user where EMAIL="'.$email.'"');
             if(count($query)>0){
                 return 1;
             }else
@@ -254,9 +278,15 @@ class User_con extends Controller {
             $this->destroy();
             $this->redirect(BASE_URL."home_con/");
         }
-	function validate_login(){
-            $username= $_POST['username'];
-            $password= $_POST['password'];
+	function validate_login($user=-1,$pass=-1){
+            if($user==-1 || $pass==-1){
+                $username= $_POST['username'];
+                $password= $_POST['password'];
+            }
+            else{
+                $username= $user;
+                $password= $pass;
+            }
             if(strlen($username)>45 || strlen($password)>45){
                 $this->redirect(BASE_URL.'login_con/error_display/0');
             }
@@ -274,7 +304,7 @@ class User_con extends Controller {
                 $_SESSION = $data;
                 //echo $_SESSION['nama'];
                 //$this->set('user',$account[0]);
-                $this->redirect(BASE_URL.'home_con/');
+                $this->redirect(BASE_URL.'user_con/profile/'.$account[0]['ID_USER']);
             }else{
                 $this->redirect(BASE_URL.'login_con/error_display/1');
             }
@@ -316,14 +346,34 @@ class User_con extends Controller {
             }
             return $result;
         }
+        function ajax_check_username($username){
+            $result = $this->_model->query('select * from user where USERNAME="'.$username.'"');
+            if(count($result)>0) echo 1;
+            else echo 0;
+        }
+        function ajax_validate_login($username, $pass){
+            $result = $this->_model->query('select * from user where USERNAME="'.$username.'" AND PASSWORD="'.$pass.'"');
+            if(count($result)>0) echo $result[0]['ID_USER'];
+            else echo -1;
+        }
+        function ajax_check_availability_username($username){
+            $result = $this->_model->query('select * from user where USERNAME="'.$username.'"');
+            if(count($result)>0) echo 1;
+            else echo 0;
+        }
+        function ajax_check_availability_email($email){
+            $result = $this->_model->query('select * from user where EMAIL="'.$email.'"');
+            if(count($result)>0) echo 1;
+            else echo 0;
+        }
         function error_display($no=0){
             $error_message="";
             switch($no){
                 case 0:
-                    $error_message="Terdapat Kesalahan";
+                    $error_message="Something Wrong...";
                     break;
                 case 1:
-                    $error_message="Login tidak valid";
+                    $error_message="Login Invalid!";
                     
                     break;
             }

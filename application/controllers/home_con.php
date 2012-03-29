@@ -2,63 +2,52 @@
 
 class Home_con extends Controller {
     function index(){
-		$list_tag = $this->_model->query('select * from tag');
-		if(count($list_tag)>0){
-			$this->set('list_tag',$list_tag);
-		}
-			//for($i=0;$i<count($list_tag);$i++)
-				//echo $list_tag[$i]['NAMA_TAG'];
-		$konten = $this->_model->query('select * from konten');
-		//echo count($konten);
-		if(count($konten)>0){
-			for($i=0;$i<count($konten);$i++){
-				$sum_like = 0;
-				$sum_dislike = 0;
-				//like/dislike
-				$konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
-				for($j=0;$j<count($konten_like);$j++){
-					if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
-					if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
-				}
-				//echo "like=".$sum_like."<br>";
-				//echo "dislike=".$sum_dislike."<br>";
-
-				//komentar
-				$komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
-				
-				if(count($komen)>0){
-                                    $konten[$i]['KOMENTAR'] = count($komen);
-				}else $konten[$i]['KOMENTAR'] = 0;
-                                
-				$konten[$i]['LIKE'] = $sum_like;
-				$konten[$i]['DISLIKE'] = $sum_dislike;
-                                switch($konten[$i]['ID_TYPE']){
-                                    case 1:
-                                        $konten[$i]['TYPE']='link';
-                                        break;
-                                    case 2:
-                                        $konten[$i]['TYPE']='image';
-                                        break;
-                                    case 3:
-                                        $konten[$i]['TYPE']='video';
-                                        break;
-                                }
-//				switch($konten[$i]['ID_TYPE']){
-//					case 1:
-//						$konten[$i]['JUDUL'] = 'VERSI LINK';
-//						break;
-//					case 2:
-//						$konten[$i]['JUDUL'] = 'VERSI IMAGE';
-//						break;
-//					case 3:
-//						$konten[$i]['JUDUL'] = 'VERSI VIDEO';
-//						break;
-//				}
-			}
-			
-			$this->set('content_most_like',$this->orderKontenByLike($konten));
-			$this->set('content_most_comment',$this->orderKontenByKomentar($konten));
-		}
+        $list_tag = $this->_model->query('select * from tag');
+        if(count($list_tag)>0){
+                $this->set('list_tag',$list_tag);
+        }
+                //for($i=0;$i<count($list_tag);$i++)
+                        //echo $list_tag[$i]['NAMA_TAG'];
+        $konten = $this->_model->query('select * from konten');
+        //echo count($konten);
+        if(count($konten)>0){
+//            for($i=0;$i<count($konten);$i++){
+//                $sum_like = 0;
+//                $sum_dislike = 0;
+//                //like/dislike
+//                $konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+//                for($j=0;$j<count($konten_like);$j++){
+//                        if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
+//                        if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
+//                }
+//                //echo "like=".$sum_like."<br>";
+//                //echo "dislike=".$sum_dislike."<br>";
+//
+//                //komentar
+//                $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+//
+//                if(count($komen)>0){
+//                    $konten[$i]['KOMENTAR'] = count($komen);
+//                }else $konten[$i]['KOMENTAR'] = 0;
+//
+//                $konten[$i]['LIKE'] = $sum_like;
+//                $konten[$i]['DISLIKE'] = $sum_dislike;
+//                switch($konten[$i]['ID_TYPE']){
+//                    case 1:
+//                        $konten[$i]['TYPE']='link';
+//                        break;
+//                    case 2:
+//                        $konten[$i]['TYPE']='image';
+//                        break;
+//                    case 3:
+//                        $konten[$i]['TYPE']='video';
+//                        break;
+//                }
+//            }			
+            $konten = $this->getContent();
+            $this->set('content_most_like',$this->orderKontenByLike($konten));
+            $this->set('content_most_comment',$this->orderKontenByKomentar($konten));
+        }
         $this->set('title_page', 'Homepage');
         $this->loadView("header_view.php");
         $this->loadView("home_view.php");
@@ -230,6 +219,14 @@ class Home_con extends Controller {
                 //echo "like=".$sum_like."<br>";
                 //echo "dislike=".$sum_dislike."<br>";
 
+                //user like
+                if(!empty($_SESSION['id'])){
+                    $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].' AND ID_USER='.$_SESSION['id'].'');
+                    if(count($user_like)>0){
+                    //echo 'asd';
+                        $konten[$i]['STATUS_USER']=$user_like[0]['STATUS'];
+                    }
+                }
                 //komentar
                 $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
                 $konten[$i]['KOMENTAR'] = $komen;
