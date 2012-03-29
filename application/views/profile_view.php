@@ -46,17 +46,63 @@
                         <div class="rhs left clearfix"><?php echo $user['POST']?></div>
                         <div class="lhs left">POST LIST</div>
                     </div>
-                    <div class="rhs left clearfix">
+                    <div class="clear">
                         <?php if(!empty($user['KONTEN'])){
                                 echo '<ul>';
                                 for($i=0;$i<count($user['KONTEN']);$i++){
                                     echo '
-                                    <li><a href="'.BASE_URL.'content_con/content/'.$user['KONTEN'][$i]['ID_KONTEN'].'">'.$user['KONTEN'][$i]['JUDUL'].'</a></li>
+                                <li><div class="top-post"">
+                                     <div class="top-';
+                                    if($user['KONTEN'][$i]['ID_TYPE']==1) echo 'link';
+                                        else if($user['KONTEN'][$i]['ID_TYPE']==2) echo 'image';
+                                        else if($user['KONTEN'][$i]['ID_TYPE']==3) echo 'video';
+                                    echo '">
+                                        <div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$user['KONTEN'][$i]['ID_KONTEN'].'">'.$user['KONTEN'][$i]['JUDUL'].'</a></div>
+                                        <div class="view">';
+                                    
+                                    if($user['KONTEN'][$i]['ID_TYPE']==1) echo '
+                                        <div class="view-link-url"><a href="'.$user['KONTEN'][$i]['LINK'].'">'.$user['KONTEN'][$i]['LINK'].'</a></div>
+                                        <div class="view-link-desc">'.$user['KONTEN'][$i]['DESKRIPSI'].'</div>
+                                        ';
+                                        else if($user['KONTEN'][$i]['ID_TYPE']==2) echo '
+                                            <div class="view-image">
+                                                <img src="'.BASE_URL.'image/'.$user['KONTEN'][$i]['LINK'].'" width="260" alt="'.$user['KONTEN'][$i]['JUDUL'].'">
+                                            </div>
+                                            ';
+                                        else if($user['KONTEN'][$i]['ID_TYPE']==3) echo '
+                                            <div class="view-video">
+                                                <div class="view"><iframe width="240" height="180" src="'.$user['KONTEN'][$i]['LINK'].'" ></iframe></div>
+                                            </div>
+                                            ';
+                                    
+                                    
+                                        echo '</div>
+                                        <div class="basic-features">
+                                            <div class="paketjempol">
+                                                <div class="likemini"></div>
+                                                <div class="jumlahlike">'.$user['KONTEN'][$i]['LIKE'].'</div>
+                                                <div class="commentmini"></div>
+                                                <div class="jumlahkomen">'.count($user['KONTEN'][$i]['KOMENTAR']).'</div>
+                                                <br/>';
+                                        if(!empty($_SESSION['login'])){
+                                        echo '
+                                            <div class="likebutton"><a href="'.BASE_URL.'content_con/like/'.$user['KONTEN'][$i]['ID_KONTEN'].'"></a></div>
+                                            <div class="dislikebutton" "><a href="'.BASE_URL.'content_con/dislike/'.$user['KONTEN'][$i]['ID_KONTEN'].'"></a></div>';
+                                        }        
+                                            echo '</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>                                        
                                         ';
                                 }
                                 echo '</ul>';
                             }
                         ?>
+                    </div>
+                    <div class="paketgantihalaman">
+                        <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
+                        <div class="buttonnext" onclick="window.location.href='contents.html'">NEXT</div>
                     </div>
                 </div>
                 <div class="userachievement">

@@ -27,7 +27,7 @@
                                                 }else if($content_most_like[$i]['TYPE']=='image'){
                                                     echo '
                                                         <div class="view-image">
-                                                        <img src="'.$content_most_like[$i]['LINK'].'" width="260" alt="'.$content_most_like[$i]['JUDUL'].'">
+                                                        <img src="'.BASE_URL.'image/'.$content_most_like[$i]['LINK'].'" width="260" alt="'.$content_most_like[$i]['JUDUL'].'">
                                                             </div>
                                                         ';
                                                 }else if($content_most_like[$i]['TYPE']=='video'){

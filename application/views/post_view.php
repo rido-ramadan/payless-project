@@ -29,7 +29,7 @@
                 <input class="input" name="link" <?php if(!empty($empty) && ($empty=="link" || $empty=='video')) echo 'style="background: orangered"' ?> <?php if(!empty($post_video)) echo ' value='.$post_video ?><?php if(!empty($post_link)) echo ' value='.$post_link ?>  type="text"/>
             </div>
 
-            <div class="row" id="linkdesc" style="border-bottom: 0; padding-bottom: 0">
+                    <div class="row" id="linkdesc" style="padding-bottom: 0">
                 <label class="key" style="vertical-align:top">DESCRIPTION</label>
                 <textarea class="input" name="description"  <?php if(!empty($empty) && $empty=="description") echo 'style="background: orangered"' ?> cols="40" rows="5"></textarea>
             </div>
@@ -39,14 +39,14 @@
             </div>
 
             <div class="space"></div>
-            <!--
-            <input class="postbutton" type="submit" name="post" value="Post"/>-->
-            <button class="postbutton" value="Post">Post</button>
-        </form>
+                <span><a class="previewbutton" onclick="previewPost()">Preview</a></span>
+                <span><input class="postbutton" type="submit" name="post" value="Post"></span>
+            </form>
             <div class="space"></div>
     </div>
     <div class="detbot"></div>
 </div>
+<div class="preview" id="preview"></div>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/newpost.js"></script>
 <?php
 if(!empty($radio_click)){
