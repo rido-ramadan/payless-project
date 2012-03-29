@@ -36,7 +36,7 @@ function GoToPage() {
 function previewPost() {
     doPopUp();
     var title = document.forms["newpostform"]["title"].value;
-    var links = document.forms["newpostform"]["hyperlink"].value;
+    var links = document.forms["newpostform"]["link"].value;
     var desc = document.forms["newpostform"]["description"].value;
     var href = links;
     var http = /^http:\/\/+[A-Za-z0-9_.-]/;
