@@ -225,7 +225,7 @@ class Content_con extends Controller {
                             $id_type = 2;
                             $waktu = date("Y-m-d H:i:s");
                             $judul = $_POST['title'];
-                            $link = BASE_URL.'image/'.$fileName;
+                            $link = $fileName;
                             $desc = "";
                             $insert = 'insert into konten (ID_USER, ID_TYPE, WAKTU, JUDUL, LINK, DESKRIPSI) 
                                 values ("'.$id_user.'", "'.$id_type.'",

@@ -65,9 +65,11 @@ class Home_con extends Controller {
         $this->loadView("footer_view.php");
     }
     function submit_search(){
-        $search = $_POST['search'];
+        $search = $_POST['search_i'];
         $filter = $_POST['srch_op'];
-        echo substr_count("asdasdasdkjhasd asd asd ssa", 'as'); 
+        echo $search;
+        echo $filter;
+        //echo substr_count("asdasdasdkjhasd asd asd ssa", 'as'); 
         if(!empty($search) && !empty($filter) && strlen($search)<45){
             if($filter=='filter-none'){
                 $user = $this->_model->query('select * from user');

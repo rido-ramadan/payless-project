@@ -27,8 +27,19 @@
                         <div class="uploaded"><?php echo $content['WAKTU']?></div>
                     </div>
                     <div class="content">
-                        <a href="<?php echo $content['LINK']?>"> <?php echo $content['LINK']?> </a>
-                        <p> <?php echo $content['DESKRIPSI']?> </p>
+                        <?php
+                            if($content['ID_TYPE']==1)
+                                echo '<a href="'.$content['LINK'].'"> '.$content['LINK'].' </a>
+                                <p> '.$content['DESKRIPSI'].' </p>';
+                            else if($content['ID_TYPE']==2)
+                                echo '
+                                <img src="'.BASE_URL.'image/'.$content['LINK'].'" width="320" alt="beach">
+                                    ';
+                            else
+                                echo '
+                                <iframe width="320" height="240" src="'.$content['LINK'].'" frameborder="0" allowfullscreen></iframe>
+                                    ';
+                        ?>
                     </div>
                 <div class="paketjempol">
                             <div class="likemini"></div>

@@ -62,7 +62,7 @@
                                             <p> '.$konten[$i]['DESKRIPSI'].' </p>
                                                 ';
                                         else if($konten[$i]['ID_TYPE']==2) echo '
-                                            <img src="'.$konten[$i]['LINK'].'" width="320" alt="beach">
+                                            <img src="'.BASE_URL.'image/'.$konten[$i]['LINK'].'" width="320" alt="beach">
                                             ';
                                         else if($konten[$i]['ID_TYPE']==3) echo '
                                             <iframe width="320" height="240" src="'.$konten[$i]['LINK'].'" frameborder="0" allowfullscreen></iframe>

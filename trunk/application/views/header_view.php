@@ -8,7 +8,7 @@
         <!--<script type="text/javascript" src="<?php echo BASE_URL?>js/navigasi.js"></script>-->
         <link type="text/css" rel="stylesheet" href="<?php echo BASE_URL?>css/header1.css" />
     </head>
-    <body onload="randomlike(); randomkomen(); inisialisasi();loadContent('init')">
+    <body onload="randomlike(); randomkomen(); inisialisasi();loadContent('init')" onclick="hideHint()">
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
@@ -48,8 +48,8 @@
 
     <div class="nav2">
         It's a Project without a Payment!
-        <?php
-        echo '<div class="right mini-avatar"><img src="'.$_SESSION['avatar'].'" width="36" height="36" alt="'.$_SESSION['avatar'].'"></div>';
+        <?php if(!empty($_SESSION['nama']))
+        echo '<div class="right mini-avatar"><a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'"><img src="'.$_SESSION['avatar'].'" width="36" height="36" alt="'.$_SESSION['avatar'].'</a>"></div>';
         ?>
         <div class="right themes">
         <?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
@@ -93,13 +93,14 @@
         <div id="sort1" class="left"><a href="<?php echo BASE_URL?>content_con/post">Upload Post</a></div>
         <form action="<?php echo BASE_URL.'home_con/submit_search'?>" method="post" name="srch">
             <div class="right searchbutton">
-                <input id="filtersearch" type="submit" name="search" value="Search"/>
+                <input id="filtersearch" type="submit" name="search_button" value="Search"/>
             </div>
             <div class="right">
                 <div id="applesearch">
                     <span class="sbox_l"></span>
                     <span class="sbox">
-                        <input style="outline-width:0px;" type="text" name="search" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="showHint('<?php echo BASE_URL?>', this.value)"/>
+                        <input style="outline-width:0px;" type="text" name="search_i" id="srch_fld" onkeyup="showHint('<?php echo BASE_URL?>', this.value)" autocomplete="off"/>
+                        <input style="outline-width:0px;" type="text" name="search_input" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="showHint('<?php echo BASE_URL?>', this.value)" autocomplete="off"/>
                     </span>
                     <span class="sbox_r" id="srch_clear"></span>
                 </div>

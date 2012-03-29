@@ -5,6 +5,6 @@
         </div>
         <!-- ::::::::::::::::::::: END OF FOOTER PART ::::::::::::::::::::: -->
         
-        <script type="text/javascript" src="js/styleBox.js"></script>
+        <script type="text/javascript" src="<?php echo BASE_URL?>js/styleBox.js"></script>
     </body>
 </html>

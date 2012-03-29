@@ -85,7 +85,7 @@ class User_con extends Controller {
     //                                                                            'ABOUT_ME'=>$about,
     //                                                                            'STATUS'=>'SINGLE'
     //                                                                        );
-                                                                            $image = BASE_URL.'upload/'.$avatar['name'];
+                                                                            $image = $avatar['name'];
                                                                             $gender = ($gender=="male")? "LAKI" : "PEREMPUAN";
                                                                             $insert = 'insert into user (USERNAME, PASSWORD, NAMA, TGL_LAHIR, EMAIL, AVATAR, GENDER, ABOUT_ME, STATUS) 
                                                                                 values ("'.$username.'", "'.md5($password).'",
@@ -230,7 +230,8 @@ class User_con extends Controller {
                     $user[0]['GENDER'] = "Female";
                 $query_komentar = $this->_model->query('select * from komentar where ID_USER='.$id.'');
                 $komentar = count($query_komentar);
-                $query_post = $this->_model->query('select * from konten where ID_USER='.$id.'');
+                
+                $query_post = $this->getContentUser($id);
                 $post = count($query_post);
                 $user[0]['KOMENTAR'] = $komentar;
                 $user[0]['POST'] = $post;
@@ -285,6 +286,36 @@ class User_con extends Controller {
 //            $this->loadView("login_view.php");		
 		
 	}
+        function getContentUser($id_user){
+            $result = Array();
+            $konten = $this->_model->query('select * from konten natural join user where konten.ID_USER='.$id_user.'');
+            if(count($konten)>0){
+                for($i=0;$i<count($konten);$i++){
+                    $sum_like = 0;
+                    $sum_dislike = 0;
+                    //like/dislike
+                    $konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                    for($j=0;$j<count($konten_like);$j++){
+                            if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
+                            if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
+                    }
+                    //echo "like=".$sum_like."<br>";
+                    //echo "dislike=".$sum_dislike."<br>";
+
+                    //komentar
+                    $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                    $konten[$i]['KOMENTAR'] = $komen;
+
+                    $konten[$i]['LIKE'] = $sum_like-$sum_dislike;
+                    // tag
+                    $tag = $this->_model->query('select * from konten_tag natural join tag where konten_tag.ID_KONTEN="'.$konten[$i]['ID_KONTEN'].'"');
+                    $konten[$i]['TAG'] = $tag;
+                    
+                }
+                $result = $konten;
+            }
+            return $result;
+        }
         function error_display($no=0){
             $error_message="";
             switch($no){
