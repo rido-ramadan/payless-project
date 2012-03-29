@@ -136,8 +136,10 @@
                 <span id="status-password"><span class="username-error"></span></span>
             </div>
             <div id="login-notification"></div>
-            <span><a class="closelogin" onclick="closePopUp()"></a></span>
-            <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
+            <div class="clear">
+                <span><a class="closelogin" onclick="closePopUp()"></a></span>
+                <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
+            </div>
         </form>
     </div>
 </div>
