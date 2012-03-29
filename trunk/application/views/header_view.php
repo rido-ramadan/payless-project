@@ -49,7 +49,7 @@
     <div class="nav2">
         It's a Project without a Payment!
         <?php if(!empty($_SESSION['nama']))
-        echo '<div class="right mini-avatar"><a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'"><img src="'.$_SESSION['avatar'].'" width="36" height="36" alt="'.$_SESSION['avatar'].'</a>"></div>';
+        echo '<div class="right mini-avatar"><a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'"><img src="'.BASE_URL.'avatar/'.$_SESSION['avatar'].'" width="36"  alt="'.$_SESSION['avatar'].'"></a></div>';
         ?>
         <div class="right themes">
         <?php if(!empty($_SESSION['nama'])) echo 'Hello, <a href="'.BASE_URL.'user_con/profile/'.$_SESSION['id'].'">'.$_SESSION['nama'].'</a>';?>
