@@ -138,7 +138,7 @@ div.themes {margin-top: 0px;}
 
 .mini-avatar {
     width: 36px;
-    height: 40px;
+    height: 36px;
     margin: 2px;
     display: inline-block;
 }
@@ -580,7 +580,6 @@ a.closelogin:active {
 }
 
 .error {
-    display:none;
     color:Red;
     text-align:right;
     font-size: 11px;
@@ -755,13 +754,29 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+.likebutton_pressed {
+    margin: -8px 2px 2px 2px;
+    width: 72px;
+    height: 48px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    background-image: -o-linear-gradient(center top , #aaaaaa, #111111);
+    background-image: -moz-linear-gradient(center top , #aaaaaa, #111111);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
 .likebutton:hover {
     background: -o-linear-gradient(center top , #aaaaaa, #777777);
     background: -moz-linear-gradient(center top , #aaaaaa, #777777);
     background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#777777));
 }
 
-.likebutton a {
+.likebutton a, .likebutton_pressed a {
     background: url('../img/button-like.png') center no-repeat;
     width: 72px;
     height: 48px;
@@ -785,13 +800,30 @@ div.judul title a:hover, div.judul title a:link, div.judul title a:visited {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+.dislikebutton_pressed {
+    background: url('../img/icon-dislike.png');
+    margin: -8px 2px 2px 0;
+    width: 72px;
+    height: 48px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    background: -o-linear-gradient(center top , #aaaaaa, #111111);
+    background: -moz-linear-gradient(center top , #aaaaaa, #111111);
+    background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));
+    border: 1px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
 .dislikebutton:hover {
     background: -o-linear-gradient(center top , #aaaaaa, #777777);
     background: -moz-linear-gradient(center top , #aaaaaa, #777777);
     background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#777777));
 }
 
-.dislikebutton a {
+.dislikebutton a, .dislikebutton_pressed a {
     background: url('../img/button-dislike.png') center no-repeat;
     width: 72px;
     height: 48px;
