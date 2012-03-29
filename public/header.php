@@ -56,6 +56,8 @@
                         <input type="text" id="username" placeholder="Username" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
                     </span>
                     <span class="lbox_r" id="srch_clear"></span>
+                    <span class="username-error"></span>
+                    <span class="username-ok"></span>
                 </div>
                 <div class="topbutton clear">
                     <span class="lbox_l"></span>
@@ -63,6 +65,8 @@
                         <input type="password" id="passwd" placeholder="Password" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
                     </span>
                     <span class="lbox_r" id="srch_clear"></span>
+                    <span class="username-error"></span>
+                    <span class="username-ok"></span>
                 </div>
                 <div class="close"><a class="closelogin" onclick="closePopUp()"></a></div>
                 <div class="do-login"><input type="submit" class="loginbutton login" id="loginButton" alt="Log In" value="Log In"></div>

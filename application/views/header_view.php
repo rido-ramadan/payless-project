@@ -119,22 +119,25 @@
 <div id="popup" class="popup">
     <div class="loginpopout">
         <form action="<?php echo BASE_URL ?>user_con/validate_login" method="post">
-        <div class="topbutton">
-            <span class="lbox_l"></span>
-            <span class="lbox">
-                <input type="text" name="username" id="username" placeholder="Username" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
-            </span>
-            <span class="lbox_r" id="srch_clear"></span>
-        </div>
-        <div class="topbutton clear">
-            <span class="lbox_l"></span>
-            <span class="lbox">
-                <input type="password" name="password" id="passwd" placeholder="Password" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
-            </span>
-            <span class="lbox_r" id="srch_clear"></span>
-        </div>
-        <span><a class="closelogin" onclick="closePopUp()"></a></span>
-        <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
+            <div class="topbutton">
+                <span class="lbox_l"></span>
+                <span class="lbox">
+                    <input type="text" name="username" id="username" placeholder="Username" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+                </span>
+                <span class="lbox_r" id="srch_clear"></span>
+                <span id="status-username"><span class="username-ok"></span></span>
+            </div>
+            <div class="topbutton clear">
+                <span class="lbox_l"></span>
+                <span class="lbox">
+                    <input type="password" name="password" id="passwd" placeholder="Password" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+                </span>
+                <span class="lbox_r" id="srch_clear"></span>
+                <span id="status-password"><span class="username-error"></span></span>
+            </div>
+            <div id="login-notification"></div>
+            <span><a class="closelogin" onclick="closePopUp()"></a></span>
+            <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
         </form>
     </div>
 </div>
