@@ -182,7 +182,7 @@ class User_con extends Controller {
                             if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
                                 $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
                                 if($move){
-                                    $image = BASE_URL.'avatar/'.$avatar['name'];
+                                    $image = $avatar['name'];
                                     $update = 'update user set EMAIL="'.$email.'", AVATAR="'.$image.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
                                         where ID_USER="'.$id.'"';
                                     $this->_model->query($update);
