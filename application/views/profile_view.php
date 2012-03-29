@@ -100,9 +100,9 @@
                             }
                         ?>
                     </div>
-                    <div class="paketgantihalaman">
+                    <div class="show-more-post">
                         <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
-                        <div class="buttonnext" onclick="window.location.href='contents.html'">NEXT</div>
+                        <div class="buttonnext" style="margin-left: 9px;" onclick="window.location.href='contents.html'">NEXT</div>
                     </div>
                 </div>
                 <div class="userachievement">

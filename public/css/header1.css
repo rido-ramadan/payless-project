@@ -1386,6 +1386,13 @@ div.likes {
     text-align: center;
 }
 
+.show-more-post {
+    width: 400px;
+    height: 40px;
+    display: block;
+    margin: 0px 0px 50px 78px;
+}
+
 .achievement {
     display: block;
     height: auto;
