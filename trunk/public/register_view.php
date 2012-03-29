@@ -156,7 +156,7 @@
                                 <select class="txtfield" name="status" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="single">Forever Alone</option><option value="relation">In a Relationship</option></select>
                             </div>
                             <div class="clear"></div>
-                            <div class="error" id="genderError">Please choose your status</div>
+                            <div class="error" id="statusError">Please choose your status</div>
                         </div>
                         <div class="txtfieldbox">
                             <div class="left txtboxlabel">AVATAR UPLOAD</div>
