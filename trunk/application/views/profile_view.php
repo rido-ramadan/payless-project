@@ -1,8 +1,8 @@
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
+        <?php if(!empty($user)){?>
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
-                <?php if(!empty($user)){?>
                 <div class="userheader"><?php echo $user['USERNAME']?>'s Profile</div>
                 <div class="useravatar">
                     <?php 
@@ -23,7 +23,7 @@
                             if(!empty($_SESSION['login']) && $_SESSION['id']==$user['ID_USER'])
                                 echo '<div class="edituser left clearfix" onclick="editProfile()">EDIT</div>';
                             else{
-                                echo '<div class="edituser left clearfix" ></div>';
+                                echo '';
                             }
                         ?>
                     </div>
@@ -100,10 +100,13 @@
                             }
                         ?>
                     </div>
+                    <?php if(!empty($user['KONTEN'])){
+                        echo '
                     <div class="show-more-post">
-                        <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
-                        <div class="buttonnext" style="margin-left: 9px;" onclick="window.location.href='contents.html'">NEXT</div>
-                    </div>
+                        <div class="buttonprevious" >PREVIOUS</div>
+                        <div class="buttonnext" style="margin-left: 9px;">NEXT</div>
+                    </div>';
+                    }?>
                 </div>
                 <div class="userachievement">
                     <div class="subtitle left ">ACHIEVEMENTS</div>
@@ -140,6 +143,7 @@
             <div class="edittop"></div>
             <div class="editmain">
                 <div class="subtitle" style="margin: 0 20px;">EDIT PROFILE DATA</div>
+                <!--
                 <div class="txtfieldbox width90" style="border-top: 0; padding-top: 10px;">
                     <div class="left txtboxlabel">OLD PASSWORD</div>
                     <div class="right">
@@ -164,6 +168,7 @@
                     <div class="clear"></div>
                     <div class="error" id="cpasswordError">The password is not match.</div>
                 </div>
+                      -->
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">EMAIL</div>
                     <div class="right">
@@ -175,7 +180,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male" <?php if($user['GENDER']="LAKI") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']="PEREMPUAN") echo 'selected="selected"'?>value="female">Female</option></select>
+                        <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male" <?php if($user['GENDER']=="Male") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']=="Female") echo 'selected="selected"'?>value="female">Female</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="genderError">You must select a gender.</div>

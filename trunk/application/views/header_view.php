@@ -12,6 +12,17 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
+        <!--        <style type="text/css">
+            #logo {
+            position: absolute; 
+
+            -webkit-box-shadow: 8px 12px 10px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 8px 12px 10px rgba(0, 0, 0, 0.3);            }
+        </style>
+        <a href="http://www.matthamm.com">
+                <div id="logo"><img src="<?php echo BASE_URL ?>img/tehkotak.jpg" width="80"></div>
+        </a>-->
+
 <div class="topbox">
     <div class="nav1">
         <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="<?php echo BASE_URL?>img/logo.png" alt="logo" /></a></div>
@@ -90,7 +101,12 @@
         <div class="left"><img src="<?php echo BASE_URL?>img/divide.png" alt="" /></div>
         <div id="sort2" class="left nav3act"><a href="<?php echo BASE_URL?>content_con/list_content">Contents</a></div>
         <div class="left"><img src="<?php echo BASE_URL?>img//divide.png" alt="" /></div>
-        <div id="sort1" class="left"><a href="<?php echo BASE_URL?>content_con/post">Upload Post</a></div>
+        <?php
+            if(!empty($_SESSION['login']))
+                echo '
+                    <div id="sort1" class="left"><a href="'.BASE_URL.'content_con/post">Upload Post</a></div>
+                    ';
+        ?>
         <form action="<?php echo BASE_URL.'home_con/submit_search'?>" method="post" name="srch">
             <div class="right searchbutton">
                 <input id="filtersearch" type="submit" name="search_button" onclick="input_search()" value="Search"/>
@@ -118,27 +134,30 @@
 <div id="overlay" onclick="closeAll()"></div>
 <div id="popup" class="popup">
     <div class="loginpopout">
-        <form action="<?php echo BASE_URL ?>user_con/validate_login" method="post">
-            <div class="topbutton">
-                <span class="lbox_l"></span>
-                <span class="lbox">
-                    <input type="text" name="username" id="username" placeholder="Username" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
-                </span>
-                <span class="lbox_r" id="srch_clear"></span>
-                <span id="status-username"><span class="username-ok"></span></span>
-            </div>
-            <div class="topbutton clear">
-                <span class="lbox_l"></span>
-                <span class="lbox">
-                    <input type="password" name="password" id="passwd" placeholder="Password" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
-                </span>
-                <span class="lbox_r" id="srch_clear"></span>
-                <span id="status-password"><span class="username-error"></span></span>
-            </div>
+        <form action="sdf.php" method="post">
+        <!--<form action="<?php echo BASE_URL ?>user_con/validate_login" method="post">-->
+        <div class="topbutton">
+            <span class="lbox_l"></span>
+            <span class="lbox">
+                <input type="text" name="username" id="username" placeholder="Username" autosave="applestyle_srch" results="5" onkeyup="validateUsername('<?php echo BASE_URL?>',this.value)" />
+            </span>
+            <span class="lbox_r" id="srch_clear"></span>
+                <span id="status-username"></span>
+        </div>
+            <div style="font-size:9px;" id="notif_user"></div>
+        <div class="topbutton clear">
+            <span class="lbox_l"></span>
+            <span class="lbox">
+                <input type="password" name="password" id="passwd" placeholder="Password" autosave="applestyle_srch" results="5" onkeyup="applesearch.onChange('srch_fld','srch_clear')" />
+            </span>
+            <span class="lbox_r" id="srch_clear"></span>
+                <span id="status-password"></span>
+        </div>
+        <div style="font-size:9px;" id="notif_login"></div>
             <div id="login-notification"></div>
             <div class="clear">
                 <span><a class="closelogin" onclick="closePopUp()"></a></span>
-                <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
+                <span><input type="button" class="loginbutton login" id="loginButton" onclick="validateLogin('<?php echo BASE_URL?>')" value="Log In" /></span>
             </div>
         </form>
     </div>

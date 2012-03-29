@@ -428,6 +428,17 @@ class Content_con extends Controller {
             }            
             $this->redirect(BASE_URL.'content_con/content/'.$id_konten);
         }
+        function unlike($id_konten){
+            if(empty($_SESSION['login'])){
+                $this->redirect(BASE_URL.'user_con/error_display/0');
+            }
+            $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'"');
+            if(count($user_like)>0){ // sudah ada
+                $delete = 'delete from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'" AND STATUS="LIKE"';
+                $this->_model->query($delete);
+            }            
+            $this->redirect(BASE_URL.'content_con/content/'.$id_konten);
+        }
         function dislike($id_konten){
             if(empty($_SESSION['login'])){
                 $this->redirect(BASE_URL.'user_con/error_display/0');
@@ -442,6 +453,17 @@ class Content_con extends Controller {
                     values ("'.$id_konten.'", "'.$_SESSION['id'].'",
                         "DISLIKE")';
                 $this->_model->query($insert);                
+            }            
+            $this->redirect(BASE_URL.'content_con/content/'.$id_konten);
+        }
+        function undislike($id_konten){
+            if(empty($_SESSION['login'])){
+                $this->redirect(BASE_URL.'user_con/error_display/0');
+            }
+            $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'"');
+            if(count($user_like)>0){ // sudah ada
+                $delete = 'delete from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'" AND STATUS="DISLIKE"';
+                $this->_model->query($delete);
             }            
             $this->redirect(BASE_URL.'content_con/content/'.$id_konten);
         }
@@ -465,11 +487,12 @@ class Content_con extends Controller {
                     //like/dislike
                     $konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
                     for($j=0;$j<count($konten_like);$j++){
-                            if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
-                            if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
+                        if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
+                        if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
                     }
-                    //echo "like=".$sum_like."<br>";
-                    //echo "dislike=".$sum_dislike."<br>";
+//                    echo "like=".$sum_like."<br>";
+//                    echo "dislike=".$sum_dislike."<br>";
+                    
 
                     //komentar
                     $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');

@@ -14,23 +14,30 @@
 					for($i=0;$i<3;$i++){
 						if(!empty($content_most_like[$i])){
 						echo '
-                                <div class="top-post" id="commented-'.($i+1).'">
-                                    <div class="top-'.$content_most_like[$i]['TYPE'].'">
+                                <div class="top-post" id="commented-'.($i+1).'">';
+                                                if($content_most_like[$i]['ID_TYPE']==1) 
+                                                    echo '<div class="top-link">';
+                                                else if($content_most_like[$i]['ID_TYPE']==2)
+                                                    echo '<div class="top-image">';
+                                                else if($content_most_like[$i]['ID_TYPE']==3)
+                                                    echo '<div class="top-video">';
+                                    
+                                                echo '
                                         <div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content_most_like[$i]['ID_KONTEN'].'">'.$content_most_like[$i]['JUDUL'].'</a></div>
                                         <div class="view">
                                             ';
-                                                if($content_most_like[$i]['TYPE']=='link'){
+                                                if($content_most_like[$i]['ID_TYPE']==1){
                                                     echo '
                                                 <div class="view-link-url"><a href="'.$content_most_like[$i]['LINK'].'">'.$content_most_like[$i]['LINK'].'</a></div>
                                                 <div class="view-link-desc">'.$content_most_like[$i]['DESKRIPSI'].'</div>
                                                         ';
-                                                }else if($content_most_like[$i]['TYPE']=='image'){
+                                                }else if($content_most_like[$i]['ID_TYPE']==2){
                                                     echo '
                                                         <div class="view-image">
                                                         <img src="'.BASE_URL.'image/'.$content_most_like[$i]['LINK'].'" width="260" alt="'.$content_most_like[$i]['JUDUL'].'">
                                                             </div>
                                                         ';
-                                                }else if($content_most_like[$i]['TYPE']=='video'){
+                                                }else if($content_most_like[$i]['ID_TYPE']==3){
                                                     echo '
                                                      <div class="view-video">
                                                         <div class="view"><iframe width="240" height="180" src="'.$content_most_like[$i]['LINK'].'" ></iframe></div>
@@ -45,10 +52,33 @@
                                                 <div class="likemini"></div>
                                                 <div class="jumlahlike">'.$content_most_like[$i]['LIKE'].'</div>
                                                 <div class="commentmini"></div>
-                                                <div class="jumlahkomen">'.$content_most_like[$i]['KOMENTAR'].'</div>
-                                                <br/>
-                                                <div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
-                                                <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                <div class="jumlahkomen">'.count($content_most_like[$i]['KOMENTAR']).'</div>
+                                                <br/>';
+                                                if(!empty($_SESSION['login'])){
+                                                    if(!empty($content_most_like[$i]['STATUS_USER'])){
+                                                        echo $content_most_like[$i]['STATUS_USER']=="LIKE" 
+                                                        ? 
+                                                        '
+                                                        <div class="likebutton_pressed" ><a href="'.BASE_URL.'content_con/unlike/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                        <div class="dislikebutton" ><a href="'.BASE_URL.'content_con/dislike/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                        '
+                                                        : 
+                                                        '
+                                                        <div class="likebutton" ><a href="'.BASE_URL.'content_con/like/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                        <div class="dislikebutton_pressed" ><a href="'.BASE_URL.'content_con/undislike/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                        ';
+                                                    }else{
+                                                        echo
+                                                        '<div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>
+                                                        <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$content_most_like[$i]['ID_KONTEN'].'"></a></div>';
+                                                    }
+                                                }else{
+                                                    echo '
+                                                        <div class="likebutton" onclick="voteplus(this.num)"><a href="#"></a></div>
+                                                        <div class="dislikebutton" onclick="votemin(this.num)"><a href="#"></a></div>
+                                                        ';
+                                                }
+                                            echo '
                                             </div>
                                         </div>
                                     </div>
@@ -76,23 +106,30 @@
 						if(!empty($content_most_comment[$i])){
                                                     
                                                     echo '
-                                                <div class="top-post" id="popular-'.($i+1).'">
-                                                    <div class="top-'.$content_most_comment[$i]['TYPE'].'">
-                                                        <div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content_most_comment[$i]['ID_KONTEN'].'">'.$content_most_comment[$i]['JUDUL'].'</a></div>
+                                                <div class="top-post" id="popular-'.($i+1).'">';
+                                                     if($content_most_comment[$i]['ID_TYPE']==1) 
+                                                        echo '<div class="top-link">';
+                                                    else if($content_most_comment[$i]['ID_TYPE']==2)
+                                                        echo '<div class="top-image">';
+                                                    else if($content_most_comment[$i]['ID_TYPE']==3)
+                                                        echo '<div class="top-video">';
+                                                   
+                                                    echo
+                                                        '<div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content_most_comment[$i]['ID_KONTEN'].'">'.$content_most_comment[$i]['JUDUL'].'</a></div>
                                                         <div class="view">';
                                                         
-                                                    if($content_most_like[$i]['TYPE']=='link'){
+                                                    if($content_most_like[$i]['ID_TYPE']==1){
                                                         echo '
                                                     <div class="view-link-url"><a href="'.$content_most_comment[$i]['LINK'].'">'.$content_most_comment[$i]['LINK'].'</a></div>
                                                     <div class="view-link-desc">'.$content_most_comment[$i]['DESKRIPSI'].'</div>
                                                             ';
-                                                    }else if($content_most_comment[$i]['TYPE']=='image'){
+                                                    }else if($content_most_comment[$i]['ID_TYPE']==2){
                                                         echo '
                                                             <div class="view-image">
                                                             <img src="'.$content_most_comment[$i]['LINK'].'" width="260" alt="'.$content_most_comment[$i]['JUDUL'].'">
                                                                 </div>
                                                             ';
-                                                    }else if($content_most_comment[$i]['TYPE']=='video'){
+                                                    }else if($content_most_comment[$i]['ID_TYPE']==3){
                                                         echo '
                                                          <div class="view-video">
                                                             <div class="view"><iframe width="240" height="180" src="'.$content_most_comment[$i]['LINK'].'" ></iframe></div>
@@ -105,7 +142,7 @@
                                                                 <div class="likemini"></div>
                                                                 <div class="jumlahlike">'.$content_most_comment[$i]['LIKE'].'</div>
                                                                 <div class="commentmini"></div>
-                                                                <div class="jumlahkomen">'.$content_most_comment[$i]['KOMENTAR'].'</div>
+                                                                <div class="jumlahkomen">'.count($content_most_comment[$i]['KOMENTAR']).'</div>
                                                                 <br/>
                                                                 <div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$content_most_comment[$i]['ID_KONTEN'].'"></a></div>
                                                                 <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$content_most_comment[$i]['ID_KONTEN'].'"></a></div>
