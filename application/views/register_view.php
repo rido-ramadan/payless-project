@@ -62,10 +62,18 @@
                         <div class="txtfieldbox">
                             <div class="left txtboxlabel">GENDER</div>
                             <div class="right">
-                                <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">- -Select- -</option><option value="male">Male</option><option value="female">Female</option></select>
+                                <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male">Male</option><option value="female">Female</option></select>
                             </div>
                             <div class="clear"></div>
                             <div class="error" id="genderError">You must select a gender.</div>
+                        </div>
+                        <div class="txtfieldbox">
+                            <div class="left txtboxlabel">STATUS</div>
+                            <div class="right">
+                                <select class="txtfield" name="status" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="single">Forever Alone</option><option value="relation">In a Relationship</option></select>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="error" id="statusError">Please choose your status</div>
                         </div>
                         <div class="txtfieldbox">
                             <div class="left txtboxlabel">AVATAR UPLOAD</div>
@@ -80,7 +88,7 @@
                     <div class="clear" style="overflow: auto; padding-top: 15px; text-align: center">
                         <div class="txtboxlabel" style="text-align: center;">ABOUT ME</div>
                         <div><textarea rows="5" cols="106" name="about"></textarea></div>
-                        <div class="termsagreements">We Get Rid of the Terms and Agreements in GetRid!</div>
+                        <div class="termsagreements">Why would you agree to the terms and agreements while we got no payment?</div>
                         <input class="joinbutton" type="submit" name="signup" value="Create my Account!" />
                         <!--<ul class="reasonlist">
                             <li>As a registered user, you can upload your own posts!</li>
