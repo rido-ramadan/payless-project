@@ -1036,6 +1036,13 @@ div.paketjempol {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+.advertises {
+    width: inherit;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
 .buttonnext {
     width: 150px;
     height: 30px;
