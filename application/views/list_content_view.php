@@ -147,6 +147,16 @@
                             <div class="tagsubmit">
                                 <input type="submit"  value="Submit">
                             </div>
+                            <div class="sorts">
+                                Sort by:
+                                <div class="sortingmethod">
+                                    <select name="sortmethod" id="Sorting" onchange="sort_content('<?php echo BASE_URL.'content_con/'?>')">
+                                        <option value="-1">Newest</option>
+                                        <option <?php if(!empty($current_sort) && $current_sort==1) echo 'selected="selected"'?> value="1">Most Popular</option>
+                                        <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
+                                    </select>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="tagclouds">
@@ -165,7 +175,7 @@
                             ?>
                         </div>
                     </div>
-                    <div class="sorting">
+                    <!--div class="sorting">
                         <div class="headertext" style="margin: 0 0 0 10px;">Sort</div>
                         Sort by:
                         <div class="sortingmethod">
@@ -175,7 +185,7 @@
                                 <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
                             </select>
                         </div>
-                    </div>
+                    </div-->
                     <div class="ads">
                         <div class="headertext" style="margin: 0 0 0 10px;">Advertisements</div>
                     </div>
