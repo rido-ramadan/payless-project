@@ -3,7 +3,10 @@ var contentHeight = 800;
 var pageHeight = document.documentElement.clientHeight;
 var scrollPosition;
 var n = 0;
-
+var m=0;
+var p=0;
+var interval=0;
+var interval_user=0;
 
 function parseScript(_source) {
     var source = _source;
@@ -171,6 +174,20 @@ function checkAvailabilityEmail(base_url){
     xmlhttp.open("GET",base_url+"user_con/ajax_check_availability_email/" + email,true);
     xmlhttp.send();
 }
+
+function getContentMessage(base_url,idmsg){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                document.getElementById("mail-body").innerHTML = xmlhttp.responseText;
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"home_con/getContentMessage/" + idmsg,true);
+    xmlhttp.send();
+}
+
 function checkEditProfile(base_url){
     var xmlhttp;
     email = document.getElementById("email-input").value;
@@ -236,7 +253,7 @@ function scroll(base_url, tag, sort){
         scrollPosition = window.pageYOffset;		
 
    //if((contentHeight - pageHeight - scrollPosition) < 1){
-   if((contentHeight - pageHeight - scrollPosition) < 1800){
+   if((contentHeight - pageHeight - scrollPosition) < 3000){
         //alert('asd');
 
         if(window.XMLHttpRequest)
@@ -294,7 +311,8 @@ function scroll_tag(base_url, tag){
             if (xmlhttp.readyState==4) 
             {
                 var files=xmlhttp.responseText;
-                    document.getElementById("contentDownList").innerHTML += files;
+                document.getElementById("contentDownList").innerHTML += files;
+                parseScript(files);
             }
         }		
         contentHeight += 800;		
@@ -314,7 +332,18 @@ function submit_comment(base_url, id_content){
     xmlhttp.open("GET",base_url+"content_con/ajax_submit_comment/" + id_content+"/"+comment,true);
     xmlhttp.send();    
 }
-
+function delete_comment(base_url, id_comment){
+    var xmlhttp;    
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("comment"+id_comment).style.display="none";
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/ajax_delete_comment/" + id_comment,true);
+    xmlhttp.send();    
+}
 function updateLike(base_url, id_content){
     var xmlhttp;
     xmlhttp = new XMLHttpRequest();
@@ -327,20 +356,77 @@ function updateLike(base_url, id_content){
     xmlhttp.open("GET",base_url+"content_con/update_like/" + id_content,true);
     xmlhttp.send();        
 }
+function updateComment(base_url, id_content){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("comment"+id_content).innerHTML = xmlhttp.responseText;
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/update_comment/" + id_content,true);
+    xmlhttp.send();        
+}
+function like(base_url, id_content){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #aaaaaa, #111111);background-image: -moz-linear-gradient(center top , #aaaaaa, #111111);background-image: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));");
+            document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
+            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"unlike(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"dislike(\'"+base_url+"\','"+id_content+"')\"></a>";
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/ajax_like/" + id_content,true);
+    xmlhttp.send();            
+}
+function dislike(base_url, id_content){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
+            document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #aaaaaa, #111111);background-image: -moz-linear-gradient(center top , #aaaaaa, #111111);background-image: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));");
+            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"undislike(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/ajax_dislike/" + id_content,true);
+    xmlhttp.send();            
+}
 function unlike(base_url, id_content){
     var xmlhttp;
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
             document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
-            //document.getElementById("likebutton"+id_content).style.background-image = "likebutton";            
+            document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
+            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"dislike(\'"+base_url+"\','"+id_content+"')\"></a>";
         }
     }
     // Get query from search bar
     xmlhttp.open("GET",base_url+"content_con/ajax_unlike/" + id_content,true);
     xmlhttp.send();            
 }
-function undislike(){
+function undislike(base_url, id_content){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
+            document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
+            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"dislike(\'"+base_url+"\','"+id_content+"')\"></a>";
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/ajax_undislike/" + id_content,true);
+    xmlhttp.send();            
     
 }
 function timerContent(base_url, div, id_content, currTime){
@@ -387,4 +473,165 @@ function timerContent(base_url, div, id_content, currTime){
     document.getElementById(div+id_content).innerHTML=text;
     //setTimeout("timer('"+currTime+"')",2);
     updateLike(base_url, id_content);
+    updateComment(base_url, id_content);
+}
+
+
+function scrollComment(base_url, id_content){
+    var xmlhttp;
+    if(navigator.appName == "Microsoft Internet Explorer")
+        scrollPosition = document.documentElement.scrollTop;
+    else 
+        scrollPosition = window.pageYOffset;		
+   //if((contentHeight - pageHeight - scrollPosition) < 1){
+   if((contentHeight - pageHeight - scrollPosition) < 20000){
+        //alert('asd');
+
+        if(window.XMLHttpRequest)
+            xmlhttp = new XMLHttpRequest();
+        else
+            if(window.ActiveXObject)
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        else
+            alert ("Bummer! Your browser does not support XMLHTTP!");
+        var url=base_url+"content_con/ajax_scrolling_comment/"+m+"/"+id_content;
+        
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+
+        m += 3;
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4) 
+            {
+                var files=xmlhttp.responseText;
+                if(files!=-1){
+                    document.getElementById("commentDownList").innerHTML += files;
+                    parseScript(files);
+                }
+                else {//interval=window.clearInterval(interval);}
+                    
+                }
+            }
+        }		
+        contentHeight += 800;		
+    }
+}
+
+
+function scrollProfileContent(base_url, id_user){
+    var xmlhttp;
+    if(navigator.appName == "Microsoft Internet Explorer")
+        scrollPosition = document.documentElement.scrollTop;
+    else 
+        scrollPosition = window.pageYOffset;		
+   //if((contentHeight - pageHeight - scrollPosition) < 1){
+   if((contentHeight - pageHeight - scrollPosition) < 2000){
+        //alert('asd');
+
+        if(window.XMLHttpRequest)
+            xmlhttp = new XMLHttpRequest();
+        else
+            if(window.ActiveXObject)
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        else
+            alert ("Bummer! Your browser does not support XMLHTTP!");
+        var url=base_url+"user_con/ajax_scrolling_profile/"+p+"/"+id_user;
+        
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+
+        p += 3;
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4) 
+            {
+                var files=xmlhttp.responseText;
+                if(files!=-1)
+                    document.getElementById("profileDownList").innerHTML += files;
+                else {interval_user=window.clearInterval(interval_user);}
+                parseScript(files);
+            }
+        }		
+        contentHeight += 800;		
+    }
+}
+
+
+function timerCommentar(base_url, div, id_commentar, currTime){
+    var t=currTime.split(/[- :]/);
+    var curr=new Date(t[0],t[1],t[2],t[3],t[4],t[5] || 0);
+    var d = new Date();
+    var jam = d.getHours();
+    var menit = d.getMinutes();
+    var detik = d.getSeconds();
+    var hari =d.getDate();
+    var bulan=d.getMonth()+1;
+    var tahun=d.getFullYear();
+    var cjam = curr.getHours();
+    var cmenit = curr.getMinutes();
+    var cdetik = curr.getSeconds();
+    var chari =curr.getDate();
+    var cbulan=curr.getMonth();
+    var ctahun=curr.getFullYear();
+    var strwaktu= hari+" "+bulan+" "+tahun+", ";
+    strwaktu += (jam<10)?"0"+jam:+jam;
+    strwaktu +=(menit<10)?" : 0"+menit:" : "+menit;
+    strwaktu +=(detik<10)?" : 0"+detik:" : "+detik;
+    //document.getElementById("time").innerHTML=strwaktu;
+    strwaktu+= "<br>"+chari+" "+cbulan+" "+ctahun+", ";
+    strwaktu += (cjam<10)?"0"+cjam:+cjam;
+    strwaktu +=(cmenit<10)?" : 0"+cmenit:" : "+cmenit;
+    strwaktu +=(cdetik<10)?" : 0"+cdetik:" : "+cdetik;
+    
+    var text="";
+    if(curr<d) text+='kurang'; 
+    
+    if(tahun-ctahun>0) text+= (tahun-ctahun)+" years ago";
+    else if(tahun-ctahun<0) (ctahun-tahun)+" years later";
+    else if(bulan-cbulan>0) text+= (bulan-cbulan)+" months ago";
+    else if(cbulan-bulan>0) text+= (cbulan-bulan)+" months later";
+    else if(hari-chari>0) text+= (hari-chari)+" days ago";
+    else if(chari-hari>0) text+= (chari-hari)+" days later";
+    else if(jam-cjam>0) text+= (jam-cjam)+" hours ago";
+    else if(cjam-jam>0) text+= (cjam-jam)+" hours later";
+    else if(menit-cmenit>0) text+= (menit-cmenit)+" minutes ago";
+    else if(cmenit-menit>0) text+= (cmenit-menit)+" minutes later";
+    else if(detik-cdetik>0) text+= (detik-cdetik)+" seconds ago";
+    else if(cdetik-detik>0) text+= (cdetik-detik)+" seconds later";
+    document.getElementById(div+id_commentar).innerHTML=text;
+    //setTimeout("timer('"+currTime+"')",2);
+}
+
+function checkAchievement(url){
+    var xmlhttp;
+    if(navigator.appName == "Microsoft Internet Explorer")
+        scrollPosition = document.documentElement.scrollTop;
+    else 
+        scrollPosition = window.pageYOffset;		
+   //if((contentHeight - pageHeight - scrollPosition) < 1){
+   if((contentHeight - pageHeight - scrollPosition) < 2000){
+        //alert('asd');
+
+        if(window.XMLHttpRequest)
+            xmlhttp = new XMLHttpRequest();
+        else
+            if(window.ActiveXObject)
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        else
+            alert ("Bummer! Your browser does not support XMLHTTP!");
+        var url=url+"content_con/check_achievement/";
+        
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4) 
+            {
+                var files=xmlhttp.responseText;
+                parseScript(files);
+            }
+        }		
+        contentHeight += 800;		
+    }    
+    function composeMessage(base_url, id_user){
+        
+    }
 }
