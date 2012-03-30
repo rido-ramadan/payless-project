@@ -658,6 +658,7 @@ label.left {
     height: auto;
     display: inline-block;
     vertical-align: top;
+    min-width: 640px;
 }
 
 .listcontents {
