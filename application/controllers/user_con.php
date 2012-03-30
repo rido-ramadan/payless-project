@@ -50,9 +50,9 @@ class User_con extends Controller {
                 $this->set('avatar', $avatar);
                 if($gender=="male") $this->set('male','');
                 else if($gender=="female") $this->set('female','');
-                if($status=="single") $this->set('single','');
-                else if($status=="relation") $this->set('relation','');
-                else if($status=="married") $this->set('married','');
+                if($status=="single") {$this->set('single',''); $status="SINGLE";}
+                else if($status=="relation") {$this->set('relation','');$status="IN RELATION";}
+                else if($status=="married") {$this->set('married','');$status="MARRIED";}
                 $this->set('about', $about);
                 if(strlen($username)<5) $this->set('error_username','Username must be at least 5 character.');
                 else{
@@ -111,7 +111,7 @@ class User_con extends Controller {
                                                                                             "'.$name.'", "'.$birthdate.'",
                                                                                                 "'.$email.'", "'.$image.'",
                                                                                                     "'.$gender.'", "'.$about.'",
-                                                                                                        "SINGLE"
+                                                                                                        "'.$status.'"
                                                                                             )';
                                                                                     $this->_model->query($insert);
                                                                                     $id = $this->_model->query('select * from user where USERNAME="'.$username.'"');
@@ -181,9 +181,6 @@ class User_con extends Controller {
 //            $pass = $_POST['password'];
 //            $newpass = $_POST['newpass'];
 //            $confirm = $_POST['confirm'];
-            $pass="";
-            $newpass="";
-            $confirm="";
             $email = $_POST['email'];
             $gender = $_POST['gender'];
             $status = $_POST['status'];
@@ -191,40 +188,32 @@ class User_con extends Controller {
             $about = $_POST['about'];
             $gender = $gender=="male" ? "LAKI" : "PEREMPUAN";
             
-            if(strlen($pass)>45 || strlen($newpass)>45 || strlen($confirm)>45 
-                    || strlen($email)>45 || strlen($about)>100 ){
-                    $this->redirect(BASE_URL.'user_con/register');
-                    }
-            else{
-                if(empty($pass)&&empty($newpass)&&empty($confirm)){
-                    if(!empty($avatar['name'])) {
-                        if($avatar['type']!='image/jpg' && 
-                                $avatar['type']!='image/jpeg' && 
-                                $avatar['type']!='image/pjpeg') 
-                                echo 'format gambar salah';
-                        else {                            
-                            if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
-                                $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
-                                if($move){
-                                    $image = $avatar['name'];
-                                    $update = 'update user set EMAIL="'.$email.'", AVATAR="'.$image.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
-                                        where ID_USER="'.$id.'"';
-                                    $this->_model->query($update);
-                                    $this->redirect(BASE_URL.'user_con/profile/'.$id);                        
-                                }else{
-                                    echo 'gambar gagal diupload';
-                                }
-                            }else{
-                                echo 'gambar error ';                                
-                            }
+            if(!empty($avatar['name'])) {
+                if($avatar['type']!='image/jpg' && 
+                        $avatar['type']!='image/jpeg' && 
+                        $avatar['type']!='image/pjpeg') 
+                        echo 'format gambar salah';
+                else {                            
+                    if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
+                        $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
+                        if($move){
+                            $image = $avatar['name'];
+                            $update = 'update user set EMAIL="'.$email.'", AVATAR="'.$image.'", STATUS="'.$status.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
+                                where ID_USER="'.$id.'"';
+                            $this->_model->query($update);
+                            $this->redirect(BASE_URL.'user_con/profile/'.$id);                        
+                        }else{
+                            echo 'gambar gagal diupload';
                         }
                     }else{
-                        $update = 'update user set EMAIL="'.$email.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
-                            where ID_USER="'.$id.'"';
-                        $this->_model->query($update);
-                        $this->redirect(BASE_URL.'user_con/profile/'.$id);
+                        echo 'gambar error ';                                
                     }
                 }
+            }else{
+                $update = 'update user set EMAIL="'.$email.'", STATUS="'.$status.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
+                    where ID_USER="'.$id.'"';
+                $this->_model->query($update);
+                $this->redirect(BASE_URL.'user_con/profile/'.$id);
             }
             
         }
@@ -250,8 +239,16 @@ class User_con extends Controller {
             if(count($user)>0){
                 if($user[0]['GENDER']=="LAKI")
                     $user[0]['GENDER'] = "Male";
-                else
+                else if($user[0]['GENDER']=="PEREMPUAN")
                     $user[0]['GENDER'] = "Female";
+                else
+                    $user[0]['GENDER'] = "none";
+                if($user[0]['STATUS'] == "SINGLE")
+                    $user[0]['STATUS'] = "Single";
+                else if($user[0]['STATUS'] == "IN RELATIONSHIP")
+                    $user[0]['STATUS'] = "In Relationship";
+                else if($user[0]['STATUS'] == "MARRIED")
+                    $user[0]['STATUS'] = "Married";
                 $query_komentar = $this->_model->query('select * from komentar where ID_USER='.$id.'');
                 $komentar = count($query_komentar);
                 
@@ -290,13 +287,14 @@ class User_con extends Controller {
             if(strlen($username)>45 || strlen($password)>45){
                 $this->redirect(BASE_URL.'login_con/error_display/0');
             }
-            $account = $this->_model->test('select * from user where USERNAME="'.$username.'" and PASSWORD="'.$password.'"');
+            $account = $this->_model->test('select * from user where USERNAME="'.$username.'" and PASSWORD="'.md5($password).'"');
             
             //echo $username."<br>";
             //echo $password."<br>";
             if(count($account)==1){
                 $data = Array (
                     'login' => true,
+                    'username' => $account[0]['USERNAME'],
                     'nama' => $account[0]['NAMA'],
                     'id' =>$account[0]['ID_USER'],
                     'avatar' =>$account[0]['AVATAR']
@@ -352,18 +350,33 @@ class User_con extends Controller {
             else echo 0;
         }
         function ajax_validate_login($username, $pass){
-            $result = $this->_model->query('select * from user where USERNAME="'.$username.'" AND PASSWORD="'.$pass.'"');
-            if(count($result)>0) echo $result[0]['ID_USER'];
-            else echo -1;
+            if(strlen($username)>45 || strlen($pass)>45){
+                echo -1;
+            }else{
+                $result = $this->_model->query('select * from user where USERNAME="'.$username.'" AND PASSWORD="'.md5($pass).'"');
+                if(count($result)>0) echo $result[0]['ID_USER'];
+                else echo -1;
+            }
         }
         function ajax_check_availability_username($username){
             $result = $this->_model->query('select * from user where USERNAME="'.$username.'"');
-            if(count($result)>0) echo 1;
+            if(count($result)>0) {
+                echo 1;
+            }
             else echo 0;
         }
         function ajax_check_availability_email($email){
             $result = $this->_model->query('select * from user where EMAIL="'.$email.'"');
-            if(count($result)>0) echo 1;
+            if(count($result)>0) {
+                if(!empty($_SESSION['login'])){
+                    $result = $this->_model->query('select * from user where EMAIL="'.$email.'" AND ID_USER='.$_SESSION['id'].'');                    
+                    if(count($result)>0) {
+                        echo 0;                        
+                    }else{
+                        echo 1;                
+                    }                    
+                }else echo 1;
+            }
             else echo 0;
         }
         function error_display($no=0){
