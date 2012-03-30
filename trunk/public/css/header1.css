@@ -370,11 +370,17 @@ a.closelogin:active {
     position: absolute;
     top: 0%;
     left: 50%;
-    margin: 45px 0 0 243px; /* [-(height/2)px 0 0 -(width/2)px] */
+    margin: -120px 0 0 243px; /* [-(height/2)px 0 0 -(width/2)px] */
     padding-bottom: 15px;
-    display: none;
+    display: block;
     background: rgb(229, 234, 239);
     border-radius: 10px;
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease;
+    -moz-transition-duration: 1.0s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease;
+    -webkit-transition-duration: 1.0s;
 }
 
 #overlay {
@@ -596,13 +602,13 @@ label.left {
 /* -------------------- */
 
 .pagebar {
-	width: 942px;
-	height: 30px;
-	margin: 0 auto;
-	padding: 0 29px 16px 29px;
-	background: url(../img/navmenu.png) no-repeat;
+    width: 942px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 0 29px 16px 29px;
+    background: url(../img/navmenu.png) no-repeat;
     display: block;
-	text-align: left;
+    text-align: left;
 }
 
 #filtermethod, #sortingmethod {
@@ -1221,7 +1227,7 @@ div.tulisan {
 }
 
 .view-image {
-    
+
 }
 
 .view-link-url {
@@ -1320,8 +1326,8 @@ div.likes {
 .userachievement {
     width: 325px;
     height: auto;
-/*    border-left: solid;
-    border-left-style: outset; */
+    /*    border-left: solid;
+        border-left-style: outset; */
     display: inline-block;
     vertical-align: top;
 }
@@ -1367,11 +1373,11 @@ div.likes {
 }
 
 .clearfix:after {
-   content: ".";
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
 }
 
 .edituser {
@@ -1482,6 +1488,43 @@ div.likes {
     word-wrap: break-word;
 }
 
+#ach_popup {
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+
+#ach_popup:hover {
+    -moz-transform: scale(1.2);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1.2);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+
+#ach_popup .slide {
+    opacity: .9;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    margin-left:-1000px;
+    -moz-transition: margin-left;
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 500ms;
+    -webkit-transition: margin-left;
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 500ms;
+    background: rgb(224, 235, 239);
+}
+
+#ach_popup:hover .slide {
+    margin-left: 0;
+}
+
 .ach_popup {
     width: 320px;
     height: auto;
@@ -1499,12 +1542,12 @@ div.likes {
 }
 
 .ach_congrats {
-	font-size: 22px;
-	line-height: 22px;
+    font-size: 22px;
+    line-height: 22px;
     margin: 10px auto 0;
-	padding-bottom: 15px;
-	font-weight: bold;
-	text-align: center;
+    padding-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .ach_text {
@@ -1545,11 +1588,59 @@ div.likes {
     background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
+.ach_list {
+    width: 320px;
+    height: auto;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin: -320px 0 0 -150px; /* [-(height/2)px 0 0 -(width/2)px] */
+    display: block;
+    border-radius: 10px;
+    background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#bbbbbb));
+    border: 5px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+    
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+/*
+.ach_scroll .achievement {
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+
+.ach_scroll .achievement:hover {
+    -moz-transform: scale(1.2);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1.2);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+*/
 .userachievement ul {
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
     list-style: none;
+}
+
+.ach_scroll {
+    height: 200px;
+    min-height: 100px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .edituserdata {
@@ -1558,8 +1649,15 @@ div.likes {
     height: auto;
     top: 0%;
     left: 50%;
-    margin: 80px 0 0 -250px; /* [-(height/2)px 0 0 -(width/2)px] */
-    display: none;
+    margin: -560px 0 0 -250px; /* [-(height/2)px 0 0 -(width/2)px] */
+    display: block;
+
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.5s;
 }
 
 .edittop {

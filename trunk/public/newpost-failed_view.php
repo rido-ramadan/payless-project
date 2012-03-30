@@ -35,6 +35,8 @@
                 <div id="sort2" class="left nav3act"><a href="contents_view.php">Contents</a></div>
                 <div class="left"><div class="divide"></div></div>
                 <div id="sort1" class="left"><a href="newpost_view.php">Upload Post</a></div>
+                <div class="left"><div class="divide"></div></div>
+                <div id="sort1" class="left"><a style="cursor:pointer" onclick="slideDown();">Achievement List</a></div>
                 <form action="" method="post" name="srch">
                     <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search" value="Search"/>
@@ -83,12 +85,49 @@
         <div class="ach_popup" id="ach_popup">
             <div class="ach_congrats">Congratulations!</div>
             <div class="ach_text">You have been awarded this achievement</div>
-            <div class="achievement">
-                <!--div class="ach_logo"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">Hello, World</div>
-                    <div class="ach_how">Upload a post once</div>
-                </div-->
+            <div class="achievement"></div>
+            <div class="slide">
+                <div class="ach_popup" style="display:block;" id="ach_popup">
+                    <div class="ach_congrats">Congratulations!</div>
+                    <div class="ach_text">You have been awarded this achievement</div>
+                    <div class="achievement"></div>
+                </div>
+            </div>
+            <div class="ach_close">
+                <button value="CLOSE" onclick="closeAchievement()">CLOSE</button>
+            </div>
+        </div>
+        <div class="ach_list">
+            <div class="ach_congrats">EdgarDrake's Achievements</div>
+            <div class="ach_scroll">
+                <div class="achievement">
+                    <div class="ach_logo"><img src="img/achievements/hello_world.png" alt="" width="50"></div>
+                    <div class="ach_detail">
+                        <div class="ach_name">Hello Worlds</div>
+                        <div class="ach_how">Your first post</div>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="ach_logo"><img src="img/achievements/i_ve_moved_on.png" alt="" width="50"></div>
+                    <div class="ach_detail">
+                        <div class="ach_name">I've Moved On</div>
+                        <div class="ach_how">You are not lonely anymore</div>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="ach_logo"><img src="img/achievements/junked.png" alt="" width="50"></div>
+                    <div class="ach_detail">
+                        <div class="ach_name">Junked</div>
+                        <div class="ach_how">100 comments</div>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="ach_logo"><img src="img/achievements/narcism.png" alt="" width="50"></div>
+                    <div class="ach_detail">
+                        <div class="ach_name">Narcism</div>
+                        <div class="ach_how">You've changed your profile picture more than 3 times</div>
+                    </div>
+                </div>
             </div>
             <div class="ach_close">
                 <button value="CLOSE" onclick="closeAchievement()">CLOSE</button>
