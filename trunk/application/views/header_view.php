@@ -247,6 +247,20 @@
     <div class="slide-inbox" onclick="showInbox()"></div>
 </div>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- ::::::::::::::::::::: COMPOSE MESSAGE ::::::::::::::::::::: -->
+<div class="compose">
+    <form name="create-message" action="" method="post">
+        <div class="compose-logo"></div>
+        <div class="compose-title clearfix">Compose New Message</div>
+        <div class="compose-message">
+            <textarea rows="11" cols="59" name="private-message" placeholder="Write your message here"></textarea>
+        </div>
+        <div class="send">
+            <input type="submit" name="send" value="">
+        </div>
+    </form>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script type="text/javascript" src="<?php echo BASE_URL?>js/divPop.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/ajax.js"></script>
 <?php 
