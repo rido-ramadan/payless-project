@@ -7,7 +7,7 @@ class Home_con extends Controller {
             if(count($achievement)>0){
                 $this->set('list_achievement', $achievement);
             }
-            $message = $this->_model->query('select * from message inner join user on user.ID_USER=message.ID_TO where ID_TO='.$_SESSION['id'].'');
+            $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
             if(count($message)>0){
                 $this->set('message_box', $message);
             }
@@ -64,6 +64,16 @@ class Home_con extends Controller {
         $this->loadView("footer_view.php");
     }
     function submit_search(){
+        if(!empty($_SESSION['login'])){
+            $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
+            if(count($message)>0){
+                $this->set('message_box', $message);
+            }
+            $achievement = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$_SESSION['id'].'');            
+            if(count($achievement)>0){
+                $this->set('list_achievement', $achievement);
+            }
+        }            
         $search = $_POST['search_input'];
         $filter = $_POST['srch_op'];
         $this->set('search_input',$search);
@@ -328,7 +338,16 @@ class Home_con extends Controller {
             echo $query[0]['ISI'];
         }else echo "-";
     }
-    function insertContentMessage(){
-        
+    function insertContentMessage($iduser){
+        if(!empty($_SESSION['login'])){
+            $isi = $_POST['private-message'];
+            $insert = 'insert into message (ID_FROM, ID_TO, ISI,WAKTU) 
+                values ("'.$_SESSION['id'].'", "'.$iduser.'","'.$isi.'", "'.date('Y-m-d H:i:s').'")';
+            
+            $this->_model->query($insert);
+            $this->redirect(BASE_URL.'user_con/profile/'.$iduser);            
+        }else{
+            $this->redirect(BASE_URL.'home_con');
+        }
     }
 }

@@ -248,20 +248,20 @@
 <?php }?>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- ::::::::::::::::::::: COMPOSE MESSAGE ::::::::::::::::::::: -->
+<?php if(!empty($user['ID_USER'])) {?>
 <div class="compose">
-    <form name="create-message" action="" method="post">
+    <form name="create-message" action="<?php echo BASE_URL.'home_con/insertContentMessage/'.$user['ID_USER']?>" method="post">
         <div class="compose-logo"></div>
         <div class="compose-title clearfix">Compose New Message</div>
         <div class="compose-message">
             <textarea rows="11" cols="59" name="private-message" id="compose_input" placeholder="Write your message here"></textarea>
         </div>
         <div class="send">
-            <?php if(!empty($user['ID_USER'])) {?>
-                <input type="button" onclick="composeMessage('<?php echo BASE_URL?>', <?php echo $user['ID_USER']?>)" name="send" value="">
-            <?php }?>
+                <input type="submit" name="send" value="">
         </div>
     </form>
 </div>
+<?php }?>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script type="text/javascript" src="<?php echo BASE_URL?>js/divPop.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/ajax.js"></script>
