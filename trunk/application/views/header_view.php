@@ -5,6 +5,7 @@
         <title>Payless Project &raquo; <?php if(!empty($title_page)) echo $title_page?></title>
         <link sizes="16x16" type="image/png" href="<?php echo BASE_URL?>img/favicon.png" rel="icon">
         <script type="text/javascript" src="<?php echo BASE_URL?>js/style.js"></script>
+        <script type="text/javascript" src="<?php echo BASE_URL?>js/peel.js"></script>
         <!--<script type="text/javascript" src="<?php echo BASE_URL?>js/navigasi.js"></script>-->
         <link type="text/css" rel="stylesheet" href="<?php echo BASE_URL?>css/header1.css" />
     </head>

@@ -1,14 +1,14 @@
 var jaaspeel = new Object();
 
-jaaspeel.ad_url = escape('http://www.marchygabe.tumblr.com');
-jaaspeel.small_path = 'peel/small.swf';
-jaaspeel.small_image = escape('peel/small.jpg');
+jaaspeel.ad_url = escape('http://www.johnniewalker.com');
+jaaspeel.small_path = '../swf/small.swf';
+jaaspeel.small_image = escape('../img/small.jpg');
 jaaspeel.small_width = '100';
 jaaspeel.small_height = '100';
 jaaspeel.small_params = 'ico=' + jaaspeel.small_image;
 
-jaaspeel.big_path = 'peel/large.swf';
-jaaspeel.big_image = escape('peel/large3.png');
+jaaspeel.big_path = '../swf/large.swf';
+jaaspeel.big_image = escape('../img/large.png');
 jaaspeel.big_width = '650';
 jaaspeel.big_height = '650';
 jaaspeel.big_params = 'big=' + jaaspeel.big_image + '&ad_url=' + jaaspeel.ad_url;

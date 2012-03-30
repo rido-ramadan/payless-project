@@ -154,6 +154,9 @@
                 <div class="filtermethod">
                     <div class="ads" style="margin-top: 40px">
                         <div class="headertext" style="margin: 0 0 0 10px;">Advertisements</div>
+                        <div class="advertises">
+                            <img src="<?php echo BASE_URL ?>img/teh_kotak_ads.jpg" alt="Teh Kotak Broo...">
+                        </div>
                     </div>
                 </div>
                 <?php }?>

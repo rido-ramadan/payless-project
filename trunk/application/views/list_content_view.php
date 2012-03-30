@@ -149,29 +149,31 @@
                 </div>
                 <div class="filtermethod">
                     <div class="inputtag">
-                        <div class="headertext" style="margin: 10px 0 0 15px;">Filter by Tags</div>
-                        <form name="filtertag" action="<?php echo BASE_URL?>content_con/list_content/0" method="post">
-                            <div class="tagbar">
-                                <span class="sbox_l"></span>
-                                <span class="sbox">
-                                    <input style="outline-width:0px;" type="text" name="input_tag" value="<?php if(!empty($isi_input_tag)) echo $isi_input_tag?>" placeholder="input tags" >
-                                </span>
-                                <span class="sbox_r" id="srch_clear"></span>
-                            </div>
-                            <div class="tagsubmit">
-                                <input type="submit"  value="Submit">
-                            </div>
-                            <div class="sorts">
-                                Sort by:
-                                <div class="sortingmethod">
-                                    <select name="sortmethod" id="Sorting" onchange="sort_content('<?php echo BASE_URL.'content_con/'?>')">
-                                        <option value="-1">Newest</option>
-                                        <option <?php if(!empty($current_sort) && $current_sort==1) echo 'selected="selected"'?> value="1">Most Popular</option>
-                                        <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
-                                    </select>
+                        <div class="headertext" style="margin: 10px 0 0 15px; cursor: pointer;" onclick="toggleFilterSearch()">Filter by Tags</div>
+                        <!--div id="togglefilter"-->
+                            <form name="filtertag" action="<?php echo BASE_URL?>content_con/list_content/0" method="post">
+                                <div class="tagbar">
+                                    <span class="sbox_l"></span>
+                                    <span class="sbox">
+                                        <input style="outline-width:0px;" type="text" name="input_tag" value="<?php if(!empty($isi_input_tag)) echo $isi_input_tag?>" placeholder="input tags" >
+                                    </span>
+                                    <span class="sbox_r" id="srch_clear"></span>
                                 </div>
-                            </div>
-                        </form>
+                                <div class="tagsubmit">
+                                    <input type="submit"  value="Submit">
+                                </div>
+                                <div class="sorts">
+                                    Sort by:
+                                    <div class="sortingmethod">
+                                        <select name="sortmethod" id="Sorting" onchange="sort_content('<?php echo BASE_URL.'content_con/'?>')">
+                                            <option value="-1">Newest</option>
+                                            <option <?php if(!empty($current_sort) && $current_sort==1) echo 'selected="selected"'?> value="1">Most Popular</option>
+                                            <option <?php if(!empty($current_sort) && $current_sort==2) echo 'selected="selected"'?> value="2">Most Commented</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        <!--/div-->
                     </div>
                     <div class="tagclouds">
                         <div class="headertext" style="margin: 0 0 0 10px;">Choose a Tag</div>
@@ -203,6 +205,9 @@
                     </div-->
                     <div class="ads">
                         <div class="headertext" style="margin: 0 0 0 10px;">Advertisements</div>
+                        <div class="advertises">
+                            <img src="<?php echo BASE_URL ?>img/teh_kotak_ads.jpg" alt="Teh Kotak Broo...">
+                        </div>
                     </div>
                 </div>
 
