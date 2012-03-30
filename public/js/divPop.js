@@ -26,14 +26,15 @@ function showPopup() {
     var popup = document.getElementById('popup');
     overlay.style.height = getHeight() + 'px';
     overlay.style.display = 'block';
-    popup.style.display = 'block';
+//    popup.style.display = 'block';
+    popup.style.marginTop = '45px';
 }
 
 function closePopUp() {
     var overlay = document.getElementById('overlay');
     var popup = document.getElementById('popup');
     overlay.style.display = 'none';
-    popup.style.display = 'none';
+    popup.style.marginTop = '-120px';
 }
 
 function editProfile() {
@@ -41,7 +42,7 @@ function editProfile() {
     var edit = document.getElementById('edituserdata');
     overlay.style.height = getHeight()  + 'px';
     overlay.style.display = 'block';
-    edit.style.display = 'block';
+    edit.style.marginTop = '80px';
 }
 
 function closeAll() {
@@ -49,10 +50,12 @@ function closeAll() {
     var edit = document.getElementById('edituserdata');
     var popup = document.getElementById('popup');
     var preview = document.getElementById('preview');
+    var slide = document.getElementsByClassName('ach_list')[0];
     overlay.style.display = 'none';
-    popup.style.display = 'none';
-    if (edit !== null) edit.style.display = 'none';
+    popup.style.marginTop = '-120px';
+    if (edit !== null) edit.style.marginTop = '-560px';
     if (preview !== null) preview.style.display = 'none';
+    if (slide !== null) slide.style.marginTop = '-320px';
 }
 
 function showAchievement(ach_name, ach_desc, ach_logo) {
@@ -72,4 +75,14 @@ function closeAchievement() {
     var popup = document.getElementById('ach_popup');
     closeAll();
     popup.style.display = 'none';
+}
+
+function slideDown() {
+    var slide = document.getElementsByClassName('ach_list')[0];
+    slide.style.marginTop = '200px'
+}
+
+function slideUp() {
+    var slide = document.getElementsByClassName('ach_list')[0];
+    slide.style.marginTop = '-320px'
 }
