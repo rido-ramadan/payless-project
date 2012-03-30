@@ -2054,4 +2054,19 @@ ul.search-user-list {
     margin-left: 10px;
     display: block;
     cursor: pointer;
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.25s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.25s;
+}
+
+#compose-new:hover {
+    -moz-transform: scale(1.2);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.1s;
+    -webkit-transform: scale(1.2);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.1s;
 }
