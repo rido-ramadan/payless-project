@@ -193,19 +193,21 @@
                 </div>
                 <div class="filtermethod">
                     <div class="inputtag">
-                        <div class="headertext" style="margin: 10px 0 0 15px;">Filter by Tags</div>
-                        <form name="filtertag" action="" method="post">
-                            <div class="tagbar">
-                                <span class="sbox_l"></span>
-                                <span class="sbox">
-                                    <input style="outline-width:0px;" type="text" name="inputtag" placeholder="input tags" >
-                                </span>
-                                <span class="sbox_r" id="srch_clear"></span>
-                            </div>
-                            <div class="tagsubmit">
-                                <input type="submit" name="submittag" value="Submit">
-                            </div>
-                        </form>
+                        <div class="headertext" onclick="toggleFilterSearch()" style="margin: 10px 0 0 15px; cursor: pointer;">Filter by Tags</div>
+                        <div id="togglefilter">
+                            <form name="filtertag" action="" method="post">
+                                <div class="tagbar">
+                                    <span class="sbox_l"></span>
+                                    <span class="sbox">
+                                        <input style="outline-width:0px;" type="text" name="inputtag" placeholder="input tags" >
+                                    </span>
+                                    <span class="sbox_r" id="srch_clear"></span>
+                                </div>
+                                <div class="tagsubmit">
+                                    <input type="submit" name="submittag" value="Submit">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="tagclouds">
                         <div class="headertext" style="margin: 0 0 0 10px;">Choose a Tag</div>

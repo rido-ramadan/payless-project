@@ -19,10 +19,10 @@ body {
 .inline { display: inline-block}
 .center { text-align: center; }
 
-a {		text-decoration: none;}
-a:visited {	text-decoration: none;}
-a:hover {	text-decoration: none;}
-a:active{	}
+a           {   text-decoration: none;}
+a:visited   {	text-decoration: none;}
+a:hover     {	text-decoration: none;}
+a:active    {	}
 
 a img {
     border: 0;
@@ -654,6 +654,7 @@ label.left {
 }
 
 .contentlist {
+    width: 640px;
     height: auto;
     display: inline-block;
     vertical-align: top;
@@ -910,6 +911,17 @@ div.paketjempol {
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 
+#togglefilter {
+/*    display: none;*/
+    height: 0;
+    -moz-transform: scale(0);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(0);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 0.5s;
+}
+
 .tagbar {
     margin: 0 0 10px 10px;
     display: inline-block;
@@ -951,6 +963,11 @@ div.paketjempol {
     font: 11px/13px arial;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.sorts {
+    margin: 0 0 15px 10px;
+    font: 11px/13px arial;
 }
 
 .tagclouds {
@@ -1484,7 +1501,7 @@ div.likes {
     color: #777777;
     font-size: 11px;
     font-weight: bold;
-    line-height: 26px;
+    line-height: 20px;
     word-wrap: break-word;
 }
 
@@ -1528,7 +1545,7 @@ div.likes {
 .ach_popup {
     width: 320px;
     height: auto;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     margin: -100px 0 0 -150px; /* [-(height/2)px 0 0 -(width/2)px] */
@@ -1588,20 +1605,41 @@ div.likes {
     background: -webkit-gradient(linear, left top, left bottom, from(rgb(48, 126, 200)), to(rgb(25, 94, 188)));
 }
 
-.ach_list {
-    width: 320px;
-    height: auto;
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    margin: -320px 0 0 -150px; /* [-(height/2)px 0 0 -(width/2)px] */
-    display: block;
-    border-radius: 10px;
+.ach_notif-center {
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 auto;
+    border-radius: 0 0 20px 20px;
+    border-left: 1px solid #888888 !important;
+    border-right: 1px solid #888888 !important;
+    border-bottom: 1px solid #888888 !important;
+/*    background: url('../img/icon-arrow-down.png') no-repeat;*/
+    font: 11px/13px arial;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
     background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
     background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
     background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#bbbbbb));
-    border: 5px solid #777777 !important;
     box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+.ach_notif-center:hover {
+    color: white;
+    background: -o-linear-gradient(center top , #777777, #666666);
+    background: -moz-linear-gradient(center top , #777777, #666666);
+    background: -webkit-gradient(linear, left top, left bottom, from(#777777), to(#666666));
+}
+
+.ach_list {
+    width: 320px;
+    height: auto;
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    margin: -312px 0 0 -150px; /* [-(height/2)px 0 0 -(width/2)px] */
+    display: block;
     
     -moz-transform: scale(1);
     -moz-transition-timing-function: ease-out;
@@ -1609,6 +1647,15 @@ div.likes {
     -webkit-transform: scale(1);
     -webkit-transition-timing-function: ease-out;
     -webkit-transition-duration: 0.5s;
+}
+
+.ach_box {
+    border-radius: 10px;
+    background: -o-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -moz-linear-gradient(center top , #eeeeee, #bbbbbb);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#bbbbbb));
+    border: 5px solid #777777 !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
 }
 /*
 .ach_scroll .achievement {
@@ -1642,6 +1689,8 @@ div.likes {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+.ach_scroll .achievement { padding-bottom: 5px; }
 
 .edituserdata {
     position: fixed;

@@ -4,6 +4,7 @@ document.body;
 
 var height = elem.clientHeight;
 var width = elem.clientWidth;
+var filterSearch = false;
 
 function getHeight(){
     var htmlheight = document.body.parentNode.scrollHeight;
@@ -55,7 +56,7 @@ function closeAll() {
     popup.style.marginTop = '-120px';
     if (edit !== null) edit.style.marginTop = '-560px';
     if (preview !== null) preview.style.display = 'none';
-    if (slide !== null) slide.style.marginTop = '-320px';
+    if (slide !== null) slide.style.marginTop = '-312px';
 }
 
 function showAchievement(ach_name, ach_desc, ach_logo) {
@@ -79,10 +80,23 @@ function closeAchievement() {
 
 function slideDown() {
     var slide = document.getElementsByClassName('ach_list')[0];
-    slide.style.marginTop = '200px'
+    slide.style.marginTop = '180px';
 }
 
 function slideUp() {
     var slide = document.getElementsByClassName('ach_list')[0];
-    slide.style.marginTop = '-320px'
+    slide.style.marginTop = '-312px';
+}
+
+function toggleFilterSearch() {
+    var x = document.getElementById('togglefilter');
+    if (!filterSearch) {
+        x.style.height = '0';
+        x.style.MozTransform = 'scale(0)';
+        filterSearch = true;
+    } else {
+        x.style.height = 'auto';
+        x.style.MozTransform = 'scale(1)';
+        filterSearch = false;
+    }
 }
