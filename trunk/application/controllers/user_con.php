@@ -51,7 +51,7 @@ class User_con extends Controller {
                 if($gender=="male") $this->set('male','');
                 else if($gender=="female") $this->set('female','');
                 if($status=="single") {$this->set('single',''); $status="SINGLE";}
-                else if($status=="relation") {$this->set('relation','');$status="IN RELATION";}
+                else if($status=="relation") {$this->set('relation','');$status="IN RELATIONSHIP";}
                 else if($status=="married") {$this->set('married','');$status="MARRIED";}
                 $this->set('about', $about);
                 if(strlen($username)<5) $this->set('error_username','Username must be at least 5 character.');
@@ -88,7 +88,7 @@ class User_con extends Controller {
                                                                         if($avatar['type']!='image/jpg' && 
                                                                                 $avatar['type']!='image/jpeg' && 
                                                                                 $avatar['type']!='image/pjpeg') 
-                                                                                $this->set('error_avatar', 'Please upload jpeg image.');
+                                                                                $this->set('error_avatar', 'Please upload jpeg or jpg image.');
                                                                         else {
                                                                             if($avatar['size'] > 0 || $avatar['error'] == 0){ //check if the file is corrupt or error
                                                                                 $move = move_uploaded_file($avatar['tmp_name'], 'avatar/'.$avatar['name']); //save image to the folder
@@ -118,12 +118,13 @@ class User_con extends Controller {
                                                                                     if(count($id)>0){ // ada
                                                                                         $data = Array (
                                                                                             'login' => true,
+                                                                                            'username' => $username,
                                                                                             'nama' => $name,
                                                                                             'id' =>$id[0]['ID_USER'],
                                                                                             'avatar' =>$image
                                                                                                 );
                                                                                         $_SESSION = $data;
-                                                                                        $this->redirect(BASE_URL.'user_con/profile/'.$id[0]['ID_USER']);
+                                                                                        $this->redirect(BASE_URL.'user_con/profile/'.$id[0]['ID_USER'].'/1');
                                                                                     }else{
 
                                                                                     }
@@ -201,6 +202,18 @@ class User_con extends Controller {
                             $update = 'update user set EMAIL="'.$email.'", AVATAR="'.$image.'", STATUS="'.$status.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
                                 where ID_USER="'.$id.'"';
                             $this->_model->query($update);
+                            
+                            $check = $this->_model->query('select * from narcism where ID_USER='.$_SESSION['id'].'');
+                            if(count($check)>0){
+                                $update = 'update narcism set CHANGE_PICTURE="'.($check[0]['CHANGE_PICTURE']+1).'"
+                                    where ID_USER="'.$_SESSION['id'].'"';
+                                $this->_model->query($update);                                
+                            }else{
+                                $insert = 'insert into narcism (ID_USER, CHANGE_PICTURE) 
+                                    values ('.$_SESSION['id'].', "1"
+                                        )';
+                                $this->_model->query($insert);                                
+                            }
                             $this->redirect(BASE_URL.'user_con/profile/'.$id);                        
                         }else{
                             echo 'gambar gagal diupload';
@@ -213,7 +226,7 @@ class User_con extends Controller {
                 $update = 'update user set EMAIL="'.$email.'", STATUS="'.$status.'", GENDER="'.$gender.'", ABOUT_ME="'.$about.'"
                     where ID_USER="'.$id.'"';
                 $this->_model->query($update);
-                $this->redirect(BASE_URL.'user_con/profile/'.$id);
+                $this->redirect(BASE_URL.'user_con/profile/'.$id.'/1');
             }
             
         }
@@ -231,9 +244,22 @@ class User_con extends Controller {
             }else
                 return 0;
         }
-        function profile($id){
+        function profile($id, $achieve=-1){
+            if(!empty($_SESSION['login'])){
+                $achievement = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$_SESSION['id'].'');            
+                if(count($achievement)>0){
+                    $this->set('list_achievement', $achievement);
+                }
+            }            
             if(empty($id)){
                 $this->redirect(BASE_URL.'user_con/error_display/0');
+            }
+            if($achieve!=-1){
+                $this->checkAlay();
+                $this->checkNarcism();
+                $this->checkStatus();
+                $this->checkThreeAchievement();
+                $this->checkUltimate();                
             }
             $user = $this->_model->query('select * from user where ID_USER='.$id.'');
             if(count($user)>0){
@@ -330,6 +356,13 @@ class User_con extends Controller {
                     //echo "like=".$sum_like."<br>";
                     //echo "dislike=".$sum_dislike."<br>";
 
+                    if(!empty($_SESSION['id'])){
+                        $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].' AND ID_USER='.$_SESSION['id'].'');
+                        if(count($user_like)>0){
+                        //echo 'asd';
+                            $konten[$i]['STATUS_USER']=$user_like[0]['STATUS'];
+                        }
+                    }
                     //komentar
                     $komen = $this->_model->query('select * from komentar where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
                     $konten[$i]['KOMENTAR'] = $komen;
@@ -399,4 +432,194 @@ class User_con extends Controller {
 		$this->set('title','Success - My Todo List App');
 		$this->set('todo',$this->Item->query('delete from items where id = \''.mysql_real_escape_string($id).'\''));	
 	}
+        
+        function ajax_scrolling_profile($index, $id_user){
+            $response = "";
+            $content = $this->getContentUser($id_user);
+            //echo count($konten).':'.$index;
+            if(count($content)<$index-3){
+                echo -1;
+            }else{
+                for($i=$index-3;$i<$index;$i++){
+                        if(!empty($content[$i])){
+                                    echo '
+                                <li><div class="top-post"">
+                                     <div class="top-';
+                                    if($user['KONTEN'][$i]['ID_TYPE']==1) echo 'link';
+                                        else if($content[$i]['ID_TYPE']==2) echo 'image';
+                                        else if($content[$i][$i]['ID_TYPE']==3) echo 'video';
+                                    echo '">
+                                        <div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$content[$i]['ID_KONTEN'].'">'.$content[$i]['JUDUL'].'</a></div>
+                                        <div style="align:center;font-size:12px" class="uploaded" id="time'.$content[$i]['ID_KONTEN'].'"></div>
+                                        <script type="text/javascript">setInterval(';echo "'timerContent"; echo '("'.BASE_URL.'","time",'.$content[$i]['ID_KONTEN'].',"'.$content[$i]['WAKTU'].'");'; echo "'"; echo ',250)</script>
+                                        <div class="view">';
+                                    
+                                    if($content[$i]['ID_TYPE']==1) echo '
+                                        <div class="view-link-url"><a href="'.$content[$i]['LINK'].'">'.$content[$i]['LINK'].'</a></div>
+                                        <div class="view-link-desc">'.$content[$i]['DESKRIPSI'].'</div>
+                                        ';
+                                        else if($content[$i]['ID_TYPE']==2) echo '
+                                            <div class="view-image">
+                                                <img src="'.BASE_URL.'image/'.$content[$i]['LINK'].'" width="260" alt="'.$content[$i]['JUDUL'].'">
+                                            </div>
+                                            ';
+                                        else if($content[$i]['ID_TYPE']==3) echo '
+                                            <div class="view-video">
+                                                <div class="view"><iframe width="240" height="180" src="'.$content[$i]['LINK'].'" ></iframe></div>
+                                            </div>
+                                            ';
+                                    
+                                    
+                                        echo '</div>
+                                        <div class="basic-features">
+                                            <div class="paketjempol">
+                                                <div class="likemini"></div>
+                                                <div class="jumlahlike" id="like'.$content[$i]['ID_KONTEN'].'">'.$content[$i]['LIKE'].'</div>
+                                                <div class="commentmini"></div>
+                                                <div class="jumlahkomen" id="comment'.$content[$i]['ID_KONTEN'].'">'.count($content[$i]['KOMENTAR']).'</div>
+                                                <br/>';
+                            if(!empty($_SESSION['login'])){
+                                if(!empty($content[$i]['STATUS_USER'])){
+                                    echo $content[$i]['STATUS_USER']=="LIKE" 
+                                    ? 
+                                    '
+                                    <div class="likebutton_pressed" id="likebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="unlike(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>
+                                    '
+                                    : 
+                                    '
+                                    <div class="likebutton" id="likebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton_pressed" id="dislikebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>
+                                    ';
+                                }else{
+                                    echo
+                                    '<div class="likebutton" id="likebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content[$i]['ID_KONTEN'].'"><a onclick="dislike(\''.BASE_URL.'\','.$content[$i]['ID_KONTEN'].')"></a></div>';
+                                }
+                            }else{
+                                echo '
+                                    <div class="likebutton" id="likebutton'.$content[$i]['ID_KONTEN'].'"><a href="#"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content[$i]['ID_KONTEN'].'"><a href="#"></a></div>
+                                    ';
+                            }
+                                            echo '</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>                                        
+                                        ';
+                                
+                            }
+
+                }
+                echo $response;      
+            }
+        }        
+
+        function checkAlay(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user where ID_USER='.$_SESSION['id'].'');                
+                if(count($ach)>0){ // berhak mendapat achievement
+                    $subject = $ach[0]['USERNAME'];
+                    if(preg_match('/[A-Za-z]/', $subject) && preg_match('/[0-9]/', $subject)) {
+                        $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=10');
+                        if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                            $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                                values ('.$_SESSION['id'].', "10"
+                                    )';
+                            $this->_model->query($insert);
+                            $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=10');
+                            if(count($achievement)>0)
+                                $this->set('achievement', $achievement[0]);
+                                $achieve = true;
+                            }
+                        }
+                }
+            }            
+            return $achieve;                                                            
+        }
+        function checkNarcism(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from narcism where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>0 && $ach[0]['CHANGE_PICTURE']>=2){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=11');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "11"
+                                )';
+                        $this->_model->query($insert);
+                        $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=11');
+                        if(count($achievement)>0)
+                        $this->set('achievement', $achievement[0]);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+            
+        }
+        function checkStatus(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>0 && $ach[0]['STATUS']=="IN RELATIONSHIP"){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=12');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "12"
+                                )';
+                        $this->_model->query($insert);
+                        $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=12');
+                        if(count($achievement)>0)
+                            echo 'asd';
+                            $this->set('achievement', $achievement[0]);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;            
+        }        
+
+        function checkThreeAchievement(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>=3){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=8');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "8"
+                                )';
+                        $this->_model->query($insert);
+                        $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=8');
+                        if(count($achievement)>0)
+                        $this->set('achievement', $achievement[0]);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                                                
+        }
+        function checkUltimate(){
+            $achieve= false;
+            if(!empty($_SESSION['id'])){
+                $ach = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].'');
+                if(count($ach)>=11){ // berhak mendapat achievement
+                    $get_achieve = $this->_model->query('select * from user_achievement where ID_USER='.$_SESSION['id'].' AND ID_ACHIEVEMENT=9');
+                    if(count($get_achieve)<=0){ // belum pernah dapet achievementnya
+                        $insert = 'insert into user_achievement (ID_USER, ID_ACHIEVEMENT) 
+                            values ('.$_SESSION['id'].', "9"
+                                )';
+                        $this->_model->query($insert);
+                        $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=9');
+                        if(count($achievement)>0)
+                        $this->set('achievement', $achievement[0]);
+                        $achieve = true;
+                    }
+                }
+            }            
+            return $achieve;                                                            
+        }        
 }

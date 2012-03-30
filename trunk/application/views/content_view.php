@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    //setInterval('checkNewContent()', 1000);
+    interval=setInterval('scrollComment("<?php echo BASE_URL?>",<?php if(!empty($content)) echo $content['ID_KONTEN']; else echo '-1'?>);', 1000);
+</script>    
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
@@ -24,7 +28,11 @@
                     <div class="headertext judul">
                         <div class="title"><a href="#"><?php echo $content['JUDUL']?></a></div>
                         <div class="uploader"><a href="<?php echo BASE_URL.'user_con/profile/'.$content['ID_USER']?>"><?php echo $content['NAMA']?></a></div>
-                        <div class="uploaded"><?php echo $content['WAKTU']?></div>
+                        <div class="uploaded" <?php echo 'id="time'.$content['ID_KONTEN'].'"';?>></div>
+                        <div class="uploaded" ></div>
+                        <?php 
+                            echo '<script type="text/javascript">setInterval(';echo "'timerContent"; echo '("'.BASE_URL.'","time",'.$content['ID_KONTEN'].',"'.$content['WAKTU'].'");'; echo "'"; echo ',250)</script>';
+                        ?>
                     </div>
                     <div class="content">
                         <?php
@@ -45,17 +53,35 @@
                     <div class="views"></div>
                     <div class="viewcount">100</div><br/>
                             <div class="likemini"></div>
-                            <div class="jumlahlike"><?php echo $content['LIKE']?></div>
+                            <div class="jumlahlike" <?php echo 'id="like'.$content['ID_KONTEN'].'"'?>></div>
                             <div class="commentmini"></div>
-                            <div class="jumlahkomen"><?php echo count($content['KOMENTAR'])?></div>
+                            <div class="jumlahkomen" <?php echo 'id="comment'.$content['ID_KONTEN'].'"'?>></div>
                             <br/>
                             <?php 
-                                if(!empty($_SESSION['login'])){
-                                    echo '
-                                <div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$content['ID_KONTEN'].'"></a></div>
-                                <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$content['ID_KONTEN'].'"></a></div>
-                                        ';
+                            if(!empty($_SESSION['login'])){
+                                if(!empty($content['STATUS_USER'])){
+                                    echo $content['STATUS_USER']=="LIKE" 
+                                    ? 
+                                    '
+                                    <div class="likebutton_pressed" id="likebutton'.$content['ID_KONTEN'].'"><a onclick="unlike(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>
+                                    '
+                                    : 
+                                    '
+                                    <div class="likebutton" id="likebutton'.$content['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton_pressed" id="dislikebutton'.$content['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>
+                                    ';
+                                }else{
+                                    echo
+                                    '<div class="likebutton" id="likebutton'.$content['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content['ID_KONTEN'].'"><a onclick="dislike(\''.BASE_URL.'\','.$content['ID_KONTEN'].')"></a></div>';
                                 }
+                            }else{
+                                echo '
+                                    <div class="likebutton" id="likebutton'.$content['ID_KONTEN'].'"><a href="#"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$content['ID_KONTEN'].'"><a href="#"></a></div>
+                                    ';
+                            }
                             ?>
                             <div class="tags">
                                 Tags : <br/>
@@ -72,55 +98,57 @@
                             </div>
                         </div>
                     </div>
-                    <div class="commentlist">
+                    <div class="commentlist" id="commentlist">
                         <div class="commenttop"></div>
-                        <div class="commentcontainer" id="commentDownList">
+                        <div class="commentcontainer" >
+                            <div id="commentDownList">
                             <!--<div id="superbaru">
 
                             </div>-->
                     <?php
-                        if(!empty($content['KOMENTAR'])){
-                            for($i=0;$i<count($content['KOMENTAR']);$i++){
-                                echo '
-                            <div class="comment">
-                                <div class="avatar">
-                                    <img src="'.BASE_URL.'avatar/'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
-                                </div>
-                                <div class="isikomen">';
-                                if(!empty($_SESSION['login']) && $content['KOMENTAR'][$i]['ID_USER']==$_SESSION['id']){
-                                    echo 
-                                    '<a href="'.BASE_URL.'content_con/delete_comment/'.$content['ID_KONTEN'].'/'.$content['KOMENTAR'][$i]['ID_KOMENTAR'].'"><div class="del-comment right"></div></a>';
-                                }
-                                echo
-                                    '<div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
-                                    <div class="timecomment">'.$content['KOMENTAR'][$i]['WAKTU'].'</div>
-								'.$content['KOMENTAR'][$i]['ISI'].'
-                                </div>
-                            </div>
-                                    ';
-                            }
+//                        if(!empty($content['KOMENTAR'])){
+//                            for($i=0;$i<count($content['KOMENTAR']);$i++){
+//                                echo '
+//                            <div class="comment" id="comment'.$content['KOMENTAR'][$i]['ID_KOMENTAR'].'">
+//                                <div class="avatar">
+//                                    <img src="'.BASE_URL.'avatar/'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
+//                                </div>
+//                                <div class="isikomen">';
+//                                if(!empty($_SESSION['login']) && $content['KOMENTAR'][$i]['ID_USER']==$_SESSION['id']){
+//                                    echo 
+//                                    '<a onclick="delete_comment(\''.BASE_URL.'\', '.$content['KOMENTAR'][$i]['ID_KOMENTAR'].')"><div class="del-comment right"></div></a>';
+//                                }
+//                                echo
+//                                    '<div class="namecomment">'.$content['KOMENTAR'][$i]['USERNAME'].'</div>
+//                                    <div class="timecomment">'.$content['KOMENTAR'][$i]['WAKTU'].'</div>
+//								'.$content['KOMENTAR'][$i]['ISI'].'
+//                                </div>
+//                            </div>
+//                                    ';
+//                            }
+//                        }
+                    echo '</div>';
+                        if(!empty($_SESSION['login'])){
+                            echo '
+                                <div class="comment" style="border-bottom:0px">
+                                    <div class="avatar">
+                                        <img src="'.BASE_URL.'avatar/'.$_SESSION['avatar'].'" alt="avatar" width="64" />
+                                    </div>                                
+                                    <div class="isikomen">
+                                        <form method="post" action="'.BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN'].'">
+                                            <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
+                                            <div class="submit-your-comment"><input type="button" onclick="submit_comment(\''.BASE_URL.'\', '.$content['ID_KONTEN'].')" value="Comment" /></div>
+                                        </form>
+                                    </div>
+                                </div>';
                         }
-                    if(!empty($_SESSION['login'])){
-                        echo '
-                            <div class="comment" style="border-bottom:0px">
-                                <div class="avatar">
-                                    <img src="'.$_SESSION['avatar'].'" alt="avatar" width="64" />
-                                </div>                                
-                                <div class="isikomen">
-                                    <form method="post" action="'.BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN'].'">
-                                        <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
-                                        <div class="submit-your-comment"><input type="button" onclick="submit_comment(\''.BASE_URL.'\', '.$content['ID_KONTEN'].')" value="Comment" /></div>
-                                    </form>
-                                </div>
-                            </div>';
-                    }
                         ?>
 
-                        </div>
+                        </div><!--
                         <div class="paketgantihalaman">
                             <div class="buttonprevious" onclick="window.location.href='contents.html'">PREVIOUS</div>
                             <div class="buttonnext" onclick="window.location.href='contents.html'">NEXT</div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="filtermethod">

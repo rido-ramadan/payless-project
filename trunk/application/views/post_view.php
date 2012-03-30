@@ -20,13 +20,13 @@
             <div class="separator"></div>
             <div class="row" id="imagelink" style="border-bottom: 0; padding-bottom: 0">
                 <label class="key">IMAGE</label>
-				Image : <input name="picture" <?php if(!empty($empty) && $empty=="image") echo 'style="background: orangered"' ?> type="file" />
+				<input name="picture" <?php if(!empty($empty) && $empty=="image") echo 'style="background: orangered"' ?> type="file" />
                 <!--<input class="input" name="img" type="file" accept="image/*"/>-->
             </div>
 
             <div class="row" id="textlink">
                 <label class="key">LINK</label>
-                <input class="input" name="link" <?php if(!empty($empty) && ($empty=="link" || $empty=='video')) echo 'style="background: orangered"' ?> <?php if(!empty($post_video)) echo ' value='.$post_video ?><?php if(!empty($post_link)) echo ' value='.$post_link ?>  type="text"/>
+                <input class="input" name="link-input" <?php if(!empty($empty) && ($empty=="link" || $empty=='video')) echo 'style="background: orangered"' ?> <?php if(!empty($post_video)) echo ' value='.$post_video ?><?php if(!empty($post_link)) echo ' value='.$post_link ?>  type="text"/>
             </div>
 
                     <div class="row" id="linkdesc" style="padding-bottom: 0">

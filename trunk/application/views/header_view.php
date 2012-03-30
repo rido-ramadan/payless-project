@@ -25,7 +25,7 @@
 
 <div class="topbox">
     <div class="nav1">
-        <div style="display:inline-block"><a id="logoButton" href="index.php"><img src="<?php echo BASE_URL?>img/logo.png" alt="logo" /></a></div>
+        <div style="display:inline-block"><a id="logoButton" href="<?php echo BASE_URL?>"><img src="<?php echo BASE_URL?>img/logo.png" alt="logo" /></a></div>
         <div class="right">
             <?php 
                 if(isset($_SESSION['login'])){
@@ -188,38 +188,26 @@
     </div>
 </div>
 <!-- ::::::::::::::::::::: ACHIEVEMENT LIST :::::::::::::::::::: -->
+<?php if(!empty($_SESSION['login'])){?>
 <div class="ach_list">
     <div class="ach_box">
         <div class="ach_congrats"><?php if(!empty($_SESSION['login'])) echo $_SESSION['username']?>'s Achievements</div>
         <div class="ach_scroll">
-            <div class="achievement">
-                <div class="ach_logo"><img src="img/achievements/hello_world.png" alt="" width="50"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">Hello Worlds</div>
-                    <div class="ach_how">Your first post</div>
-                </div>
-            </div>
-            <div class="achievement">
-                <div class="ach_logo"><img src="img/achievements/i_ve_moved_on.png" alt="" width="50"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">I've Moved On</div>
-                    <div class="ach_how">You are not lonely anymore</div>
-                </div>
-            </div>
-            <div class="achievement">
-                <div class="ach_logo"><img src="img/achievements/junked.png" alt="" width="50"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">Junked</div>
-                    <div class="ach_how">100 comments</div>
-                </div>
-            </div>
-            <div class="achievement">
-                <div class="ach_logo"><img src="img/achievements/narcism.png" alt="" width="50"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">Narcism</div>
-                    <div class="ach_how">You've changed your profile picture more than 3 times</div>
-                </div>
-            </div>
+            <?php
+                if(!empty($list_achievement)){
+                    for($i=0;$i<count($list_achievement);$i++){
+                        echo '
+                            <div class="achievement">
+                                <div class="ach_logo"><img src="'.BASE_URL.'img/achievements/'.$list_achievement[$i]['GAMBAR'].'" alt="" width="50"></div>
+                                <div class="ach_detail">
+                                    <div class="ach_name">'.$list_achievement[$i]['NAMA'].'</div>
+                                    <div class="ach_how">'.$list_achievement[$i]['DESKRIPSI'].'</div>
+                                </div>
+                            </div>
+                            ';
+                    }
+                }
+            ?>
         </div>
         <div class="ach_close">
             <button value="CLOSE" onclick="slideUp()">CLOSE</button>
@@ -227,25 +215,36 @@
     </div>
     <div class="ach_notif-center" onclick="slideDown()">ACHIEVEMENTS</div>
 </div>
+<?php }?>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
+<?php if(!empty($_SESSION['login'])){?>
 <div id="inbox">
     <div class="mail">
         <div class="mail-list">
             <div class="headertext inbox-title">INBOX</div>
             <div class="messages">
-                <div class="message" onclick="">
-                    <div class="message-sender">EdgarDrake</div>
-                    <div class="message-time">22-03-2012</div>
-                </div>
+                <?php 
+                    if(!empty($message_box)){
+                        for($i=0;$i<count($message_box);$i++){
+                            echo '
+                                <div class="message" onclick="getContentMessage(\''.BASE_URL.'\','.$message_box[$i]['ID_MESSAGE'].')">
+                                    <div class="message-sender">'.$message_box[$i]['NAMA'].'</div>
+                                    <div class="message-time">'.$message_box[$i]['WAKTU'].'</div>
+                                </div>
+                                ';
+                        }
+                    }
+                ?>
             </div>
         </div>
-        <div class="mail-body">
-            This is just a simple mail.
+        <div class="mail-body" id="mail-body">
+            <?php if(!empty($message_box)) echo $message_box[0]['ISI']?>
         </div>
     </div>
     <div class="slide-inbox" onclick="showInbox()"></div>
 </div>
+<?php }?>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <!-- ::::::::::::::::::::: COMPOSE MESSAGE ::::::::::::::::::::: -->
 <div class="compose">
@@ -253,18 +252,23 @@
         <div class="compose-logo"></div>
         <div class="compose-title clearfix">Compose New Message</div>
         <div class="compose-message">
-            <textarea rows="11" cols="59" name="private-message" placeholder="Write your message here"></textarea>
+            <textarea rows="11" cols="59" name="private-message" id="compose_input" placeholder="Write your message here"></textarea>
         </div>
         <div class="send">
-            <input type="submit" name="send" value="">
+            <?php if(!empty($user['ID_USER'])) {?>
+                <input type="button" onclick="composeMessage('<?php echo BASE_URL?>', <?php echo $user['ID_USER']?>)" name="send" value="">
+            <?php }?>
         </div>
     </form>
 </div>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script type="text/javascript" src="<?php echo BASE_URL?>js/divPop.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/ajax.js"></script>
+<script type="text/javascript">
+    setInterval('checkAchievement("<?php echo BASE_URL?>");', 2000);
+</script>
 <?php 
     if(!empty($achievement)) echo '
-        <script type="text/javascript">showAchievement("'.$achievement['NAME'].'", "'.$achievement['DESCRIPTION'].'", "'.$achievement['IMAGE'].'")</script>';
+        <script type="text/javascript">showAchievement("'.$achievement['NAMA'].'", "'.$achievement['DESKRIPSI'].'", "'.BASE_URL.'img/achievements/'.$achievement['GAMBAR'].'")</script>';
 ?>
 <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
