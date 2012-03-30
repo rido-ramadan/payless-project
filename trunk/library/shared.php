@@ -80,13 +80,13 @@ function callHook() {
 //            if(file_exists(BASE_URL.$controllerName))
 //                echo "File ada";
 //            else
-            header( 'Location: '.BASE_URL.'404-not-found.php' ) ;            
+            header( 'Location: '.BASE_URL.'home_con/error/' ) ;            
         }
 
 	if ((int)method_exists($controller, $action)) {
             call_user_func_array(array($dispatch,$action),$queryString);
 	} else {
-            header( 'Location: '.BASE_URL.'404-not-found.php' ) ;            
+            header( 'Location: '.BASE_URL.'home_con/error/' ) ;            
 		/* Error Generation Code Here */
 	}
 }
