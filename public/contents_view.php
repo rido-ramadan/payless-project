@@ -79,6 +79,25 @@
                 <!--span><a class="loginbutton login" id="loginButton" alt="Log In"></a></span-->
             </div>
         </div>
+        <!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
+        <div id="inbox">
+            <div class="mail">
+                <div class="mail-list">
+                    <div class="headertext inbox-title">INBOX</div>
+                    <div class="messages">
+                        <div class="message" onclick="">
+                            <div class="message-sender">EdgarDrake</div>
+                            <div class="message-time">22-03-2012</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mail-body">
+                    This is just a simple mail.
+                </div>
+            </div>
+            <div class="slide-inbox" onclick="showInbox()"></div>
+        </div>
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <script type="text/javascript" src="js/divPop.js"></script>
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
         <div class="pagebar">
@@ -168,7 +187,7 @@
                                     <div class="uploaded">3 days ago</div>
                                 </div>
                                 <div class="content">
-                                    <iframe width="320" height="240" src="http://www.youtube.com/embed/MGtLGuSaVOI" frameborder="0" allowfullscreen></iframe>
+                                    <object width="320" height="240" data="http://www.youtube.com/embed/AuzyODgWRp4"></object>
                                 </div>
                                 <div class="paketjempol">
                                     <div class="likemini"></div>

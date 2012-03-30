@@ -1917,6 +1917,22 @@ ul.search-user-list {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
+
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.25s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.25s;
+}
+
+.slide-inbox:hover {
+    -moz-transform: scale(1.1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.25s;
+    -webkit-transform: scale(1.1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.25s;
 }
 
 .inbox-title {
@@ -1954,4 +1970,88 @@ ul.search-user-list {
     font: 12px arial;
     font-weight: bold;
     margin: 0 0 2px 10px;
+}
+
+.compose {
+    width: 500px;
+    height: 300px;
+    display: block;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -250px;
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #dddddd !important;
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 3px 3px rgba(0, 0, 0, 0.6);
+
+    -moz-transform: scale(0);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.5s;
+    -webkit-transform: scale(0);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.5s;
+}
+
+.compose-title {
+    font-size: 22px;
+    line-height: 22px;
+    padding-bottom: 10px;
+    border-bottom: inset;
+    font-weight: bold;
+    text-align: left;
+    display: inline-block;
+}
+
+.compose-logo {
+    width: 32px;
+    height: 32px;
+    background: url('../img/icon-write.png') no-repeat;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.compose-message {
+    width: 495px;
+    height: 200px;
+    display: block;
+}
+
+.send {
+    width: 48px;
+    height: 48px;
+    margin: 10px 0 0 445px;
+    display: block;
+}
+
+.send input {
+    background: url('../img/icon-send.png') no-repeat;
+    width: 48px;
+    height: 48px;
+
+    -moz-transform: scale(1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.25s;
+    -webkit-transform: scale(1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.25s;
+}
+
+.send input:hover {
+    -moz-transform: scale(1.1);
+    -moz-transition-timing-function: ease-in;
+    -moz-transition-duration: 0.25s;
+    -webkit-transform: scale(1.1);
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-duration: 0.25s;
+}
+
+#compose-new {
+    width: 32px;
+    height: 32px;
+    background: url('../img/icon-write.png') no-repeat;
+    margin-left: 10px;
+    display: block;
+    cursor: pointer;
 }

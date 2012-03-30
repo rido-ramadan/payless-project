@@ -54,11 +54,14 @@ function closeAll() {
     var popup = document.getElementById('popup');
     var preview = document.getElementById('preview');
     var slide = document.getElementsByClassName('ach_list')[0];
+    var box = document.getElementsByClassName('compose')[0];
     overlay.style.display = 'none';
     popup.style.marginTop = '-160px';
     if (edit !== null) edit.style.marginTop = '-560px';
     if (preview !== null) preview.style.display = 'none';
     if (slide !== null) slide.style.marginTop = '-312px';
+    if (box !== null) box.style.MozTransform = 'scale(0)';
+    if (box !== null) box.style.WebkitTransform = 'scale(0)';
 }
 
 function showAchievement(ach_name, ach_desc, ach_logo) {
@@ -114,4 +117,11 @@ function showInbox() {
         box.style.marginLeft = '-630px';
         inbox = false;
     }
+}
+
+function compose() {
+    var box = document.getElementsByClassName('compose')[0];
+    doPopUp();
+    box.style.MozTransform = 'scale(1)';
+    box.style.WebkitTransform = 'scale(1)';
 }

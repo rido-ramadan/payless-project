@@ -3,7 +3,10 @@
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
-                <div class="userheader"><?php echo $user['USERNAME']?>'s Profile</div>
+                <div class="userheader">
+                    <?php echo $user['USERNAME']?>'s Profile
+                    <div class="right" id="compose-new" onclick="compose()"></div>
+                </div>
                 <div class="useravatar">
                     <?php 
                         if(!empty($user['AVATAR'])) 
