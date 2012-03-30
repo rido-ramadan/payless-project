@@ -370,11 +370,12 @@ a.closelogin:active {
     position: absolute;
     top: 0%;
     left: 50%;
-    margin: -120px 0 0 243px; /* [-(height/2)px 0 0 -(width/2)px] */
+    margin: -160px 0 0 243px; /* [-(height/2)px 0 0 -(width/2)px] */
     padding-bottom: 15px;
     display: block;
     background: rgb(229, 234, 239);
     border-radius: 10px;
+    z-index: 10;
     -moz-transform: scale(1);
     -moz-transition-timing-function: ease;
     -moz-transition-duration: 1.0s;
@@ -843,6 +844,22 @@ div.paketjempol {
     display: inline-block;
     vertical-align: top;
     font-size: 12px;
+}
+
+.views {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    display: inline-block;
+    background: url('../img/icon-view.png') no-repeat;
+    vertical-align: middle;
+}
+
+.viewcount {
+    display: inline-block;
+    height: 16px;
+    line-height: 32px;
+    vertical-align: middle;
 }
 
 .likemini {
