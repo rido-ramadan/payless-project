@@ -5,45 +5,93 @@ class Content_con extends Controller {
 	function index(){
             $this->redirect(BASE_URL.'content_con/list_content');
 	}
-        function list_content($id_tag=-1, $sort=-1, $achieve = -1){
-            if($achieve!=-1){
-                $this->checkFirstPost();
-                $this->checkMorePost();
-                $this->checkThreeAchievement();
-                $this->checkUltimate();
-            }
-            
-            $list_tag = $this->_model->query('select * from tag');
-                if(count($list_tag)>0){
-                        $this->set('list_tag',$list_tag);
+        function list_content($submit_tag=-1,$id_tag=-1, $sort=-1, $achieve = -1){
+            if($submit_tag!=-1){
+                if(empty($_POST['input_tag'])){
+                    $this->redirect(BASE_URL.'content_con');
                 }
-            $current_list_tag = $this->_model->query('select * from tag where ID_TAG='.$id_tag.'');
-            if(count($current_list_tag)>0){
-                $current_list_tag[0] = $current_list_tag[0]['NAMA_TAG'];
-                $this->set('current_list_tag',$current_list_tag);
-            }
-            
-            if($id_tag==-1){ // no tags
-                $konten= $this->getContent();
+                $input = $_POST['input_tag'];
+                $sort = $_POST['sortmethod'];
+                $tag = $this->explodeTag($input);
+                $this->set('input_tag_from_text', $input);
+
+                if(count($tag)>0){
+                    $query='select * from konten_tag natural join tag where NAMA_TAG=';
+                    for($i=0;$i<count($tag);$i++){
+                        $query.='"'.$tag[$i].'"';
+                        if(($i+1)!=count($tag)){
+                            $query.=' OR NAMA_TAG=';
+                        }
+                    }
+                    $this->set('current_list_tag', $tag);
+                    //echo $query.'<br>';
+                    $tag_konten = $this->_model->query($query);            
+                    //echo count($tag_konten);
+                    $konten = $this->getContentFromMoreTag($tag_konten);
+                    //for($i=0;$i<count($konten);$i++){
+                        //echo $konten[$i]['JUDUL']."<br>";
+                    //}
+
+                    $list_tag = $this->_model->query('select * from tag');
+                    if(count($list_tag)>0){
+                            $this->set('list_tag',$list_tag);
+                    }
+
+                    if($sort==-1){ // sort waktu
+                        $konten=  $this->orderKontenByTime($konten);
+                    }else if($sort==1){ // sort like
+                        $konten=  $this->orderKontenByLike($konten);
+                    }else if($sort==2){ // sort komentar
+                        $konten=  $this->orderKontenByKomentar($konten);                    
+                    }
+                    $this->set('current_sort',$sort);
+
+                    $this->set('konten',$konten);
+                    $this->loadView("header_view.php");
+                    $this->loadView("list_content_view.php");		
+                    $this->loadView("footer_view.php");
+                }                
             }else{
-                $konten = $this->getContentFromTag($id_tag);                
+
+                if($achieve!=-1){
+                    $this->checkFirstPost();
+                    $this->checkMorePost();
+                    $this->checkThreeAchievement();
+                    $this->checkUltimate();
+                }
+
+                $list_tag = $this->_model->query('select * from tag');
+                    if(count($list_tag)>0){
+                            $this->set('list_tag',$list_tag);
+                    }
+                $current_list_tag = $this->_model->query('select * from tag where ID_TAG='.$id_tag.'');
+                if(count($current_list_tag)>0){
+                    $current_list_tag[0] = $current_list_tag[0]['NAMA_TAG'];
+                    $this->set('current_list_tag',$current_list_tag);
+                }
+
+                if($id_tag==-1){ // no tags
+                    $konten= $this->getContent();
+                }else{
+                    $konten = $this->getContentFromTag($id_tag);                
+                }
+
+                if($sort==-1){ // sort waktu
+                    $konten=  $this->orderKontenByTime($konten);
+                }else if($sort==1){ // sort like
+                    $konten=  $this->orderKontenByLike($konten);
+                }else if($sort==2){ // sort komentar
+                    $konten=  $this->orderKontenByKomentar($konten);                    
+                }
+                $this->set('current_sort', $sort);
+                $this->set('current_tag', $id_tag);
+                $this->set('konten', $konten);
+                $this->set('gate', 1);
+                $this->set('title_page', 'Contents');
+                $this->loadView("header_view.php");
+                $this->loadView("list_content_view.php");		
+                $this->loadView("footer_view.php");            
             }
-            
-            if($sort==-1){ // sort waktu
-                $konten=  $this->orderKontenByTime($konten);
-            }else if($sort==1){ // sort like
-                $konten=  $this->orderKontenByLike($konten);
-            }else if($sort==2){ // sort komentar
-                $konten=  $this->orderKontenByKomentar($konten);                    
-            }
-            $this->set('current_sort', $sort);
-            $this->set('current_tag', $id_tag);
-            $this->set('konten', $konten);
-            $this->set('gate', 1);
-            $this->set('title_page', 'Contents');
-            $this->loadView("header_view.php");
-            $this->loadView("list_content_view.php");		
-            $this->loadView("footer_view.php");            
         }
         
         function getContentFromTag($id_tag){
@@ -84,15 +132,8 @@ class Content_con extends Controller {
             }
             return $result;
         }
-        function submit_tag($input_tag=-1){
-            if(empty($_POST['input_tag'])){
-                $this->redirect(BASE_URL.'content_con');
-            }
-            if($input_tag!=-1){
-                $input = $input_tag;
-            }else
-                $input = $_POST['input_tag'];
-            $input = explode(',', $input);
+        function explodeTag($input1){
+            $input = explode(',', $input1);
             $tag = Array();
             foreach ($input as $value) {
                 $value = str_replace ("\"", "", $value);
@@ -113,7 +154,20 @@ class Content_con extends Controller {
                 }
                 //if(!empty($value))
                 //echo $value .";<br>";
-            }            
+            }                 
+            return $tag;
+        }
+        function submit_tag($input_tag=-1){
+            if(empty($_POST['input_tag'])){
+                $this->redirect(BASE_URL.'content_con');
+            }
+            if($input_tag!=-1){
+                $input = $input_tag;
+            }else $input = $_POST['input_tag'];
+            
+            $tag = $this->explodeTag($input);
+            $this->set('input_tag_from_text', $input);
+
             if(count($tag)>0){
                 $query='select * from konten_tag natural join tag where NAMA_TAG=';
                 for($i=0;$i<count($tag);$i++){
@@ -130,6 +184,11 @@ class Content_con extends Controller {
                 //for($i=0;$i<count($konten);$i++){
                     //echo $konten[$i]['JUDUL']."<br>";
                 //}
+
+                $list_tag = $this->_model->query('select * from tag');
+                if(count($list_tag)>0){
+                        $this->set('list_tag',$list_tag);
+                }
 
                 // mekanisme sorting
                 $sort = -1;
@@ -148,8 +207,7 @@ class Content_con extends Controller {
                 $this->set('konten',$konten);
                 $this->loadView("header_view.php");
                 $this->loadView("list_content_view.php");		
-                $this->loadView("footer_view.php");            
-                
+                $this->loadView("footer_view.php");
             }
             
         }
@@ -292,7 +350,7 @@ class Content_con extends Controller {
                 $this->loadView("post_view.php");		
                 $this->loadView("footer_view.php");            					
             }else{ // berhasil
-                $this->redirect(BASE_URL.'content_con/list_content/-1/-1/1');
+                $this->redirect(BASE_URL.'content_con/list_content/-1/-1/-1/1');
                 
             }
             
@@ -492,6 +550,14 @@ class Content_con extends Controller {
                     }
 //                    echo "like=".$sum_like."<br>";
 //                    echo "dislike=".$sum_dislike."<br>";
+                    //user like
+                    if(!empty($_SESSION['id'])){
+                        $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].' AND ID_USER='.$_SESSION['id'].'');
+                        if(count($user_like)>0){
+                        //echo 'asd';
+                            $konten[$i]['STATUS_USER']=$user_like[0]['STATUS'];
+                        }
+                    }
                     
 
                     //komentar
@@ -536,9 +602,9 @@ class Content_con extends Controller {
                 $this->redirect(BASE_URL.'content_con/');
             }
             if($gate==1){ // list content
-                $this->redirect(BASE_URL.'content_con/list_content/'.$tag.'/'.$sort);
+                $this->redirect(BASE_URL.'content_con/list_content/-1/'.$tag.'/'.$sort);
             }else{ // submit tag
-                $this->redirect(BASE_URL.'content_con/submit_tag/'.$tag);                
+                $this->redirect(BASE_URL.'content_con/submit_tag/-1/'.$tag);                
             }
         }
         function orderKontenByTime($konten){
@@ -815,6 +881,300 @@ class Content_con extends Controller {
             return $achieve;            
         }
         
+        function ajax_scrolling_content($index, $id_tag=-1, $sort=-1){
+            $response = "";
+            if($id_tag==-1){ // no tags
+                $konten= $this->getContent();
+            }else{
+                $konten = $this->getContentFromTag($id_tag);                
+            }
+            
+            if($sort==-1){ // sort waktu
+                $konten=  $this->orderKontenByTime($konten);
+            }else if($sort==1){ // sort like
+                $konten=  $this->orderKontenByLike($konten);
+            }else if($sort==2){ // sort komentar
+                $konten=  $this->orderKontenByKomentar($konten);                    
+            }
+            
+            //echo count($konten).':'.$index;
+            for($i=$index-3;$i<$index;$i++){
+                if(!empty($konten[$i])){
+                        echo '
+                    <li>
+                    <div class="paketkonten ';
+                        if($konten[$i]['ID_TYPE']==1) echo 'link';
+                        else if($konten[$i]['ID_TYPE']==2) echo 'image';
+                        else if($konten[$i]['ID_TYPE']==3) echo 'video';
+
+                        echo 'post">
+                        <div class="left iconcontent">
+                            <div class="icon';
+                        if($konten[$i]['ID_TYPE']==1) echo 'link';
+                        else if($konten[$i]['ID_TYPE']==2) echo 'photo';
+                        else if($konten[$i]['ID_TYPE']==3) echo 'video';
+
+                        echo '"></div>
+                        </div>
+                        <div class="headertext judul">
+                            <div class="title"><a href="'.BASE_URL.'content_con/content/'.$konten[$i]['ID_KONTEN'].'">'.$konten[$i]['JUDUL'].'</a></div>
+                            <div class="uploader"><a href="'.BASE_URL.'user_con/profile/'.$konten[$i]['ID_USER'].'">'.$konten[$i]['NAMA'].'</a></div>
+                            <div class="uploaded" id="time'.$konten[$i]['ID_KONTEN'].'"></div>
+                                <script type="text/javascript">setInterval(';echo "'timerContent"; echo '("'.BASE_URL.'","time",'.$konten[$i]['ID_KONTEN'].',"'.$konten[$i]['WAKTU'].'");'; echo "'"; echo ',250)</script>
+                        </div>
+                        <div class="content">';
+                        if($konten[$i]['ID_TYPE']==1) 
+                            echo '
+                            <a href="'.$konten[$i]['LINK'].'"> '.$konten[$i]['LINK'].' </a>
+                            <p> '.$konten[$i]['DESKRIPSI'].' </p>
+                                ';
+                        else if($konten[$i]['ID_TYPE']==2) echo '
+                            <img src="'.BASE_URL.'image/'.$konten[$i]['LINK'].'" width="320" alt="beach">
+                            ';
+                        else if($konten[$i]['ID_TYPE']==3) echo '
+                            <iframe width="320" height="240" src="'.$konten[$i]['LINK'].'" frameborder="0" allowfullscreen></iframe>
+                            ';
+
+
+                        echo '</div>
+                        <div class="paketjempol">
+                            <div class="likemini"></div>
+                            <div class="jumlahlike" id="like'.$konten[$i]['ID_KONTEN'].'">'.$konten[$i]['LIKE'].'</div>
+                            <div class="commentmini"></div>
+                            <div class="jumlahkomen">'.count($konten[$i]['KOMENTAR']).'</div>
+                            <br/>';
+                            if(!empty($_SESSION['login'])){
+                                if(!empty($konten[$i]['STATUS_USER'])){
+                                    echo $konten[$i]['STATUS_USER']=="LIKE" 
+                                    ? 
+                                    '
+                                    <div class="likebutton_pressed" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="unlike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" ><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    '
+                                    : 
+                                    '
+                                    <div class="likebutton" ><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    <div class="dislikebutton_pressed" ><a href="'.BASE_URL.'content_con/undislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    ';
+                                }else{
+                                    echo
+                                    '<div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>';
+                                }
+                            }else{
+                                echo '
+                                    <div class="likebutton" onclick="voteplus(this.num)"><a href="#"></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a href="#"></a></div>
+                                    ';
+                            }
+                            echo '<div class="tags">
+                                Tags : <br/>
+                                <ul class="tag">';
+                                    for($j=0;$j<count($konten[$i]['TAG']);$j++){
+                                        echo '
+                                            <li><a href="'.BASE_URL.'content_con/list_content/-1/'.$konten[$i]['TAG'][$j]['ID_TAG'].'">'.$konten[$i]['TAG'][$j]['NAMA_TAG'].'</a></li>
+                                            ';
+                                    }
+                                echo '</ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                ';
+
+
+
+                }
+
+            }
+            echo $response;            
+        }
+        function ajax_scrolling_tag($index, $input, $sort=-1){
+            $input = explode(',', $input);
+            $tag = Array();
+            foreach ($input as $value) {
+                $value = str_replace ("\"", "", $value);
+                $value = str_replace ("'", "", $value);
+                $white = str_replace (" ", "", $value);
+                if(!empty($white)){
+                    $value = explode(' ', $value);
+                    $one_tag="";
+                    for($i=0;$i<count($value);$i++){
+                        if(!empty($value[$i])){
+                        $one_tag.=$value[$i];
+                        if(($i+1)!=count($value)) 
+                            $one_tag=$one_tag." ";
+                        }
+                    }
+                    //echo 'satu tag='.$one_tag.';<br>';
+                    array_push($tag, $one_tag);
+                }
+                //if(!empty($value))
+                //echo $value .";<br>";
+            }            
+            if(count($tag)>0){
+                $query='select * from konten_tag natural join tag where NAMA_TAG=';
+                for($i=0;$i<count($tag);$i++){
+                    $query.='"'.$tag[$i].'"';
+                    if(($i+1)!=count($tag)){
+                        $query.=' OR NAMA_TAG=';
+                    }
+                }
+               $tag_konten = $this->_model->query($query);            
+                //echo count($tag_konten);
+                $konten = $this->getContentFromMoreTag($tag_konten);
+                //for($i=0;$i<count($konten);$i++){
+                    //echo $konten[$i]['JUDUL']."<br>";
+                //}
+
+                if($sort==-1){ // sort waktu
+                    $konten=  $this->orderKontenByTime($konten);
+                }else if($sort==1){ // sort like
+                    $konten=  $this->orderKontenByLike($konten);
+                }else if($sort==2){ // sort komentar
+                    $konten=  $this->orderKontenByKomentar($konten);                    
+                }
+                
+
+                for($i=$index-3;$i<$index;$i++){
+                    if(!empty($konten[$i])){
+                            echo '
+                        <li>
+                        <div class="paketkonten ';
+                            if($konten[$i]['ID_TYPE']==1) echo 'link';
+                            else if($konten[$i]['ID_TYPE']==2) echo 'image';
+                            else if($konten[$i]['ID_TYPE']==3) echo 'video';
+
+                            echo 'post">
+                            <div class="left iconcontent">
+                                <div class="icon';
+                            if($konten[$i]['ID_TYPE']==1) echo 'link';
+                            else if($konten[$i]['ID_TYPE']==2) echo 'photo';
+                            else if($konten[$i]['ID_TYPE']==3) echo 'video';
+
+                            echo '"></div>
+                            </div>
+                            <div class="headertext judul">
+                                <div class="title"><a href="'.BASE_URL.'content_con/content/'.$konten[$i]['ID_KONTEN'].'">'.$konten[$i]['JUDUL'].'</a></div>
+                                <div class="uploader"><a href="'.BASE_URL.'user_con/profile/'.$konten[$i]['ID_USER'].'">'.$konten[$i]['NAMA'].'</a></div>
+                                <div class="uploaded" >'.$konten[$i]['WAKTU'].'</div>
+                            </div>
+                            <div class="content">';
+                            if($konten[$i]['ID_TYPE']==1) 
+                                echo '
+                                <a href="'.$konten[$i]['LINK'].'"> '.$konten[$i]['LINK'].' </a>
+                                <p> '.$konten[$i]['DESKRIPSI'].' </p>
+                                    ';
+                            else if($konten[$i]['ID_TYPE']==2) echo '
+                                <img src="'.BASE_URL.'image/'.$konten[$i]['LINK'].'" width="320" alt="beach">
+                                ';
+                            else if($konten[$i]['ID_TYPE']==3) echo '
+                                <iframe width="320" height="240" src="'.$konten[$i]['LINK'].'" frameborder="0" allowfullscreen></iframe>
+                                ';
+
+
+                            echo '</div>
+                            <div class="paketjempol">
+                                <div class="likemini"></div>
+                                <div class="jumlahlike">'.$konten[$i]['LIKE'].'</div>
+                                <div class="commentmini"></div>
+                                <div class="jumlahkomen">'.count($konten[$i]['KOMENTAR']).'</div>
+                                <br/>';
+                            if(!empty($_SESSION['login'])){
+                                if(!empty($konten[$i]['STATUS_USER'])){
+                                    echo $konten[$i]['STATUS_USER']=="LIKE" 
+                                    ? 
+                                    '
+                                    <div class="likebutton_pressed" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="unlike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" ><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    '
+                                    : 
+                                    '
+                                    <div class="likebutton" ><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    <div class="dislikebutton_pressed" ><a href="'.BASE_URL.'content_con/undislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    ';
+                                }else{
+                                    echo
+                                    '<div class="likebutton" onclick="voteplus(this.num)"><a href="'.BASE_URL.'content_con/like/'.$konten[$i]['ID_KONTEN'].'"></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a href="'.BASE_URL.'content_con/dislike/'.$konten[$i]['ID_KONTEN'].'"></a></div>';
+                                }
+                            }else{
+                                echo '
+                                    <div class="likebutton" onclick="voteplus(this.num)"><a href="#"></a></div>
+                                    <div class="dislikebutton" onclick="votemin(this.num)"><a href="#"></a></div>
+                                    ';
+                            }
+                            echo '<div class="tags">
+                                    Tags : <br/>
+                                    <ul class="tag">';
+                                        for($j=0;$j<count($konten[$i]['TAG']);$j++){
+                                            echo '
+                                                <li><a href="'.BASE_URL.'content_con/list_content/-1/'.$konten[$i]['TAG'][$j]['ID_TAG'].'">'.$konten[$i]['TAG'][$j]['NAMA_TAG'].'</a></li>
+                                                ';
+                                        }
+                                    echo '</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    ';
+
+
+
+                    }
+
+                }                
+            }
+            
+        }
         
+        function ajax_submit_comment($id_content, $comment){
+            $insert = 'insert into komentar (ID_KONTEN, ISI, WAKTU, ID_USER) 
+                values ("'.$id_content.'", "'.$comment.'",
+                    "'.date('Y-m-d H:i:s').'", "'.$_SESSION['id'].'"
+                    )';
+            $this->_model->query($insert);
+            $comment = $this->_model->query('select * from komentar where ID_KONTEN="'.$id_content.'" AND ID_USER="'.$_SESSION['id'].'" order by WAKTU desc');
+            $user = $this->_model->query('select * from user where ID_USER="'.$_SESSION['id'].'"');
+            if(count($user)>0){
+                $comment[0]['USERNAME'] = $user[0]['USERNAME'];
+                $comment[0]['AVATAR'] = $user[0]['AVATAR'];
+            }else{
+                
+            }
+            if(count($comment)>0)
+            echo                             
+                '<div class="comment">
+                                <div class="avatar">
+                                    <img src="'.$comment[0]['AVATAR'].'" alt="avatar" width="64" />
+                                </div>
+                                <div class="isikomen">';
+                                if(!empty($_SESSION['login']) && $comment[0]['ID_USER']==$_SESSION['id']){
+                                    echo 
+                                    '<a href="'.BASE_URL.'content_con/delete_comment/'.$id_content.'/'.$comment[0]['ID_KOMENTAR'].'"><div class="del-comment right"></div></a>';
+                                }
+                                echo
+                                    '<div class="namecomment">'.$comment[0]['USERNAME'].'</div>
+                                    <div class="timecomment">'.$comment[0]['WAKTU'].'</div>
+								'.$comment[0]['ISI'].'
+                                </div>
+                            </div>';
+        }
+        function update_like($id_content){
+            $konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$id_content.'');
+            $sum = 0;
+            for($j=0;$j<count($konten_like);$j++){
+                if($konten_like[$j]['STATUS']=="LIKE") $sum+=1;
+                if($konten_like[$j]['STATUS']=="DISLIKE") $sum-=1;
+            }
+            echo $sum;
+        }
         
+        function ajax_unlike($id_konten){
+            $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'"');
+            if(count($user_like)>0){ // sudah ada
+                $delete = 'delete from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'" AND STATUS="LIKE"';
+                $this->_model->query($delete);
+            }                        
+        }
 }

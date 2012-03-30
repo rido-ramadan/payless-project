@@ -172,34 +172,34 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">EMAIL</div>
                     <div class="right">
-                        <input class="txtfield" type="text" value="<?php echo $user['EMAIL']?>" size="30" name="email" onkeydown="ProcessCPassword(this)" onkeyup="ProcessCPassword(this)" />
+                        <input class="txtfield" id="email-input" type="text" value="<?php echo $user['EMAIL']?>" size="30" name="email" onkeyup="checkEditProfile('<?php echo BASE_URL?>')" />
                     </div>
                     <div class="clear"></div>
-                    <div class="error" id="cpasswordError">The password is not match.</div>
+                    <div class="error" id="emailError"></div>
                 </div>
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" name="gender" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="male" <?php if($user['GENDER']=="Male") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']=="Female") echo 'selected="selected"'?>value="female">Female</option></select>
+                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <?php if($user['GENDER']=="none") echo 'selected="selected"'?> value="none">--Select--</option><option value="male" <?php if($user['GENDER']=="Male") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']=="Female") echo 'selected="selected"'?>value="female">Female</option></select>
                     </div>
                     <div class="clear"></div>
-                    <div class="error" id="genderError">You must select a gender.</div>
+                    <div class="error" id="genderError"></div>
                 </div>
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">STATUS</div>
                     <div class="right">
-                        <select class="txtfield" name="status" onchange="ProcessGender(this)" style="width: 215px"><option value="none">--Select--</option><option value="single">Forever Alone</option><option value="relation">In a Relationship</option></select>
+                        <select class="txtfield" id="status-input" name="status" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <?php if($user['STATUS']=="none") echo 'selected="selected"'?> value="none">--Select--</option><option <?php if($user['STATUS']=="Single") echo 'selected="selected"'?> value="SINGLE">Forever Alone</option><option <?php if($user['STATUS']=="In Relationship") echo 'selected="selected"'?> value="IN RELATIONSHIP">In a Relationship</option><option <?php if($user['STATUS']=="Married") echo 'selected="selected"'?> value="MARRIED">Married</option></select>
                     </div>
                     <div class="clear"></div>
-                    <div class="error" id="genderError">Please choose your status</div>
+                    <div class="error" id="statusError"></div>
                 </div>
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">AVATAR UPLOAD</div>
                     <div class="right">
-                        <input class="txtfield" type="file" name="avatar" onchange="ProcessAvatar(this)" accept="image/jpg, image/jpeg"/>
+                        <input class="txtfield" id="avatar-input" type="file" name="avatar" onchange="checkEditProfile('<?php echo BASE_URL?>')" accept="image/jpg, image/jpeg"/>
                     </div>
                     <div class="clear"></div>
-                    <div class="error" id="avatarError">Please upload jpeg image.</div>
+                    <div class="error" id="avatarError"></div>
                 </div>
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">ABOUT ME</div>
@@ -207,11 +207,10 @@
                         <textarea rows="5" cols="24"  name="about"><?php echo $user['ABOUT_ME']?></textarea>
                     </div>
                     <div class="clear"></div>
-                    <div class="error" id="avatarError">Please upload jpeg image.</div>
                 </div>
                 <div class="txtfieldbox width90">
                     <div class="right">
-                        <input class="joinbutton" type="submit" name="edit" value="Edit my Account!" />
+                        <input class="joinbutton" id="edit-submit" type="submit" name="edit" value="Edit my Account!" />
                     </div>
                     <div class="clear"></div>
                 </div>

@@ -44,9 +44,13 @@
         </div>
     </div>
     <script type="text/javascript">
-        function message(msg){
-            alert(msg);
-        }
+    function tag_link(url){
+        var sort = document.getElementById('Sorting').value;
+        document.location.href=url+"/"+sort;
+    }
+    function message(msg){
+        alert(msg);
+    }
     function sort_content(url){
         var sort=document.getElementById("Sorting");
         //document.location.href=url+'/'+term.value;
@@ -186,7 +190,7 @@
 <!-- ::::::::::::::::::::: ACHIEVEMENT LIST :::::::::::::::::::: -->
 <div class="ach_list">
     <div class="ach_box">
-        <div class="ach_congrats">EdgarDrake's Achievements</div>
+        <div class="ach_congrats"><?php if(!empty($_SESSION['login'])) echo $_SESSION['username']?>'s Achievements</div>
         <div class="ach_scroll">
             <div class="achievement">
                 <div class="ach_logo"><img src="img/achievements/hello_world.png" alt="" width="50"></div>

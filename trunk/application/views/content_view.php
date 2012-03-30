@@ -72,17 +72,17 @@
                     </div>
                     <div class="commentlist">
                         <div class="commenttop"></div>
-                        <div class="commentcontainer">
-                            <div id="superbaru">
+                        <div class="commentcontainer" id="commentDownList">
+                            <!--<div id="superbaru">
 
-                            </div>
+                            </div>-->
                     <?php
                         if(!empty($content['KOMENTAR'])){
                             for($i=0;$i<count($content['KOMENTAR']);$i++){
                                 echo '
                             <div class="comment">
                                 <div class="avatar">
-                                    <img src="'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
+                                    <img src="'.BASE_URL.'avatar/'.$content['KOMENTAR'][$i]['AVATAR'].'" alt="avatar" width="64" />
                                 </div>
                                 <div class="isikomen">';
                                 if(!empty($_SESSION['login']) && $content['KOMENTAR'][$i]['ID_USER']==$_SESSION['id']){
@@ -107,7 +107,7 @@
                                 <div class="isikomen">
                                     <form method="post" action="'.BASE_URL.'content_con/submit_comment/'.$content['ID_KONTEN'].'">
                                         <div class="your-comment"><textarea rows="2" cols="72" id="ucomment" name="komentar"></textarea></div>
-                                        <div class="submit-your-comment"><input type="submit" value="Comment" /></div>
+                                        <div class="submit-your-comment"><input type="button" onclick="submit_comment(\''.BASE_URL.'\', '.$content['ID_KONTEN'].')" value="Comment" /></div>
                                     </form>
                                 </div>
                             </div>';
