@@ -36,7 +36,7 @@ function closePopUp() {
     var overlay = document.getElementById('overlay');
     var popup = document.getElementById('popup');
     overlay.style.display = 'none';
-    popup.style.marginTop = '-120px';
+    popup.style.marginTop = '-160px';
 }
 
 function editProfile() {
@@ -55,7 +55,7 @@ function closeAll() {
     var preview = document.getElementById('preview');
     var slide = document.getElementsByClassName('ach_list')[0];
     overlay.style.display = 'none';
-    popup.style.marginTop = '-120px';
+    popup.style.marginTop = '-160px';
     if (edit !== null) edit.style.marginTop = '-560px';
     if (preview !== null) preview.style.display = 'none';
     if (slide !== null) slide.style.marginTop = '-312px';
