@@ -52,7 +52,7 @@
                             <div class="error" id="emailError"><?php if(!empty($error_email)) echo $error_email?></div>
                         </div>
                         <div class="txtfieldbox">
-                            <div class="left txtboxlabel">BIRTH DATE</div>
+                            <div class="left txtboxlabel">BIRTH DATE (YYYY-MM-DD)</div>
                             <div class="right">
                                 <input class="txtfield" type="text" size="30" name="birthdate" onkeydown="ProcessBirthdate(this)" value="<?php if(!empty($birthdate)) echo $birthdate?>" onkeyup="ProcessBirthdate(this)" />
                             </div>
