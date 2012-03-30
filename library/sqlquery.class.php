@@ -66,12 +66,12 @@ class SQLQuery {
 			
 				while ($row = mysql_fetch_row($this->_result)) {
 					for ($i = 0;$i < $numOfFields; ++$i) {
-						//$table[$i] = trim(ucfirst($table[$i]),"s");
-						$tempResults[$field[$i]] = $row[$i];
+                                            //$table[$i] = trim(ucfirst($table[$i]),"s");
+                                            $tempResults[$field[$i]] = $row[$i];
 					}
 					if ($singleResult == 1) {
-						mysql_free_result($this->_result);
-						return $tempResults;
+                                            mysql_free_result($this->_result);
+                                            return $tempResults;
 					}
 					array_push($result,$tempResults);
 				}
