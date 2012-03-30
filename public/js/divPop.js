@@ -44,6 +44,7 @@ function editProfile() {
     overlay.style.height = getHeight()  + 'px';
     overlay.style.display = 'block';
     edit.style.marginTop = '80px';
+    document.getElementById('edit-submit').style.display="none";
 }
 
 function closeAll() {
