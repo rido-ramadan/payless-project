@@ -228,7 +228,25 @@
     <div class="ach_notif-center" onclick="slideDown()">ACHIEVEMENTS</div>
 </div>
 <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-
+<!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
+<div id="inbox">
+    <div class="mail">
+        <div class="mail-list">
+            <div class="headertext inbox-title">INBOX</div>
+            <div class="messages">
+                <div class="message" onclick="">
+                    <div class="message-sender">EdgarDrake</div>
+                    <div class="message-time">22-03-2012</div>
+                </div>
+            </div>
+        </div>
+        <div class="mail-body">
+            This is just a simple mail.
+        </div>
+    </div>
+    <div class="slide-inbox" onclick="showInbox()"></div>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 <script type="text/javascript" src="<?php echo BASE_URL?>js/divPop.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL?>js/ajax.js"></script>
 <?php 
