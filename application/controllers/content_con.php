@@ -11,6 +11,10 @@ class Content_con extends Controller {
                 if(count($achievement)>0){
                     $this->set('list_achievement', $achievement);
                 }
+                $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
+                if(count($message)>0){
+                    $this->set('message_box', $message);
+                }
             }            
         }
         function list_content($submit_tag=-1,$id_tag=-1, $sort=-1, $achieve = -1){
@@ -52,6 +56,8 @@ class Content_con extends Controller {
                         $konten=  $this->orderKontenByLike($konten);
                     }else if($sort==2){ // sort komentar
                         $konten=  $this->orderKontenByKomentar($konten);                    
+                    }else if($sort==3){ // sort view
+                        $konten=  $this->orderKontenByView($konten);                    
                     }
                     $this->set('current_sort',$sort);
 
@@ -91,6 +97,8 @@ class Content_con extends Controller {
                     $konten=  $this->orderKontenByLike($konten);
                 }else if($sort==2){ // sort komentar
                     $konten=  $this->orderKontenByKomentar($konten);                    
+                }else if($sort==3){ // sort view
+                    $konten=  $this->orderKontenByView($konten);                    
                 }
                 $this->set('current_sort', $sort);
                 $this->set('current_tag', $id_tag);
@@ -210,6 +218,8 @@ class Content_con extends Controller {
                     $konten=  $this->orderKontenByLike($konten);
                 }else if($sort==2){ // sort komentar
                     $konten=  $this->orderKontenByKomentar($konten);                    
+                }else if($sort==3){ // sort view
+                    $konten=  $this->orderKontenByView($konten);                    
                 }
                 $this->set('current_sort',$sort);
                 
@@ -223,6 +233,10 @@ class Content_con extends Controller {
         // POST
         function post(){
             if(!empty($_SESSION['login'])){
+                $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
+                if(count($message)>0){
+                    $this->set('message_box', $message);
+                }
                 $achievement = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$_SESSION['id'].'');            
                 if(count($achievement)>0){
                     $this->set('list_achievement', $achievement);
@@ -469,6 +483,18 @@ class Content_con extends Controller {
 
         }
         function content($id, $achieve=-1){
+            if(!empty($_SESSION['login']) && $id>0){
+                $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
+                if(count($message)>0){
+                    $this->set('message_box', $message);
+                }
+                $viewed = $this->_model->query('select * from konten_view where ID_KONTEN='.$id.' AND ID_USER='.$_SESSION['id'].'');
+                if(count($viewed)<=0){
+                    $insert = 'insert into konten_view (ID_KONTEN, ID_USER) 
+                        values ("'.$id.'", "'.$_SESSION['id'].'")';
+                    $this->_model->query($insert);                
+                }
+            }
             $this->setListAchievement();
             if(!empty($id)){
                 if($achieve!=-1){
@@ -571,6 +597,10 @@ class Content_con extends Controller {
                         if($konten_like[$j]['STATUS']=="LIKE") $sum_like+=1;
                         if($konten_like[$j]['STATUS']=="DISLIKE") $sum_dislike+=1;
                     }
+
+                    $view = $this->_model->query('select * from konten_view where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                    $konten[$i]['VIEW'] = count($view);
+                    
 //                    echo "like=".$sum_like."<br>";
 //                    echo "dislike=".$sum_dislike."<br>";
                     //user like
@@ -666,6 +696,19 @@ class Content_con extends Controller {
             for($x = 0; $x < count($result); $x++) {
               for($y = 0; $y < count($result); $y++) {
                 if($result[$x]['KOMENTAR'] > $result[$y]['KOMENTAR']) {
+                  $hold = $result[$x];
+                  $result[$x] = $result[$y];
+                  $result[$y] = $hold;
+                }
+              }
+            }        
+            return $result;
+        }
+        function orderKontenByView($konten){
+            $result = $konten;
+            for($x = 0; $x < count($result); $x++) {
+              for($y = 0; $y < count($result); $y++) {
+                if($result[$x]['VIEW'] > $result[$y]['VIEW']) {
                   $hold = $result[$x];
                   $result[$x] = $result[$y];
                   $result[$y] = $hold;
@@ -885,6 +928,8 @@ class Content_con extends Controller {
                 $konten=  $this->orderKontenByLike($konten);
             }else if($sort==2){ // sort komentar
                 $konten=  $this->orderKontenByKomentar($konten);                    
+            }else if($sort==3){ // sort view
+                $konten=  $this->orderKontenByView($konten);                    
             }
             
             //echo count($konten).':'.$index;
@@ -929,7 +974,7 @@ class Content_con extends Controller {
                         echo '</div>
                         <div class="paketjempol">
                             <div class="views"></div>
-                            <div class="viewcount">100</div><br/>
+                            <div class="viewcount" id="view'.$konten[$i]['ID_KONTEN'].'"></div><br/>
                             <div class="likemini"></div>
                             <div class="jumlahlike" id="like'.$konten[$i]['ID_KONTEN'].'"></div>
                             <div class="commentmini"></div>
@@ -1025,6 +1070,8 @@ class Content_con extends Controller {
                     $konten=  $this->orderKontenByLike($konten);
                 }else if($sort==2){ // sort komentar
                     $konten=  $this->orderKontenByKomentar($konten);                    
+                }else if($sort==3){ // sort view
+                    $konten=  $this->orderKontenByView($konten);                    
                 }
                 
 
@@ -1069,7 +1116,7 @@ class Content_con extends Controller {
                             echo '</div>
                             <div class="paketjempol">
                                 <div class="views"></div>
-                                <div class="viewcount">100</div><br/>
+                                <div class="viewcount" id="view'.$konten[$i]['ID_KONTEN'].'"></div><br/>
                                 <div class="likemini"></div>
                                 <div class="jumlahlike" id="like'.$konten[$i]['ID_KONTEN'].'"></div>
                                 <div class="commentmini"></div>
@@ -1174,6 +1221,10 @@ class Content_con extends Controller {
         function update_comment($id_content){
             $komentar = $this->_model->query('select * from komentar where ID_KONTEN='.$id_content.'');
             echo count($komentar);
+        }
+        function update_view($id_content){
+            $view = $this->_model->query('select * from konten_view where ID_KONTEN='.$id_content.'');
+            echo count($view);
         }
         function ajax_unlike($id_konten){
             $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN="'.$id_konten.'" AND ID_USER="'.$_SESSION['id'].'"');
@@ -1312,5 +1363,116 @@ class Content_con extends Controller {
                     echo '<script type="text/javascript">showAchievement("'.$achievement['NAMA'].'", "'.$achievement['DESKRIPSI'].'", "'.BASE_URL.'img/achievements/'.$achievement['GAMBAR'].'")</script>';                
             }
         }
+        function ajax_scrolling_search($index, $id_tag=-1, $sort=-1){
+            $response = "";
+            if($id_tag==-1){ // no tags
+                $konten= $this->getContent();
+            }else{
+                $konten = $this->getContentFromTag($id_tag);                
+            }
+            
+            if($sort==-1){ // sort waktu
+                $konten=  $this->orderKontenByTime($konten);
+            }else if($sort==1){ // sort like
+                $konten=  $this->orderKontenByLike($konten);
+            }else if($sort==2){ // sort komentar
+                $konten=  $this->orderKontenByKomentar($konten);                    
+            }else if($sort==3){ // sort view
+                $konten=  $this->orderKontenByView($konten);                    
+            }
+            
+            //echo count($konten).':'.$index;
+            for($i=$index-3;$i<$index;$i++){
+                if(!empty($konten[$i])){
+                        echo '
+                    <li>
+                    <div class="paketkonten ';
+                        if($konten[$i]['ID_TYPE']==1) echo 'link';
+                        else if($konten[$i]['ID_TYPE']==2) echo 'image';
+                        else if($konten[$i]['ID_TYPE']==3) echo 'video';
 
+                        echo 'post">
+                        <div class="left iconcontent">
+                            <div class="icon';
+                        if($konten[$i]['ID_TYPE']==1) echo 'link';
+                        else if($konten[$i]['ID_TYPE']==2) echo 'photo';
+                        else if($konten[$i]['ID_TYPE']==3) echo 'video';
+
+                        echo '"></div>
+                        </div>
+                        <div class="headertext judul">
+                            <div class="title"><a href="'.BASE_URL.'content_con/content/'.$konten[$i]['ID_KONTEN'].'">'.$konten[$i]['JUDUL'].'</a></div>
+                            <div class="uploader"><a href="'.BASE_URL.'user_con/profile/'.$konten[$i]['ID_USER'].'">'.$konten[$i]['NAMA'].'</a></div>
+                            <div class="uploaded" id="time'.$konten[$i]['ID_KONTEN'].'"></div>
+                                <script type="text/javascript">setInterval(';echo "'timerContent"; echo '("'.BASE_URL.'","time",'.$konten[$i]['ID_KONTEN'].',"'.$konten[$i]['WAKTU'].'");'; echo "'"; echo ',250)</script>
+                        </div>
+                        <div class="content">';
+                        if($konten[$i]['ID_TYPE']==1) 
+                            echo '
+                            <a href="'.$konten[$i]['LINK'].'"> '.$konten[$i]['LINK'].' </a>
+                            <p> '.$konten[$i]['DESKRIPSI'].' </p>
+                                ';
+                        else if($konten[$i]['ID_TYPE']==2) echo '
+                            <img src="'.BASE_URL.'image/'.$konten[$i]['LINK'].'" width="320" alt="beach">
+                            ';
+                        else if($konten[$i]['ID_TYPE']==3) echo '
+                            <iframe width="320" height="240" src="'.$konten[$i]['LINK'].'" frameborder="0" allowfullscreen></iframe>
+                            ';
+
+
+                        echo '</div>
+                        <div class="paketjempol">
+                            <div class="views"></div>
+                            <div class="viewcount" id="view'.$konten[$i]['ID_KONTEN'].'"></div><br/>
+                            <div class="likemini"></div>
+                            <div class="jumlahlike" id="like'.$konten[$i]['ID_KONTEN'].'"></div>
+                            <div class="commentmini"></div>
+                            <div class="jumlahkomen" id="comment'.$konten[$i]['ID_KONTEN'].'"></div>
+                            <br/>';
+                            if(!empty($_SESSION['login'])){
+                                if(!empty($konten[$i]['STATUS_USER'])){
+                                    echo $konten[$i]['STATUS_USER']=="LIKE" 
+                                    ? 
+                                    '
+                                    <div class="likebutton_pressed" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="unlike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    '
+                                    : 
+                                    '
+                                    <div class="likebutton" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton_pressed" id="dislikebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="undislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    ';
+                                }else{
+                                    echo
+                                    '<div class="likebutton" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="like(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$konten[$i]['ID_KONTEN'].'"><a onclick="dislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')"></a></div>';
+                                }
+                            }else{
+                                echo '
+                                    <div class="likebutton" id="likebutton'.$konten[$i]['ID_KONTEN'].'"><a href="#"></a></div>
+                                    <div class="dislikebutton" id="dislikebutton'.$konten[$i]['ID_KONTEN'].'"><a href="#"></a></div>
+                                    ';
+                            }
+                            echo '<div class="tags">
+                                Tags : <br/>
+                                <ul class="tag">';
+                                    for($j=0;$j<count($konten[$i]['TAG']);$j++){
+                                        echo '
+                                            <li><a href="'.BASE_URL.'content_con/list_content/-1/'.$konten[$i]['TAG'][$j]['ID_TAG'].'">'.$konten[$i]['TAG'][$j]['NAMA_TAG'].'</a></li>
+                                            ';
+                                    }
+                                echo '</ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                ';
+
+
+
+                }
+
+            }
+            echo $response;            
+        }
 }

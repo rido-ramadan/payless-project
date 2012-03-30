@@ -1,5 +1,4 @@
 <?php
-
 // Fill up array with names
 $username = array ("Anna",
             "Brittany",

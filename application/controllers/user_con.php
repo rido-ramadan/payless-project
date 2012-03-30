@@ -246,6 +246,10 @@ class User_con extends Controller {
         }
         function profile($id, $achieve=-1){
             if(!empty($_SESSION['login'])){
+                $message = $this->_model->query('select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO='.$_SESSION['id'].'');
+                if(count($message)>0){
+                    $this->set('message_box', $message);
+                }
                 $achievement = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$_SESSION['id'].'');            
                 if(count($achievement)>0){
                     $this->set('list_achievement', $achievement);

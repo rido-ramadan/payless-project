@@ -8,7 +8,7 @@ jaaspeel.small_height = '100';
 jaaspeel.small_params = 'ico=' + jaaspeel.small_image;
 
 jaaspeel.big_path = '../swf/large.swf';
-jaaspeel.big_image = escape('../img/large.png');
+jaaspeel.big_image = escape('../img/large.jpg');
 jaaspeel.big_width = '650';
 jaaspeel.big_height = '650';
 jaaspeel.big_params = 'big=' + jaaspeel.big_image + '&ad_url=' + jaaspeel.ad_url;

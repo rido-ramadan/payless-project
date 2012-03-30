@@ -51,7 +51,7 @@
                     </div>
                 <div class="paketjempol">
                     <div class="views"></div>
-                    <div class="viewcount">100</div><br/>
+                    <div class="viewcount" <?php echo 'id="view'.$content['ID_KONTEN'].'"'?>></div><br/>
                             <div class="likemini"></div>
                             <div class="jumlahlike" <?php echo 'id="like'.$content['ID_KONTEN'].'"'?>></div>
                             <div class="commentmini"></div>

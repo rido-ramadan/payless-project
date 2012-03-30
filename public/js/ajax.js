@@ -1,4 +1,3 @@
-//var page = 0;
 var contentHeight = 800;
 var pageHeight = document.documentElement.clientHeight;
 var scrollPosition;
@@ -368,6 +367,18 @@ function updateComment(base_url, id_content){
     xmlhttp.open("GET",base_url+"content_con/update_comment/" + id_content,true);
     xmlhttp.send();        
 }
+function updateView(base_url, id_content){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("view"+id_content).innerHTML = xmlhttp.responseText;
+        }
+    }
+    // Get query from search bar
+    xmlhttp.open("GET",base_url+"content_con/update_view/" + id_content,true);
+    xmlhttp.send();        
+}
 function like(base_url, id_content){
     var xmlhttp;
     xmlhttp = new XMLHttpRequest();
@@ -474,6 +485,7 @@ function timerContent(base_url, div, id_content, currTime){
     //setTimeout("timer('"+currTime+"')",2);
     updateLike(base_url, id_content);
     updateComment(base_url, id_content);
+    updateView(base_url, id_content);
 }
 
 
@@ -631,7 +643,4 @@ function checkAchievement(url){
         }		
         contentHeight += 800;		
     }    
-    function composeMessage(base_url, id_user){
-        
-    }
 }
