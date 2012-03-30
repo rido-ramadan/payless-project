@@ -5,6 +5,7 @@ document.body;
 var height = elem.clientHeight;
 var width = elem.clientWidth;
 var filterSearch = false;
+var inbox = false;
 
 function getHeight(){
     var htmlheight = document.body.parentNode.scrollHeight;
@@ -99,5 +100,18 @@ function toggleFilterSearch() {
         x.style.height = 'auto';
         x.style.MozTransform = 'scale(1)';
         filterSearch = false;
+    }
+}
+
+function showInbox() {
+    var box = document.getElementById("inbox");
+    if (!inbox) {
+        box.style.left = '50%';
+        box.style.marginLeft = '-310px';
+        inbox = true;
+    } else {
+        box.style.left = '0%';
+        box.style.marginLeft = '-630px';
+        inbox = false;
     }
 }
