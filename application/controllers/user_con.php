@@ -577,7 +577,7 @@ class User_con extends Controller {
                         $this->_model->query($insert);
                         $achievement=$this->_model->query('select * from achievement where ID_ACHIEVEMENT=12');
                         if(count($achievement)>0)
-                            echo 'asd';
+                            //echo 'asd';
                             $this->set('achievement', $achievement[0]);
                         $achieve = true;
                     }

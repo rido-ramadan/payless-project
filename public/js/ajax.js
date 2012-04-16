@@ -1,3 +1,4 @@
+//var page = 0;
 var contentHeight = 800;
 var pageHeight = document.documentElement.clientHeight;
 var scrollPosition;
