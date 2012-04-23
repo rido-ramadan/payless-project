@@ -1,13 +1,14 @@
+<%@page import="Model.User"%>
 <script type="text/javascript">
     interval_user=setInterval('scrollProfileContent("<?php echo BASE_URL?>",<?php if(!empty($user)) echo $user['ID_USER']; else echo '-1'?>);', 1000);
 </script>    
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
-        <?php if(!empty($user)){?>
+        <% if(session.getAttribute("user") != null){ %>
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
                 <div class="userheader">
-                    <?php echo $user['USERNAME']?>'s Profile
+                    <% ((User)session.getAttribute("user")).getName() ; %>'s Profile
                     <?php
                         if(!empty($_SESSION['login'])){
                             if($user['ID_USER']!=$_SESSION['id']){
@@ -235,7 +236,7 @@
             <div class="editbot"></div>
         </div>
         </form>
-                    <?php }?>
+        <% } %>
 
         <!---------------------->
 

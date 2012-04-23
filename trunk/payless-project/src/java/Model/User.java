@@ -21,7 +21,10 @@ public class User {
     public String gender;
     public String aboutMe;
     public String status;
+    public boolean valid;
     
+    public User() {}
+
     public User(int ID, String username, String password, String name,
                 Date date, String email, String avatar, String gender,
                 String aboutMe, String status) {
@@ -115,5 +118,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
 }
