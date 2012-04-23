@@ -185,6 +185,7 @@
         </div>
         <!-- ::::::::::::::::::::: ACHIEVEMENT LIST :::::::::::::::::::: -->
         <!--?php if (!empty($_SESSION['login'])) { ?-->
+        <% if (session.getAttribute("login") != null) { %>
         <div class="ach_list">
             <div class="ach_box">
                 <div class="ach_congrats"><!--?php if (!empty($_SESSION['login'])) echo $_SESSION['username'] ?-->Edgar's Achievements</div>
@@ -211,10 +212,10 @@
             </div>
             <div class="ach_notif-center" onclick="slideDown()">ACHIEVEMENTS</div>
         </div>
-        <?php } ?>
+        <% } %>
         <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
-        <!--?php if (!empty($_SESSION['login'])) { ?-->
+        <% if (session.getAttribute("login") != null) { %>
         <div id="inbox">
             <div class="mail">
                 <div class="mail-list">
@@ -240,7 +241,7 @@
             </div>
             <div class="slide-inbox" onclick="showInbox()"></div>
         </div>
-        <!--?php } ?-->
+        <% } %>
         <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <!-- ::::::::::::::::::::: COMPOSE MESSAGE ::::::::::::::::::::: -->
         <!--?php if (!empty($user['ID_USER'])) { ?-->
@@ -266,6 +267,6 @@
         <!--?php
             if (!empty($achievement))
             echo '
-        --><script type="text/javascript">showAchievement("' . $achievement['NAMA'] . '", "' . $achievement['DESKRIPSI'] . '", "' . BASE_URL . 'img/achievements/' . $achievement['GAMBAR'] . '")</script>';
-        <!--?-->
+        --><!--script type="text/javascript">showAchievement("' . $achievement['NAMA'] . '", "' . $achievement['DESKRIPSI'] . '", "' . BASE_URL . 'img/achievements/' . $achievement['GAMBAR'] . '")</script>'
+        ?-->
         <!-- ::::::::::::::::::::: END OF HEADER PART ::::::::::::::::::::: -->
