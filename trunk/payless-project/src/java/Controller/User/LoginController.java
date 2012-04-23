@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
             User user = new User();
             user.setUsername(request.getParameter("username"));
             user.setPassword(request.getParameter("password"));
-
+            
             user = UserDAO.login(user);
 
             if (user.isValid()) {
@@ -51,14 +51,13 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
 //                response.sendRedirect("ProfileView.jsp"); //logged-in page 
                 RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/header.jsp");
-                rd.include(request, response);
                 rd = getServletContext().getRequestDispatcher("/ProfilePage");
                 rd.include(request, response);
-                rd = getServletContext().getRequestDispatcher("/footer.jsp");
-                rd.include(request, response);
             } else {
-                response.sendRedirect("index.jsp"); //error page 
+//                response.sendRedirect("index.jsp"); //error page 
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/Home");
+                rd.include(request, response);
             }
         } catch (Exception e) {
         } finally {
