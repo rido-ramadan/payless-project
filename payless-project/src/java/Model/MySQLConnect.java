@@ -1,11 +1,6 @@
 package Model;
 
-import java.beans.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
@@ -19,8 +14,8 @@ public class MySQLConnect {
 
     private String connectionURL = "jdbc:mysql://localhost:3306/progin_171_13509078";
     private Connection connection = null;
-    private String username = "root";
-    private String password = "";
+    private String username = "progin";
+    private String password = "progin";
     private Object driver;
 
     public MySQLConnect() throws Exception {
@@ -52,44 +47,47 @@ public class MySQLConnect {
     public Connection getConnection() {
         return connection;
     }
+    
+    public Statement createStatement() throws SQLException {
+        return connection.createStatement();
+    }
 
-    public static String[] query(String mQuery){
+    public static String[] query(String mQuery) {
         String[] result = null;
-        try{
+        try {
             MySQLConnect mysql = new MySQLConnect();
             mysql.connect();
             ResultSet rs = mysql.executeQuery(mQuery);
-            System.out.println("jumlah row="+rs.getRow());
+            System.out.println("jumlah row=" + rs.getRow());
             while (rs.next()) {
                 System.out.println(rs.getString("GENDER"));
             }
-        }catch(Exception ex){
-            System.out.println("EXCEPTION : "+ex);
+        } catch (Exception ex) {
+            System.out.println("EXCEPTION : " + ex);
         }
         return result;
     }
-    
+
     public static void main(String[] Args) throws Exception {
         MySQLConnect mysql = new MySQLConnect();
         mysql.connect();
-        try{
-            ResultSet rs = mysql.executeQuery("SELECT * FROM auser");
+        try {
+            ResultSet rs = mysql.executeQuery("SELECT * FROM user");
             while (rs.next()) {
-                System.out.println(rs.getString("GENDER"));
+                System.out.println(rs.getString("NAMA"));
             }
-        }catch(Exception ex){
-            System.out.println("exception : "+ex);
+        } catch (Exception ex) {
+            System.out.println("exception : " + ex);
         }
-        
-        try{
+
+        try {
             mysql.executeUpdate("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('15', 'belajar')");
-                }catch(Exception ex){
-                    System.out.println("exception : "+ex);
-                    
-                }
+        } catch (Exception ex) {
+            System.out.println("exception : " + ex);
+
+        }
         mysql.close();
     }
-
 //    public static ArrayList<Post> getPosts() throws Exception {
 //        ArrayList<Post> posts = new ArrayList<Post>();
 //        MySQLConnect mysql = new MySQLConnect();

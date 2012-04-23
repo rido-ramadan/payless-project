@@ -17,8 +17,10 @@ public class UserDAO {
     static ResultSet rs = null;
 
     public static User login(User bean) {
-
         //preparing some objects for connection 
+        MySQLConnect mySQL;
+        Statement statement = null;
+
         String username = bean.getUsername();
         String password = bean.getPassword();
 
@@ -30,9 +32,11 @@ public class UserDAO {
         System.out.println("Query: " + searchQuery);
 
         try {
-            MySQLConnect mySQL = new MySQLConnect();
+            mySQL = new MySQLConnect();
             mySQL.connect();
-            mySQL.executeQuery(searchQuery);
+//            mySQL.executeQuery(searchQuery);
+            statement = mySQL.createStatement();
+            rs = statement.executeQuery(searchQuery);
             boolean more = rs.next();
 
             // if user does not exist set the isValid variable to false
@@ -41,10 +45,9 @@ public class UserDAO {
                 bean.setValid(false);
             } //if user exists set the isValid variable to true
             else if (more) {
-                String name = rs.getString("name");
-
+                String name = rs.getString("NAMA");
                 System.out.println("Welcome " + name);
-                
+
                 bean.setID_User(rs.getInt("ID_USER"));
                 bean.setName(name);
                 bean.setEmail(rs.getString("EMAIL"));
@@ -54,17 +57,32 @@ public class UserDAO {
                 bean.setAboutMe(rs.getString("ABOUT_ME"));
                 bean.setValid(true);
             }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (Exception e) {
+                }
+                statement = null;
+            }
             mySQL.close();
         } catch (Exception ex) {
             System.out.println("Log In failed: An Exception has occurred! " + ex);
+            ex.printStackTrace();
         } //some exception handling
         finally {
-//            if (rs != null) {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
+                rs = null;
+            }
+//            if (statement != null) {
 //                try {
-//                    rs.close();
+//                    statement.close();
 //                } catch (Exception e) {
 //                }
-//                rs = null;
+//                statement = null;
 //            }
         }
         return bean;
