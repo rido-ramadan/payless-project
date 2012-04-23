@@ -134,7 +134,7 @@
         <div id="overlay" onclick="closeAll()"></div>
         <div id="popup" class="popup">
             <div class="loginpopout">
-                <form action="sdf.php" method="post">
+                <form action="/Login" method="post">
                     <!--<form action="<?php echo BASE_URL ?>user_con/validate_login" method="post">-->
                     <div class="topbutton">
                         <span class="lbox_l"></span>
@@ -157,7 +157,8 @@
                     <div id="login-notification"></div>
                     <div class="clear">
                         <span><a class="closelogin" onclick="closePopUp()"></a></span>
-                        <span><input type="button" class="loginbutton login" id="loginButton" onclick="validateLogin('index.jsp')" value="Log In" /></span>
+                        <!--span><input type="button" class="loginbutton login" id="loginButton" onclick="validateLogin('index.jsp')" value="Log In" /></span-->
+                        <span><input type="submit" class="loginbutton login" id="loginButton" value="Log In" /></span>
                     </div>
                 </form>
             </div>

@@ -8,22 +8,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
  */
-
 /**
  *
  * @author FAISAL
  */
 public class MySQLConnect {
+
     private String connectionURL = "jdbc:mysql://localhost:3306/progin_171_13509078";
     private Connection connection = null;
-    private String username = "progin";
-    private String password = "progin";
-
+    private String username = "root";
+    private String password = "";
     private Object driver;
-    
+
     public MySQLConnect() throws Exception {
         driver = Class.forName("com.mysql.jdbc.Driver").newInstance();
     }
@@ -54,23 +53,50 @@ public class MySQLConnect {
         return connection;
     }
 
+    public static String[] query(String mQuery){
+        String[] result = null;
+        try{
+            MySQLConnect mysql = new MySQLConnect();
+            mysql.connect();
+            ResultSet rs = mysql.executeQuery(mQuery);
+            System.out.println("jumlah row="+rs.getRow());
+            while (rs.next()) {
+                System.out.println(rs.getString("GENDER"));
+            }
+        }catch(Exception ex){
+            System.out.println("EXCEPTION : "+ex);
+        }
+        return result;
+    }
+    
     public static void main(String[] Args) throws Exception {
         MySQLConnect mysql = new MySQLConnect();
         mysql.connect();
-        ResultSet rs = mysql.executeQuery("SELECT * FROM post WHERE ID_post='3'");
-        while (rs.next()) {
-            System.out.println(rs.getString("judul"));
+        try{
+            ResultSet rs = mysql.executeQuery("SELECT * FROM auser");
+            while (rs.next()) {
+                System.out.println(rs.getString("GENDER"));
+            }
+        }catch(Exception ex){
+            System.out.println("exception : "+ex);
         }
+        
+        try{
+            mysql.executeUpdate("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('15', 'belajar')");
+                }catch(Exception ex){
+                    System.out.println("exception : "+ex);
+                    
+                }
         mysql.close();
     }
-	
-//	public static ArrayList<Post> getPosts() throws Exception{
+
+//    public static ArrayList<Post> getPosts() throws Exception {
 //        ArrayList<Post> posts = new ArrayList<Post>();
 //        MySQLConnect mysql = new MySQLConnect();
 //        mysql.connect();
 //        ResultSet result = mysql.executeQuery("SELECT * FROM post");
-//        while(result.next()){
-//            Post post = new Post(result.getInt("ID_post"),result.getString("judul"),result.getString("konten_link"),result.getString("konten_deskripsi"),result.getDate("Time"),result.getTime("Time"), result.getString("tipe"),result.getString("username"));
+//        while (result.next()) {
+//            Post post = new Post(result.getInt("ID_post"), result.getString("judul"), result.getString("konten_link"), result.getString("konten_deskripsi"), result.getDate("Time"), result.getTime("Time"), result.getString("tipe"), result.getString("username"));
 //            posts.add(post);
 //        }
 //        mysql.close();

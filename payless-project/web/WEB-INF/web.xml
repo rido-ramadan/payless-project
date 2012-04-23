@@ -32,6 +32,10 @@
         <servlet-name>ErrorPageCon</servlet-name>
         <servlet-class>Controller.ErrorPageCon</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Controller.User.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContentPage</servlet-name>
         <url-pattern>/ContentPage</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ErrorPageCon</servlet-name>
         <url-pattern>/ErrorPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
