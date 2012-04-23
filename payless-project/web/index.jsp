@@ -4,7 +4,7 @@
     Author     : Edgar Drake
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-<%@ include file="home.jsp" %>
+<%@ include file="register.jsp" %>
 <%@ include file="footer.jsp" %>
