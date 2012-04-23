@@ -17,6 +17,7 @@ public class HomeCon extends HttpServlet {
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
+    test();
     RequestDispatcher rd;
     rd =getServletContext().getRequestDispatcher("/header.jsp");
     rd.include(request, response);
@@ -25,7 +26,9 @@ throws ServletException, IOException {
     rd =getServletContext().getRequestDispatcher("/footer.jsp");
     rd.include(request, response);
 }//
-
+public void test(){
+    
+}
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +sign on the left to edit the code.">
 /**
 * Handles the HTTP <code>GET</code> method.

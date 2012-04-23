@@ -1,4 +1,4 @@
-package servlet;
+package Model;
 
 import java.beans.Statement;
 import java.sql.Connection;
@@ -17,10 +17,10 @@ import java.sql.SQLException;
  */
 public class MySQLConnect {
 
-    private String connectionURL = "jdbc:mysql://localhost:3306/progin_171_13509048";
+    private String connectionURL = "jdbc:mysql://localhost:3306/progin_171_13509078";
     private Connection connection = null;
-    private String username = "progin";
-    private String password = "progin";
+    private String username = "root";
+    private String password = "";
     private Object driver;
 
     public MySQLConnect() throws Exception {
@@ -53,13 +53,25 @@ public class MySQLConnect {
         return connection;
     }
 
+    public static String[] query(String mQuery){
+        String[] result = null;
+        return result;
+    }
+    
     public static void main(String[] Args) throws Exception {
         MySQLConnect mysql = new MySQLConnect();
         mysql.connect();
-        ResultSet rs = mysql.executeQuery("SELECT * FROM post WHERE ID_post='3'");
+        ResultSet rs = mysql.executeQuery("SELECT * FROM user");
         while (rs.next()) {
-            System.out.println(rs.getString("judul"));
+            System.out.println(rs.getString("GENDER"));
         }
+        
+        try{
+            mysql.executeUpdate("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('15', 'belajar')");
+                }catch(Exception ex){
+                    System.out.println("exception : "+ex);
+                    
+                }
         mysql.close();
     }
 
