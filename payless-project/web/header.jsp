@@ -35,7 +35,7 @@
                     }
                     ?-->
                     <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
-                    <a class="topbutton signup" href="user_con/register" id="myacctButton" title="Sign Up"></a>
+                    <a class="topbutton signup" href="/RegisterPage" id="myacctButton" title="Sign Up"></a>
                 </div>
             </div>
             <!--script type="text/javascript">
@@ -96,9 +96,9 @@
                 </div>
             </div>
             <div class="nav3">
-                <div id="sort5" class="left"><a href="index.jsp">Home</a></div>
+                <div id="sort5" class="left"><a href="/Home">Home</a></div>
                 <div class="left"><img src="img/divide.png" alt="" /></div>
-                <div id="sort2" class="left nav3act"><a href="content_con/list_content">Contents</a></div>
+                <div id="sort2" class="left nav3act"><a href="/ListContentPage">Contents</a></div>
                 <div class="left"><img src="img/divide.png" alt="" /></div>
                 <!--?php
                 if (!empty($_SESSION['login']))
@@ -106,7 +106,7 @@
                 <div id="sort1" class="left"><a href="' . BASE_URL . 'content_con/post">Upload Post</a></div>
                 ';
                 ?-->
-                <div id="sort1" class="left"><a href="content_con/post">Upload Post</a></div>
+                <div id="sort1" class="left"><a href="/UploadPage">Upload Post</a></div>
                 <form action="home_con/submit_search" method="post" name="srch">
                     <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search_button" onclick="input_search()" value="Search"/>
