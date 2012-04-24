@@ -17,9 +17,9 @@ import javax.servlet.RequestDispatcher;
 //@WebServlet(name = "ContentCon", urlPatterns = {"/ContentCon"})
 public class HomeCon extends HttpServlet {
 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 //    if(!empty($_SESSION['login'])){
 //            $achievement = $this->_model->query('select * from user_achievement natural join achievement where ID_USER='.$_SESSION['id'].'');            
 //            if(count($achievement)>0){
@@ -44,67 +44,69 @@ throws ServletException, IOException {
 //            $this->set('content_most_comment',$this->orderKontenByKomentar($konten));
 //        }
 
-    //$this->set('title_page', 'Homepage');
-    Model bean = new Model();
-    bean.display.put("title", new String[]{"asep", "dayat"});
-    
-    QueryResult query = MySQLConnect.query("select * from konten");
-    if(query.count()>0){
-        bean.display.put("content_most_like",query);
-        bean.display.put("content_most_comment",query);
+        //$this->set('title_page', 'Homepage');
+        Model bean = new Model();
+        bean.display.put("title", new String[]{"asep", "dayat"});
+
+        QueryResult query = MySQLConnect.query("select * from konten");
+        if (query.count() > 0) {
+            bean.display.put("content_most_like", query);
+            bean.display.put("content_most_comment", query);
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("bean", bean);
+
+        RequestDispatcher rd;
+        rd = getServletContext().getRequestDispatcher("/header.jsp");
+        rd.include(request, response);
+        rd = getServletContext().getRequestDispatcher("/HomeView.jsp");
+        rd.include(request, response);
+        rd = getServletContext().getRequestDispatcher("/footer.jsp");
+        rd.include(request, response);
+    }//
+    public QueryResult getContent() {
+        QueryResult result = null;
+
+        return result;
     }
-        
-    HttpSession session = request.getSession();
-    session.setAttribute("bean", bean);
-
-    RequestDispatcher rd;
-    rd =getServletContext().getRequestDispatcher("/header.jsp");
-    rd.include(request, response);
-    rd =getServletContext().getRequestDispatcher("/HomeView.jsp");
-    rd.include(request, response);
-    rd =getServletContext().getRequestDispatcher("/footer.jsp");
-    rd.include(request, response);
-}//
-public QueryResult getContent(){
-    QueryResult result = null;
-    
-    return result;
-}
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +sign on the left to edit the code.">
-/**
-* Handles the HTTP <code>GET</code> method.
-* @param request servlet request
-* @param response servlet response
-* @throws ServletException if a servlet-specific error occurs
-* @throws IOException if an I/O error occurs
-*/
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-throws ServletException, IOException {
-processRequest(request, response);
-}
 
-/**
-* Handles the HTTP <code>POST</code> method.
-* @param request servlet request
-* @param response servlet response
-* @throws ServletException if a servlet-specific error occurs
-* @throws IOException if an I/O error occurs
-*/
-@Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-throws ServletException, IOException {
-processRequest(request, response);
-}
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-/**
-* Returns a short description of the servlet.
-* @return a String containing servlet description
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-*/
-@Override
-public String getServletInfo() {
-return "Short description";
-}// </editor-fold>
-
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 }
