@@ -100,6 +100,7 @@ public class MySQLConnect {
 
     public static QueryResult query(String mQuery){
         QueryResult result = null;
+        result = new QueryResult();
         boolean debug = false;
         try{
             MySQLConnect mysql = new MySQLConnect();
@@ -130,11 +131,10 @@ public class MySQLConnect {
                     if(debug) System.out.println("");
                     j++;
                 }
-                result = new QueryResult();
                 result.setColumnName(columnName);
                 result.setContent(content);
-                result.setCountRow(countRow);
             }
+            result.setCountRow(countRow);
         }catch(Exception ex){
             System.out.println("EXCEPTION : "+ex);
         }
