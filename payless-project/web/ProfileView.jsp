@@ -7,13 +7,15 @@
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
         <% 
             QueryResult user = (QueryResult)bean.display.get("user");
-            if(user != null) { 
+            QueryResult posts = (QueryResult)bean.display.get("posts");
+            QueryResult comments = (QueryResult)bean.display.get("comments");
+            QueryResult achievements = (QueryResult)bean.display.get("achievements");
+            if(user == null) {
+                // DO REDIRECT
                 
-                out.println(user.get(0, "NAMA"));
-                out.println(user.get(0, "TGL_LAHIR"));
-            }
+                response.sendRedirect("404View.jsp");
+            } else {                
         %>
-        <% { %>
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
@@ -46,111 +48,56 @@
                     </div>
                     <div class="user-attribute">
                         <div class="lhs left">FULL NAME</div>
-                        <div class="rhs left clearfix"><% user.get(0, "NAMA"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "NAMA")); %></div>
                         <div class="lhs left">E-MAIL</div>
-                        <div class="rhs left clearfix"><% user.get(0, "EMAIL"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "EMAIL")); %></div>
                         <div class="lhs left">GENDER</div>
-                        <div class="rhs left clearfix"><% user.get(0, "GENDER"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "GENDER")); %></div>
                         <div class="lhs left">STATUS</div>
-                        <div class="rhs left clearfix"><% user.get(0, "STATUS"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "STATUS")); %></div>
                         <div class="lhs left">BIRTHDATE</div>
-                        <div class="rhs left clearfix"><% user.get(0, "TGL_LAHIR"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "TGL_LAHIR")); %></div>
                         <div class="lhs left">ABOUT ME</div>
-                        <div class="rhs left clearfix"><% user.get(0, "ABOUT_ME"); %></div>
+                        <div class="rhs left clearfix"><% out.println(user.get(0, "ABOUT_ME")); %></div>
                         <div class="lhs left"># COMMENTS</div>
-                        <div class="rhs left clearfix"><?php echo $user['KOMENTAR']?></div>
+                        <div class="rhs left clearfix"><% out.println(comments.count()); %></div>
                         <div class="lhs left"># UPLOADS</div>
-                        <div class="rhs left clearfix"><?php echo $user['POST']?></div>
+                        <div class="rhs left clearfix"><% out.println(posts.count()); %></div>
                         <div class="lhs left">POST LIST</div>
                     </div>
                     <div class="clear">
-                        <ul id="profileDownList">
-                        <?php 
-//                        if(!empty($user['KONTEN'])){
-//                                echo '<ul>';
-//                                for($i=0;$i<count($user['KONTEN']);$i++){
-//                                    echo '
-//                                <li><div class="top-post"">
-//                                     <div class="top-';
-//                                    if($user['KONTEN'][$i]['ID_TYPE']==1) echo 'link';
-//                                        else if($user['KONTEN'][$i]['ID_TYPE']==2) echo 'image';
-//                                        else if($user['KONTEN'][$i]['ID_TYPE']==3) echo 'video';
-//                                    echo '">
-//                                        <div class="contenttitle"><a href="'.BASE_URL.'content_con/content/'.$user['KONTEN'][$i]['ID_KONTEN'].'">'.$user['KONTEN'][$i]['JUDUL'].'</a></div>
-//                                        <div class="view">';
-//                                    
-//                                    if($user['KONTEN'][$i]['ID_TYPE']==1) echo '
-//                                        <div class="view-link-url"><a href="'.$user['KONTEN'][$i]['LINK'].'">'.$user['KONTEN'][$i]['LINK'].'</a></div>
-//                                        <div class="view-link-desc">'.$user['KONTEN'][$i]['DESKRIPSI'].'</div>
-//                                        ';
-//                                        else if($user['KONTEN'][$i]['ID_TYPE']==2) echo '
-//                                            <div class="view-image">
-//                                                <img src="'.BASE_URL.'image/'.$user['KONTEN'][$i]['LINK'].'" width="260" alt="'.$user['KONTEN'][$i]['JUDUL'].'">
-//                                            </div>
-//                                            ';
-//                                        else if($user['KONTEN'][$i]['ID_TYPE']==3) echo '
-//                                            <div class="view-video">
-//                                                <div class="view"><iframe width="240" height="180" src="'.$user['KONTEN'][$i]['LINK'].'" ></iframe></div>
-//                                            </div>
-//                                            ';
-//                                    
-//                                    
-//                                        echo '</div>
-//                                        <div class="basic-features">
-//                                            <div class="paketjempol">
-//                                                <div class="likemini"></div>
-//                                                <div class="jumlahlike">'.$user['KONTEN'][$i]['LIKE'].'</div>
-//                                                <div class="commentmini"></div>
-//                                                <div class="jumlahkomen">'.count($user['KONTEN'][$i]['KOMENTAR']).'</div>
-//                                                <br/>';
-//                                        if(!empty($_SESSION['login'])){
-//                                        echo '
-//                                            <div class="likebutton"><a href="'.BASE_URL.'content_con/like/'.$user['KONTEN'][$i]['ID_KONTEN'].'"></a></div>
-//                                            <div class="dislikebutton" "><a href="'.BASE_URL.'content_con/dislike/'.$user['KONTEN'][$i]['ID_KONTEN'].'"></a></div>';
-//                                        }        
-//                                            echo '</div>
-//                                        </div>
-//                                    </div>
-//                                </div>
-//                            </li>                                        
-//                                        ';
-//                                }
-//                                echo '</ul>';
-//                            }
-                        ?>
-                    </ul>
+                        <ul id="profileDownList"></ul>
                     </div>
-                    <?php if(!empty($user['KONTEN'])){
-                        echo '
+                    <% if(posts != null) { %>
                     <div class="show-more-post">
                         <div class="buttonprevious" >PREVIOUS</div>
                         <div class="buttonnext" style="margin-left: 9px;">NEXT</div>
-                    </div>';
-                    }?>
+                    </div>
+                    <% } %>
                 </div>
                 <div class="userachievement">
                     <div class="subtitle left ">ACHIEVEMENTS</div>
                     <div class="clearfix"></div>
                     <!-- ACHIEVEMENT LIST -->
-                    <?php 
-                        if(!empty($user['ACHIEVEMENT'])){
-                                echo '<ul>';
-                                for($i=0;$i<count($user['ACHIEVEMENT']);$i++){
-                                    echo '
-                                    <li>
-                                        <div class="achievement">
-                                            <div class="ach_logo"><img src="'.BASE_URL.'img/achievements/'.$user['ACHIEVEMENT'][$i]['GAMBAR'].'" alt=""></div>
-                                            <div class="ach_detail">
-                                                <div class="ach_name">'.$user['ACHIEVEMENT'][$i]['NAMA'].'</div>
-                                                <div class="ach_how">'.$user['ACHIEVEMENT'][$i]['DESKRIPSI'].'</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                        ';
-                                }
-                                echo '</ul>';
+                    <%
+                        if (achievements != null) {
+                            out.println("<ul>");
+                            for (int i = 0; i < achievements.count(); i++) {
+                    %>
+                    <li>
+                        <div class="achievement">
+                            <div class="ach_logo"><img src="img/achievements/<% out.print(achievements.get(i, "GAMBAR")); %>" alt=""></div>
+                            <div class="ach_detail">
+                                <div class="ach_name"><% out.println(achievements.get(i, "NAMA")); %></div>
+                                <div class="ach_how"><% out.println(achievements.get(i, "DESKRIPSI")); %></div>
+                            </div>
+                        </div>
+                    </li>
+                    <%
+                            }
+                            out.println("</ul>");
                         }
-                    ?>
+                    %>
                 </div>
             </div>
             <div class="detbot"></div>

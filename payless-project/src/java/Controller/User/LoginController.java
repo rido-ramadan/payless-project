@@ -52,12 +52,12 @@ public class LoginController extends HttpServlet {
 //                response.sendRedirect("ProfileView.jsp"); //logged-in page 
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
-                rd.include(request, response);
+                rd.forward(request, response);
             } else {
 //                response.sendRedirect("index.jsp"); //error page 
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/Home");
-                rd.include(request, response);
+                rd.forward(request, response);
             }
         } catch (Exception e) {
         } finally {
