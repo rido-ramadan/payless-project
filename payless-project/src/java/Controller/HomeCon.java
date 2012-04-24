@@ -67,6 +67,7 @@ public class HomeCon extends HttpServlet {
         rd = getServletContext().getRequestDispatcher("/footer.jsp");
         rd.include(request, response);
     }//
+
     public QueryResult getContent() {
         QueryResult result = null;
 

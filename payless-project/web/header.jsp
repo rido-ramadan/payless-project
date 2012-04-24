@@ -25,7 +25,7 @@
                     <%
                         User user = ((User) session.getAttribute("user"));
                         if (user != null) {
-                            out.println("<a class='topbutton myaccount' href='/ProfilePage' id='myacctButton' title='Sign Up'></a>");
+                            out.println("<a class='topbutton myaccount' href='/ProfilePage?user=" + user.getID_User() + "' id='myacctButton' title='Sign Up'></a>");
                             out.println("<a class='topbutton signout' id='loginButton' alt='Log Out' href='/Logout'></a>");
                         } else {
                             out.println("<a class='topbutton login' id='loginButton' alt='Log In' onclick='showPopup();'></a>");
@@ -56,13 +56,13 @@
                 It's a Project without a Payment!
                 <%
                     if (user != null) {
-                        out.println("<div class='right mini-avatar'><a href='ProfilePage/" + user.getID_User() + "'><img src='avatar/" + user.getAvatar() + "' width='36'  alt='" + user.getAvatar() + "'></a></div>");
+                        out.println("<div class='right mini-avatar'><a href='/ProfilePage?user=" + user.getID_User() + "'><img src='avatar/" + user.getAvatar() + "' width='36'  alt='" + user.getAvatar() + "'></a></div>");
                     }
                 %>
                 <div class="right themes">
                     <%
                         if (user != null) {
-                            out.println("Hello, <a href='ProfilePage/" + user.getID_User() + "'>" + user.getName() + "</a>");
+                            out.println("Hello, <a href='/ProfilePage?user=" + user.getID_User() + "'>" + user.getName() + "</a>");
                         } 
                     %>
                     <!--<form action="<?php echo BASE_URL ?>content_con/submit_tag" method="post">
