@@ -36,6 +36,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Controller.User.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controller.User.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContentPage</servlet-name>
         <url-pattern>/ContentPage</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

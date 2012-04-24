@@ -19,7 +19,7 @@ public class UserDAO {
     public static User login(User bean) {
         //preparing some objects for connection 
         MySQLConnect mySQL;
-        Statement statement = null;
+//        Statement statement = null;
 
         String username = bean.getUsername();
         String password = bean.getPassword();
@@ -34,9 +34,9 @@ public class UserDAO {
         try {
             mySQL = new MySQLConnect();
             mySQL.connect();
-//            mySQL.executeQuery(searchQuery);
-            statement = mySQL.createStatement();
-            rs = statement.executeQuery(searchQuery);
+            rs = mySQL.executeQuery(searchQuery);
+//            statement = mySQL.createStatement();
+//            rs = statement.executeQuery(searchQuery);
             boolean more = rs.next();
 
             // if user does not exist set the isValid variable to false
@@ -57,13 +57,13 @@ public class UserDAO {
                 bean.setAboutMe(rs.getString("ABOUT_ME"));
                 bean.setValid(true);
             }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (Exception e) {
-                }
-                statement = null;
-            }
+//            if (statement != null) {
+//                try {
+//                    statement.close();
+//                } catch (Exception e) {
+//                }
+//                statement = null;
+//            }
             mySQL.close();
         } catch (Exception ex) {
             System.out.println("Log In failed: An Exception has occurred! " + ex);
