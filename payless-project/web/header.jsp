@@ -4,6 +4,7 @@
     Author     : Edgar Drake
 --%>
 
+<%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,21 +22,16 @@
             <div class="nav1">
                 <div style="display:inline-block"><a id="logoButton" href="index.jsp"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
-                    <!--?php
-                    if (isset($_SESSION['login'])) {
-                        echo '
-                    <a class="topbutton myaccount" href="' . BASE_URL . 'user_con/profile/' . ($_SESSION['id']) . '" id="myacctButton" title="Sign Up"></a>
-                    <a class="topbutton signout" id="loginButton" alt="Log In" href="' . BASE_URL . 'user_con/logout"></a>
-                        ';
-                    } else {
-                        echo '
-                    <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
-                    <a class="topbutton signup" href="' . BASE_URL . 'user_con/register" id="myacctButton" title="Sign Up"></a>
-                        ';
-                    }
-                    ?-->
-                    <a class="topbutton login" id="loginButton" alt="Log In" onclick="showPopup();"></a>
-                    <a class="topbutton signup" href="/RegisterPage" id="myacctButton" title="Sign Up"></a>
+                    <%
+                        User user = ((User) session.getAttribute("user"));
+                        if (user != null) {
+                            out.println("<a class='topbutton myaccount' href='/ProfilePage' id='myacctButton' title='Sign Up'></a>");
+                            out.println("<a class='topbutton signout' id='loginButton' alt='Log Out' href='/Logout'></a>");
+                        } else {
+                            out.println("<a class='topbutton login' id='loginButton' alt='Log In' onclick='showPopup();'></a>");
+                            out.println("<a class='topbutton signup' href='/RegisterPage' id='myacctButton' title='Sign Up'></a>");
+                        }
+                    %>
                 </div>
             </div>
             <!--script type="text/javascript">
@@ -186,7 +182,7 @@
         </div>
         <!-- ::::::::::::::::::::: ACHIEVEMENT LIST :::::::::::::::::::: -->
         <!--?php if (!empty($_SESSION['login'])) { ?-->
-        <% if (session.getAttribute("login") != null) { %>
+        <% if (session.getAttribute("login") != null) {%>
         <div class="ach_list">
             <div class="ach_box">
                 <div class="ach_congrats"><!--?php if (!empty($_SESSION['login'])) echo $_SESSION['username'] ?-->Edgar's Achievements</div>
@@ -213,10 +209,10 @@
             </div>
             <div class="ach_notif-center" onclick="slideDown()">ACHIEVEMENTS</div>
         </div>
-        <% } %>
+        <% }%>
         <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
-        <% if (session.getAttribute("login") != null) { %>
+        <% if (session.getAttribute("login") != null) {%>
         <div id="inbox">
             <div class="mail">
                 <div class="mail-list">
@@ -242,7 +238,7 @@
             </div>
             <div class="slide-inbox" onclick="showInbox()"></div>
         </div>
-        <% } %>
+        <% }%>
         <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <!-- ::::::::::::::::::::: COMPOSE MESSAGE ::::::::::::::::::::: -->
         <!--?php if (!empty($user['ID_USER'])) { ?-->
