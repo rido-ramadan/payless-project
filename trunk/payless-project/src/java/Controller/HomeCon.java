@@ -12,6 +12,7 @@ import Model.ContentModel;
 import Model.Model;
 import Model.MySQLConnect;
 import Model.QueryResult;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 
 //@WebServlet(name = "ContentCon", urlPatterns = {"/ContentCon"})
@@ -49,6 +50,7 @@ public class HomeCon extends HttpServlet {
         bean.display.put("title", new String[]{"asep", "dayat"});
 
         QueryResult query = MySQLConnect.query("select * from konten");
+        System.out.println("aaaaaa");
         if (query.count() > 0) {
             bean.display.put("content_most_like", query);
             bean.display.put("content_most_comment", query);
