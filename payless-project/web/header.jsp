@@ -20,7 +20,7 @@
         <!-- ::::::::::::::::::::: START OF HEADER PART ::::::::::::::::::::: -->
         <div class="topbox">
             <div class="nav1">
-                <div style="display:inline-block"><a id="logoButton" href="index.jsp"><img src="img/logo.png" alt="logo" /></a></div>
+                <div style="display:inline-block"><a id="logoButton" href="Home"><img src="img/logo.png" alt="logo" /></a></div>
                 <div class="right">
                     <%
                         User user = ((User) session.getAttribute("user"));

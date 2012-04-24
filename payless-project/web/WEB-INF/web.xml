@@ -33,12 +33,16 @@
         <servlet-class>Controller.ErrorPageCon</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Login</servlet-name>
+        <servlet-name>LoginController</servlet-name>
         <servlet-class>Controller.User.LoginController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>Controller.User.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfileCon</servlet-name>
+        <servlet-class>Controller.User.UpdateProfileCon</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ContentPage</servlet-name>
@@ -73,12 +77,16 @@
         <url-pattern>/ErrorPage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
+        <servlet-name>LoginController</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileCon</servlet-name>
+        <url-pattern>/UpdateProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
