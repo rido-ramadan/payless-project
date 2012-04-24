@@ -1,60 +1,62 @@
 <%@page import="Model.User"%>
+<%@page import="Model.QueryResult"%>
+<jsp:useBean id="bean" class="Model.Model" scope="session"/>
 <!--script type="text/javascript">
     interval_user=setInterval('scrollProfileContent("<?php echo BASE_URL?>",<?php if(!empty($user)) echo $user['ID_USER']; else echo '-1'?>);', 1000);
 </script>    
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
-        <% if(session.getAttribute("user") != null){ %>
+        <% 
+            QueryResult user = (QueryResult)bean.display.get("user");
+            if(user != null) { 
+                
+                out.println(user.get(0, "NAMA"));
+                out.println(user.get(0, "TGL_LAHIR"));
+            }
+        %>
+        <% { %>
         <div class="detbox">
             <div class="dettop"></div>
             <div class="detmain">
                 <div class="userheader">
-                    <% ((User)session.getAttribute("user")).getName() ; %>'s Profile
-                    <?php
-                        if(!empty($_SESSION['login'])){
-                            if($user['ID_USER']!=$_SESSION['id']){
-                                echo '
-                                    <div class="right" id="compose-new" onclick="compose()"></div>
-                                    ';
-                            }
+                    <% out.println(user.get(0, "NAMA")); %>'s Profile
+                    <%
+                        User currentUser = ((User) session.getAttribute("user"));
+                        if (currentUser != null) {
+                            out.println("<div class='right' id='compose-new' onclick='compose()'></div>");
                         }
-                    ?>
+                    %>
                 </div>
                 <div class="useravatar">
-                    <?php 
-                        if(!empty($user['AVATAR'])) 
-                            echo '
-                                <img src="'.BASE_URL.'avatar/'.$user['AVATAR'].'" width="150" alt="'.$user['USERNAME'].'">
-                                ';
-                        else
-                            echo '
-                                <img src="'.BASE_URL.'img/avatar.jpg" width="150" alt="'.$user['USERNAME'].'">
-                                ';
-                    ?>
+                    <%
+                        if (user.get(0, "AVATAR") != null) {
+                            out.println("<img src='avatar/" + user.get(0, "AVATAR") + "' width='150' alt='" + user.get(0, "USERNAME") + "'>");
+                        } else {
+                            out.println("<img src='img/avatar.jpg' width='150' alt='" + user.get(0, "USERNAME") + "'>");
+                        }
+                    %>
                 </div>
                 <div class="userdata">
                     <div class="userdata-header">
                         <div class="subtitle left ">USER INFORMATION</div>
-                        <?php
-                            if(!empty($_SESSION['login']) && $_SESSION['id']==$user['ID_USER'])
-                                echo '<div class="edituser left clearfix" onclick="editProfile();checkEditProfile(\''.BASE_URL.'\')">EDIT</div>';
-                            else{
-                                echo '';
+                        <%
+                            if (currentUser != null && currentUser.getID_User() == Integer.parseInt(user.get(0, "ID_USER"))) {
+                                out.println("<div class='edituser left clearfix' onclick='editProfile();checkEditProfile()'>EDIT</div>");
                             }
-                        ?>
+                        %>
                     </div>
                     <div class="user-attribute">
                         <div class="lhs left">FULL NAME</div>
-                        <div class="rhs left clearfix"><?php echo $user['NAMA']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "NAMA"); %></div>
                         <div class="lhs left">E-MAIL</div>
-                        <div class="rhs left clearfix"><?php echo $user['EMAIL']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "EMAIL"); %></div>
                         <div class="lhs left">GENDER</div>
-                        <div class="rhs left clearfix"><?php echo $user['GENDER']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "GENDER"); %></div>
                         <div class="lhs left">STATUS</div>
-                        <div class="rhs left clearfix"><?php echo $user['STATUS']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "STATUS"); %></div>
                         <div class="lhs left">BIRTHDATE</div>
-                        <div class="rhs left clearfix"><?php echo $user['TGL_LAHIR']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "TGL_LAHIR"); %></div>
                         <div class="lhs left">ABOUT ME</div>
-                        <div class="rhs left clearfix"><?php echo $user['ABOUT_ME']?></div>
+                        <div class="rhs left clearfix"><% user.get(0, "ABOUT_ME"); %></div>
                         <div class="lhs left"># COMMENTS</div>
                         <div class="rhs left clearfix"><?php echo $user['KOMENTAR']?></div>
                         <div class="lhs left"># UPLOADS</div>

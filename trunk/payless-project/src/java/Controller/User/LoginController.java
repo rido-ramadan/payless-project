@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
 //                response.sendRedirect("ProfileView.jsp"); //logged-in page 
                 RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/ProfilePage");
+                rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
                 rd.include(request, response);
             } else {
 //                response.sendRedirect("index.jsp"); //error page 

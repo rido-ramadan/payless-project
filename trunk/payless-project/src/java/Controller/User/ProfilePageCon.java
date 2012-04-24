@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
 import Model.ContentModel;
+import Model.Model;
+import Model.MySQLConnect;
+import Model.QueryResult;
 import javax.servlet.RequestDispatcher;
 
 //@WebServlet(name = "ContentCon", urlPatterns = {"/ContentCon"})
@@ -17,6 +20,24 @@ public class ProfilePageCon extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        int ID = Integer.parseInt(request.getParameter("user"));
+
+        Model bean = new Model();
+        QueryResult users = MySQLConnect.query("select * from user");
+        QueryResult user = MySQLConnect.query("select * from user where ID_USER=" + ID);
+        QueryResult userComments = MySQLConnect.query("select * from komentar where ID_USER=" + ID);
+        QueryResult userPosts = MySQLConnect.query("select * from konten natural join user where konten.ID_USER=" + ID);
+        if (users.count() > 0) {
+            bean.display.put("users", users);
+            bean.display.put("user", user);
+            bean.display.put("comments", userComments);
+            bean.display.put("posts", userPosts);
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("bean", bean);
+
         RequestDispatcher rd;
         rd = getServletContext().getRequestDispatcher("/header.jsp");
         rd.include(request, response);
