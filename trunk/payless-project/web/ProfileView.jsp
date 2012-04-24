@@ -10,11 +10,7 @@
             QueryResult posts = (QueryResult)bean.display.get("posts");
             QueryResult comments = (QueryResult)bean.display.get("comments");
             QueryResult achievements = (QueryResult)bean.display.get("achievements");
-            if(user == null) {
-                // DO REDIRECT
-                
-                response.sendRedirect("404View.jsp");
-            } else {                
+            {
         %>
         <div class="detbox">
             <div class="dettop"></div>
@@ -105,7 +101,7 @@
         <div style="height: 10px;"></div>
 
         <!-- EDIT DIV POP OUT -->
-        <form method="post" action="<?php echo BASE_URL?>user_con/edit_user" enctype="multipart/form-data">
+        <form method="post" action="UpdateProfile" enctype="multipart/form-data">
         <div class="edituserdata" id="edituserdata">
             <div class="edittop"></div>
             <div class="editmain">
@@ -139,7 +135,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">EMAIL</div>
                     <div class="right">
-                        <input class="txtfield" id="email-input" type="text" value="<?php echo $user['EMAIL']?>" size="30" name="email" onkeyup="checkEditProfile('<?php echo BASE_URL?>')" />
+                        <input class="txtfield" id="email-input" type="text" value="<% out.println(user.get(0, "EMAIL")); %>" size="30" name="email" onkeyup="checkEditProfile('<?php echo BASE_URL?>')" />
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="emailError"></div>
@@ -147,7 +143,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <?php if($user['GENDER']=="none") echo 'selected="selected"'?> value="none">--Select--</option><option value="male" <?php if($user['GENDER']=="Male") echo 'selected="selected"'?>>Male</option><option <?php if($user['GENDER']=="Female") echo 'selected="selected"'?>value="female">Female</option></select>
+                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "GENDER").equals("none")) out.println("selected='selected'"); %> value="none">--Select--</option><option value="male" <% if (user.get(0, "GENDER").equals("Male")) out.println("selected='selected'"); %>>Male</option><option <% if (user.get(0, "GENDER").equals("Female")) out.println("selected='selected'"); %>value="female">Female</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="genderError"></div>
@@ -155,7 +151,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">STATUS</div>
                     <div class="right">
-                        <select class="txtfield" id="status-input" name="status" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <?php if($user['STATUS']=="none") echo 'selected="selected"'?> value="none">--Select--</option><option <?php if($user['STATUS']=="Single") echo 'selected="selected"'?> value="SINGLE">Forever Alone</option><option <?php if($user['STATUS']=="In Relationship") echo 'selected="selected"'?> value="IN RELATIONSHIP">In a Relationship</option><option <?php if($user['STATUS']=="Married") echo 'selected="selected"'?> value="MARRIED">Married</option></select>
+                        <select class="txtfield" id="status-input" name="status" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "STATUS") == "none") out.println("selected='selected'"); %> value="none">--Select--</option><option <% if(user.get(0, "STATUS") == "Single") out.println("selected='selected'"); %> value="SINGLE">Forever Alone</option><option <% if(user.get(0, "STATUS") == "In Relationship") out.println("selected='selected'"); %> value="IN RELATIONSHIP">In a Relationship</option><option <?php if($user['STATUS']=="Married") echo 'selected="selected"'?> value="MARRIED">Married</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="statusError"></div>
@@ -171,7 +167,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">ABOUT ME</div>
                     <div class="right">
-                        <textarea rows="5" cols="24"  name="about"><?php echo $user['ABOUT_ME']?></textarea>
+                        <textarea rows="5" cols="24" name="about"><% out.println(user.get(0, "ABOUT_ME")); %></textarea>
                     </div>
                     <div class="clear"></div>
                 </div>

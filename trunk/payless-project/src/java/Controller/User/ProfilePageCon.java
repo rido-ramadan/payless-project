@@ -29,7 +29,7 @@ public class ProfilePageCon extends HttpServlet {
         QueryResult userComments = MySQLConnect.query("select * from komentar where ID_USER=" + ID);
         QueryResult userPosts = MySQLConnect.query("select * from konten natural join user where konten.ID_USER=" + ID);
         QueryResult userAchievements = MySQLConnect.query("select * from user_achievement natural join achievement where ID_USER=" + ID);
-        
+
         if (users.count() > 0) {
             bean.display.put("users", users);
             bean.display.put("user", user);
@@ -42,12 +42,17 @@ public class ProfilePageCon extends HttpServlet {
         session.setAttribute("bean", bean);
 
         RequestDispatcher rd;
-        rd = getServletContext().getRequestDispatcher("/header.jsp");
-        rd.include(request, response);
-        rd = getServletContext().getRequestDispatcher("/ProfileView.jsp");
-        rd.include(request, response);
-        rd = getServletContext().getRequestDispatcher("/footer.jsp");
-        rd.include(request, response);
+        if (user.count() == 0) {
+            rd = getServletContext().getRequestDispatcher("/ErrorPage");
+            rd.forward(request, response);
+        } else {
+            rd = getServletContext().getRequestDispatcher("/header.jsp");
+            rd.include(request, response);
+            rd = getServletContext().getRequestDispatcher("/ProfileView.jsp");
+            rd.include(request, response);
+            rd = getServletContext().getRequestDispatcher("/footer.jsp");
+            rd.include(request, response);
+        }
     }//
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +sign on the left to edit the code.">
