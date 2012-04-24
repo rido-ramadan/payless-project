@@ -1,14 +1,19 @@
 package Model;
 
-import java.sql.*;
+import Model.QueryResult;
+import java.sql.Statement;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
- */
-/**
- *
- * @author FAISAL
  */
 public class MySQLConnect {
 
@@ -52,42 +57,137 @@ public class MySQLConnect {
         return connection.createStatement();
     }
 
-    public static String[] query(String mQuery) {
+    public static String[] query2(String mQuery){
         String[] result = null;
-        try {
+        try{
             MySQLConnect mysql = new MySQLConnect();
             mysql.connect();
             ResultSet rs = mysql.executeQuery(mQuery);
-            System.out.println("jumlah row=" + rs.getRow());
-            while (rs.next()) {
-                System.out.println(rs.getString("GENDER"));
+            System.out.println("jumlah row="+rs.getRow());
+            // Get the column names; column indices start from 1
+            for (int i=1; i<rs.getMetaData().getColumnCount()+1; i++) {
+                String columnName = rs.getMetaData().getColumnName(i);
+                System.out.println("column:"+columnName);
             }
-        } catch (Exception ex) {
-            System.out.println("EXCEPTION : " + ex);
+            int i=0;
+                    System.out.println("column:");
+            while (rs.next()) {
+                System.out.println(rs.getString("GENDER")+"aaa");
+                ResultSet rsa = mysql.executeQuery("select * from konten where ID_USER="+rs.getString("ID_USER"));
+                System.out.println("column:");
+                while (rsa.next()) {
+                    System.out.println(rsa.getString("ID_KONTEN"));                
+                }
+                i++;
+            }
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
+            i=0;
+            while (rs.next()) {
+                //System.out.println(rs.getString("ID_USER")+"aaa");
+                ResultSet rsa = mysql.executeQuery("select * from konten where ID_USER="+rs.getString("ID_USER"));
+                System.out.println("column:");
+                while (rsa.next()) {
+                    //System.out.println(rsa.getString("ID_KONTEN"));                
+                }
+                i++;
+            }
+            System.out.println("column:");
+        }catch(Exception ex){
+            System.out.println("EXCEPTION : "+ex);
         }
         return result;
     }
 
-    public static void main(String[] Args) throws Exception {
-        MySQLConnect mysql = new MySQLConnect();
-        mysql.connect();
-        try {
-            ResultSet rs = mysql.executeQuery("SELECT * FROM user");
-            while (rs.next()) {
-                System.out.println(rs.getString("NAMA"));
+    public static QueryResult query(String mQuery){
+        QueryResult result = null;
+        boolean debug = false;
+        try{
+            MySQLConnect mysql = new MySQLConnect();
+            mysql.connect();
+            String[] columnName;
+            String[][] content;
+            ResultSet rs = mysql.executeQuery(mQuery);
+            rs.last();
+            int countRow = rs.getRow();
+            rs.beforeFirst();
+            if(countRow>0){
+                if(debug) System.out.println("jumlah row="+countRow);
+                if(debug) System.out.println("jumlah column:"+rs.getMetaData().getColumnCount());
+                columnName = new String[rs.getMetaData().getColumnCount()];
+                content= new String[countRow][rs.getMetaData().getColumnCount()];
+                // Get the column names; column indices start from 1
+                for (int i=1; i<rs.getMetaData().getColumnCount()+1; i++) {
+                    columnName[i-1] = rs.getMetaData().getColumnName(i);
+                    if(debug) System.out.println("column:"+columnName[i-1]);
+                }
+                int j=0;
+                while (rs.next()) {
+                    for (int i=0; i<columnName.length; i++) {
+                        content[j][i] = rs.getString(i+1); 
+                        if(debug) System.out.print("get="+rs.getString(i+1));
+                        if(debug) System.out.print(i+":"+j+"."+content[j][i]+" ");
+                    }
+                    if(debug) System.out.println("");
+                    j++;
+                }
+                result = new QueryResult();
+                result.setColumnName(columnName);
+                result.setContent(content);
+                result.setCountRow(countRow);
             }
-        } catch (Exception ex) {
-            System.out.println("exception : " + ex);
+        }catch(Exception ex){
+            System.out.println("EXCEPTION : "+ex);
         }
-
-        try {
-            mysql.executeUpdate("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('15', 'belajar')");
-        } catch (Exception ex) {
-            System.out.println("exception : " + ex);
-
-        }
-        mysql.close();
+        return result;
     }
+    public static boolean sQuery(String mQuery){
+        boolean result = false;
+        try {
+            MySQLConnect mysql = new MySQLConnect();
+            mysql.connect();
+            try{
+                mysql.executeUpdate(mQuery);
+                result = true;
+            }catch(Exception ex){
+                System.out.println("exception : "+ex);
+            }
+            mysql.close();
+        } catch (Exception ex) {
+            System.out.println("exception : "+ex);
+        }
+        return result;
+    }
+    public static void main(String[] Args) throws Exception {
+        QueryResult QR= MySQLConnect.query("select * from user"); 
+        if(QR.count()>0){
+            for(int i=0;i<QR.count();i++){
+                System.out.println(QR.get(i, "TGL_LAHIR"));
+            }
+        }
+        if(MySQLConnect.sQuery("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('16', 'rajin')"))
+            System.out.println("true");else System.out.println("false");
+//        MySQLConnect.query("SELECT * from user");
+//        
+//        MySQLConnect mysql = new MySQLConnect();
+//        mysql.connect();
+//        try{
+//            ResultSet rs = mysql.executeQuery("SELECT * FROM user");
+//            while (rs.next()) {
+//                System.out.println(rs.getString("GENDER"));
+//            }
+//        }catch(Exception ex){
+//            System.out.println("exception : "+ex);
+//        }
+//        
+//        try{
+//            mysql.executeUpdate("INSERT INTO tag (ID_TAG, NAMA_TAG) VALUES('15', 'belajar')");
+//                }catch(Exception ex){
+//                    System.out.println("exception : "+ex);
+//                    
+//                }
+//        mysql.close();
+    }
+
 //    public static ArrayList<Post> getPosts() throws Exception {
 //        ArrayList<Post> posts = new ArrayList<Post>();
 //        MySQLConnect mysql = new MySQLConnect();
