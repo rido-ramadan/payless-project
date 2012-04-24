@@ -1,5 +1,5 @@
 <%@page import="Model.User"%>
-<script type="text/javascript">
+<!--script type="text/javascript">
     interval_user=setInterval('scrollProfileContent("<?php echo BASE_URL?>",<?php if(!empty($user)) echo $user['ID_USER']; else echo '-1'?>);', 1000);
 </script>    
         <!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
