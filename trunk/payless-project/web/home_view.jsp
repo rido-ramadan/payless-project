@@ -1,9 +1,10 @@
-<!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
+${bean.display.get("title")}
 <div class="pagebar">
     <div class="notification">
         MOST POPULAR CONTENTS
     </div>
 </div>
+<!-- ::::::::::::::::::::: START OF BODY PART ::::::::::::::::::::: -->
 
 
 <%
