@@ -28,11 +28,14 @@ public class ProfilePageCon extends HttpServlet {
         QueryResult user = MySQLConnect.query("select * from user where ID_USER=" + ID);
         QueryResult userComments = MySQLConnect.query("select * from komentar where ID_USER=" + ID);
         QueryResult userPosts = MySQLConnect.query("select * from konten natural join user where konten.ID_USER=" + ID);
+        QueryResult userAchievements = MySQLConnect.query("select * from user_achievement natural join achievement where ID_USER=" + ID);
+        
         if (users.count() > 0) {
             bean.display.put("users", users);
             bean.display.put("user", user);
             bean.display.put("comments", userComments);
             bean.display.put("posts", userPosts);
+            bean.display.put("achievements", userAchievements);
         }
 
         HttpSession session = request.getSession();

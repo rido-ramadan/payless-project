@@ -24,8 +24,7 @@ throws ServletException, IOException {
     HttpSession session = request.getSession(true);
     Model bean = new Model();
 
-
-    if(session.getAttribute("login")!=null && session.getAttribute("login")!=false){
+    if(session.getAttribute("login")!=null && ((Boolean)session.getAttribute("login"))!=false){
         QueryResult message = MySQLConnect.query("select * from message inner join user on message.ID_FROM=user.ID_USER where ID_TO="+session.getAttribute("id"));
         if(message!=null && message.count()>0){
             bean.display.put("message_box", message);
