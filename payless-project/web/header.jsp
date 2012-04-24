@@ -54,12 +54,17 @@
 
             <div class="nav2">
                 It's a Project without a Payment!
-                <!--?php
-                if (!empty($_SESSION['nama']))
-                    echo '<div class="right mini-avatar"><a href="' . BASE_URL . 'user_con/profile/' . $_SESSION['id'] . '"><img src="' . BASE_URL . 'avatar/' . $_SESSION['avatar'] . '" width="36"  alt="' . $_SESSION['avatar'] . '"></a></div>';
-                ?-->
+                <%
+                    if (user != null) {
+                        out.println("<div class='right mini-avatar'><a href='ProfilePage/" + user.getID_User() + "'><img src='avatar/" + user.getAvatar() + "' width='36'  alt='" + user.getAvatar() + "'></a></div>");
+                    }
+                %>
                 <div class="right themes">
-                    <!--?php if (!empty($_SESSION['nama'])) echo 'Hello, <a href="' . BASE_URL . 'user_con/profile/' . $_SESSION['id'] . '">' . $_SESSION['nama'] . '</a>'; ?-->
+                    <%
+                        if (user != null) {
+                            out.println("Hello, <a href='ProfilePage/" + user.getID_User() + "'>" + user.getName() + "</a>");
+                        } 
+                    %>
                     <!--<form action="<?php echo BASE_URL ?>content_con/submit_tag" method="post">
                             <select  name="Sorting">
                                 <option value="-1">Newest</option>
@@ -96,13 +101,11 @@
                 <div class="left"><img src="img/divide.png" alt="" /></div>
                 <div id="sort2" class="left nav3act"><a href="/ListContentPage">Contents</a></div>
                 <div class="left"><img src="img/divide.png" alt="" /></div>
-                <!--?php
-                if (!empty($_SESSION['login']))
-                echo '
-                <div id="sort1" class="left"><a href="' . BASE_URL . 'content_con/post">Upload Post</a></div>
-                ';
-                ?-->
-                <div id="sort1" class="left"><a href="/UploadPage">Upload Post</a></div>
+                <%
+                    if (user != null) {
+                        out.println("<div id='sort1' class='left'><a href='/UploadPage'>Upload Post</a></div>");
+                    }
+                %>
                 <form action="home_con/submit_search" method="post" name="srch">
                     <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search_button" onclick="input_search()" value="Search"/>
@@ -169,23 +172,16 @@
         <div class="ach_popup" id="ach_popup">
             <div class="ach_congrats">Congratulations!</div>
             <div class="ach_text">You have been awarded this achievement</div>
-            <div class="achievement">
-                <!--div class="ach_logo"></div>
-                <div class="ach_detail">
-                    <div class="ach_name">Hello, World</div>
-                    <div class="ach_how">Upload a post once</div>
-                </div-->
-            </div>
+            <div class="achievement"></div>
             <div class="ach_close">
                 <button value="CLOSE" onclick="closeAchievement()">CLOSE</button>
             </div>
         </div>
         <!-- ::::::::::::::::::::: ACHIEVEMENT LIST :::::::::::::::::::: -->
-        <!--?php if (!empty($_SESSION['login'])) { ?-->
-        <% if (session.getAttribute("login") != null) {%>
+        <% if (user != null) {%>
         <div class="ach_list">
             <div class="ach_box">
-                <div class="ach_congrats"><!--?php if (!empty($_SESSION['login'])) echo $_SESSION['username'] ?-->Edgar's Achievements</div>
+                <div class="ach_congrats"><% out.println(user.getName()); %>'s Achievements</div>
                 <div class="ach_scroll">
                     <!--?php
                     if (!empty($list_achievement)) {
@@ -212,7 +208,7 @@
         <% }%>
         <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
         <!-- :::::::::::::::::::::::::: INBOX :::::::::::::::::::::::::: -->
-        <% if (session.getAttribute("login") != null) {%>
+        <% if (user != null) {%>
         <div id="inbox">
             <div class="mail">
                 <div class="mail-list">
