@@ -34,11 +34,7 @@
                     %>
                 </div>
             </div>
-            <!--script type="text/javascript">
-                function tag_link(url){
-                    var sort = document.getElementById('Sorting').value;
-                    document.location.href=url+"/"+sort;
-                }
+            <script type="text/javascript">
                 function message(msg){
                     alert(msg);
                 }
@@ -50,7 +46,7 @@
                         document.location.href='<?php echo BASE_URL . 'content_con/sort_content/' . $gate . '/' . $current_tag . '/' ?>'+sort.value;
                     <?php } ?>
                     }
-            </script-->
+            </script>
 
             <div class="nav2">
                 It's a Project without a Payment!

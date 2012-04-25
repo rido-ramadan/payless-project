@@ -263,7 +263,7 @@ function scroll(base_url, tag, sort){
         else
             alert ("Bummer! Your browser does not support XMLHTTP!");		  
 
-        var url=base_url+"content_con/ajax_scrolling_content/"+n+"/"+tag+"/"+sort;
+        var url=base_url+"AjaxContent?n="+n+"&tag="+tag+"&sort="+sort;
         
         xmlhttp.open("GET",url,true);
         xmlhttp.send();

@@ -1,4 +1,8 @@
+
+<%@page import="Model.User"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.QueryResult"%>
+<%@page import="Model.Content"%>
 <jsp:useBean id="bean" class="Model.Model" scope="session"/>
 <script type="text/javascript">
     <% if(bean.display.get("gate")!=null){ 
@@ -56,9 +60,83 @@
             <div class="detmain">
                 <div class="contentlist" >
                     <%
+                            //out.println("<ul class=\"listcontents\" id=\"contentDownList\">");
+                            //out.println("</ul>");
+                    %>
+                    
+                    <%
+                    ArrayList<Content> konten = (ArrayList<Content>)bean.display.get("konten");
+                        //echo count($konten).':'.$index;
+                    for(int i=0;i<konten.size();i++){
+                       if(i<konten.size()){
+                            out.print("<li><div class=\"paketkonten ");
+                                if(konten.get(i).getId_type().equals("1")) 
+                                    out.print("link");
+                               else if(konten.get(i).getId_type().equals("2")) 
+                                    out.print("image");
+                               else if(konten.get(i).getId_type().equals("3")) 
+                                    out.print("video");
 
-                            out.println("<ul class=\"listcontents\" id=\"contentDownList\">");
-                            out.println("</ul>");
+                                out.print("post\">"
+                                        + "<div class=\"left iconcontent\"><div class=\"icon");
+                                if(konten.get(i).getId_type().equals("1")) out.print("link");
+                                else if(konten.get(i).getId_type().equals("2")) out.print("image");
+                                else if(konten.get(i).getId_type().equals("3")) out.print("video");
+
+                                out.print("\"></div></div><div class=\"headertext judul\">"
+                                        + "<div class=\"title\"><a href=\"ContentPage?id="+konten.get(i).getId_konten()+"\">"+konten.get(i).getJudul() +"</a></div>"
+                                        + "<div class=\"uploader\"><a href=\"ProfilePage?user="+konten.get(i).getId_user()+"\">"+konten.get(i).getNama()+"</a></div>"
+                                        + "<div class=\"uploaded\" id=\"time"+konten.get(i).getId_konten()+"\"></div>"
+                                        + ""
+                                                + "</div>"
+                                                + "<div class=\"content\">");
+                                if(konten.get(i).getId_type().equals("1")) 
+                                    out.print("<a href=\""+konten.get(i).getLink()+"\"> "+konten.get(i).getLink()+" </a><p> "+konten.get(i).getDeskripsi() +" </p>");
+                                else if(konten.get(i).getId_type().equals("2")) out.print("<img src=\"/image/"+konten.get(i).getLink() +"\" width=\"320\" alt=\"beach\">"
+                                        + "");
+                                else if(konten.get(i).getId_type().equals("3")) out.print("<iframe width=\"320\" height=\"240\" src=\""+konten.get(i).getLink()+"\" frameborder=\"0\" "
+                                        + "allowfullscreen></iframe>");
+
+
+                                out.print("</div><div class=\"paketjempol\"><div class=\"views\"></div>"
+                                        + "<div class=\"viewcount\" id=\"view'.$konten[$i]['ID_KONTEN'].'\"></div><br/>"
+                                        + "<div class=\"likemini\"></div>"
+                                        + "<div class=\"jumlahlike\" id=\"like'.$konten[$i]['ID_KONTEN'].'\"></div>"
+                                        + "<div class=\"commentmini\"></div>"
+                                        + "<div class=\"jumlahkomen\" id=\"comment'.$konten[$i]['ID_KONTEN'].'\"></div>"
+                                        + "<br/>");
+                                User user = (User)session.getAttribute("user");
+                                   if(user!=null){
+                                        if(konten.get(i).getStatus_user()!=null){
+                                            out.print(konten.get(i).getStatus_user().equals("LIKE")?"<div class=\"likebutton_pressed\" id=\"likebutton'.$konten[$i]['ID_KONTEN'].'\">"
+                                                    + "<a onclick=\"unlike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\">"
+                                                    + "</a></div><div class=\"dislikebutton\" id=\"dislikebutton'.$konten[$i]['ID_KONTEN'].'\"><a "
+                                                    + "onclick=\"undislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\">"
+                                                    + "</a></div>":"<div class=\"likebutton\" id=\"likebutton'.$konten[$i]['ID_KONTEN'].'\">"
+                                                    + "<a onclick=\"like(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\">"
+                                                    + "</a></div><div class=\"dislikebutton_pressed\" id=\"dislikebutton'.$konten[$i]['ID_KONTEN'].'\"><a onclick=\"undislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\">"
+                                                    + "</a></div>");
+                                        }else{
+                                            out.print("<div class=\"likebutton\" id=\"likebutton'.$konten[$i]['ID_KONTEN'].'\"><a onclick=\"like(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\"></a></div>"
+                                                    + "<div class=\"dislikebutton\" id=\"dislikebutton'.$konten[$i]['ID_KONTEN'].'\">"
+                                                    + "<a onclick=\"dislike(\''.BASE_URL.'\','.$konten[$i]['ID_KONTEN'].')\"></a></div>");
+                                        }
+                                    }else{
+                                        out.print("<div class=\"likebutton\" id=\"likebutton'.$konten[$i]['ID_KONTEN'].'\"><a href=\"#\"></a>"
+                                                + "</div><div class=\"dislikebutton\" id=\"dislikebutton'.$konten[$i]['ID_KONTEN'].'\">"
+                                                + "<a href=\"#\"></a></div>");
+                                    }
+                                    out.print("<div class=\"tags\">Tags : <br/><ul class=\"tag\">");
+                                    for(int j=0;j<konten.get(i).getTag().length;j++){
+                                        out.print("<li><a href=\"'.BASE_URL.'content_con/list_content/-1/'.$konten[$i]['TAG'][$j]['ID_TAG'].'\">"+konten.get(i).getTag()[j]+"</a></li>");
+                                    }
+                                        out.print("</ul></div></div></div></li>");
+
+
+
+                        }
+
+                    }
                     %>
                 </div>
                 <div class="filtermethod">
@@ -95,15 +173,21 @@
                             <%
                             if(bean.display.get("list_tag")!=null){
                                 QueryResult list_tag = (QueryResult) bean.display.get("list_tag");
-                                   out.print("<a href=\"#\" onclick=\"tag_link(\'/ListContentPage?submit_tag=-1&id_tag=-1\')\">NO_FILTER</a> ");
+                                   out.print("<a href=\"#\" onclick=\"tag_link(\'/ListContentPage?submit_tag=-1&id_tag=-1\');\">NO_FILTER</a> ");
                                     for(int i=0;i<list_tag.count();i++){
-                                            out.print("<a href=\"#\" onclick=\"tag_link(\'/ListContentPage?submit_tag=-1&" +list_tag.get(i, "ID_TAG")+" \')\">"+list_tag.get(i, "NAMA_TAG")+"</a>");
+                                            out.print("<a href=\"#\" onclick=\"tag_link(\'/ListContentPage?submit_tag=-1&id_tag=" +list_tag.get(i, "ID_TAG")+"\')\">"+list_tag.get(i, "NAMA_TAG")+"</a>");
                                             if((i+1)!=list_tag.count()){
                                                 out.print(" ");
                                             }
                                     }                                    
                                 }
                             %>
+                            <script type="text/javascript">
+                            function tag_link(url){
+                                var sort = document.getElementById('Sorting').value;
+                                document.location.href=url+"&sort="+sort;
+                            }                                
+                            </script>
                         </div>
                     </div>
 
