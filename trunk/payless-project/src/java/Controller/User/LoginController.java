@@ -49,6 +49,7 @@ public class LoginController extends HttpServlet {
             if (user.isValid()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
+                session.setAttribute("login", true);
 //                response.sendRedirect("ProfileView.jsp"); //logged-in page 
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
