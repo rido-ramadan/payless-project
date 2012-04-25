@@ -20,8 +20,8 @@
         if(!request.getParameter("search_result").isEmpty()){ %>
         <ul class="listcontents">';
     <%
-         //   for(int i=0;i<request.getParameter("search_result");$i++){
-         //       if($search_result[$i]['JENIS']=='user'){ %>
+            for(int i=0;i<request.getParameter("search_result");$i++){
+                if($search_result[$i]['JENIS']=='user'){ %>
                         <li>
                             <div class="search-user-box">
                                 <div class="search-user-avatar">
@@ -58,19 +58,13 @@
                             </div>
                             <div class="content">';
                             <%if($search_result[$i]['ID_TYPE']==1) %>
-                                '
                                 <a href="'.$search_result[$i]['LINK'].'"> '.$search_result[$i]['LINK'].' </a>
                                 <p> '.$search_result[$i]['DESKRIPSI'].' </p>
-                                    ';
-                            <%else if($search_result[$i]['ID_TYPE']==2)%>'
+                            <%else if($search_result[$i]['ID_TYPE']==2)%>
                                 <img src="'.BASE_URL.'image/'.$search_result[$i]['LINK'].'" width="320" alt="beach">
-                                ';
-                            <%else if($search_result[$i]['ID_TYPE']==3)%> '
+                            <%else if($search_result[$i]['ID_TYPE']==3)%>
                                 <iframe width="320" height="240" src="'.$search_result[$i]['LINK'].'" frameborder="0" allowfullscreen></iframe>
-                                ';
-
-
-                            '</div>
+                            </div>
                             <div class="paketjempol">
                                 <div class="likemini"></div>
                                 <div class="jumlahlike">'.$search_result[$i]['LIKE'].'</div>
