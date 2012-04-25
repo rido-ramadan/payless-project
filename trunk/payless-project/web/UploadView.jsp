@@ -32,7 +32,7 @@
 
                     <div class="row" id="linkdesc" style="padding-bottom: 0">
                 <label class="key" style="vertical-align:top">DESCRIPTION</label>
-                <textarea class="input" name="description"  <% if(bean.display.get("empty")!=null && ((String)bean.display.get("description")).equals("description")) out.print(" style=\"background: orangered\""); %> cols="40" rows="5"></textarea>
+                <textarea class="input" name="description"  <% if(bean.display.get("empty")!=null && ((String)bean.display.get("empty")).equals("description")) out.print(" style=\"background: orangered\""); %> cols="40" rows="5"></textarea>
             </div>
             <div class="row" id="tagspost" style="border-bottom: 0; padding-bottom: 0">
                 <label class="key" style="vertical-align:top">TAGS</label>
