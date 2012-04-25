@@ -71,7 +71,7 @@ public class UpdateProfileCon extends HttpServlet {
             if (session.getAttribute("login") == null) {
                 response.sendRedirect("/Home");
             } else {
-                if (request.getParameter("id") != null) { // upload process
+                if (request.getParameter("user") != null) { // upload process
                     String email = null, gender = null, status = null, avatar = null, about = null;
                     FileItem imageUpload = null;
                     File savedFile = null;
@@ -98,6 +98,11 @@ public class UpdateProfileCon extends HttpServlet {
                                 email = value;
                                 System.out.println("e-mail : " + value);
                             } else if (name.equals("gender")) {
+                                if (value.compareTo("male") == 0) {
+                                    value = "LAKI";
+                                } else if (value.compareTo("female") == 0) {
+                                    value = "PEREMPUAN";
+                                }
                                 gender = value;
                                 System.out.println("gender : " + value);
                             } else if (name.equals("status")) {
@@ -116,28 +121,67 @@ public class UpdateProfileCon extends HttpServlet {
                         }
                     }
 
+                    if (avatar != null && !avatar.equals("")) {
+                        if ((avatar.length() > 4 && avatar.toLowerCase().charAt(avatar.length() - 1) == 'g'
+                                && avatar.toLowerCase().charAt(avatar.length() - 2) == 'p'
+                                && avatar.toLowerCase().charAt(avatar.length() - 3) == 'j'
+                                && avatar.toLowerCase().charAt(avatar.length() - 4) == '.')
+                                || (avatar.length() > 5 && avatar.toLowerCase().charAt(avatar.length() - 1) == 'g'
+                                && avatar.toLowerCase().charAt(avatar.length() - 2) == 'e'
+                                && avatar.toLowerCase().charAt(avatar.length() - 3) == 'p'
+                                && avatar.toLowerCase().charAt(avatar.length() - 4) == 'j'
+                                && avatar.toLowerCase().charAt(avatar.length() - 5) == '.')) {
+                            System.out.println("image exist");
+                            String sPath = getServletConfig().getServletContext().getRealPath("/avatar");
+                            System.out.println("Lokasi penyimpanan file =" + sPath);
+                            savedFile = new File(sPath, avatar);
+                            try {
+                                imageUpload.write(savedFile);
+//                                String link = avatar;
+//                                String desc = "";
+//                                String insert = "insert into konten (ID_USER, ID_TYPE, WAKTU, JUDUL, LINK, DESKRIPSI) "
+//                                        + "values (\"" + id_user + "\", \"" + id_type + "\", "
+//                                        + "\"" + waktu + "\", \"" + judul + "\","
+//                                        + "\"" + link + "\", \"" + desc + "\")";
+//                                if (MySQLConnect.sQuery(insert)) {
+//                                    System.out.println("berhasil");
+//                                } else {
+//                                    System.out.println("query gagal");
+//                                }
+//                                Constant.inputTagsInLastKonten(tags);
+//                                valid = true;
+                            } catch (Exception e) {
+                                System.out.println("Ada Kesalahan ketika menyimpan File :" + e.getMessage());
+                            }
+                        } else {
+                            System.out.println("Image invalid");
+                            bean.display.put("empty", "image");
+                        }
+                    }
+
                     if (gender != null) {
                         bean.display.put("gender_select", gender);
                     }
                     if (status != null) {
                         bean.display.put("status_select", status);
                     }
-                    
-                    User user = ((User)session.getAttribute("user"));
-                    String query = "update user set " + "EMAIL='" + email + "', " +  
-                                                        "STATUS='" + status + "', " + 
-                                                        "GENDER='" + gender + "', " +
-                                                        "ABOUT_ME='" + about + "'" +
-                                                        "where ID_USER='" + user.getID_User() + "';";
+
+                    User user = ((User) session.getAttribute("user"));
+                    String query = "update user set " + "EMAIL='" + email + "', "
+                            + "STATUS='" + status + "', "
+                            + "GENDER='" + gender + "', "
+                            + "ABOUT_ME='" + about + "', "
+                            + "AVATAR='" + avatar + "' "
+                            + "where ID_USER='" + user.getID_User() + "';";
                     MySQLConnect.sQuery(query);
                     System.out.println("OK");
                     session.setAttribute("bean", bean);
                     System.out.println(user.getID_User());
                     response.sendRedirect("/ProfilePage?user=" + user.getID_User());
+                } else {
+                    response.sendRedirect("/ErrorPage");
                 }
-
             }
-            session.setAttribute("bean", bean);
 
             //<editor-fold defaultstate="collapsed" desc="dispatcher">
 //            rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
