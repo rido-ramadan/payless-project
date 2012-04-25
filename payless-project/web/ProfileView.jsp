@@ -16,7 +16,7 @@
             <div class="dettop"></div>
             <div class="detmain">
                 <div class="userheader">
-                    <% out.println(user.get(0, "NAMA")); %>'s Profile
+                    <% out.println(user.get(0, "USERNAME")); %>'s Profile
                     <%
                         User currentUser = ((User) session.getAttribute("user"));
                         if (currentUser != null) {
