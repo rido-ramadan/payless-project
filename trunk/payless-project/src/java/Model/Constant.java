@@ -5,6 +5,9 @@
 package Model;
 
 import java.lang.String;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +22,17 @@ public class Constant {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+    public static String md5(String s) {
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(s.getBytes(), 0, s.length());
+            BigInteger i = new BigInteger(1,m.digest());
+            return String.format("%1$032x", i);         
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("ex : "+e);
+        }
+        return null;
     }
     public static void inputTagsInLastKonten(String input_tags){
             String input = input_tags;

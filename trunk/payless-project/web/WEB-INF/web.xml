@@ -48,6 +48,10 @@
         <servlet-name>UpdateProfileCon</servlet-name>
         <servlet-class>Controller.User.UpdateProfileCon</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterProcessCon</servlet-name>
+        <servlet-class>Controller.User.RegisterProcessCon</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ContentPage</servlet-name>
         <url-pattern>/ContentPage</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>UpdateProfileCon</servlet-name>
         <url-pattern>/UpdateProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterProcessCon</servlet-name>
+        <url-pattern>/RegisterProcess</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

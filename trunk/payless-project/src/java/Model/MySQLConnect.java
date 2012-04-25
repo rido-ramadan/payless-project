@@ -140,6 +140,7 @@ public class MySQLConnect {
         }
         return result;
     }
+    
     public static boolean sQuery(String mQuery){
         boolean result = false;
         try {
