@@ -27,7 +27,7 @@ public QueryResult(){
             for(int j=0;j<countRow;j++){
                 for(int i=0;i<columnName.length;i++){
                     result.display.put("isi["+j+"]"+"["+columnName[i]+"]", content[j][i]);
-                    System.out.println("isi["+j+"]"+"["+columnName[i]+"]"+" = "+content[j][i]);
+                    //System.out.println("isi["+j+"]"+"["+columnName[i]+"]"+" = "+content[j][i]);
                 }
             }
             result.display.put("isi.count()", countRow);

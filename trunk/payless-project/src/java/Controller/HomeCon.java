@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Constant;
+import Model.Content;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -52,21 +53,20 @@ public class HomeCon extends HttpServlet {
 
         //$this->set('title_page', 'Homepage');
         Model bean = new Model();
-        bean.display.put("title", new String[]{"asep", "dayat"});
-        getContent(request); 
-//        bean.display.put("konten", new ArrayList<String>());
-//        ArrayList<String> a = (ArrayList<String>)bean.display.get("konten");
-//        System.out.println("a ukuran="+a.size());
-//        a.add("woi");
-//        ArrayList<String> b = (ArrayList<String>)bean.display.get("konten");
-//        System.out.println("b ukuran="+b.size());
+        HttpSession session = request.getSession(true);
+
+        bean.display.put("title", "Payless Project");
+        User user = (User)session.getAttribute("user");
+        ArrayList<Content> content = Constant.getContent(user); 
         QueryResult query = MySQLConnect.query("select * from konten");
         if (query.count() > 0) {
-            bean.display.put("content_most_like", query);
-            bean.display.put("content_most_comment", query);
+            ArrayList<Content> like = orderKontenByLike(content);
+            ArrayList<Content> comment = orderKontenByComment(content);
+            bean.display.put("content_most_like", like);
+            bean.display.put("content_most_comment", comment);
         }
+        
 
-        HttpSession session = request.getSession(true);
         session.setAttribute("bean", bean);
 
         RequestDispatcher rd;
@@ -77,58 +77,64 @@ public class HomeCon extends HttpServlet {
         rd = getServletContext().getRequestDispatcher("/footer.jsp");
         rd.include(request, response);
     }//
+    
 
-    public Model getContent(HttpServletRequest request) {
-        Model  result= new Model();
-        QueryResult konten = MySQLConnect.query("select * from konten natural join user");
-        result = konten.getModel();
-        System.out.println((Integer)result.display.get("isi.count()"));
-        if((Integer)result.display.get("isi.count()") >0){
-            for(int i=0;i<konten.count();i++){
-                int sum_like = 0;
-                int sum_dislike = 0;
-                //like/dislike
-                QueryResult konten_like = MySQLConnect.query("select * from like_dislike where ID_KONTEN="+result.get(i, "ID_KONTEN") +"");
-                for(int j=0;j<konten_like.count();j++){
-                    if(konten_like.get(j, "STATUS").equals("LIKE")) sum_like+=1;
-                    if(konten_like.get(j, "STATUS").equals("DISLIKE")) sum_dislike+=1;
-                }
-                //echo "like=".$sum_like."<br>";
-                //echo "dislike=".$sum_dislike."<br>";
-
-                //user like
-                HttpSession session = request.getSession(true);
-                User user = (User)session.getAttribute("user");
-                if(user!=null){
-                    QueryResult user_like = MySQLConnect.query("select * from like_dislike where ID_KONTEN="+konten.get(i, "ID_KONTEN") +" AND ID_USER="+user.ID_User+"");
-//                    System.out.println("user like="+user_like.count());
-//                    System.out.println("id user="+user.ID_User);
-//                    System.out.println("id konten="+konten.get(i, "ID_KONTEN") );
-                    if(user_like.count()>0){
-                    //echo 'asd';
-                        //konten.get(i, "STATUS_USER") = 
-                        Model bean = new Model();
-//                        bean.display.put("konten", bean)
-//                        $konten[$i]['STATUS_USER']=$user_like[0]['STATUS'];
-                        result.put(i, "STATUS_USER", user_like.get(0, "STATUS"));
-                        //System.out.println("status = "+result.get(i, "STATUS_USER"));
-                    }
-                }else System.out.println("user null");
-//                //komentar
-                QueryResult komen = MySQLConnect.query("select * from komentar where ID_KONTEN="+result.get(i, "ID_KONTEN"));
-//                result.put("i", "KOMENTAR", komen.getModel());
-//                $konten[$i]['KOMENTAR'] = $komen;
-//
-//                $konten[$i]['LIKE'] = $sum_like-$sum_dislike;
-//                // tag
-//                $tag = $this->_model->query('select * from konten_tag natural join tag where konten_tag.ID_KONTEN="'.$konten[$i]['ID_KONTEN'].'"');
-//                $konten[$i]['TAG'] = $tag;
-
-            }
-//            $result = $konten;
+        
+    public ArrayList<Content> orderKontenByLike(ArrayList<Content> konten){
+        ArrayList<Content> result = new ArrayList<Content>();
+        ArrayList<Content> temp = new ArrayList<Content>();
+        for(int i=0;i<konten.size();i++){
+            temp.add(konten.get(i));
         }
+        if(konten.size()>0){
+            int id = Constant.getMaxLike(temp);
+            result.add(temp.get(id));
+            temp.remove(id);
+        }
+        //System.out.println(id);
+        if(konten.size()>1){
+        int id = Constant.getMaxLike(temp);
+        result.add(temp.get(id));
+        temp.remove(id);
+        }
+        //System.out.println(id);
+        if(konten.size()>2){
+        int id = Constant.getMaxLike(temp);
+        result.add(temp.get(id));
+        temp.remove(id);
+        }
+        //System.out.println(id);
         return result;
     }
+    
+    public ArrayList<Content> orderKontenByComment(ArrayList<Content> konten){
+        ArrayList<Content> result = new ArrayList<Content>();
+        ArrayList<Content> temp = new ArrayList<Content>();
+        for(int i=0;i<konten.size();i++){
+            temp.add(konten.get(i));
+        }
+        
+        if(konten.size()>0){
+            int id = Constant.getMaxComment(temp);
+            result.add(temp.get(id));
+            temp.remove(id);
+        }
+        //System.out.println(id);
+        if(konten.size()>1){
+        int id = Constant.getMaxComment(temp);
+        result.add(temp.get(id));
+        temp.remove(id);
+        }
+        //System.out.println(id);
+        if(konten.size()>2){
+        int id = Constant.getMaxComment(temp);
+        result.add(temp.get(id));
+        temp.remove(id);
+        }
+        //System.out.println(id);
+        return result;
+    }
+
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +sign on the left to edit the code.">
 
     /**
