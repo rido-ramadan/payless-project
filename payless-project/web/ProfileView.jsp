@@ -101,7 +101,7 @@
         <div style="height: 10px;"></div>
 
         <!-- EDIT DIV POP OUT -->
-        <form method="post" action="/UpdateProfile?user=<% out.println(currentUser.getID_User()); %>" enctype="multipart/form-data">
+        <form method="post" action="/UpdateProfile?user=<% if(currentUser!=null) currentUser.getID_User(); %>" enctype="multipart/form-data">
         <div class="edituserdata" id="edituserdata">
             <div class="edittop"></div>
             <div class="editmain">

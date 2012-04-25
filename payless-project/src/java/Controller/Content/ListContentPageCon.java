@@ -1,5 +1,7 @@
 package Controller.Content;
 
+import Model.Constant;
+import Model.Content;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,9 @@ import Model.ContentModel;
 import Model.Model;
 import Model.MySQLConnect;
 import Model.QueryResult;
+import Model.User;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 
 //@WebServlet(name = "ContentCon", urlPatterns = {"/ContentCon"})
@@ -25,6 +29,8 @@ Model bean = new Model();
 RequestDispatcher rd;
 bean.display.put("title", "Payless Project Content");
 PrintWriter out = response.getWriter();
+HttpSession session = request.getSession(true);
+User user=(User)session.getAttribute("user"); 
 
 //$this->setListAchievement();
 if(request.getParameter("submit_tag")!=null){ // get
@@ -73,7 +79,6 @@ if(request.getParameter("submit_tag")!=null){ // get
         }
         bean.display.put("current_sort", sort);
         //$this->set('konten',$konten);
-        HttpSession session = request.getSession(true);
         session.setAttribute("bean", bean);
         rd =getServletContext().getRequestDispatcher("/header.jsp");
         rd.include(request, response);
@@ -107,7 +112,8 @@ if(request.getParameter("submit_tag")!=null){ // get
         bean.display.put("current_list_tag", clt);
     }
     if(id_tag.equals("-1")){
-    //    $konten= $this->getContent();   
+        ArrayList<Content> konten= Constant.getContent(user);
+        bean.display.put("konten", konten);
     }else{
 //    $konten = $this->getContentFromTag($id_tag);                
         
@@ -124,11 +130,9 @@ if(request.getParameter("submit_tag")!=null){ // get
     
     bean.display.put("current_sort", sort);
     bean.display.put("current_tag", id_tag);
-    //bean.display.put("konten", konten);
     bean.display.put("gate", 1);
     bean.display.put("title_page", "Contents");
     
-    HttpSession session = request.getSession(true);
     session.setAttribute("bean", bean);
     rd =getServletContext().getRequestDispatcher("/header.jsp");
     rd.include(request, response);
