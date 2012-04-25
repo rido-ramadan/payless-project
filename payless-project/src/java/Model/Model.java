@@ -14,6 +14,15 @@ public class Model {
     public void put(int id, String column, String content){
         display.put("isi["+id+"]"+"["+column+"]", content);
     }
+    public void putObject(int id, String column, Model content){
+        display.put("isi["+id+"]"+"["+column+"]", content);
+//        for(int i=0;i<(Integer)content.display.get("isi.count()");i++){
+//            display.put("isi["+id+"]"+"["+column+"]", content);
+//        }
+    }
+    public int count(){
+        return (Integer)display.get("isi.count()");
+    }
     public HashMap<String, Object> getDisplay() {
         return display;
     }

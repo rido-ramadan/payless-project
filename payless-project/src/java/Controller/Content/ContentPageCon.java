@@ -1,5 +1,7 @@
 package Controller.Content;
 
+import Model.Constant;
+import Model.Content;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import Model.Model;
 import Model.MySQLConnect;
 import Model.QueryResult;
 import Model.User;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 
 //@WebServlet(name = "ContentCon", urlPatterns = {"/ContentCon"})
@@ -52,8 +55,29 @@ public class ContentPageCon extends HttpServlet {
 
         String ID = request.getParameter("id");
         if (ID != null) {
-            
+//            if($achieve!=-1){
+//                $this->checkFirstComment();
+//                $this->checkMoreComment();
+//            }
+            Content konten = getContentFromId(Constant.getContent(user),Integer.parseInt(ID));
+            if(konten!=null){
+                QueryResult komen = MySQLConnect.query("select * from komentar natural join user where ID_KONTEN="+konten.getId_konten()+" order by WAKTU desc");
+                String[] idUserKomen = new String[komen.count()];
+                String[] contentUserKomen = new String[komen.count()];
+                String[] waktuUserKomen = new String[komen.count()];
+                for(int j=0;j<komen.count();j++){
+                    idUserKomen[j] = komen.get(j, "ID_USER");
+                    contentUserKomen[j] = komen.get(j, "KOMENTAR");
+                    waktuUserKomen[j] = komen.get(j, "wAKTU");                    
+                }
+                konten.setKomentar(contentUserKomen);
+                konten.setId_user_komentar(idUserKomen);
+                konten.setWaktu_komentar(waktuUserKomen);
+                bean.display.put("content", konten);
+                System.out.println("konent exist");
+            }else System.out.println("konten exist");
         }
+        session.setAttribute("bean", bean);
         //            if(!empty($id)){
         //                if($achieve!=-1){
         //                    $this->checkFirstComment();
@@ -81,7 +105,16 @@ public class ContentPageCon extends HttpServlet {
         rd = getServletContext().getRequestDispatcher("/footer.jsp");
         rd.include(request, response);
     }//
-
+    public Content getContentFromId(ArrayList<Content> konten, int id){
+        Content result = null;
+        int counter=0;
+        if(konten.size()>0)
+        while(counter<konten.size() && result==null){
+            if(Integer.parseInt(konten.get(counter).getId_konten())==id) result = konten.get(counter);
+            counter+=1;
+        }
+        return result;        
+    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the +sign on the left to edit the code.">
     /**
      * Handles the HTTP

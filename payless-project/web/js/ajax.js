@@ -384,14 +384,17 @@ function like(base_url, id_content){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("like"+id_content).innerHTML= eval(parseInt(document.getElementById("like"+id_content).innerHTML, 10)+1);
             document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #aaaaaa, #111111);background-image: -moz-linear-gradient(center top , #aaaaaa, #111111);background-image: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));");
             document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"unlike(\'"+base_url+"\','"+id_content+"')\"></a>";
-            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"dislike(\'"+base_url+"\','"+id_content+"')\"></a>";
+            //document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"dislike(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"\"></a>";
+            
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET",base_url+"content_con/ajax_like/" + id_content,true);
+    xmlhttp.open("GET","/AjaxContent?id_konten=" + id_content+"&ajax=like",true);
     xmlhttp.send();            
 }
 function dislike(base_url, id_content){
@@ -399,14 +402,16 @@ function dislike(base_url, id_content){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("like"+id_content).innerHTML= eval(parseInt(document.getElementById("like"+id_content).innerHTML, 10)-1);
             document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #aaaaaa, #111111);background-image: -moz-linear-gradient(center top , #aaaaaa, #111111);background-image: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#111111));");
             document.getElementById("dislikebutton"+id_content).innerHTML="<a onclick=\"undislike(\'"+base_url+"\','"+id_content+"')\"></a>";
-            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
+            //document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
+            document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"\"></a>";
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET",base_url+"content_con/ajax_dislike/" + id_content,true);
+    xmlhttp.open("GET","/AjaxContent?id_konten=" + id_content+"&ajax=dislike",true);
     xmlhttp.send();            
 }
 function unlike(base_url, id_content){
@@ -414,6 +419,7 @@ function unlike(base_url, id_content){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("like"+id_content).innerHTML= eval(parseInt(document.getElementById("like"+id_content).innerHTML, 10)-1);
             document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
@@ -421,7 +427,7 @@ function unlike(base_url, id_content){
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET",base_url+"content_con/ajax_unlike/" + id_content,true);
+    xmlhttp.open("GET","/AjaxContent?id_konten=" + id_content+"&ajax=unlike",true);
     xmlhttp.send();            
 }
 function undislike(base_url, id_content){
@@ -429,6 +435,7 @@ function undislike(base_url, id_content){
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            document.getElementById("like"+id_content).innerHTML= eval(parseInt(document.getElementById("like"+id_content).innerHTML, 10)+1);
             document.getElementById("likebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("dislikebutton"+id_content).setAttribute("style","background-image: -o-linear-gradient(center top , #dddddd, #999999);background-image: -moz-linear-gradient(center top , #dddddd, #999999);background-image: -webkit-gradient(linear, left top, left bottom, from(#dddddd), to(#999999));");
             document.getElementById("likebutton"+id_content).innerHTML="<a onclick=\"like(\'"+base_url+"\','"+id_content+"')\"></a>";
@@ -436,7 +443,7 @@ function undislike(base_url, id_content){
         }
     }
     // Get query from search bar
-    xmlhttp.open("GET",base_url+"content_con/ajax_undislike/" + id_content,true);
+    xmlhttp.open("GET","/AjaxContent?id_konten=" + id_content+"&ajax=undislike",true);
     xmlhttp.send();            
     
 }

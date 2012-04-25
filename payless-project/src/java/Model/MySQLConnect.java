@@ -30,6 +30,9 @@ public class MySQLConnect {
     public void connect() throws Exception {
         connection = DriverManager.getConnection(connectionURL, username, password);
     }
+    public void connectAble(Connection conn) throws Exception {
+        conn = DriverManager.getConnection(connectionURL, username, password);
+    }
 
     public ResultSet executeQuery(String query) throws Exception {
         Connection _connection = getConnection();
@@ -141,6 +144,48 @@ public class MySQLConnect {
         return result;
     }
     
+    public static QueryResult query(MySQLConnect conn, String mQuery){
+        QueryResult result = null;
+        result = new QueryResult();
+        boolean debug = false;
+        try{
+            MySQLConnect mysql = conn;
+            String[] columnName;
+            String[][] content;
+            ResultSet rs = mysql.executeQuery(mQuery);
+            rs.last();
+            int countRow = rs.getRow();
+            rs.beforeFirst();
+            if(countRow>0){
+                if(debug) System.out.println("jumlah row="+countRow);
+                if(debug) System.out.println("jumlah column:"+rs.getMetaData().getColumnCount());
+                columnName = new String[rs.getMetaData().getColumnCount()];
+                content= new String[countRow][rs.getMetaData().getColumnCount()];
+                // Get the column names; column indices start from 1
+                for (int i=1; i<rs.getMetaData().getColumnCount()+1; i++) {
+                    columnName[i-1] = rs.getMetaData().getColumnName(i);
+                    if(debug) System.out.println("column:"+columnName[i-1]);
+                }
+                int j=0;
+                while (rs.next()) {
+                    for (int i=0; i<columnName.length; i++) {
+                        content[j][i] = rs.getString(i+1); 
+                        if(debug) System.out.print("get="+rs.getString(i+1));
+                        if(debug) System.out.print(i+":"+j+"."+content[j][i]+" ");
+                    }
+                    if(debug) System.out.println("");
+                    j++;
+                }
+                result.setColumnName(columnName);
+                result.setContent(content);
+            }
+            result.setCountRow(countRow);
+        }catch(Exception ex){
+            System.out.println("EXCEPTION : "+ex);
+        }
+        return result;
+    }
+
     public static boolean sQuery(String mQuery){
         boolean result = false;
         try {
