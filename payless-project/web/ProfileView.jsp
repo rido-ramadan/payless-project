@@ -101,7 +101,7 @@
         <div style="height: 10px;"></div>
 
         <!-- EDIT DIV POP OUT -->
-        <form method="post" action="UpdateProfile" enctype="multipart/form-data">
+        <form method="post" action="/UpdateProfile" enctype="multipart/form-data">
         <div class="edituserdata" id="edituserdata">
             <div class="edittop"></div>
             <div class="editmain">
@@ -143,7 +143,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "GENDER").equals("none")) out.println("selected='selected'"); %> value="none">--Select--</option><option value="male" <% if (user.get(0, "GENDER").equals("Male")) out.println("selected='selected'"); %>>Male</option><option <% if (user.get(0, "GENDER").equals("Female")) out.println("selected='selected'"); %>value="female">Female</option></select>
+                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "GENDER").equals("none")) out.println("selected='selected'"); %> value="none">--Select--</option><option value="male" <% if (user.get(0, "GENDER").equals("LAKI")) out.println("selected='selected'"); %>>Male</option><option <% if (user.get(0, "GENDER").equals("Female")) out.println("selected='selected'"); %>value="PEREMPUAN">Female</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="genderError"></div>

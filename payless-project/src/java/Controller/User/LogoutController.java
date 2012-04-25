@@ -41,6 +41,7 @@ public class LogoutController extends HttpServlet {
              */
             HttpSession session = request.getSession(true);
             session.invalidate();
+            System.out.println("You have logged out");
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/Home");
             rd.include(request, response);
