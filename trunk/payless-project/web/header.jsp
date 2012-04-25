@@ -102,7 +102,7 @@
                         out.println("<div id='sort1' class='left'><a href='/UploadPage'>Upload Post</a></div>");
                     }
                 %>
-                <form action="home_con/submit_search" method="post" name="srch">
+                <form action="/SearchPage" method="post" name="srch">
                     <div class="right searchbutton">
                         <input id="filtersearch" type="submit" name="search_button" onclick="input_search()" value="Search"/>
                     </div>
@@ -111,7 +111,7 @@
                             <span class="sbox_l"></span>
                             <span class="sbox">
                                 <input style="outline-width:0px;" type="text" name="search_input" id="srch_fld_input" hidden />
-                                <input style="outline-width:0px;" type="text" name="search" id="srch_fld" placeholder="Search" autosave="applestyle_srch" results="5" onkeyup="showHint('index.jsp', this.value)" autocomplete="off"/>
+                                <input style="outline-width:0px;" type="text" name="search_data" id="srch_fld" placeholder="Search" results="5" onkeyup="showHint('index.jsp', this.value)" autocomplete="off"/>
                             </span>
                             <span class="sbox_r" id="srch_clear"></span>
                         </div>
