@@ -71,10 +71,11 @@ public class SearchPageCon extends HttpServlet {
     
     public ArrayList<content> filterUser(QueryResult qr, String search){
         ArrayList<content> result = new ArrayList<content>();
+        QueryResult tempUser = qr;
         int counter = 0;
         String filter = search.toLowerCase();
         for(int i=0;i<qr.count();i++){
-            
+            //tempUser. = "user";
         }
         return result;
     }
@@ -85,9 +86,57 @@ public class SearchPageCon extends HttpServlet {
         return result;
     }
     
+    public boolean exitUser(QueryResult user, String id){
+        boolean found=false;
+        int counter = 0;
+        
+        while((!found)&&(counter<user.count())){
+            //if($user[$counter]['ID_USER']==$id)){
+                found=true;
+            //}
+            counter++;
+        }
+        
+        return found;
+    }
+    
     public ArrayList<content> getContent(){
         ArrayList<content> result = new ArrayList<content>();
+        QueryResult konten = MySQLConnect.query("select * from konten natural join user");
         
+        if(konten.count()>0){
+            for(int i=0;i<konten.count();i++){
+                int sum_like = 0;
+                int sum_dislike = 0;
+                
+                //cari konten_like
+                //like/dislike
+                //$konten_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].'');
+                QueryResult konten_like = null;
+                for(int j=0;j<konten_like.count();j++){
+                    //if($konten_like[$j]['STATUS']=="LIKE") sum_like+=1;
+                    //if($konten_like[$j]['STATUS']=="DISLIKE") sum_dislike+=1;
+                }
+                //user_like
+                /*if(!empty($_SESSION['id'])){
+                    $user_like = $this->_model->query('select * from like_dislike where ID_KONTEN='.$konten[$i]['ID_KONTEN'].' AND ID_USER='.$_SESSION['id'].'');
+                    if(count($user_like)>0){
+                    //echo 'asd';
+                        $konten[$i]['STATUS_USER']=$user_like[0]['STATUS'];
+                    }
+                }*/
+                //komentar
+                QueryResult komen = MySQLConnect.query("select * from komentar where ID_KONTEN=" + "$konten[$i]['ID_KONTEN']");
+                /*$konten[$i]['KOMENTAR'] = $komen;
+
+                $konten[$i]['LIKE'] = $sum_like-$sum_dislike;*/
+                
+                //tag
+                QueryResult tag = MySQLConnect.query("select * from konten_tag natural join tag where konten_tag.ID_KONTEN=" + ".$konten[$i]['ID_KONTEN'].");
+                //$konten[$i]['TAG'] = $tag;
+            }
+        }
+       // result = konten;
         return result;
     }
 
