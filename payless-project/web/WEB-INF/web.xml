@@ -41,6 +41,10 @@
         <servlet-class>Controller.User.LogoutController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AjaxContentCon</servlet-name>
+        <servlet-class>Controller.Ajax.AjaxContentCon</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateProfileCon</servlet-name>
         <servlet-class>Controller.User.UpdateProfileCon</servlet-class>
     </servlet>
@@ -83,6 +87,10 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AjaxContentCon</servlet-name>
+        <url-pattern>/AjaxContent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateProfileCon</servlet-name>

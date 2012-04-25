@@ -55,7 +55,7 @@ public class HomeCon extends HttpServlet {
             bean.display.put("content_most_comment", query);
         }
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         session.setAttribute("bean", bean);
 
         RequestDispatcher rd;

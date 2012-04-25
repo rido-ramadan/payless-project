@@ -35,6 +35,7 @@ if(request.getParameter("submit_tag")!=null){ // get
         String input = request.getParameter("input_tag");
         String sort="-1";
         //String tag = explodeTag(input);
+        //$this->set('input_tag_from_text', $input);
         
 //                    if(count($tag)>0){
 //                    $query='select * from konten_tag natural join tag where NAMA_TAG=';
@@ -72,6 +73,8 @@ if(request.getParameter("submit_tag")!=null){ // get
         }
         bean.display.put("current_sort", sort);
         //$this->set('konten',$konten);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("bean", bean);
         rd =getServletContext().getRequestDispatcher("/header.jsp");
         rd.include(request, response);
         rd =getServletContext().getRequestDispatcher("/ListContentView.jsp");
@@ -99,7 +102,9 @@ if(request.getParameter("submit_tag")!=null){ // get
     }else id_tag = request.getParameter("id_tag"); 
     QueryResult current_list_tag = MySQLConnect.query("select * from tag where ID_TAG="+ id_tag);
     if(current_list_tag!=null && current_list_tag.count()>0){
-        bean.display.put("current_list_tag", current_list_tag.get(0, "NAMA_TAG"));
+        String[] clt = new String[0];
+        clt[0] = current_list_tag.get(0, "NAMA_TAG");
+        bean.display.put("current_list_tag", clt);
     }
     if(id_tag.equals("-1")){
     //    $konten= $this->getContent();   
@@ -123,6 +128,8 @@ if(request.getParameter("submit_tag")!=null){ // get
     bean.display.put("gate", 1);
     bean.display.put("title_page", "Contents");
     
+    HttpSession session = request.getSession(true);
+    session.setAttribute("bean", bean);
     rd =getServletContext().getRequestDispatcher("/header.jsp");
     rd.include(request, response);
     rd =getServletContext().getRequestDispatcher("/ListContentView.jsp");
