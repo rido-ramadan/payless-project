@@ -45,7 +45,14 @@ public class UpdateProfileCon extends HttpServlet {
             String avatar = request.getParameter("avatar");
             String about = request.getParameter("about");
 
-            MySQLConnect.sQuery("INSERT INTO user (EMAIL, AVATAR, GENDER, ABOUT_ME, STATUS) VALUES(" + email + "," + avatar + "," + gender + "," + about + "," + status + ")");
+            String query = "update user " +
+                           "set EMAIL='" + email +"', " +
+//                           "STATUS='" + status + "', " +
+//                           "GENDER='" + gender + "', " +
+                           "ABOUT_ME='" + about + "'" +
+                           "where ID_USER='" + user.getID_User() +"';";
+            MySQLConnect.sQuery(query);
+//            MySQLConnect.sQuery("INSERT INTO user (EMAIL, AVATAR, GENDER, ABOUT_ME, STATUS) VALUES(" + email + "," + avatar + "," + gender + "," + about + "," + status + ")");
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
             rd.forward(request, response);

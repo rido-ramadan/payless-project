@@ -51,14 +51,16 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
                 session.setAttribute("login", true);
 //                response.sendRedirect("ProfileView.jsp"); //logged-in page 
-                RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
-                rd.forward(request, response);
+//                RequestDispatcher rd;
+//                rd = getServletContext().getRequestDispatcher("/ProfilePage?user=" + user.getID_User());
+//                rd.forward(request, response);
+                response.sendRedirect("/ProfilePage?user=" + user.getID_User());
             } else {
 //                response.sendRedirect("index.jsp"); //error page 
-                RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/Home");
-                rd.forward(request, response);
+                response.sendRedirect("/Home");
+//                RequestDispatcher rd;
+//                rd = getServletContext().getRequestDispatcher("/Home");
+//                rd.forward(request, response);
             }
         } catch (Exception e) {
         } finally {
