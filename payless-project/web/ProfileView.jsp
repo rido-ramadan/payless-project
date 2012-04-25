@@ -19,7 +19,7 @@
                     <% out.println(user.get(0, "USERNAME")); %>'s Profile
                     <%
                         User currentUser = ((User) session.getAttribute("user"));
-                        if (currentUser != null) {
+                        if (currentUser != null && currentUser.getID_User() != Integer.parseInt(user.get(0, "ID_USER"))) {
                             out.println("<div class='right' id='compose-new' onclick='compose()'></div>");
                         }
                     %>
@@ -101,7 +101,7 @@
         <div style="height: 10px;"></div>
 
         <!-- EDIT DIV POP OUT -->
-        <form method="post" action="/UpdateProfile?user=<% currentUser.getID_User(); %>" enctype="multipart/form-data">
+        <form method="post" action="/UpdateProfile?user=<% out.println(currentUser.getID_User()); %>" enctype="multipart/form-data">
         <div class="edituserdata" id="edituserdata">
             <div class="edittop"></div>
             <div class="editmain">
@@ -135,7 +135,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">EMAIL</div>
                     <div class="right">
-                        <input class="txtfield" id="email-input" type="text" value="<% out.println(user.get(0, "EMAIL")); %>" size="30" name="email" onkeyup="checkEditProfile('<?php echo BASE_URL?>')" />
+                        <input class="txtfield" id="email-input" type="text" value="<% out.println(user.get(0, "EMAIL")); %>" size="30" name="email" onkeyup="checkEditProfile('/')" />
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="emailError"></div>
@@ -143,7 +143,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">GENDER</div>
                     <div class="right">
-                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "GENDER").equals("none")) out.println("selected='selected'"); %> value="none">--Select--</option><option value="male" <% if (user.get(0, "GENDER").equals("LAKI")) out.println("selected='selected'"); %>>Male</option><option <% if (user.get(0, "GENDER").equals("Female")) out.println("selected='selected'"); %>value="PEREMPUAN">Female</option></select>
+                        <select class="txtfield" id="gender-input" name="gender" onchange="checkEditProfile('/')" style="width: 215px"><option <% if(user.get(0, "GENDER").equals("none")) out.println("selected='selected'"); %> value="none">--Select--</option><option value="male" <% if (user.get(0, "GENDER").equals("LAKI")) out.println("selected='selected'"); %>>Male</option><option <% if (user.get(0, "GENDER").equals("Female")) out.println("selected='selected'"); %>value="PEREMPUAN">Female</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="genderError"></div>
@@ -151,7 +151,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">STATUS</div>
                     <div class="right">
-                        <select class="txtfield" id="status-input" name="status" onchange="checkEditProfile('<?php echo BASE_URL?>')" style="width: 215px"><option <% if(user.get(0, "STATUS") == "none") out.println("selected='selected'"); %> value="none">--Select--</option><option <% if(user.get(0, "STATUS") == "Single") out.println("selected='selected'"); %> value="SINGLE">Forever Alone</option><option <% if(user.get(0, "STATUS") == "In Relationship") out.println("selected='selected'"); %> value="IN RELATIONSHIP">In a Relationship</option><option <?php if($user['STATUS']=="Married") echo 'selected="selected"'?> value="MARRIED">Married</option></select>
+                        <select class="txtfield" id="status-input" name="status" onchange="checkEditProfile('/')" style="width: 215px"><option <% if(user.get(0, "STATUS").compareTo("none") == 0) out.println("selected='selected'"); %> value="none">--Select--</option><option <% if(user.get(0, "STATUS").equals("SINGLE")) out.println("selected='selected'"); %> value="SINGLE">Forever Alone</option><option <% if(user.get(0, "STATUS").equals("IN RELATIONSHIP")) out.println("selected='selected'"); %> value="IN RELATIONSHIP">In a Relationship</option><option <% if(user.get(0, "STATUS").equals("MARRIED")) out.println("selected='selected'"); %> value="MARRIED">Married</option></select>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="statusError"></div>
@@ -159,7 +159,7 @@
                 <div class="txtfieldbox width90">
                     <div class="left txtboxlabel">AVATAR UPLOAD</div>
                     <div class="right">
-                        <input class="txtfield" id="avatar-input" type="file" name="avatar" onchange="checkEditProfile('<?php echo BASE_URL?>')" accept="image/jpg, image/jpeg"/>
+                        <input class="txtfield" id="avatar-input" type="file" name="avatar" onchange="checkEditProfile('/')" accept="image/jpg, image/jpeg"/>
                     </div>
                     <div class="clear"></div>
                     <div class="error" id="avatarError"></div>
