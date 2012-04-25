@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="Model.User"%>
 <%@page import="Model.QueryResult"%>
 <jsp:useBean id="bean" class="Model.Model" scope="session"/>
@@ -82,6 +83,12 @@
                             echo '<li>' . $content['TAG'][$j]['NAMA_TAG'] . '</li>';
                             }
                             ?>
+                            <%
+                                HashMap<String, Object> tag = ((HashMap<String, Object>)content.get(0, "TAG"));
+                                for (int i = 0; i < content.count(); i++) {
+                                    tag.
+                                }
+                            %>
                         </ul>
                     </div>
                 </div>
