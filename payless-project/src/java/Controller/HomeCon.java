@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Constant;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -48,7 +49,6 @@ public class HomeCon extends HttpServlet {
         //$this->set('title_page', 'Homepage');
         Model bean = new Model();
         bean.display.put("title", new String[]{"asep", "dayat"});
-
         QueryResult query = MySQLConnect.query("select * from konten");
         if (query.count() > 0) {
             bean.display.put("content_most_like", query);
